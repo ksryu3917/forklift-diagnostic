@@ -8,8 +8,8 @@ android {
         applicationId "com.ryu.forkliftdiagnostic"
         minSdk 26
         targetSdk 35
-        versionCode 2
-        versionName "0.2-field"
+        versionCode 3
+        versionName "0.3-field"
     }
     buildTypes {
         release { minifyEnabled false }

@@ -180,14 +180,76 @@ public class MainActivity extends Activity {
 
     private void cause(String sid,String cid)throws Exception{
         JSONObject sy=findSymptom(sid),c=findCause(sy,cid);baseScreen(c.optString("name"));
-        LinearLayout x=card();x.addView(tv("현재 원인",13,true));x.addView(tv(c.optString("name"),19,true));x.addView(tv(c.optString("normalization_status","OEM 원인 정규화"),12,false));x.addView(tv("근거: "+c.optString("source")+" / PDF "+c.optJSONArray("pdf_pages"),12,false));body.addView(x);
-        if(c.has("graph")){Button b=btn("실행형 분기진단 시작",true);String gid=c.getString("graph"),st=c.optString("graph_start");b.setOnClickListener(v->go(new Screen("graph",gid,st)));body.addView(b);}
+        LinearLayout x=card();x.addView(tv("현재 원인",13,true));x.addView(tv(c.optString("name"),19,true));
+        x.addView(tv("OEM 원인표에서 확인된 가능 원인",12,true));
+        x.addView(tv("증상: "+sy.optString("name"),12,false));
+        x.addView(tv("근거: "+c.optString("source")+" / PDF "+c.optJSONArray("pdf_pages"),12,false));body.addView(x);
+
+        String guide=causeGuide(c.optString("name"),sy.optString("system"));
+        LinearLayout g=card();g.addView(tv("이 원인을 어떻게 좁힐까",16,true));
+        g.addView(tv(guide,13,false));
+        g.addView(tv("※ 원인별 전용 OEM 판정이 없는 부분은 일반 현장 확인으로 명확히 구분합니다.",11,false));body.addView(g);
+
+        if(c.has("graph")){Button b=btn("▶ 실행형 분기진단 시작",true);String gid=c.getString("graph"),st=c.optString("graph_start");b.setOnClickListener(v->go(new Screen("graph",gid,st)));body.addView(b);}
+
         JSONArray tests=c.optJSONArray("tests");
-        if(tests!=null && tests.length()>0){LinearLayout p=card();p.addView(tv("OEM 점검 절차",16,true));p.addView(tv("이 원인과 연결된 매뉴얼 검사만 표시합니다.",12,false));for(int i=0;i<tests.length();i++){String tid=tests.optString(i);JSONObject pr=db.optJSONObject("procedures").optJSONObject(tid);if(pr==null)continue;Button b=btn(pr.optString("title"),false);b.setOnClickListener(v->go(new Screen("procedure",tid,cid)));p.addView(b);}body.addView(p);}
+        if(tests!=null && tests.length()>0){
+            LinearLayout p=card();p.addView(tv("현장 점검 순서",16,true));
+            p.addView(tv("아래는 이 원인과 연결된 OEM 검사입니다. 검사명만 보지 말고 조건·측정위치·기준값·판정을 바로 확인하십시오.",12,false));
+            for(int i=0;i<tests.length();i++){
+                String tid=tests.optString(i);JSONObject pr=db.optJSONObject("procedures").optJSONObject(tid);if(pr==null)continue;
+                p.addView(tv("STEP "+(i+1)+" · "+pr.optString("title"),15,true));
+                if(pr.optJSONArray("conditions")!=null){p.addView(tv("시험 조건",12,true));addArray(p,pr.optJSONArray("conditions"),"• ");}
+                if(pr.optJSONArray("tools")!=null){p.addView(tv("필요 공구",12,true));addArray(p,pr.optJSONArray("tools"),"• ");}
+                p.addView(tv("실제 작업",12,true));addArray(p,pr.optJSONArray("steps"),"① ");
+                String std=pr.optString("standard");JSONObject sbm=pr.optJSONObject("standard_by_model");if(sbm!=null)std=sbm.optString(vehicle,std);
+                if(std.length()>0)p.addView(tv("OEM 기준 · "+std,13,true));
+                if(pr.optJSONArray("decision")!=null){p.addView(tv("OEM 판정 연결",12,true));addArray(p,pr.optJSONArray("decision"),"→ ");}
+                if(pr.optString("verification").length()>0)p.addView(tv("⚠ "+pr.optString("verification"),12,true));
+                Button run=btn("이 검사만 크게 보기",false);final String ftid=tid;run.setOnClickListener(v->go(new Screen("procedure",ftid,cid)));p.addView(run);
+                Button ev=btn("OEM 원문/그림 보기",false);JSONArray pp=pr.optJSONArray("pdf_pages");String src=pr.optString("source");ev.setOnClickListener(v->showEvidence(pp,src));p.addView(ev);
+            }body.addView(p);
+        }
+
+        addSystemVisual(sy.optString("system"));
+
         if(c.optString("remedy").length()>0){LinearLayout r=card();r.addView(tv("OEM 대책",16,true));r.addView(tv(c.optString("remedy"),14,false));body.addView(r);}
-        if((tests==null||tests.length()==0)&&!c.has("graph")){LinearLayout w=card();w.addView(tv("OEM 원인표 기반 항목",15,true));w.addView(tv("이 원인은 매뉴얼 고장진단표에 명시되어 있지만 별도 측정 기준/분기 절차는 확인되지 않았습니다. 임의의 수치나 검사 순서는 만들지 않습니다.",13,false));body.addView(w);}
+        if((tests==null||tests.length()==0)&&!c.has("graph")){LinearLayout w=card();w.addView(tv("OEM 원인표 기반 항목",15,true));w.addView(tv("원인 자체는 OEM 표에 있지만 원인별 전용 측정 기준/분기 절차는 확인되지 않았습니다. 임의 수치는 넣지 않습니다.",13,false));body.addView(w);}
     }
 
+    private String causeGuide(String name,String system){
+        if(system.equals("트랜스미션")){
+            if(name.contains("오염")||name.contains("막힘"))return "[OEM 연결] 먼저 T/M 오일량·상태와 외부 라인/필터의 오염·막힘 흔적을 확인합니다. 이어 T_PRESS에서 탭(6) 펌프압과 탭(1)을 비교합니다. OEM 판정상 탭6 정상/탭1 이상이면 유압계통 막힘 또는 인칭밸브 결함 쪽으로 좁힙니다.";
+            if(name.contains("내부 누유")||name.contains("시일")||name.contains("누유"))return "[OEM 연결] T_PRESS로 메인압과 전/후진 개별 클러치압을 비교합니다. OEM 판정상 개별 클러치만 낮으면 해당 클러치 시일 또는 모듈밸브 쪽을 우선 점검합니다. 외부 누유가 보이지 않는데 압력이 유지되지 않으면 내부 누설 가능성을 좁혀갑니다.";
+            if(name.contains("오일 부족"))return "[일반 현장 확인 + OEM 시험조건] 딥스틱 기준으로 T/M 오일량부터 확인합니다. T_PRESS의 OEM 시험조건 자체가 오일량 정상 상태를 요구하므로, 부족하면 먼저 규정 상태로 맞춘 뒤 압력시험으로 넘어갑니다.";
+            if(name.contains("인칭"))return "[OEM 연결] T_PRESS 전에 인칭 페달 검사를 먼저 수행합니다. OEM 판정상 탭(6) 펌프압은 정상인데 탭(1)이 비정상이면 인칭밸브 결함 또는 회로 막힘을 의심합니다.";
+            if(name.contains("펌프"))return "[OEM 연결] T_PRESS의 탭(6) 펌프압을 우선 확인합니다. 탭6과 탭1이 모두 낮으면 OEM 저압 원인표로 분기하며, 오일펌프 결함은 그 원인 후보 중 하나입니다.";
+            if(name.contains("전기")||name.contains("솔레노이드"))return "[OEM 연결] F/R 솔레노이드 자화 → F/R 스위치 전원/연속성 → 하네스 → 솔레노이드 플런저 순으로 확인합니다. 전기회로 원인은 실행형 분기진단이 있으면 그 그래프를 우선 사용합니다.";
+            if(name.contains("릴리프"))return "[OEM 연결] T_PRESS로 메인 압력 이상 여부를 먼저 확인합니다. 원인표에 릴리프밸브가 명시되어 있어도 전용 판정 수치가 따로 없으면 압력 결과와 밸브 상태를 함께 확인하고 임의 조정값은 사용하지 않습니다.";
+            if(name.contains("기계"))return "[OEM 연결] 압력·전기 제어가 정상인데 증상이 지속되면 기계 고장 쪽으로 좁힙니다. 스톨시험이 연결된 경우 스톨값과 클러치압을 함께 비교합니다.";
+        }
+        return "[OEM 원인표] 이 원인은 매뉴얼 고장진단표에 명시되어 있습니다. 아래 연결된 OEM 검사를 조건→측정→기준→판정 순서로 수행하고, 원인별 전용 판정이 없는 부분은 임의 수치 없이 확인합니다.";
+    }
+
+    private void addSystemVisual(String system)throws Exception{
+        JSONObject systems=db.optJSONObject("systems");if(systems==null)return;JSONObject s=systems.optJSONObject(system);if(s==null)return;
+        LinearLayout v=card();v.addView(tv("계통 이해 자료",16,true));
+        v.addView(tv(s.optString("overview"),13,false));
+        JSONArray pages=s.optJSONArray("diagram_pages");ImageView iv=loadFirstImage(pages);
+        if(iv!=null){v.addView(tv("✅ OEM 원본 계통/구조 자료",12,true));v.addView(iv,new LinearLayout.LayoutParams(-1,dp(300)));}
+        else{v.addView(tv("⚠ 일반 개념도 — 해당 차량의 정확한 OEM 도면이 아니라 계통 이해용입니다.",12,true));Bitmap bm=makeConceptDiagram(system,s.optString("overview"));ImageView cv=new ImageView(this);cv.setImageBitmap(bm);cv.setAdjustViewBounds(true);cv.setOnClickListener(x->showCircuit(bm,system+" 일반 개념도"));v.addView(cv,new LinearLayout.LayoutParams(-1,dp(260)));}
+        body.addView(v);
+    }
+
+    private Bitmap makeConceptDiagram(String title,String overview){
+        int w=1400,h=700;Bitmap bm=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);Canvas c=new Canvas(bm);c.drawColor(Color.WHITE);Paint p=new Paint(1);p.setColor(Color.rgb(16,38,58));p.setTextSize(48);p.setFakeBoldText(true);c.drawText(title+" · 일반 개념도",40,65,p);
+        p.setTextSize(28);p.setFakeBoldText(false);String[] a=overview.split("→");int n=Math.max(1,a.length),gap=24,box=(w-80-gap*(n-1))/n;int y=240,bh=150;Paint boxp=new Paint(1);boxp.setStyle(Paint.Style.STROKE);boxp.setStrokeWidth(5);boxp.setColor(Color.rgb(17,117,214));
+        for(int i=0;i<n;i++){int x=40+i*(box+gap);RectF r=new RectF(x,y,x+box,y+bh);c.drawRoundRect(r,18,18,boxp);p.setColor(Color.rgb(25,30,35));p.setTextSize(24);drawCentered(c,p,a[i].trim(),x+box/2,y+80,box-20);if(i<n-1){p.setColor(Color.rgb(17,117,214));p.setTextSize(46);c.drawText("→",x+box+2,y+92,p);}}
+        p.setColor(Color.rgb(180,80,0));p.setTextSize(26);c.drawText("※ 일반적인 계통 이해용 예시 · 실제 차량 배치/포트는 OEM 원본 확인",40,590,p);return bm;
+    }
+    private void drawCentered(Canvas c,Paint p,String text,float cx,float cy,int maxw){
+        String t=text;if(p.measureText(t)>maxw&&t.length()>8){int m=t.length()/2;c.drawText(t.substring(0,m),cx-p.measureText(t.substring(0,m))/2,cy-18,p);c.drawText(t.substring(m),cx-p.measureText(t.substring(m))/2,cy+22,p);}else c.drawText(t,cx-p.measureText(t)/2,cy,p);
+    }
     private void procedure(String pid,String cid)throws Exception{
         JSONObject p=db.getJSONObject("procedures").getJSONObject(pid);baseScreen(p.optString("title"));
         LinearLayout h=card();h.addView(tv(p.optString("system")+" · OEM 점검",13,true));h.addView(tv("근거: "+p.optString("source")+" / PDF "+p.optJSONArray("pdf_pages"),12,false));body.addView(h);
@@ -220,6 +282,8 @@ public class MainActivity extends Activity {
     private void addArray(LinearLayout l,JSONArray a,String p){if(a!=null)for(int i=0;i<a.length();i++)l.addView(tv(p+a.optString(i),13,false));}
 
     private ImageView loadFirstImage(JSONArray pages){
+        if(pages==null)return null;for(int i=0;i<pages.length();i++){String n="oem_pages/p"+pages.optInt(i)+".jpg";try{InputStream is=getAssets().open(n);Bitmap bm=BitmapFactory.decodeStream(is);is.close();ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);iv.setOnClickListener(v->showCircuit(bm,"OEM 원본 · "+n));return iv;}catch(Exception ignored){}}return null;
+    }
         if(pages==null)return null;for(int i=0;i<pages.length();i++){String n="oem_pages/p"+pages.optInt(i)+".jpg";try{InputStream is=getAssets().open(n);Bitmap bm=BitmapFactory.decodeStream(is);is.close();ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);return iv;}catch(Exception ignored){}}return null;
     }
 
@@ -270,7 +334,13 @@ public class MainActivity extends Activity {
     }
     private void drawNode(Canvas c,Paint p,float l,float t,float r,float b,String text,boolean hi){p.setStyle(Paint.Style.FILL);p.setColor(hi?Color.rgb(255,230,180):Color.rgb(232,242,250));c.drawRoundRect(l,t,r,b,24,24,p);p.setStyle(Paint.Style.STROKE);p.setStrokeWidth(hi?8:4);p.setColor(hi?Color.rgb(240,135,20):Color.rgb(40,110,170));c.drawRoundRect(l,t,r,b,24,24,p);p.setStyle(Paint.Style.FILL);p.setColor(Color.rgb(20,40,55));p.setTextSize(27);p.setTypeface(Typeface.DEFAULT_BOLD);p.setTextAlign(Paint.Align.CENTER);String[] a=text.split("\n");float y=(t+b)/2-(a.length-1)*20;for(String z:a){c.drawText(z,(l+r)/2,y,p);y+=42;}}
     private void drawArrow(Canvas c,Paint p,float x1,float y1,float x2,float y2){p.setColor(Color.rgb(40,110,170));p.setStrokeWidth(7);p.setStyle(Paint.Style.STROKE);c.drawLine(x1,y1,x2,y2,p);c.drawLine(x2,y2,x2-24,y2-18,p);c.drawLine(x2,y2,x2-24,y2+18,p);}
-    private void showCircuit(Bitmap bm,String title){Dialog d=new Dialog(this);LinearLayout r=new LinearLayout(this);r.setOrientation(LinearLayout.VERTICAL);r.setPadding(dp(8),dp(8),dp(8),dp(8));r.addView(tv(title,18,true));HorizontalScrollView hs=new HorizontalScrollView(this);ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);hs.addView(iv,new HorizontalScrollView.LayoutParams(dp(1200),dp(650)));r.addView(hs,new LinearLayout.LayoutParams(-1,0,1));Button close=btn("닫기",true);close.setOnClickListener(v->d.dismiss());r.addView(close);d.setContentView(r);d.show();Window w=d.getWindow();if(w!=null)w.setLayout(-1,-1);}
+    static class ZoomImageView extends android.widget.ImageView {
+        private final Matrix matrix=new Matrix();private final ScaleGestureDetector scale;private final GestureDetector gesture;private float lastX,lastY;private boolean dragging=false;
+        public ZoomImageView(Context c){super(c);setScaleType(ScaleType.MATRIX);scale=new ScaleGestureDetector(c,new ScaleGestureDetector.SimpleOnScaleGestureListener(){public boolean onScale(ScaleGestureDetector d){float f=d.getScaleFactor();matrix.postScale(f,f,d.getFocusX(),d.getFocusY());setImageMatrix(matrix);return true;}});gesture=new GestureDetector(c,new GestureDetector.SimpleOnGestureListener(){public boolean onDoubleTap(android.view.MotionEvent e){matrix.postScale(1.7f,1.7f,e.getX(),e.getY());setImageMatrix(matrix);return true;}});}
+        @Override public boolean onTouchEvent(android.view.MotionEvent e){scale.onTouchEvent(e);gesture.onTouchEvent(e);switch(e.getActionMasked()){case android.view.MotionEvent.ACTION_DOWN:lastX=e.getX();lastY=e.getY();dragging=true;break;case android.view.MotionEvent.ACTION_MOVE:if(dragging&&!scale.isInProgress()){float dx=e.getX()-lastX,dy=e.getY()-lastY;matrix.postTranslate(dx,dy);setImageMatrix(matrix);lastX=e.getX();lastY=e.getY();}break;case android.view.MotionEvent.ACTION_UP:case android.view.MotionEvent.ACTION_CANCEL:dragging=false;break;}return true;}
+        @Override protected void onSizeChanged(int w,int h,int ow,int oh){super.onSizeChanged(w,h,ow,oh);android.graphics.drawable.Drawable d=getDrawable();if(d!=null&&d.getIntrinsicWidth()>0&&d.getIntrinsicHeight()>0){float s=Math.min((float)w/d.getIntrinsicWidth(),(float)h/d.getIntrinsicHeight());matrix.reset();matrix.postScale(s,s);matrix.postTranslate((w-d.getIntrinsicWidth()*s)/2f,(h-d.getIntrinsicHeight()*s)/2f);setImageMatrix(matrix);}}
+    }
+    private void showCircuit(Bitmap bm,String title){Dialog d=new Dialog(this);LinearLayout r=new LinearLayout(this);r.setOrientation(LinearLayout.VERTICAL);r.setPadding(dp(8),dp(8),dp(8),dp(8));r.setBackgroundColor(Color.WHITE);r.addView(tv(title,17,true));r.addView(tv("두 손가락 확대/축소 · 드래그 이동 · 더블탭 확대",11,false));ZoomImageView iv=new ZoomImageView(this);iv.setImageBitmap(bm);r.addView(iv,new LinearLayout.LayoutParams(-1,0,1));Button close=btn("닫기",true);close.setOnClickListener(v->d.dismiss());r.addView(close);d.setContentView(r);d.show();Window w=d.getWindow();if(w!=null)w.setLayout(-1,-1);}
 
     private void toast(String s){Toast.makeText(this,s,Toast.LENGTH_LONG).show();}
     private void fatal(String s){TextView t=tv(s,15,false);t.setPadding(dp(20),dp(20),dp(20),dp(20));setContentView(t);}
