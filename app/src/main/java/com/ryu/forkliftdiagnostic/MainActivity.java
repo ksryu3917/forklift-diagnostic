@@ -256,6 +256,7 @@ public class MainActivity extends Activity {
         LinearLayout m=card();if(p.optJSONArray("conditions")!=null){m.addView(tv("점검 조건",15,true));addArray(m,p.optJSONArray("conditions"),"• ");}if(p.optJSONArray("tools")!=null){m.addView(tv("필요 공구",15,true));addArray(m,p.optJSONArray("tools"),"• ");}m.addView(tv("점검 방법",15,true));addArray(m,p.optJSONArray("steps"),"① ");String std=p.optString("standard");JSONObject sbm=p.optJSONObject("standard_by_model");if(sbm!=null)std=sbm.optString(vehicle,std);if(std.length()>0)m.addView(tv("OEM 기준: "+std,15,true));if(p.optString("verification").length()>0)m.addView(tv("주의: "+p.optString("verification"),13,true));body.addView(m);
         JSONArray dec=p.optJSONArray("decision");if(dec!=null){LinearLayout d=card();d.addView(tv("판정 연결",15,true));addArray(d,dec,"• ");body.addView(d);}
 
+    }
     private void engine()throws Exception{
         baseScreen("엔진 진단");JSONObject er=db.getJSONObject("engine_reference");LinearLayout w=card();w.addView(tv("⚠ "+er.optString("status"),16,true));w.addView(tv(er.optString("title"),15,true));w.addView(tv(er.optString("applicability"),12,false));body.addView(w);
         JSONArray a=db.optJSONArray("engine_dtcs");LinearLayout c=card();c.addView(tv("현재 정규화된 D34 DTC",16,true));for(int i=0;i<a.length();i++){JSONObject d=a.getJSONObject(i);Button b=btn(d.optString("code")+" · "+d.optString("name"),false);String code=d.optString("code");b.setOnClickListener(v->go(new Screen("engine_dtc",code)));c.addView(b);}body.addView(c);
@@ -281,8 +282,6 @@ public class MainActivity extends Activity {
 
     private ImageView loadFirstImage(JSONArray pages){
         if(pages==null)return null;for(int i=0;i<pages.length();i++){String n="oem_pages/p"+pages.optInt(i)+".jpg";try{InputStream is=getAssets().open(n);Bitmap bm=BitmapFactory.decodeStream(is);is.close();ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);iv.setOnClickListener(v->showCircuit(bm,"OEM 원본 · "+n));return iv;}catch(Exception ignored){}}return null;
-    }
-        if(pages==null)return null;for(int i=0;i<pages.length();i++){String n="oem_pages/p"+pages.optInt(i)+".jpg";try{InputStream is=getAssets().open(n);Bitmap bm=BitmapFactory.decodeStream(is);is.close();ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);return iv;}catch(Exception ignored){}}return null;
     }
 
     private void showEvidence(JSONArray pages,String source){
