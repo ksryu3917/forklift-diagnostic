@@ -1,0 +1,8 @@
+휴대폰 업로드 순서
+1) ZIP 다운로드 후 압축 풀기
+2) GitHub 저장소에서 Add file → Upload files
+3) 압축 푼 폴더 자체가 아니라 그 안의 내용(.github, app, build.gradle, settings.gradle, README.md)을 저장소 최상위에 업로드
+4) Commit changes
+5) Actions → Build Android APK
+6) 초록 체크가 뜨면 해당 실행을 열고 Artifacts → forklift-diagnostic-apk 다운로드
+7) ZIP 압축 해제 → app-debug.apk 설치
