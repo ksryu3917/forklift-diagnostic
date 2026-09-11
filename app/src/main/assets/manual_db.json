@@ -255,7 +255,19 @@
           "graph_start": "A_MAG",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "exact_branch_graph"
+          "verification_mode": "exact_branch_graph",
+          "diag_type": "ELECTRICAL",
+          "diag_plan": [
+            "해당 F/R 솔레노이드가 선택 방향에서 자화되는지 확인한다.",
+            "자화되지 않으면 F/R 스위치 전원·연속성을 확인한다.",
+            "스위치 정상이면 하네스 단선/접촉불량을 확인한다.",
+            "전원과 배선이 정상이면 솔레노이드 플런저 작동을 확인한다.",
+            "플런저가 정상인데 작동하지 않으면 밸브/기계 계통으로 넘어간다."
+          ],
+          "ui_tests": [
+            "T_ELEC"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM000_C02",
@@ -272,7 +284,17 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEVEL",
+          "diag_plan": [
+            "평탄한 곳에서 해당 오일의 지정 점검조건을 맞춘다.",
+            "게이지/딥스틱/레벨 표시로 실제 오일량을 확인한다.",
+            "기준 이하이면 외부 누유 흔적을 확인한 뒤 규정량으로 맞춘다.",
+            "보충 후 같은 증상을 재확인한다.",
+            "정상 레벨이면 이 원인을 배제하고 다음 원인으로 이동한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM000_C03",
@@ -289,7 +311,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ADJUSTMENT",
+          "diag_plan": [
+            "해당 링크·페달·케이블·마운팅의 유격과 풀림을 육안/손으로 확인한다.",
+            "매뉴얼에 지정 치수가 있으면 실제 치수를 측정한다.",
+            "조정 후 전체 스트로크에서 걸림 없이 작동하는지 확인한다.",
+            "조정 후 같은 증상을 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM000_C04",
@@ -306,7 +339,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM000_C05",
@@ -323,7 +367,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM000_C06",
@@ -340,7 +395,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM000_C07",
@@ -357,7 +424,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM000_C08",
@@ -374,7 +452,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM000_C09",
@@ -391,7 +480,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM000_C10",
@@ -408,7 +508,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM000_C11",
@@ -425,7 +536,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM000_C12",
@@ -442,7 +561,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         }
       ]
     },
@@ -480,7 +607,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM001_C02",
@@ -497,7 +635,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ELECTRICAL",
+          "diag_plan": [
+            "해당 F/R 솔레노이드가 선택 방향에서 자화되는지 확인한다.",
+            "자화되지 않으면 F/R 스위치 전원·연속성을 확인한다.",
+            "스위치 정상이면 하네스 단선/접촉불량을 확인한다.",
+            "전원과 배선이 정상이면 솔레노이드 플런저 작동을 확인한다.",
+            "플런저가 정상인데 작동하지 않으면 밸브/기계 계통으로 넘어간다."
+          ],
+          "ui_tests": [
+            "T_ELEC"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM001_C03",
@@ -514,7 +664,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -552,7 +713,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM002_C02",
@@ -569,7 +741,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ELECTRICAL",
+          "diag_plan": [
+            "해당 F/R 솔레노이드가 선택 방향에서 자화되는지 확인한다.",
+            "자화되지 않으면 F/R 스위치 전원·연속성을 확인한다.",
+            "스위치 정상이면 하네스 단선/접촉불량을 확인한다.",
+            "전원과 배선이 정상이면 솔레노이드 플런저 작동을 확인한다.",
+            "플런저가 정상인데 작동하지 않으면 밸브/기계 계통으로 넘어간다."
+          ],
+          "ui_tests": [
+            "T_ELEC"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM002_C03",
@@ -586,7 +770,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -632,7 +827,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM003_C02",
@@ -649,7 +855,17 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEVEL",
+          "diag_plan": [
+            "평탄한 곳에서 해당 오일의 지정 점검조건을 맞춘다.",
+            "게이지/딥스틱/레벨 표시로 실제 오일량을 확인한다.",
+            "기준 이하이면 외부 누유 흔적을 확인한 뒤 규정량으로 맞춘다.",
+            "보충 후 같은 증상을 재확인한다.",
+            "정상 레벨이면 이 원인을 배제하고 다음 원인으로 이동한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM003_C03",
@@ -666,7 +882,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "COOLING",
+          "diag_plan": [
+            "쿨러/라인의 막힘·찌그러짐·오염을 확인한다.",
+            "입구와 출구의 온도 차 및 순환상태를 비교한다.",
+            "유량을 제한하는 원인이 없으면 과부하·내부누설·릴리프 작동을 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM003_C04",
@@ -683,7 +907,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS",
+            "T_STALL"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM003_C05",
@@ -700,7 +936,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS",
+            "T_STALL"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM003_C06",
@@ -717,7 +965,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM003_C07",
@@ -734,7 +991,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM003_C08",
@@ -751,7 +1020,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "OVERLOAD",
+          "diag_plan": [
+            "증상이 발생하는 하중과 작업 조건을 확인한다.",
+            "무부하/정상하중에서 같은 증상이 재현되는지 비교한다.",
+            "압력 제한값을 넘는 작업인지 확인한다.",
+            "정상 부하에서도 동일하면 압력·펌프·밸브 원인으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM003_C09",
@@ -768,7 +1046,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM003_C10",
@@ -785,7 +1071,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_STALL",
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM003_C11",
@@ -802,7 +1100,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -839,7 +1149,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM004_C02",
@@ -855,7 +1173,17 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEVEL",
+          "diag_plan": [
+            "평탄한 곳에서 해당 오일의 지정 점검조건을 맞춘다.",
+            "게이지/딥스틱/레벨 표시로 실제 오일량을 확인한다.",
+            "기준 이하이면 외부 누유 흔적을 확인한 뒤 규정량으로 맞춘다.",
+            "보충 후 같은 증상을 재확인한다.",
+            "정상 레벨이면 이 원인을 배제하고 다음 원인으로 이동한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM004_C03",
@@ -871,7 +1199,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ADJUSTMENT",
+          "diag_plan": [
+            "해당 링크·페달·케이블·마운팅의 유격과 풀림을 육안/손으로 확인한다.",
+            "매뉴얼에 지정 치수가 있으면 실제 치수를 측정한다.",
+            "조정 후 전체 스트로크에서 걸림 없이 작동하는지 확인한다.",
+            "조정 후 같은 증상을 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM004_C04",
@@ -887,7 +1226,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -921,7 +1269,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -956,7 +1315,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM006_C02",
@@ -972,7 +1342,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1009,7 +1390,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS",
+            "T_STALL"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM007_C02",
@@ -1026,7 +1419,17 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEVEL",
+          "diag_plan": [
+            "평탄한 곳에서 해당 오일의 지정 점검조건을 맞춘다.",
+            "게이지/딥스틱/레벨 표시로 실제 오일량을 확인한다.",
+            "기준 이하이면 외부 누유 흔적을 확인한 뒤 규정량으로 맞춘다.",
+            "보충 후 같은 증상을 재확인한다.",
+            "정상 레벨이면 이 원인을 배제하고 다음 원인으로 이동한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM007_C03",
@@ -1043,7 +1446,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS",
+            "T_STALL"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1078,7 +1493,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM008_C02",
@@ -1094,7 +1517,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1127,7 +1561,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM009_C02",
@@ -1143,7 +1586,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM009_C03",
@@ -1159,7 +1613,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM009_C04",
@@ -1173,7 +1638,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -1213,7 +1687,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ADJUSTMENT",
+          "diag_plan": [
+            "해당 링크·페달·케이블·마운팅의 유격과 풀림을 육안/손으로 확인한다.",
+            "매뉴얼에 지정 치수가 있으면 실제 치수를 측정한다.",
+            "조정 후 전체 스트로크에서 걸림 없이 작동하는지 확인한다.",
+            "조정 후 같은 증상을 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM010_C02",
@@ -1229,7 +1714,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM010_C03",
@@ -1245,7 +1741,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM010_C04",
@@ -1261,7 +1768,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM010_C05",
@@ -1277,7 +1796,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM010_C06",
@@ -1293,7 +1820,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM010_C07",
@@ -1309,7 +1844,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1345,7 +1891,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM011_C02",
@@ -1361,7 +1919,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM011_C03",
@@ -1377,7 +1946,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1413,7 +1994,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM012_C02",
@@ -1429,7 +2021,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM012_C03",
@@ -1445,7 +2048,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1484,7 +2098,17 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "오일 보충",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEVEL",
+          "diag_plan": [
+            "평탄한 곳에서 해당 오일의 지정 점검조건을 맞춘다.",
+            "게이지/딥스틱/레벨 표시로 실제 오일량을 확인한다.",
+            "기준 이하이면 외부 누유 흔적을 확인한 뒤 규정량으로 맞춘다.",
+            "보충 후 같은 증상을 재확인한다.",
+            "정상 레벨이면 이 원인을 배제하고 다음 원인으로 이동한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM013_C02",
@@ -1500,7 +2124,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM013_C03",
@@ -1516,7 +2152,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM013_C04",
@@ -1532,7 +2179,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM013_C05",
@@ -1548,7 +2204,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1586,7 +2254,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM014_C02",
@@ -1602,7 +2281,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM014_C03",
@@ -1618,7 +2308,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM014_C04",
@@ -1634,7 +2335,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM014_C05",
@@ -1650,7 +2362,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1685,7 +2408,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM015_C02",
@@ -1701,7 +2435,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         }
       ]
     },
@@ -1738,7 +2480,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM016_C02",
@@ -1755,7 +2508,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM016_C03",
@@ -1771,7 +2535,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1807,7 +2582,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM017_C02",
@@ -1823,7 +2610,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1858,7 +2657,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM018_C02",
@@ -1874,7 +2681,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1908,7 +2727,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1943,7 +2773,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM020_C02",
@@ -1960,7 +2798,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS",
+            "T_STALL"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -1999,7 +2849,17 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEVEL",
+          "diag_plan": [
+            "평탄한 곳에서 해당 오일의 지정 점검조건을 맞춘다.",
+            "게이지/딥스틱/레벨 표시로 실제 오일량을 확인한다.",
+            "기준 이하이면 외부 누유 흔적을 확인한 뒤 규정량으로 맞춘다.",
+            "보충 후 같은 증상을 재확인한다.",
+            "정상 레벨이면 이 원인을 배제하고 다음 원인으로 이동한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM021_C02",
@@ -2016,7 +2876,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM021_C03",
@@ -2033,7 +2901,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS",
+            "T_STALL"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM021_C04",
@@ -2050,7 +2930,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_STALL",
+            "T_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -2088,7 +2980,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM022_C02",
@@ -2105,7 +3006,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS",
+            "T_STALL"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM022_C03",
@@ -2122,7 +3035,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         }
       ]
     },
@@ -2160,7 +3081,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM023_C02",
@@ -2176,7 +3106,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ELECTRICAL",
+          "diag_plan": [
+            "해당 F/R 솔레노이드가 선택 방향에서 자화되는지 확인한다.",
+            "자화되지 않으면 F/R 스위치 전원·연속성을 확인한다.",
+            "스위치 정상이면 하네스 단선/접촉불량을 확인한다.",
+            "전원과 배선이 정상이면 솔레노이드 플런저 작동을 확인한다.",
+            "플런저가 정상인데 작동하지 않으면 밸브/기계 계통으로 넘어간다."
+          ],
+          "ui_tests": [
+            "T_ELEC"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM023_C03",
@@ -2192,7 +3134,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM023_C04",
@@ -2209,7 +3160,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "T_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM023_C05",
@@ -2226,7 +3188,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         }
       ]
     },
@@ -2263,7 +3233,15 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "윤활제를 보충하십시오. (오일교환 주기: 최초 50시간, 이후 매 500시간)",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM024_C02",
@@ -2278,7 +3256,15 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "윤활제를 교체하십시오.",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM024_C03",
@@ -2295,7 +3281,18 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "휠 베어링을 교체하십시오.",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ADJUSTMENT",
+          "diag_plan": [
+            "해당 링크·페달·케이블·마운팅의 유격과 풀림을 육안/손으로 확인한다.",
+            "매뉴얼에 지정 치수가 있으면 실제 치수를 측정한다.",
+            "조정 후 전체 스트로크에서 걸림 없이 작동하는지 확인한다.",
+            "조정 후 같은 증상을 재확인한다."
+          ],
+          "ui_tests": [
+            "AXLE_DIFF_ADJ"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM024_C04",
@@ -2312,7 +3309,18 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "조정값을 재조정하십시오(분해 및 조립 부분 참조).",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ADJUSTMENT",
+          "diag_plan": [
+            "해당 링크·페달·케이블·마운팅의 유격과 풀림을 육안/손으로 확인한다.",
+            "매뉴얼에 지정 치수가 있으면 실제 치수를 측정한다.",
+            "조정 후 전체 스트로크에서 걸림 없이 작동하는지 확인한다.",
+            "조정 후 같은 증상을 재확인한다."
+          ],
+          "ui_tests": [
+            "AXLE_DIFF_ADJ"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM024_C05",
@@ -2327,7 +3335,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "손상된 기어를 교체하십시오.",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM024_C06",
@@ -2344,7 +3361,18 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "디퍼런셜 기어를 교체하십시오.",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "AXLE_DIFF_ADJ"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM024_C07",
@@ -2361,7 +3389,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "베어링을 교체하십시오.",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -2397,7 +3434,18 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "피니언 기어 또는 스파이더를 교체하십시오.",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "AXLE_DIFF_ADJ"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM025_C02",
@@ -2412,7 +3460,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "사이드 기어를 교체하십시오.",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM025_C03",
@@ -2429,7 +3486,18 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "기어를 교체하십시오.",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "AXLE_DIFF_ADJ"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM025_C04",
@@ -2444,7 +3512,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "스러스트 와셔를 교체하십시오.",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -2478,7 +3555,15 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "오일량을 조절하십시오.",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM026_C02",
@@ -2493,7 +3578,15 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "오일을 교체하십시오.",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM026_C03",
@@ -2508,7 +3601,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "브리더를 교체하십시오.",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM026_C04",
@@ -2523,7 +3625,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "오일 시일을 교체하십시오.",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -2560,7 +3671,18 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "휠 베어링을 재조립 또는 교체하십시오(분해 및 조립 부분 참조).",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "AXLE_DIFF_ADJ"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM027_C02",
@@ -2575,7 +3697,15 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "축을 교체하십시오.",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM027_C03",
@@ -2590,7 +3720,15 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "스터드 및 너트를 체결하십시오.",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM027_C04",
@@ -2605,7 +3743,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "드라이브 기어를 교체하십시오.",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM027_C05",
@@ -2622,7 +3769,18 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "파손된 부품을 교체하십시오.",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "AXLE_DIFF_ADJ"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -2660,7 +3818,17 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "오일 보충",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEVEL",
+          "diag_plan": [
+            "평탄한 곳에서 해당 오일의 지정 점검조건을 맞춘다.",
+            "게이지/딥스틱/레벨 표시로 실제 오일량을 확인한다.",
+            "기준 이하이면 외부 누유 흔적을 확인한 뒤 규정량으로 맞춘다.",
+            "보충 후 같은 증상을 재확인한다.",
+            "정상 레벨이면 이 원인을 배제하고 다음 원인으로 이동한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM028_C02",
@@ -2677,7 +3845,17 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "오일 교체",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISCOSITY",
+          "diag_plan": [
+            "현재 주입 오일의 규격과 점도등급을 확인한다.",
+            "차량 지정 규격과 비교한다.",
+            "다른 오일·연료·수분 혼입 또는 열화 흔적을 확인한다.",
+            "냉간과 유온 상승 후 작동상태 차이를 비교한다.",
+            "규격/점도 이상이면 적정 오일로 교환 후 증상을 재확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM028_C03",
@@ -2693,7 +3871,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM028_C04",
@@ -2709,7 +3898,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM028_C05",
@@ -2726,7 +3926,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "필터 및 오일 교환",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM028_C06",
@@ -2743,7 +3952,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "에어빼기 및 라인 확인",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "AIR",
+          "diag_plan": [
+            "흡입측 호스·클램프·피팅의 느슨함과 균열을 먼저 확인한다.",
+            "탱크 레벨과 거품/기포 발생 여부를 확인한다.",
+            "공기 제거 절차가 있는 계통은 해당 절차로 에어를 제거한다.",
+            "에어 제거 후 재발하면 흡입측 누기 지점을 다시 추적한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -2784,7 +4002,17 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "오일 보충",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEVEL",
+          "diag_plan": [
+            "평탄한 곳에서 해당 오일의 지정 점검조건을 맞춘다.",
+            "게이지/딥스틱/레벨 표시로 실제 오일량을 확인한다.",
+            "기준 이하이면 외부 누유 흔적을 확인한 뒤 규정량으로 맞춘다.",
+            "보충 후 같은 증상을 재확인한다.",
+            "정상 레벨이면 이 원인을 배제하고 다음 원인으로 이동한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM029_C02",
@@ -2800,7 +4028,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM029_C03",
@@ -2816,7 +4055,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM029_C04",
@@ -2832,7 +4083,17 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISCOSITY",
+          "diag_plan": [
+            "현재 주입 오일의 규격과 점도등급을 확인한다.",
+            "차량 지정 규격과 비교한다.",
+            "다른 오일·연료·수분 혼입 또는 열화 흔적을 확인한다.",
+            "냉간과 유온 상승 후 작동상태 차이를 비교한다.",
+            "규격/점도 이상이면 적정 오일로 교환 후 증상을 재확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM029_C05",
@@ -2848,7 +4109,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM029_C06",
@@ -2864,7 +4134,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM029_C07",
@@ -2880,7 +4161,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "OVERLOAD",
+          "diag_plan": [
+            "증상이 발생하는 하중과 작업 조건을 확인한다.",
+            "무부하/정상하중에서 같은 증상이 재현되는지 비교한다.",
+            "압력 제한값을 넘는 작업인지 확인한다.",
+            "정상 부하에서도 동일하면 압력·펌프·밸브 원인으로 넘어간다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -2917,7 +4209,18 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "샤프트 시일 교체",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "HYD_PUMP_SPEC"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM030_C02",
@@ -2933,7 +4236,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM030_C03",
@@ -2950,7 +4264,17 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "오일 보충",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEVEL",
+          "diag_plan": [
+            "평탄한 곳에서 해당 오일의 지정 점검조건을 맞춘다.",
+            "게이지/딥스틱/레벨 표시로 실제 오일량을 확인한다.",
+            "기준 이하이면 외부 누유 흔적을 확인한 뒤 규정량으로 맞춘다.",
+            "보충 후 같은 증상을 재확인한다.",
+            "정상 레벨이면 이 원인을 배제하고 다음 원인으로 이동한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM030_C04",
@@ -2967,7 +4291,15 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "해당 시일 교체",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM030_C05",
@@ -2984,7 +4316,15 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "해당 시일 교체",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         }
       ]
     },
@@ -3022,7 +4362,17 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "오일 보충",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEVEL",
+          "diag_plan": [
+            "평탄한 곳에서 해당 오일의 지정 점검조건을 맞춘다.",
+            "게이지/딥스틱/레벨 표시로 실제 오일량을 확인한다.",
+            "기준 이하이면 외부 누유 흔적을 확인한 뒤 규정량으로 맞춘다.",
+            "보충 후 같은 증상을 재확인한다.",
+            "정상 레벨이면 이 원인을 배제하고 다음 원인으로 이동한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM031_C02",
@@ -3039,7 +4389,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "호스라인 점검 확인",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM031_C03",
@@ -3056,7 +4415,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "에어빼기 및 라인 확인",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "AIR",
+          "diag_plan": [
+            "흡입측 호스·클램프·피팅의 느슨함과 균열을 먼저 확인한다.",
+            "탱크 레벨과 거품/기포 발생 여부를 확인한다.",
+            "공기 제거 절차가 있는 계통은 해당 절차로 에어를 제거한다.",
+            "에어 제거 후 재발하면 흡입측 누기 지점을 다시 추적한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM031_C04",
@@ -3073,7 +4441,17 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "오일 교환",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISCOSITY",
+          "diag_plan": [
+            "현재 주입 오일의 규격과 점도등급을 확인한다.",
+            "차량 지정 규격과 비교한다.",
+            "다른 오일·연료·수분 혼입 또는 열화 흔적을 확인한다.",
+            "냉간과 유온 상승 후 작동상태 차이를 비교한다.",
+            "규격/점도 이상이면 적정 오일로 교환 후 증상을 재확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM031_C05",
@@ -3089,7 +4467,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM031_C06",
@@ -3105,7 +4494,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -3140,7 +4540,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "재조임 / 오링 확인",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM032_C02",
@@ -3157,7 +4566,15 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "시일 교환 및 실린더 교체",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM032_C03",
@@ -3174,7 +4591,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "피스톤 로드 교체",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -3211,7 +4637,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "COOLING",
+          "diag_plan": [
+            "쿨러/라인의 막힘·찌그러짐·오염을 확인한다.",
+            "입구와 출구의 온도 차 및 순환상태를 비교한다.",
+            "유량을 제한하는 원인이 없으면 과부하·내부누설·릴리프 작동을 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM033_C02",
@@ -3225,7 +4659,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM033_C03",
@@ -3239,7 +4681,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM033_C04",
@@ -3253,7 +4703,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM033_C05",
@@ -3267,7 +4725,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM033_C06",
@@ -3281,7 +4747,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM033_C07",
@@ -3295,7 +4769,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM033_C08",
@@ -3309,7 +4792,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -3342,7 +4833,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM034_C02",
@@ -3356,7 +4855,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM034_C03",
@@ -3370,7 +4878,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM034_C04",
@@ -3384,7 +4900,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -3421,7 +4946,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM035_C02",
@@ -3437,7 +4970,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM035_C03",
@@ -3453,7 +4997,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM035_C04",
@@ -3469,7 +5024,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -3503,7 +5070,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM036_C02",
@@ -3517,7 +5093,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM036_C03",
@@ -3531,7 +5115,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM036_C04",
@@ -3545,7 +5137,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM036_C05",
@@ -3559,7 +5159,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -3597,7 +5205,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM037_C02",
@@ -3613,7 +5233,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM037_C03",
@@ -3629,7 +5257,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "H_RELIEF"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM037_C04",
@@ -3645,7 +5285,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM037_C05",
@@ -3661,7 +5309,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         }
       ]
     },
@@ -3692,7 +5348,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM038_C02",
@@ -3706,7 +5371,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -3743,7 +5417,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [
+            "M_TILT_DRIFT",
+            "M_LIFT_DRIFT"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM039_C02",
@@ -3760,7 +5446,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "M_TILT_DRIFT",
+            "M_LIFT_DRIFT"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -3791,7 +5489,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM040_C02",
@@ -3805,7 +5511,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -3836,7 +5551,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM041_C02",
@@ -3850,7 +5574,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -3892,7 +5624,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM042_C02",
@@ -3908,7 +5648,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM042_C03",
@@ -3924,7 +5675,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM042_C04",
@@ -3940,7 +5699,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM042_C05",
@@ -3956,7 +5723,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM042_C06",
@@ -3972,7 +5747,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM042_C07",
@@ -3988,7 +5771,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM042_C08",
@@ -4004,7 +5795,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM042_C09",
@@ -4020,7 +5822,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -4057,7 +5870,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM043_C02",
@@ -4073,7 +5894,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM043_C03",
@@ -4089,7 +5918,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM043_C04",
@@ -4105,7 +5942,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         }
       ]
     },
@@ -4137,7 +5982,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "재조임 / 오링 확인",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM044_C02",
@@ -4152,7 +6006,16 @@
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
           "remedy": "샤프트 시일 교체",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -4190,7 +6053,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM045_C02",
@@ -4206,7 +6077,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM045_C03",
@@ -4222,7 +6105,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM045_C04",
@@ -4238,7 +6133,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM045_C05",
@@ -4254,7 +6158,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -4295,7 +6210,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM046_C02",
@@ -4312,7 +6235,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM046_C03",
@@ -4329,7 +6263,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM046_C04",
@@ -4346,7 +6291,17 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISCOSITY",
+          "diag_plan": [
+            "현재 주입 오일의 규격과 점도등급을 확인한다.",
+            "차량 지정 규격과 비교한다.",
+            "다른 오일·연료·수분 혼입 또는 열화 흔적을 확인한다.",
+            "냉간과 유온 상승 후 작동상태 차이를 비교한다.",
+            "규격/점도 이상이면 적정 오일로 교환 후 증상을 재확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM046_C05",
@@ -4363,7 +6318,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM046_C06",
@@ -4380,7 +6343,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -4422,7 +6396,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM047_C02",
@@ -4439,7 +6421,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM047_C03",
@@ -4456,7 +6446,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM047_C04",
@@ -4473,7 +6474,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM047_C05",
@@ -4490,7 +6502,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM047_C06",
@@ -4507,7 +6527,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM047_C07",
@@ -4524,7 +6555,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         }
       ]
     },
@@ -4562,7 +6601,17 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISCOSITY",
+          "diag_plan": [
+            "현재 주입 오일의 규격과 점도등급을 확인한다.",
+            "차량 지정 규격과 비교한다.",
+            "다른 오일·연료·수분 혼입 또는 열화 흔적을 확인한다.",
+            "냉간과 유온 상승 후 작동상태 차이를 비교한다.",
+            "규격/점도 이상이면 적정 오일로 교환 후 증상을 재확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM048_C02",
@@ -4579,7 +6628,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM048_C03",
@@ -4595,7 +6652,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM048_C04",
@@ -4611,7 +6680,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM048_C05",
@@ -4627,7 +6704,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [
+            "S_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -4667,7 +6756,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ADJUSTMENT",
+          "diag_plan": [
+            "해당 링크·페달·케이블·마운팅의 유격과 풀림을 육안/손으로 확인한다.",
+            "매뉴얼에 지정 치수가 있으면 실제 치수를 측정한다.",
+            "조정 후 전체 스트로크에서 걸림 없이 작동하는지 확인한다.",
+            "조정 후 같은 증상을 재확인한다."
+          ],
+          "ui_tests": [
+            "B_PEDAL_S",
+            "B_PEDAL_SE"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM049_C02",
@@ -4684,7 +6785,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM049_C03",
@@ -4701,7 +6810,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM049_C04",
@@ -4718,7 +6835,17 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM049_C05",
@@ -4735,7 +6862,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -4775,7 +6911,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ADJUSTMENT",
+          "diag_plan": [
+            "해당 링크·페달·케이블·마운팅의 유격과 풀림을 육안/손으로 확인한다.",
+            "매뉴얼에 지정 치수가 있으면 실제 치수를 측정한다.",
+            "조정 후 전체 스트로크에서 걸림 없이 작동하는지 확인한다.",
+            "조정 후 같은 증상을 재확인한다."
+          ],
+          "ui_tests": [
+            "B_PEDAL_S",
+            "B_PEDAL_SE"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM050_C02",
@@ -4793,7 +6941,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM050_C03",
@@ -4811,7 +6967,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -4848,7 +7013,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM051_C02",
@@ -4864,7 +7037,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM051_C03",
@@ -4880,7 +7062,17 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PRESSURE",
+          "diag_plan": [
+            "오일량·누유·흡입측 이상을 먼저 배제한다.",
+            "해당 계통의 지정 측정포트에 압력계를 연결한다.",
+            "지정 온도·RPM·레버 위치에서 압력을 측정한다.",
+            "화면의 기준값과 실측값을 비교한다.",
+            "낮음/높음 결과에 따라 릴리프·펌프·밸브·내부누설 쪽으로 분기한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM051_C04",
@@ -4896,7 +7088,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -4928,7 +7129,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM052_C02",
@@ -4942,7 +7152,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM052_C03",
@@ -4956,7 +7174,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -4994,7 +7220,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM053_C02",
@@ -5010,7 +7244,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM053_C03",
@@ -5026,7 +7268,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM053_C04",
@@ -5042,7 +7293,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM053_C05",
@@ -5058,7 +7318,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         }
       ]
     },
@@ -5101,7 +7369,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ADJUSTMENT",
+          "diag_plan": [
+            "해당 링크·페달·케이블·마운팅의 유격과 풀림을 육안/손으로 확인한다.",
+            "매뉴얼에 지정 치수가 있으면 실제 치수를 측정한다.",
+            "조정 후 전체 스트로크에서 걸림 없이 작동하는지 확인한다.",
+            "조정 후 같은 증상을 재확인한다."
+          ],
+          "ui_tests": [
+            "B_PEDAL_S",
+            "B_PEDAL_SE"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM054_C02",
@@ -5119,7 +7399,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM054_C03",
@@ -5137,7 +7425,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM054_C04",
@@ -5155,7 +7451,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM054_C05",
@@ -5173,7 +7478,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM054_C06",
@@ -5191,7 +7504,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -5230,7 +7552,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM055_C02",
@@ -5246,7 +7576,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM055_C03",
@@ -5262,7 +7600,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM055_C04",
@@ -5278,7 +7624,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM055_C05",
@@ -5294,7 +7648,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM055_C06",
@@ -5310,7 +7673,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -5346,7 +7718,19 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ADJUSTMENT",
+          "diag_plan": [
+            "해당 링크·페달·케이블·마운팅의 유격과 풀림을 육안/손으로 확인한다.",
+            "매뉴얼에 지정 치수가 있으면 실제 치수를 측정한다.",
+            "조정 후 전체 스트로크에서 걸림 없이 작동하는지 확인한다.",
+            "조정 후 같은 증상을 재확인한다."
+          ],
+          "ui_tests": [
+            "B_PEDAL_S",
+            "B_PEDAL_SE"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM056_C02",
@@ -5360,7 +7744,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM056_C03",
@@ -5374,7 +7766,15 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM056_C04",
@@ -5388,7 +7788,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -5427,7 +7836,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM057_C02",
@@ -5444,7 +7862,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM057_C03",
@@ -5461,7 +7888,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         },
         {
           "id": "SYM057_C04",
@@ -5478,7 +7913,15 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "VISUAL",
+          "diag_plan": [
+            "해당 부품의 장착상태·손상·풀림·오염을 직접 확인한다.",
+            "이상이 보이면 먼저 복구한 뒤 증상을 재확인한다.",
+            "육안 이상이 없을 때만 연결된 수치 시험으로 넘어간다."
+          ],
+          "ui_tests": [],
+          "needs_review": true
         }
       ]
     },
@@ -5513,7 +7956,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM058_C02",
@@ -5529,7 +7981,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -5561,7 +8022,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM059_C02",
@@ -5575,7 +8045,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "MECHANICAL",
+          "diag_plan": [
+            "관련 오일량·압력·전기제어가 정상인지 먼저 확인한다.",
+            "유격·소착·마모·파손 흔적을 확인한다.",
+            "해당 계통에 스톨/백래시/자연침하 등 수치 시험이 있으면 그 결과와 함께 판정한다.",
+            "유압·전기 정상인데 증상이 지속되면 해당 기계부품 분해점검으로 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         },
         {
           "id": "SYM059_C03",
@@ -5589,7 +8068,16 @@
           "method_status": "별도 검사절차 미추출 — 원문 확인 필요",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_source_action"
+          "verification_mode": "oem_source_action",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -5625,7 +8113,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ADJUSTMENT",
+          "diag_plan": [
+            "해당 링크·페달·케이블·마운팅의 유격과 풀림을 육안/손으로 확인한다.",
+            "매뉴얼에 지정 치수가 있으면 실제 치수를 측정한다.",
+            "조정 후 전체 스트로크에서 걸림 없이 작동하는지 확인한다.",
+            "조정 후 같은 증상을 재확인한다."
+          ],
+          "ui_tests": [
+            "P_ADJ"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM060_C02",
@@ -5641,7 +8140,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "ADJUSTMENT",
+          "diag_plan": [
+            "해당 링크·페달·케이블·마운팅의 유격과 풀림을 육안/손으로 확인한다.",
+            "매뉴얼에 지정 치수가 있으면 실제 치수를 측정한다.",
+            "조정 후 전체 스트로크에서 걸림 없이 작동하는지 확인한다.",
+            "조정 후 같은 증상을 재확인한다."
+          ],
+          "ui_tests": [
+            "P_ADJ"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM060_C03",
@@ -5657,7 +8167,16 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "PUMP",
+          "diag_plan": [
+            "오일 레벨과 흡입측 누기/막힘을 먼저 배제한다.",
+            "펌프 출구 또는 해당 계통의 지정 압력포트에서 압력을 측정한다.",
+            "압력 저하가 있으면 릴리프 상태와 내부누설을 함께 구분한다.",
+            "흡입·릴리프·외부누설 정상이면서 압력이 부족하면 펌프 마모/손상을 좁힌다."
+          ],
+          "ui_tests": [],
+          "needs_review": false
         }
       ]
     },
@@ -5692,7 +8211,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [
+            "AC_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM061_C02",
@@ -5708,7 +8238,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "AC_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -5743,7 +8284,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "AC_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM062_C02",
@@ -5759,7 +8311,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "LEAK",
+          "diag_plan": [
+            "호스·피팅·실린더 로드·하우징 주변의 젖음/흐름 흔적을 확인한다.",
+            "누유부를 세척한 뒤 재작동하여 정확한 시작점을 찾는다.",
+            "느슨한 체결이면 규정 상태로 복구하고 손상된 시일/호스는 교환한다.",
+            "수리 후 오일량을 맞추고 재작동해 누유 여부를 확인한다."
+          ],
+          "ui_tests": [
+            "AC_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     },
@@ -5797,7 +8360,17 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "AC",
+          "diag_plan": [
+            "냉매 압력을 지정 조건에서 저압/고압 동시에 측정한다.",
+            "두 압력의 조합을 기준 패턴과 비교한다.",
+            "냉매량·건조기·팽창밸브·컨덴서·컴프레서를 압력 패턴으로 분리한다."
+          ],
+          "ui_tests": [
+            "AC_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM063_C02",
@@ -5813,7 +8386,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "BLOCKAGE",
+          "diag_plan": [
+            "필터·스트레이너·호스의 눌림/막힘과 오일 오염상태를 확인한다.",
+            "가능하면 막힘 전·후의 압력 또는 유량 차이를 비교한다.",
+            "트랜스미션은 메인 펌프압과 밸브측 비교 포인트를 이용해 막힘 구간을 좁힌다.",
+            "막힘 제거/필터 교환 후 오일상태를 정상화하고 재확인한다."
+          ],
+          "ui_tests": [
+            "AC_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM063_C03",
@@ -5829,7 +8413,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "AIR",
+          "diag_plan": [
+            "흡입측 호스·클램프·피팅의 느슨함과 균열을 먼저 확인한다.",
+            "탱크 레벨과 거품/기포 발생 여부를 확인한다.",
+            "공기 제거 절차가 있는 계통은 해당 절차로 에어를 제거한다.",
+            "에어 제거 후 재발하면 흡입측 누기 지점을 다시 추적한다."
+          ],
+          "ui_tests": [
+            "AC_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM063_C04",
@@ -5845,7 +8440,17 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "AC",
+          "diag_plan": [
+            "냉매 압력을 지정 조건에서 저압/고압 동시에 측정한다.",
+            "두 압력의 조합을 기준 패턴과 비교한다.",
+            "냉매량·건조기·팽창밸브·컨덴서·컴프레서를 압력 패턴으로 분리한다."
+          ],
+          "ui_tests": [
+            "AC_PRESS"
+          ],
+          "needs_review": false
         },
         {
           "id": "SYM063_C05",
@@ -5861,7 +8466,18 @@
           "method_status": "전용 OEM 검사절차 연결",
           "normalized": true,
           "normalization_status": "OEM 원인표 정규화 완료",
-          "verification_mode": "oem_procedure_chain"
+          "verification_mode": "oem_procedure_chain",
+          "diag_type": "INTERNAL_LEAK",
+          "diag_plan": [
+            "외부 누유가 없는지 먼저 확인한다.",
+            "해당 회로의 공급압과 작동부 압력 또는 자연침하량을 비교한다.",
+            "공급압 정상인데 작동부만 낮거나 유지되지 않으면 해당 시일/밸브 내부누설을 좁힌다.",
+            "압력도 정상이라면 기계적 손상 가능성으로 넘어간다."
+          ],
+          "ui_tests": [
+            "AC_PRESS"
+          ],
+          "needs_review": false
         }
       ]
     }
@@ -12771,5 +15387,10 @@
       "source": "D34 제5장 고장 진단 / D34 156",
       "provisional": true
     }
-  ]
+  ],
+  "diagnostic_normalization": {
+    "version": "0.5-full",
+    "cause_count": 268,
+    "strategy": "cause-specific direct check first; only relevant quantitative procedure exposed"
+  }
 }

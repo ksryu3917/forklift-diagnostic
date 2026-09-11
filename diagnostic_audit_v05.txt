@@ -1,0 +1,272 @@
+Forklift Diagnostic v0.5 cause audit
+causes=268
+needs_review=55
+
+SYM000_C01	트랜스미션	전기회로(방향조정) 문제	ELECTRICAL	ui_tests=T_ELEC	review=False
+SYM000_C02	트랜스미션	오일 부족/없음	LEVEL	ui_tests=-	review=False
+SYM000_C03	트랜스미션	인칭 제어 밸브 결합 느슨/손상/조정 불량	ADJUSTMENT	ui_tests=T_PRESS	review=False
+SYM000_C04	트랜스미션	인칭 밸브 감속 스풀 스틱 열림	MECHANICAL	ui_tests=T_PRESS	review=False
+SYM000_C05	트랜스미션	오일 펌프 고장/내부 결함	PUMP	ui_tests=T_PRESS	review=False
+SYM000_C06	트랜스미션	메인 릴리프 밸브 동작 이상	PRESSURE	ui_tests=T_PRESS	review=False
+SYM000_C07	트랜스미션	오염 오일/회로 막힘	BLOCKAGE	ui_tests=T_PRESS	review=False
+SYM000_C08	트랜스미션	T/M 내부 누유	INTERNAL_LEAK	ui_tests=T_PRESS	review=False
+SYM000_C09	트랜스미션	입력/리버스 샤프트 금속 시일링 또는 클러치 피스톤 시일 손상	INTERNAL_LEAK	ui_tests=T_PRESS	review=False
+SYM000_C10	트랜스미션	오염에 의한 모듈 밸브 어셈블리 스틱	BLOCKAGE	ui_tests=T_PRESS	review=False
+SYM000_C11	트랜스미션	외부 오일 라인 연결 오류	VISUAL	ui_tests=-	review=True
+SYM000_C12	트랜스미션	T/M 기계 고장	VISUAL	ui_tests=-	review=True
+SYM001_C01	트랜스미션	전진 클러치가 닫혀있음	MECHANICAL	ui_tests=T_PRESS	review=False
+SYM001_C02	트랜스미션	후진 솔레노이드 밸브 미작동	ELECTRICAL	ui_tests=T_ELEC	review=False
+SYM001_C03	트랜스미션	후진 클러치 요소 손상/시일 누유	INTERNAL_LEAK	ui_tests=T_PRESS	review=False
+SYM002_C01	트랜스미션	후진 클러치가 닫혀있음	MECHANICAL	ui_tests=T_PRESS	review=False
+SYM002_C02	트랜스미션	전진 솔레노이드 밸브 미작동	ELECTRICAL	ui_tests=T_ELEC	review=False
+SYM002_C03	트랜스미션	전진 클러치 요소 손상/시일 누유	INTERNAL_LEAK	ui_tests=T_PRESS	review=False
+SYM003_C01	트랜스미션	냉각 회로 막힘	BLOCKAGE	ui_tests=T_PRESS	review=False
+SYM003_C02	트랜스미션	오일 레벨 높음/낮음	LEVEL	ui_tests=-	review=False
+SYM003_C03	트랜스미션	오일 냉각기 코어 제한	COOLING	ui_tests=-	review=False
+SYM003_C04	트랜스미션	낮은 펌프 압력/펌프 마모	PUMP	ui_tests=T_PRESS,T_STALL	review=False
+SYM003_C05	트랜스미션	컨버터 1방향 클러치 마모/슬립	PUMP	ui_tests=T_PRESS,T_STALL	review=False
+SYM003_C06	트랜스미션	펌프 흡입부 공기 누유	LEAK	ui_tests=-	review=False
+SYM003_C07	트랜스미션	컨버터 저유량/릴리프밸브 문제	PRESSURE	ui_tests=T_PRESS	review=False
+SYM003_C08	트랜스미션	과부하/잘못된 적용	OVERLOAD	ui_tests=-	review=False
+SYM003_C09	트랜스미션	과도한 인칭	VISUAL	ui_tests=-	review=True
+SYM003_C10	트랜스미션	과도한 토크컨버터 스톨	MECHANICAL	ui_tests=T_STALL,T_PRESS	review=False
+SYM003_C11	트랜스미션	쿨러 릴리프 밸브 동작 문제	PRESSURE	ui_tests=T_PRESS	review=False
+SYM004_C01	트랜스미션	낮은 오일 압력	VISUAL	ui_tests=-	review=True
+SYM004_C02	트랜스미션	오일 공기혼입(흡입부 공기누기/낮은 오일레벨)	LEVEL	ui_tests=-	review=False
+SYM004_C03	트랜스미션	인칭 밸브 결합 조정 불량	ADJUSTMENT	ui_tests=T_PRESS	review=False
+SYM004_C04	트랜스미션	모듈 밸브 어셈블리 누유 또는 부분 스틱	LEAK	ui_tests=-	review=False
+SYM005_C01	트랜스미션	모듈 밸브 어셈블리, 로드 피스톤 또는 감속 밸브 스틱	MECHANICAL	ui_tests=T_PRESS	review=False
+SYM006_C01	트랜스미션	현재 진행 방향의 방향 클러치 손상/디스크·판 소착	MECHANICAL	ui_tests=T_PRESS	review=False
+SYM006_C02	트랜스미션	현재 진행 방향 모듈 밸브가 맞물린 위치에서 소착	MECHANICAL	ui_tests=T_PRESS	review=False
+SYM007_C01	트랜스미션	토크컨버터 1방향 클러치 마모	PUMP	ui_tests=T_PRESS,T_STALL	review=False
+SYM007_C02	트랜스미션	낮은 오일 레벨(펌프 캐비테이션)	LEVEL	ui_tests=-	review=False
+SYM007_C03	트랜스미션	펌프쪽 베어링 마모	PUMP	ui_tests=T_PRESS,T_STALL	review=False
+SYM008_C01	트랜스미션	단시간 소음: T/M 유압계통 이물질	VISUAL	ui_tests=-	review=True
+SYM008_C02	트랜스미션	지속 소음: 펌프 손상	PUMP	ui_tests=T_PRESS	review=False
+SYM009_C01	트랜스미션	손상 기어	MECHANICAL	ui_tests=-	review=False
+SYM009_C02	트랜스미션	마모 기어/클러치판/클러치디스크	PUMP	ui_tests=T_PRESS	review=False
+SYM009_C03	트랜스미션	클러치 플레이트 슬립/디스크 소음	MECHANICAL	ui_tests=T_PRESS	review=False
+SYM009_C04	트랜스미션	기타 내부 요소 마모/손상	PUMP	ui_tests=-	review=False
+SYM010_C01	트랜스미션	인칭 밸브 링크 조정 불량	ADJUSTMENT	ui_tests=T_PRESS	review=False
+SYM010_C02	트랜스미션	인칭 밸브 감속 스풀 스틱 열림	MECHANICAL	ui_tests=T_PRESS	review=False
+SYM010_C03	트랜스미션	클러치 피스톤 시일 누유	INTERNAL_LEAK	ui_tests=T_PRESS	review=False
+SYM010_C04	트랜스미션	릴리프 밸브 스프링 문제로 중심 릴리프 낮은 설정	PRESSURE	ui_tests=T_PRESS	review=False
+SYM010_C05	트랜스미션	낮은 오일 압력	VISUAL	ui_tests=-	review=True
+SYM010_C06	트랜스미션	외부 오일 라인 연결 오류	VISUAL	ui_tests=-	review=True
+SYM010_C07	트랜스미션	모듈 밸브 소착	MECHANICAL	ui_tests=T_PRESS	review=False
+SYM011_C01	트랜스미션	메인 릴리프 밸브 소착	PRESSURE	ui_tests=T_PRESS	review=False
+SYM011_C02	트랜스미션	유압회로 막힘	BLOCKAGE	ui_tests=T_PRESS	review=False
+SYM011_C03	트랜스미션	메인 릴리프 밸브 조정 불량	PRESSURE	ui_tests=T_PRESS	review=False
+SYM012_C01	트랜스미션	클러치 피스톤 시일 배열 불량/누유	INTERNAL_LEAK	ui_tests=T_PRESS	review=False
+SYM012_C02	트랜스미션	샤프트 또는 클러치 피스톤 시일 손상/마모	INTERNAL_LEAK	ui_tests=T_PRESS	review=False
+SYM012_C03	트랜스미션	모듈 밸브 어셈블리 소착	MECHANICAL	ui_tests=T_PRESS	review=False
+SYM013_C01	트랜스미션	오일 레벨 낮음	LEVEL	ui_tests=-	review=False
+SYM013_C02	트랜스미션	중심 릴리프 밸브 오동작	PRESSURE	ui_tests=T_PRESS	review=False
+SYM013_C03	트랜스미션	T/M 펌프 마모	PUMP	ui_tests=T_PRESS	review=False
+SYM013_C04	트랜스미션	내부 오일 누유	LEAK	ui_tests=-	review=False
+SYM013_C05	트랜스미션	중심 릴리프 밸브 조정 불량	PRESSURE	ui_tests=T_PRESS	review=False
+SYM014_C01	트랜스미션	오일펌프 결함/소손	PUMP	ui_tests=T_PRESS	review=False
+SYM014_C02	트랜스미션	오일오염/회로막힘	BLOCKAGE	ui_tests=T_PRESS	review=False
+SYM014_C03	트랜스미션	인칭밸브 감속 스풀 소착	MECHANICAL	ui_tests=T_PRESS	review=False
+SYM014_C04	트랜스미션	요소 손상에 의한 내부누유	INTERNAL_LEAK	ui_tests=T_PRESS	review=False
+SYM014_C05	트랜스미션	오일 냉각기 회로 막힘	BLOCKAGE	ui_tests=T_PRESS	review=False
+SYM015_C01	트랜스미션	외부 오일 라인 또는 내부통로 막힘	BLOCKAGE	ui_tests=T_PRESS	review=False
+SYM015_C02	트랜스미션	외부 오일라인 연결 오류	VISUAL	ui_tests=-	review=True
+SYM016_C01	트랜스미션	컨버터 바이패스 오리피스 막힘	BLOCKAGE	ui_tests=T_PRESS	review=False
+SYM016_C02	트랜스미션	컨버터 내부 막힘	BLOCKAGE	ui_tests=T_PRESS	review=False
+SYM016_C03	트랜스미션	회로 막힘	BLOCKAGE	ui_tests=T_PRESS	review=False
+SYM017_C01	트랜스미션	컨버터 릴리프 밸브 소착	PRESSURE	ui_tests=T_PRESS	review=False
+SYM017_C02	트랜스미션	중심 릴리프 밸브 동작 막힘	PRESSURE	ui_tests=T_PRESS	review=False
+SYM018_C01	트랜스미션	낮은 오일 압력	VISUAL	ui_tests=-	review=True
+SYM018_C02	트랜스미션	쿨러 릴리프 밸브 소착	PRESSURE	ui_tests=T_PRESS	review=False
+SYM019_C01	트랜스미션	오일 냉각기 라인 또는 냉각기 막힘	BLOCKAGE	ui_tests=T_PRESS	review=False
+SYM020_C01	트랜스미션	엔진 운전 불량	VISUAL	ui_tests=-	review=True
+SYM020_C02	트랜스미션	토크컨버터 1방향 클러치 유지 불량	MECHANICAL	ui_tests=T_PRESS,T_STALL	review=False
+SYM021_C01	트랜스미션	낮은 오일 레벨	LEVEL	ui_tests=-	review=False
+SYM021_C02	트랜스미션	오일 공기혼입	VISUAL	ui_tests=-	review=True
+SYM021_C03	트랜스미션	클러치 슬립	MECHANICAL	ui_tests=T_PRESS,T_STALL	review=False
+SYM021_C04	트랜스미션	토크컨버터 결함	MECHANICAL	ui_tests=T_STALL,T_PRESS	review=False
+SYM022_C01	트랜스미션	해당 클러치 회로 누유	LEAK	ui_tests=-	review=False
+SYM022_C02	트랜스미션	클러치 어셈블리 결함/슬립	MECHANICAL	ui_tests=T_PRESS,T_STALL	review=False
+SYM022_C03	트랜스미션	셀렉터 스풀 문제	VISUAL	ui_tests=-	review=True
+SYM023_C01	트랜스미션	스풀 소착(불순물/케이스·몸체 변형/보어·스풀 치수 문제)	MECHANICAL	ui_tests=-	review=False
+SYM023_C02	트랜스미션	솔레노이드 미작동(O링/포트/이물/전기)	ELECTRICAL	ui_tests=T_ELEC	review=False
+SYM023_C03	트랜스미션	플라스틱 오리피스 막힘	BLOCKAGE	ui_tests=-	review=False
+SYM023_C04	트랜스미션	모듈 밸브 OFF 위치 소착	MECHANICAL	ui_tests=T_PRESS	review=False
+SYM023_C05	트랜스미션	모듈 밸브 조립 오류	VISUAL	ui_tests=-	review=True
+SYM024_C01	드라이브 액슬	윤활제 부족	VISUAL	ui_tests=-	review=False
+SYM024_C02	드라이브 액슬	윤활제 사양 불일치	VISUAL	ui_tests=-	review=False
+SYM024_C03	드라이브 액슬	휠 베어링 조정 불량/결함	ADJUSTMENT	ui_tests=AXLE_DIFF_ADJ	review=False
+SYM024_C04	드라이브 액슬	드라이브기어/피니언 조정 불량	ADJUSTMENT	ui_tests=AXLE_DIFF_ADJ	review=False
+SYM024_C05	드라이브 액슬	기어 손상/마모	PUMP	ui_tests=-	review=False
+SYM024_C06	드라이브 액슬	백래시 과소/과다	MECHANICAL	ui_tests=AXLE_DIFF_ADJ	review=False
+SYM024_C07	드라이브 액슬	피니언 또는 사이드 베어링 마모/풀림	PUMP	ui_tests=-	review=False
+SYM025_C01	드라이브 액슬	피니언기어/스파이더 과도 조임	MECHANICAL	ui_tests=AXLE_DIFF_ADJ	review=False
+SYM025_C02	드라이브 액슬	사이드기어 타이트	MECHANICAL	ui_tests=-	review=False
+SYM025_C03	드라이브 액슬	피니언/사이드기어 결함	MECHANICAL	ui_tests=AXLE_DIFF_ADJ	review=False
+SYM025_C04	드라이브 액슬	스러스트와셔 마모/손상	PUMP	ui_tests=-	review=False
+SYM026_C01	드라이브 액슬	오일 과다	VISUAL	ui_tests=-	review=False
+SYM026_C02	드라이브 액슬	윤활제 종류 오류	VISUAL	ui_tests=-	review=False
+SYM026_C03	드라이브 액슬	브리더 막힘	BLOCKAGE	ui_tests=-	review=False
+SYM026_C04	드라이브 액슬	오일시일 마모/조립불량	PUMP	ui_tests=-	review=False
+SYM027_C01	드라이브 액슬	휠베어링 풀림	MECHANICAL	ui_tests=AXLE_DIFF_ADJ	review=False
+SYM027_C02	드라이브 액슬	축 길이 문제	VISUAL	ui_tests=-	review=False
+SYM027_C03	드라이브 액슬	스터드/너트 풀림	VISUAL	ui_tests=-	review=False
+SYM027_C04	드라이브 액슬	드라이브기어 치면 손상	MECHANICAL	ui_tests=-	review=False
+SYM027_C05	드라이브 액슬	디퍼런셜 사이드기어/피니언 파손	MECHANICAL	ui_tests=AXLE_DIFF_ADJ	review=False
+SYM028_C01	유압	오일 레벨 낮음	LEVEL	ui_tests=-	review=False
+SYM028_C02	유압	오일 점도 높음	VISCOSITY	ui_tests=-	review=False
+SYM028_C03	유압	펌프 인입라인 장애	BLOCKAGE	ui_tests=H_RELIEF	review=False
+SYM028_C04	유압	펌프 내부 부품 마모	PUMP	ui_tests=H_RELIEF	review=False
+SYM028_C05	유압	필터 이물질	BLOCKAGE	ui_tests=-	review=False
+SYM028_C06	유압	인입라인 공기유입	AIR	ui_tests=-	review=False
+SYM029_C01	유압	오일 레벨 낮음	LEVEL	ui_tests=-	review=False
+SYM029_C02	유압	오일 통로 장애	BLOCKAGE	ui_tests=H_RELIEF	review=False
+SYM029_C03	유압	릴리프밸브 설정 낮음	PRESSURE	ui_tests=H_RELIEF	review=False
+SYM029_C04	유압	오일 점도 낮음	VISCOSITY	ui_tests=-	review=False
+SYM029_C05	유압	시스템 누출	LEAK	ui_tests=-	review=False
+SYM029_C06	유압	펌프 심한 마모	PUMP	ui_tests=H_RELIEF	review=False
+SYM029_C07	유압	시스템 과부하	OVERLOAD	ui_tests=H_RELIEF	review=False
+SYM030_C01	유압	샤프트시일 마모	PUMP	ui_tests=HYD_PUMP_SPEC	review=False
+SYM030_C02	유압	펌프바디 내부부품 마모	PUMP	ui_tests=H_RELIEF	review=False
+SYM030_C03	유압	오일부족 상태 운전에 의한 시일불량	LEVEL	ui_tests=-	review=False
+SYM030_C04	유압	설치 중 시일 절단	VISUAL	ui_tests=-	review=True
+SYM030_C05	유압	열에 의한 시일립 경화	VISUAL	ui_tests=-	review=True
+SYM031_C01	유압	오일레벨 낮음	LEVEL	ui_tests=-	review=False
+SYM031_C02	유압	인입라인 장애	BLOCKAGE	ui_tests=-	review=False
+SYM031_C03	유압	인입라인 공기유입	AIR	ui_tests=-	review=False
+SYM031_C04	유압	오일 점도 부적합	VISCOSITY	ui_tests=-	review=False
+SYM031_C05	유압	펌프 심한 마모	PUMP	ui_tests=H_RELIEF	review=False
+SYM031_C06	유압	펌프 샤프트/커플링 고장	PUMP	ui_tests=H_RELIEF	review=False
+SYM032_C01	유압	호스 연결 느슨	LEAK	ui_tests=-	review=False
+SYM032_C02	유압	피스톤로드 단부 시일 결함	VISUAL	ui_tests=-	review=True
+SYM032_C03	유압	피스톤로드 손상	MECHANICAL	ui_tests=-	review=False
+SYM033_C01	작업장치	작동유 과열	COOLING	ui_tests=-	review=False
+SYM033_C02	작업장치	작동유 이물질	VISUAL	ui_tests=-	review=False
+SYM033_C03	작업장치	연결부 과다조임	VISUAL	ui_tests=-	review=False
+SYM033_C04	작업장치	밸브 고정볼트 토크불량/몸체 뒤틀림	VISUAL	ui_tests=-	review=False
+SYM033_C05	작업장치	틸트/리프트 링케이지 작동불량	VISUAL	ui_tests=-	review=False
+SYM033_C06	작업장치	리프트/틸트 스풀 휨	VISUAL	ui_tests=-	review=False
+SYM033_C07	작업장치	리턴스프링 손상	MECHANICAL	ui_tests=-	review=False
+SYM033_C08	작업장치	작동유 온도 규정 이탈	VISUAL	ui_tests=-	review=False
+SYM034_C01	작업장치	시일부 이물질	VISUAL	ui_tests=-	review=False
+SYM034_C02	작업장치	밸브스풀 과다마모	PUMP	ui_tests=-	review=False
+SYM034_C03	작업장치	시일플레이트 헐거움	VISUAL	ui_tests=-	review=False
+SYM034_C04	작업장치	시일 손상/이상마모	PUMP	ui_tests=-	review=False
+SYM035_C01	작업장치	체크밸브 근처 이물질	VISUAL	ui_tests=-	review=True
+SYM035_C02	작업장치	체크밸브 시트/포펫 마모	PUMP	ui_tests=H_RELIEF	review=False
+SYM035_C03	작업장치	펌프 토출압 급락	PUMP	ui_tests=H_RELIEF	review=False
+SYM035_C04	작업장치	릴리프밸브 손상으로 작동압 저하	PRESSURE	ui_tests=H_RELIEF	review=False
+SYM036_C01	작업장치	스프링 파손	MECHANICAL	ui_tests=-	review=False
+SYM036_C02	작업장치	스풀 변형	VISUAL	ui_tests=-	review=False
+SYM036_C03	작업장치	유로 이물질	VISUAL	ui_tests=-	review=False
+SYM036_C04	작업장치	컨트롤 링케이지 정렬불량	VISUAL	ui_tests=-	review=False
+SYM036_C05	작업장치	밸브고정 볼트 과다토크	VISUAL	ui_tests=-	review=False
+SYM037_C01	작업장치	릴리프밸브 비정상마모/오작동	PRESSURE	ui_tests=H_RELIEF	review=False
+SYM037_C02	작업장치	회로 공기혼입	VISUAL	ui_tests=-	review=True
+SYM037_C03	작업장치	릴리프 컨트롤 포펫/시트 이물질	PRESSURE	ui_tests=H_RELIEF	review=False
+SYM037_C04	작업장치	밸브몸체 크랙	VISUAL	ui_tests=-	review=True
+SYM037_C05	작업장치	스풀 스트로크 불량	VISUAL	ui_tests=-	review=True
+SYM038_C01	마스트	실린더 헤드 시일 마모	PUMP	ui_tests=-	review=False
+SYM038_C02	마스트	실린더로드 과다마모/스크래치/휨	PUMP	ui_tests=-	review=False
+SYM039_C01	마스트	피스톤시일 과다마모로 작동유 통과	INTERNAL_LEAK	ui_tests=M_TILT_DRIFT,M_LIFT_DRIFT	review=False
+SYM039_C02	마스트	실린더 손상	MECHANICAL	ui_tests=M_TILT_DRIFT,M_LIFT_DRIFT	review=False
+SYM040_C01	마스트	실린더 정렬 불량	VISUAL	ui_tests=-	review=False
+SYM040_C02	마스트	작동유 오염	BLOCKAGE	ui_tests=-	review=False
+SYM041_C01	마스트	와이퍼링 과다마모	PUMP	ui_tests=-	review=False
+SYM041_C02	마스트	이물질 제거 미흡	VISUAL	ui_tests=-	review=False
+SYM042_C01	스티어링	우선순위밸브가 낮은 설정에서 오일 방출	VISUAL	ui_tests=-	review=True
+SYM042_C02	스티어링	펌프압 낮음/펌프마모	PUMP	ui_tests=S_PRESS	review=False
+SYM042_C03	스티어링	스티어링유닛 덮개 과다조임	VISUAL	ui_tests=-	review=True
+SYM042_C04	스티어링	컬럼-유닛 정렬불량	VISUAL	ui_tests=-	review=True
+SYM042_C05	스티어링	우선순위밸브 스풀 고착	VISUAL	ui_tests=-	review=True
+SYM042_C06	스티어링	스티어링유닛 윤활 부족	VISUAL	ui_tests=-	review=True
+SYM042_C07	스티어링	작동유 부족	VISUAL	ui_tests=-	review=True
+SYM042_C08	스티어링	스티어액슬 파손	MECHANICAL	ui_tests=S_PRESS	review=False
+SYM042_C09	스티어링	실린더 피스톤시일 마모	INTERNAL_LEAK	ui_tests=S_PRESS	review=False
+SYM043_C01	스티어링	스티어링유닛 덮개 과다조임	VISUAL	ui_tests=-	review=True
+SYM043_C02	스티어링	컬럼 정렬불량	VISUAL	ui_tests=-	review=True
+SYM043_C03	스티어링	스티어링유닛 밸브스풀 구속	VISUAL	ui_tests=-	review=True
+SYM043_C04	스티어링	우선순위밸브/체크밸브 제어 불량	VISUAL	ui_tests=-	review=True
+SYM044_C01	스티어링	호스 연결 느슨	LEAK	ui_tests=-	review=False
+SYM044_C02	스티어링	샤프트 시일 결함	MECHANICAL	ui_tests=-	review=False
+SYM045_C01	스티어링	작동유 부족	VISUAL	ui_tests=-	review=True
+SYM045_C02	스티어링	우선순위밸브 릴리프 스프링 장력 약함	PRESSURE	ui_tests=S_PRESS	review=False
+SYM045_C03	스티어링	릴리프밸브 고착/작동불량	PRESSURE	ui_tests=S_PRESS	review=False
+SYM045_C04	스티어링	유압계통 내/외부 누유	LEAK	ui_tests=-	review=False
+SYM045_C05	스티어링	펌프 결함	PUMP	ui_tests=S_PRESS	review=False
+SYM046_C01	스티어링	유압회로 공기혼입	VISUAL	ui_tests=-	review=True
+SYM046_C02	스티어링	펌프 심한 마모	PUMP	ui_tests=S_PRESS	review=False
+SYM046_C03	스티어링	펌프 유입라인 느슨	PUMP	ui_tests=S_PRESS	review=False
+SYM046_C04	스티어링	작동유 점도 오류	VISCOSITY	ui_tests=-	review=False
+SYM046_C05	스티어링	작동유 부족	VISUAL	ui_tests=-	review=True
+SYM046_C06	스티어링	실린더 피스톤시일 마모	INTERNAL_LEAK	ui_tests=S_PRESS	review=False
+SYM047_C01	스티어링	작동유 부족	VISUAL	ui_tests=-	review=True
+SYM047_C02	스티어링	스티어링계통 공기혼입	VISUAL	ui_tests=-	review=True
+SYM047_C03	스티어링	펌프 작동불량	PUMP	ui_tests=S_PRESS	review=False
+SYM047_C04	스티어링	계통 오염	BLOCKAGE	ui_tests=S_PRESS	review=False
+SYM047_C05	스티어링	스티어링유닛 작동불량	VISUAL	ui_tests=-	review=True
+SYM047_C06	스티어링	실린더 마모부품	PUMP	ui_tests=S_PRESS	review=False
+SYM047_C07	스티어링	스티어액슬 연결장치 구속	VISUAL	ui_tests=-	review=True
+SYM048_C01	스티어링	작동유 점도 오류	VISCOSITY	ui_tests=-	review=False
+SYM048_C02	스티어링	작동유 공기혼입	VISUAL	ui_tests=-	review=True
+SYM048_C03	스티어링	우선순위밸브 릴리프 설정 과다	PRESSURE	ui_tests=S_PRESS	review=False
+SYM048_C04	스티어링	유압라인 구속	VISUAL	ui_tests=-	review=True
+SYM048_C05	스티어링	장시간 릴리프 모드	PRESSURE	ui_tests=S_PRESS	review=False
+SYM049_C01	브레이크	페달 스트로크 불충분	ADJUSTMENT	ui_tests=B_PEDAL_S,B_PEDAL_SE	review=False
+SYM049_C02	브레이크	유압라인 연결 오류	VISUAL	ui_tests=-	review=True
+SYM049_C03	브레이크	컨트롤밸브 1구간 제동 공급유량 불충분	VISUAL	ui_tests=-	review=True
+SYM049_C04	브레이크	브레이크밸브 릴리프밸브 파손	PRESSURE	ui_tests=-	review=False
+SYM049_C05	브레이크	서보피스톤 시일 파손	INTERNAL_LEAK	ui_tests=-	review=False
+SYM050_C01	브레이크	페달 스트로크 불충분	ADJUSTMENT	ui_tests=B_PEDAL_S,B_PEDAL_SE	review=False
+SYM050_C02	브레이크	유압라인 공기	VISUAL	ui_tests=-	review=True
+SYM050_C03	브레이크	서보피스톤 시일/슬리브 파손·오염	INTERNAL_LEAK	ui_tests=-	review=False
+SYM051_C01	브레이크	유압라인 공기	VISUAL	ui_tests=-	review=True
+SYM051_C02	브레이크	컨트롤밸브 브레이크포트 체크밸브 손상	MECHANICAL	ui_tests=-	review=False
+SYM051_C03	브레이크	브레이크밸브 릴리프 스프링 파손	PRESSURE	ui_tests=-	review=False
+SYM051_C04	브레이크	컨트롤밸브 브레이크스풀 스프링 파손	MECHANICAL	ui_tests=-	review=False
+SYM052_C01	브레이크	마스터피스톤/시일 파손	MECHANICAL	ui_tests=-	review=False
+SYM052_C02	브레이크	외관 주조품 구멍	VISUAL	ui_tests=-	review=False
+SYM052_C03	브레이크	유압라인 연결장치 이상	VISUAL	ui_tests=-	review=False
+SYM053_C01	브레이크	브레이크 유압계통 공기	VISUAL	ui_tests=-	review=True
+SYM053_C02	브레이크	브레이크밸브 풀림	VISUAL	ui_tests=-	review=True
+SYM053_C03	브레이크	서보피스톤 마모/결함	PUMP	ui_tests=-	review=False
+SYM053_C04	브레이크	드라이브액슬 브레이크 피스톤시일 마모/결함	INTERNAL_LEAK	ui_tests=-	review=False
+SYM053_C05	브레이크	작동유 부족	VISUAL	ui_tests=-	review=True
+SYM054_C01	브레이크	페달 정렬불량	ADJUSTMENT	ui_tests=B_PEDAL_S,B_PEDAL_SE	review=False
+SYM054_C02	브레이크	브레이크 유압계통 공기	VISUAL	ui_tests=-	review=True
+SYM054_C03	브레이크	브레이크밸브 풀림	VISUAL	ui_tests=-	review=True
+SYM054_C04	브레이크	서보피스톤 마모/결함	PUMP	ui_tests=-	review=False
+SYM054_C05	브레이크	작동유 부족	VISUAL	ui_tests=-	review=True
+SYM054_C06	브레이크	드라이브액슬 브레이크 피스톤시일 마모/결함	INTERNAL_LEAK	ui_tests=-	review=False
+SYM055_C01	브레이크	작동유 부족	VISUAL	ui_tests=-	review=True
+SYM055_C02	브레이크	유압계통 공기	VISUAL	ui_tests=-	review=True
+SYM055_C03	브레이크	연결장치 정렬불량/휨	VISUAL	ui_tests=-	review=True
+SYM055_C04	브레이크	브레이크밸브 결함	VISUAL	ui_tests=-	review=True
+SYM055_C05	브레이크	플레이트/디스크 휨	MECHANICAL	ui_tests=-	review=False
+SYM055_C06	브레이크	드라이브액슬 피스톤 마모/결함	PUMP	ui_tests=-	review=False
+SYM056_C01	브레이크	페달 또는 디스크 어셈블리 기계저항	ADJUSTMENT	ui_tests=B_PEDAL_S,B_PEDAL_SE	review=False
+SYM056_C02	브레이크	브레이크라인 구속	VISUAL	ui_tests=-	review=False
+SYM056_C03	브레이크	브레이크밸브 결함	VISUAL	ui_tests=-	review=False
+SYM056_C04	브레이크	브레이크디스크 글레이징/마모	PUMP	ui_tests=-	review=False
+SYM057_C01	브레이크	브레이크디스크 어셈블리 결함/피스톤 고착	MECHANICAL	ui_tests=-	review=False
+SYM057_C02	브레이크	브레이크디스크 평탄 불량	MECHANICAL	ui_tests=-	review=False
+SYM057_C03	브레이크	브레이크라인 구속	VISUAL	ui_tests=-	review=True
+SYM057_C04	브레이크	브레이크밸브 결함	VISUAL	ui_tests=-	review=True
+SYM058_C01	브레이크	유압라인/연결부 누유	LEAK	ui_tests=-	review=False
+SYM058_C02	브레이크	브레이크밸브 시일 파손	MECHANICAL	ui_tests=-	review=False
+SYM059_C01	브레이크	유압라인/연결부 누유	LEAK	ui_tests=-	review=False
+SYM059_C02	브레이크	브레이크밸브 시일 파손	MECHANICAL	ui_tests=-	review=False
+SYM059_C03	브레이크	디스크 어셈블리 누유	LEAK	ui_tests=-	review=False
+SYM060_C01	주차 브레이크	주차브레이크 어셈블리 조정불량	ADJUSTMENT	ui_tests=P_ADJ	review=False
+SYM060_C02	주차 브레이크	제어 케이블 조정불량	ADJUSTMENT	ui_tests=P_ADJ	review=False
+SYM060_C03	주차 브레이크	브레이크 밴드 마모	PUMP	ui_tests=-	review=False
+SYM061_C01	에어컨	냉매가스 누출 또는 부족	LEAK	ui_tests=AC_PRESS	review=False
+SYM061_C02	에어컨	건조기 오물에 의한 냉각흐름 막힘	BLOCKAGE	ui_tests=AC_PRESS	review=False
+SYM062_C01	에어컨	수분/오물에 의한 냉각흐름 막힘	BLOCKAGE	ui_tests=AC_PRESS	review=False
+SYM062_C02	에어컨	팽창밸브 가스누출로 인한 냉각흐름 막힘	LEAK	ui_tests=AC_PRESS	review=False
+SYM063_C01	에어컨	냉매 과다	AC	ui_tests=AC_PRESS	review=False
+SYM063_C02	에어컨	컨덴서 핀 막힘/팬 결함	BLOCKAGE	ui_tests=AC_PRESS	review=False
+SYM063_C03	에어컨	냉각계통 공기유입	AIR	ui_tests=AC_PRESS	review=False
+SYM063_C04	에어컨	팽창밸브 과다개방	AC	ui_tests=AC_PRESS	review=False
+SYM063_C05	에어컨	컴프레서 내부누출 등 표의 증상으로 구분	INTERNAL_LEAK	ui_tests=AC_PRESS	review=False
