@@ -255,8 +255,6 @@ public class MainActivity extends Activity {
         LinearLayout h=card();h.addView(tv(p.optString("system")+" · OEM 점검",13,true));h.addView(tv("근거: "+p.optString("source")+" / PDF "+p.optJSONArray("pdf_pages"),12,false));body.addView(h);
         LinearLayout m=card();if(p.optJSONArray("conditions")!=null){m.addView(tv("점검 조건",15,true));addArray(m,p.optJSONArray("conditions"),"• ");}if(p.optJSONArray("tools")!=null){m.addView(tv("필요 공구",15,true));addArray(m,p.optJSONArray("tools"),"• ");}m.addView(tv("점검 방법",15,true));addArray(m,p.optJSONArray("steps"),"① ");String std=p.optString("standard");JSONObject sbm=p.optJSONObject("standard_by_model");if(sbm!=null)std=sbm.optString(vehicle,std);if(std.length()>0)m.addView(tv("OEM 기준: "+std,15,true));if(p.optString("verification").length()>0)m.addView(tv("주의: "+p.optString("verification"),13,true));body.addView(m);
         JSONArray dec=p.optJSONArray("decision");if(dec!=null){LinearLayout d=card();d.addView(tv("판정 연결",15,true));addArray(d,dec,"• ");body.addView(d);}
-        LinearLayout q=card();q.addView(tv("현장 확인 결과",16,true));Button ok=btn("기준 만족 / 이상 없음",false);ok.setOnClickListener(v->showResult("현재 검사 정상","다음 연결 검사 또는 다른 원인을 확인하십시오."));q.addView(ok);Button ng=btn("기준 이탈 / 이상 발견",true);ng.setOnClickListener(v->showResult("이상 확인","해당 OEM 점검 절차의 대책/판정 기준에 따라 수리 후 재검사하십시오."));q.addView(ng);body.addView(q);
-    }
 
     private void engine()throws Exception{
         baseScreen("엔진 진단");JSONObject er=db.getJSONObject("engine_reference");LinearLayout w=card();w.addView(tv("⚠ "+er.optString("status"),16,true));w.addView(tv(er.optString("title"),15,true));w.addView(tv(er.optString("applicability"),12,false));body.addView(w);
