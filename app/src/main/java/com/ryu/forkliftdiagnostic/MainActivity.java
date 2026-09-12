@@ -549,6 +549,7 @@ public class MainActivity extends Activity {
             if("SYM005".equals(sid) && "pressure".equals(nodeId) && nodes.has("ect_shift")) nodeId="ect_shift";
         }
         JSONObject n=nodes.getJSONObject(nodeId);
+        final String currentNodeId=nodeId;
         JSONObject sy=findSymptom(sid);
         String title=n.optString("title",sy==null?"트랜스미션 진단":sy.optString("name"));
         baseScreen(title);
@@ -577,7 +578,11 @@ public class MainActivity extends Activity {
             JSONObject o=ch.getJSONObject(i);
             Button b=btn(o.optString("label"),true);
             String next=o.optString("next");
-            b.setOnClickListener(v->{ saveDiagLog("TM_V08_"+sid,nodeId,o.optString("label")); go(new Screen("tm_diag",sid,next)); });
+            b.setOnClickListener(v->{
+                try{ saveDiagLog("TM_V08_"+sid,currentNodeId,o.optString("label")); }
+                catch(Exception e){ android.util.Log.w("ForkliftDiag","diag log failed",e); }
+                go(new Screen("tm_diag",sid,next));
+            });
             q.addView(b);
         }
         body.addView(q);
