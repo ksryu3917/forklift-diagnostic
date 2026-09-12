@@ -552,7 +552,7 @@ public class MainActivity extends Activity {
         final String currentNodeId=nodeId;
         JSONObject sy=findSymptom(sid);
         String title=n.optString("title",sy==null?"트랜스미션 진단":sy.optString("name"));
-        baseScreen(title);
+        baseScreen("T/M 진단");
 
         LinearLayout h=card();
         h.addView(tv(sy==null?title:sy.optString("name"),18,true));
@@ -566,11 +566,16 @@ public class MainActivity extends Activity {
         }
 
         String vis=n.optString("visual");
-        if(vis.length()>0)addTmStepVisual(vis);
+        if("SYM000".equals(sid) && ("tap6".equals(currentNodeId) || "tap1".equals(currentNodeId) || "pair".equals(currentNodeId))){
+            addTmManualPressureImage();
+        }else if(vis.length()>0){
+            addTmStepVisual(vis);
+        }
 
         String type=n.optString("type");
         if("result".equals(type)){ showTmResult(n); return; }
-        if("measure".equals(type)){ showTmMeasure(sid,nodeId,n); return; }
+        if("measure".equals(type)){ showTmMeasure(sid,currentNodeId,n); return; }
+        if("clutch_pair_measure".equals(type)){ showTmClutchPairMeasure(sid,currentNodeId,n); return; }
 
         LinearLayout q=card(); q.addView(tv(n.optString("question"),17,true));
         JSONArray ch=n.optJSONArray("choices");
@@ -611,10 +616,95 @@ public class MainActivity extends Activity {
         m.addView(b); body.addView(m);
     }
 
+
+    private void showTmClutchPairMeasure(String sid,String nodeId,JSONObject n){
+        LinearLayout m=card();
+        m.addView(tv("F 선택",17,true));
+        EditText f4=tmPressureInput("Tap4 (bar)");
+        EditText f5=tmPressureInput("Tap5 (bar)");
+        m.addView(f4); m.addView(f5);
+
+        m.addView(tv("R 선택",17,true));
+        EditText r4=tmPressureInput("Tap4 (bar)");
+        EditText r5=tmPressureInput("Tap5 (bar)");
+        m.addView(r4); m.addView(r5);
+
+        TextView guide=tv("정상: F 선택 Tap4 7.3~8.6 / Tap5 0 · R 선택 Tap5 7.3~8.6 / Tap4 0",13,false);
+        m.addView(guide);
+
+        Button b=btn("4개 실측값으로 판정",true);
+        b.setOnClickListener(v->{
+            try{
+                double fv4=Double.parseDouble(f4.getText().toString().trim());
+                double fv5=Double.parseDouble(f5.getText().toString().trim());
+                double rv4=Double.parseDouble(r4.getText().toString().trim());
+                double rv5=Double.parseDouble(r5.getText().toString().trim());
+
+                final double LO=7.3, HI=8.6, ZERO_MAX=0.5;
+                boolean fApply=fv4>=LO && fv4<=HI;
+                boolean rApply=rv5>=LO && rv5<=HI;
+                boolean fOff=fv5<=ZERO_MAX;
+                boolean rOff=rv4<=ZERO_MAX;
+
+                String next;
+                if(!fOff || !rOff) next=n.optString("next_cross_apply");
+                else if(fv4<LO && rv5<LO) next=n.optString("next_common_low");
+                else if(fv4<LO && rApply) next=n.optString("next_f_low");
+                else if(rv5<LO && fApply) next=n.optString("next_r_low");
+                else if(fApply && rApply) next=n.optString("next_normal");
+                else if(fv4>HI || rv5>HI) next=n.optString("next_cross_apply");
+                else next=n.optString("next_common_low");
+
+                try{
+                    saveDiagLog("TM_V083_"+sid,nodeId,
+                        String.format(Locale.US,"F:T4 %.2f/T5 %.2f, R:T4 %.2f/T5 %.2f",fv4,fv5,rv4,rv5));
+                }catch(Exception e){ android.util.Log.w("ForkliftDiag","diag log failed",e); }
+                go(new Screen("tm_diag",sid,next));
+            }catch(Exception e){ toast("Tap4/Tap5 네 값을 모두 숫자로 입력하세요."); }
+        });
+        m.addView(b);
+        body.addView(m);
+    }
+
+    private EditText tmPressureInput(String hint){
+        EditText e=new EditText(this);
+        e.setHint(hint);
+        e.setTextSize(18);
+        e.setInputType(android.text.InputType.TYPE_CLASS_NUMBER |
+                       android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL |
+                       android.text.InputType.TYPE_NUMBER_FLAG_SIGNED);
+        e.setPadding(dp(12),dp(10),dp(12),dp(10));
+        return e;
+    }
+
     private void showTmResult(JSONObject n){
         LinearLayout r=card(); r.addView(tv("판정",16,true)); r.addView(tv(n.optString("result"),17,true));
         if(n.optString("action").length()>0){ r.addView(tv("다음 점검",15,true)); r.addView(tv(n.optString("action"),14,false)); }
         body.addView(r);
+    }
+
+
+    private void addTmManualPressureImage(){
+        try{
+            JSONObject ps=db.optJSONObject("procedures");
+            JSONObject p=ps==null?null:ps.optJSONObject("T_PRESS");
+            JSONArray pages=p==null?null:p.optJSONArray("pdf_pages");
+            Bitmap bmp=loadFirstImage(pages);
+            if(bmp==null) return;
+
+            LinearLayout c=card();
+            c.addView(tv("실제 매뉴얼 · 압력 탭 위치",16,true));
+            c.addView(tv("그림을 누르면 확대해서 볼 수 있습니다.",12,false));
+            ImageView iv=new ImageView(this);
+            iv.setImageBitmap(bmp);
+            iv.setAdjustViewBounds(true);
+            iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            iv.setOnClickListener(v->showCircuit(bmp,"압력 탭 위치"));
+            c.addView(iv,new LinearLayout.LayoutParams(-1,dp(430)));
+            body.addView(c);
+        }catch(Exception e){
+            android.util.Log.w("ForkliftDiag","manual pressure image failed",e);
+        }
     }
 
     private void addTmStepVisual(String code)throws Exception{
@@ -890,7 +980,7 @@ public class MainActivity extends Activity {
         baseScreen("앱 / 데이터 상태");
         JSONObject norm=db.optJSONObject("diagnostic_normalization");
         LinearLayout c=card();
-        c.addView(tv("FIELD v0.8.2 · T/M Focused Diagnostic · 진단 구조 재설계",18,true));
+        c.addView(tv("FIELD v0.8.3 · SYM000 Field Test · 진단 구조 재설계",18,true));
         c.addView(tv("증상 "+db.getJSONArray("symptoms").length()+"개",13,false));
         c.addView(tv("원인 "+norm.optInt("cause_count",268)+"개 전체 재분류",13,false));
         c.addView(tv("원인 확인 → 필요한 경우에만 계측 → 결과 판정 순서로 표시",13,false));

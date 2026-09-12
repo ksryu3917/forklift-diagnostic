@@ -1,116 +1,240 @@
 {
-  "version": "0.8-transmission",
+  "version": "0.8.3-sym000-redesign",
   "scope": "D20/25/30/33S(SE)-7 transmission",
   "graphs": {
     "SYM000": {
-      "start": "s0",
+      "start": "start",
       "nodes": {
-        "s0": {
+        "start": {
           "type": "question",
-          "title": "전·후진 모두 작동 안 됨",
-          "question": "주차브레이크가 완전히 해제되고 인칭페달이 완전히 복귀했습니까?",
+          "title": "기본 안전/인터록",
+          "question": "주차브레이크를 해제했을 때 주행 인터록도 해제됩니까?",
           "choices": [
             {
-              "label": "둘 다 정상",
-              "next": "oil"
+              "label": "해제됨",
+              "next": "inching"
             },
             {
-              "label": "인칭페달/링크 복귀 이상",
-              "next": "inch"
-            },
-            {
-              "label": "주차브레이크/인터록 이상",
-              "next": "park"
+              "label": "해제되지 않음",
+              "next": "park_bad"
             }
           ]
         },
-        "inch": {
+        "park_bad": {
+          "type": "result",
+          "title": "주차브레이크/인터록",
+          "result": "주차브레이크 해제 상태에서도 주행 인터록이 남아 있습니다.",
+          "action": "주차브레이크 스위치와 인터록 입력을 먼저 수리한 뒤 다시 진단합니다."
+        },
+        "inching": {
+          "type": "question",
+          "title": "인칭 복귀",
+          "question": "인칭페달을 놓았을 때 완전히 복귀합니까?",
+          "choices": [
+            {
+              "label": "완전 복귀",
+              "next": "recent"
+            },
+            {
+              "label": "복귀 불량/걸림",
+              "next": "inch_bad"
+            }
+          ],
+          "note": "STD 차량 기준. ECT 차량은 인칭 각도센서 입력이 완전 복귀값으로 돌아오는지 확인합니다."
+        },
+        "inch_bad": {
           "type": "result",
           "title": "인칭 계통 우선",
-          "result": "인칭 링크 조정불량 또는 감압스풀 열린 위치 고착 가능성이 높습니다.",
-          "action": "인칭페달 자유복귀와 링크/스풀을 먼저 정상화한 뒤 재시험합니다. 정상화 전 압력·클러치 분해로 진행하지 않습니다."
+          "result": "부분 인칭 상태가 지속되면 양방향 주행이 모두 약해지거나 작동하지 않을 수 있습니다.",
+          "action": "STD: 링크/감압스풀 복귀를 점검합니다. ECT: 인칭 각도센서 입력과 비례밸브 지령을 확인합니다."
         },
-        "park": {
+        "recent": {
+          "type": "question",
+          "title": "최근 작업 여부",
+          "question": "최근 T/M 오일·필터·밸브·호스 작업을 했습니까?",
+          "choices": [
+            {
+              "label": "최근 작업 있음",
+              "next": "recent_check"
+            },
+            {
+              "label": "최근 작업 없음",
+              "next": "oil"
+            }
+          ]
+        },
+        "recent_check": {
+          "type": "question",
+          "title": "최근 작업부 재확인",
+          "question": "최근 작업부에서 오연결·흡입 누기·잘못된 오일 레벨이 확인됩니까?",
+          "choices": [
+            {
+              "label": "이상 있음",
+              "next": "recent_bad"
+            },
+            {
+              "label": "이상 없음",
+              "next": "oil"
+            }
+          ]
+        },
+        "recent_bad": {
           "type": "result",
-          "title": "주차브레이크/인터록 우선",
-          "result": "주차브레이크가 실제로 걸려 있거나 인터록 입력이 변속을 차단할 수 있습니다.",
-          "action": "기계적 해제와 인터록 스위치 입력을 확인한 뒤 다시 진단합니다."
+          "title": "최근 작업부 이상",
+          "result": "최근 작업 직후 발생한 공통 증상이므로 작업부 오류 가능성이 가장 높습니다.",
+          "action": "오연결/흡입 누기/레벨을 수정하고 공기혼입이 사라진 뒤 재시험합니다."
         },
         "oil": {
           "type": "question",
-          "title": "T/M 오일 1차 확인",
-          "question": "오일 레벨과 상태는 정상입니까?",
+          "title": "T/M 오일 상태",
+          "question": "현재 가장 가까운 상태를 선택하십시오.",
           "choices": [
             {
-              "label": "정상",
-              "next": "sol"
+              "label": "레벨 정상 · 거품 없음 · 규격/상태 정상",
+              "next": "fmag"
             },
             {
-              "label": "부족/거품/이상",
-              "next": "oilbad"
+              "label": "레벨 부족",
+              "next": "oil_low"
+            },
+            {
+              "label": "거품/기포 있음",
+              "next": "oil_air"
+            },
+            {
+              "label": "규격 불명/변색·오염",
+              "next": "oil_spec"
             }
-          ],
-          "note": "최근 오일·필터·밸브·호스 작업 직후라면 작업부 오연결·흡입 누기·잘못된 레벨을 우선 확인합니다."
+          ]
         },
-        "oilbad": {
+        "oil_low": {
           "type": "result",
-          "title": "오일/흡입 문제 우선",
-          "result": "저유량·공기혼입으로 F/R 공통 작동불량이 생길 수 있습니다.",
-          "action": "레벨과 흡입계통을 정상화하고 공기혼입이 사라진 뒤 재시험합니다."
+          "title": "오일 레벨 부족",
+          "result": "공통 공급량 부족으로 F/R 모두 작동하지 않을 수 있습니다.",
+          "action": "누유 원인을 확인하고 규정 레벨로 맞춘 뒤 다시 시험합니다."
         },
-        "sol": {
+        "oil_air": {
+          "type": "result",
+          "title": "공기혼입",
+          "result": "흡입측 공기유입 또는 과소 레벨로 압력이 형성되지 않을 수 있습니다.",
+          "action": "흡입라인/클램프/스트레이너/레벨을 확인하고 거품이 사라진 뒤 재시험합니다."
+        },
+        "oil_spec": {
+          "type": "result",
+          "title": "오일 상태/규격",
+          "result": "잘못된 점도·혼유·오염은 밸브 작동과 압력형성에 영향을 줄 수 있습니다.",
+          "action": "매뉴얼 규격과 실제 오일을 확인하고 필요하면 교환 후 재시험합니다."
+        },
+        "fmag": {
           "type": "question",
-          "title": "F/R 전기 작동",
-          "question": "F와 R 선택 때 두 솔레노이드가 실제로 각각 작동합니까?",
+          "title": "전진 솔레노이드 자화",
+          "question": "엔진 OFF · KEY ON · 주차브레이크 해제 상태에서 F 선택 시 전진 솔레노이드가 자화됩니까?",
           "choices": [
             {
-              "label": "둘 다 작동",
+              "label": "자화됨",
+              "next": "rmag"
+            },
+            {
+              "label": "자화 안 됨",
+              "next": "f_elec"
+            }
+          ]
+        },
+        "f_elec": {
+          "type": "result",
+          "title": "전진 전기회로",
+          "result": "F 선택 시 전진 솔레노이드에 전기 지령이 도달하지 않습니다.",
+          "action": "F/R 스위치 전원·출력 → FWD/REV 퓨즈 → 하네스 → F 솔레노이드 코일 순으로 확인합니다."
+        },
+        "rmag": {
+          "type": "question",
+          "title": "후진 솔레노이드 자화",
+          "question": "같은 조건에서 R 선택 시 후진 솔레노이드가 자화됩니까?",
+          "choices": [
+            {
+              "label": "자화됨",
+              "next": "fplunger"
+            },
+            {
+              "label": "자화 안 됨",
+              "next": "r_elec"
+            }
+          ]
+        },
+        "r_elec": {
+          "type": "result",
+          "title": "후진 전기회로",
+          "result": "R 선택 시 후진 솔레노이드에 전기 지령이 도달하지 않습니다.",
+          "action": "F/R 스위치 전원·출력 → FWD/REV 퓨즈 → 하네스 → R 솔레노이드 코일 순으로 확인합니다."
+        },
+        "fplunger": {
+          "type": "question",
+          "title": "전진 솔레노이드 실제 작동",
+          "question": "F 선택 시 전진 솔레노이드 플런저가 실제로 움직입니까?",
+          "choices": [
+            {
+              "label": "실제 이동 정상",
+              "next": "rplunger"
+            },
+            {
+              "label": "자화되지만 이동 안 됨/불량",
+              "next": "f_sol_bad"
+            }
+          ]
+        },
+        "f_sol_bad": {
+          "type": "result",
+          "title": "전진 솔레노이드 기계작동 불량",
+          "result": "코일은 자화되지만 플런저가 정상 작동하지 않습니다.",
+          "action": "전진 솔레노이드 플런저 고착/코일 어셈블리를 점검합니다."
+        },
+        "rplunger": {
+          "type": "question",
+          "title": "후진 솔레노이드 실제 작동",
+          "question": "R 선택 시 후진 솔레노이드 플런저가 실제로 움직입니까?",
+          "choices": [
+            {
+              "label": "실제 이동 정상",
               "next": "tap6"
             },
             {
-              "label": "둘 다 작동 안 함",
-              "next": "elec_common"
-            },
-            {
-              "label": "한쪽만 작동",
-              "next": "sym_mismatch"
+              "label": "자화되지만 이동 안 됨/불량",
+              "next": "r_sol_bad"
             }
-          ],
-          "note": "자화만 확인하지 말고 플런저/밸브 실제 작동까지 확인합니다.",
-          "visual": "SOL_FR"
+          ]
         },
-        "elec_common": {
+        "r_sol_bad": {
           "type": "result",
-          "title": "공통 전기계통",
-          "result": "F/R 공통 전원·방향스위치·하네스·인터록 문제 가능성이 높습니다.",
-          "action": "키 ON 상태에서 방향스위치 전원/출력과 공통 하네스를 추적합니다."
-        },
-        "sym_mismatch": {
-          "type": "result",
-          "title": "증상 재분류 필요",
-          "result": "한쪽 솔레노이드만 작동하지 않는다면 '양방향 모두 불가' 단일고장과 맞지 않을 수 있습니다.",
-          "action": "실제 F/R 각각의 견인 여부를 다시 확인하고 한 방향 불가 그래프로 이동합니다."
+          "title": "후진 솔레노이드 기계작동 불량",
+          "result": "코일은 자화되지만 플런저가 정상 작동하지 않습니다.",
+          "action": "후진 솔레노이드 플런저 고착/코일 어셈블리를 점검합니다."
         },
         "tap6": {
           "type": "measure",
-          "title": "메인 압력 · Tap 6",
-          "prompt": "Tap 6 압력",
+          "title": "Tap 6 · 메인라인",
+          "prompt": "Tap 6 실측압력",
           "unit": "bar",
           "min": 8.3,
           "max": 10.3,
           "next_low": "tap1",
-          "next_normal": "clutchpair",
-          "next_high": "high",
+          "next_normal": "pair",
+          "next_high": "tap6_high",
           "conditions": [
             "T/M 오일 49~71°C",
-            "저속 공전 기준"
-          ],
-          "visual": "TAP6"
+            "저속 공전",
+            "0~20.5 bar(0~300 psi) 압력계"
+          ]
+        },
+        "tap6_high": {
+          "type": "result",
+          "title": "메인라인 고압",
+          "result": "Tap6가 정상범위보다 높습니다.",
+          "action": "메인 릴리프 소착/오염 또는 회로 제한을 확인하고 조정은 마지막에 합니다."
         },
         "tap1": {
           "type": "measure",
-          "title": "Tap 1 비교",
-          "prompt": "Tap 1 압력",
+          "title": "Tap 1 · Tap6 저압 시 비교",
+          "prompt": "Tap 1 실측압력",
           "unit": "bar",
           "min": 8.3,
           "max": 10.3,
@@ -118,86 +242,89 @@
           "next_normal": "between",
           "next_high": "between",
           "conditions": [
-            "Tap 6이 낮을 때만 측정"
-          ],
-          "visual": "TAP1"
+            "T/M 오일 49~71°C",
+            "저속 공전",
+            "0~20.5 bar(0~300 psi) 압력계"
+          ]
         },
         "between": {
           "type": "result",
-          "title": "Tap1~Tap6 구간/인칭 계통",
-          "result": "Tap1은 정상인데 Tap6이 낮으면 두 지점 사이 제한 또는 인칭밸브 결함이 우선입니다.",
-          "action": "인칭 감압스풀과 Tap1~Tap6 사이 유로 제한을 확인합니다."
+          "title": "Tap1~Tap6 구간/인칭",
+          "result": "Tap1은 정상인데 Tap6가 낮습니다.",
+          "action": "Tap1~Tap6 사이 유로 제한 또는 인칭밸브 결함을 우선 확인합니다."
         },
         "common_low": {
           "type": "result",
-          "title": "공통 저압",
-          "result": "Tap6과 Tap1 모두 낮아 공통 공급 문제입니다.",
-          "action": "흡입 제한/공기혼입 → 메인 릴리프 열린 고착 → 대규모 내부누설 → 펌프 마모·구동 순으로 확인합니다."
+          "title": "공통 공급 저압",
+          "result": "Tap6과 Tap1이 모두 낮습니다.",
+          "action": "흡입 제한/공기혼입 → 메인 릴리프 열린 고착 → 큰 내부누설 → 펌프 마모/구동 순으로 확인합니다."
         },
-        "high": {
-          "type": "result",
-          "title": "공통 고압",
-          "result": "Tap6가 기준보다 높습니다.",
-          "action": "메인 릴리프 소착/오염과 회로 제한을 확인하고 조정은 마지막에 합니다."
-        },
-        "clutchpair": {
-          "type": "question",
-          "title": "F/R 클러치 압력",
-          "question": "F 선택 시 Tap4, R 선택 시 Tap5가 각각 정상 범위까지 상승합니까?",
-          "choices": [
-            {
-              "label": "둘 다 정상",
-              "next": "output"
-            },
-            {
-              "label": "둘 다 낮거나 0",
-              "next": "ctrl_common"
-            },
-            {
-              "label": "한쪽만 이상",
-              "next": "one_dir"
-            }
+        "pair": {
+          "type": "clutch_pair_measure",
+          "title": "F/R 클러치 압력 4점 측정",
+          "question": "F와 R 각각 선택했을 때 Tap4/Tap5 네 값을 입력하십시오.",
+          "conditions": [
+            "T/M 오일 49~71°C",
+            "저속 공전",
+            "선택 방향 클러치 정상 7.3~8.6 bar",
+            "선택하지 않은 반대 클러치 0 bar"
           ],
-          "visual": "TAP45"
+          "next_normal": "output",
+          "next_common_low": "clutch_common_low",
+          "next_f_low": "f_clutch_low",
+          "next_r_low": "r_clutch_low",
+          "next_cross_apply": "cross_apply"
         },
-        "ctrl_common": {
+        "clutch_common_low": {
           "type": "result",
-          "title": "클러치 공통 제어계통",
-          "result": "메인압은 정상인데 양쪽 클러치압이 낮습니다.",
-          "action": "인칭/모듈레이션/셀렉터 공통부와 내부누설을 확인합니다."
+          "title": "F/R 클러치 공통 저압",
+          "result": "Tap6는 정상인데 F/R 선택압이 모두 낮습니다.",
+          "action": "인칭/모듈레이션/셀렉터 공통부 및 내부누설을 확인합니다."
         },
-        "one_dir": {
+        "f_clutch_low": {
           "type": "result",
-          "title": "한 방향 고장으로 분리",
-          "result": "한쪽만 압력 이상이면 공통펌프보다 해당 방향 회로가 우선입니다.",
-          "action": "SYM001 또는 SYM002 방향별 그래프로 이동합니다."
+          "title": "전진 클러치 회로 저압",
+          "result": "R측은 정상인데 F 선택 시 Tap4가 낮습니다.",
+          "action": "전진 selector/modulation 유로와 전진 클러치 내부 시일 누설을 확인합니다."
+        },
+        "r_clutch_low": {
+          "type": "result",
+          "title": "후진 클러치 회로 저압",
+          "result": "F측은 정상인데 R 선택 시 Tap5가 낮습니다.",
+          "action": "후진 selector/modulation 유로와 후진 클러치 내부 시일 누설을 확인합니다."
+        },
+        "cross_apply": {
+          "type": "result",
+          "title": "반대 클러치 잔압/동시체결",
+          "result": "선택하지 않은 반대쪽 클러치 압력이 0으로 떨어지지 않습니다.",
+          "action": "해당 반대쪽 selector/modulation 해제회로와 스풀 고착을 확인합니다."
         },
         "output": {
           "type": "question",
-          "title": "기계 동력전달 확인",
-          "question": "정상 클러치압에서 T/M 출력축은 회전합니까?",
+          "title": "기계 동력전달",
+          "question": "클러치 압력은 정상입니다. T/M 출력축이 실제로 회전합니까?",
           "choices": [
             {
               "label": "출력축 회전함",
-              "next": "axle"
+              "next": "after_tm"
             },
             {
-              "label": "출력축도 안 돎",
-              "next": "tm_mech"
+              "label": "출력축 회전 안 함",
+              "next": "tm_internal"
             }
           ]
         },
-        "axle": {
+        "after_tm": {
           "type": "result",
           "title": "T/M 이후 계통",
-          "result": "T/M 출력은 있으나 차륜 전달이 없습니다.",
-          "action": "U-joint/드라이브 액슬/디퍼렌셜 계통으로 진단을 이동합니다."
+          "result": "T/M 출력은 정상인데 차량이 움직이지 않습니다.",
+          "action": "U-joint → 드라이브 액슬 → 디퍼렌셜 순으로 진단을 이동합니다."
         },
-        "tm_mech": {
+        "tm_internal": {
           "type": "result",
-          "title": "T/M 내부 기계계통",
-          "result": "전기·유압 체결은 정상인데 출력이 없습니다.",
-          "action": "클러치팩/기어/입력·출력 동력경로를 기계적으로 점검합니다."
+          "title": "T/M 내부 기계고장",
+          "result": "전기와 클러치 압력은 정상인데 T/M 출력이 없습니다.",
+          "action": "클러치팩/기어/입출력 동력경로의 기계고장을 점검합니다."
         }
       }
     },
