@@ -1,6 +1,11 @@
-# Forklift Diagnostic Android FIELD v0.2
+# Forklift Diagnostic Android v0.18 RC Auto
 
 Native Android field test build.
+
+v0.18 release-candidate validation:
+- Every reachable individual diagnosis/result is exercised with at least 30 distinct operating-condition scenarios.
+- CI rejects broken links, unreachable results, dead ends, placeholders, missing OEM page assets, scenario collisions, and wrong terminal outcomes.
+- GitHub Actions builds the `v18-rc-auto` branch and publishes both the debug APK and validation reports.
 
 Changes in v0.2:
 - Brand + model display (두산 · D25S-7 style)
