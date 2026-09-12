@@ -689,17 +689,12 @@ public class MainActivity extends Activity {
             JSONObject ps=db.optJSONObject("procedures");
             JSONObject p=ps==null?null:ps.optJSONObject("T_PRESS");
             JSONArray pages=p==null?null:p.optJSONArray("pdf_pages");
-            Bitmap bmp=loadFirstImage(pages);
-            if(bmp==null) return;
+            ImageView iv=loadFirstImage(pages);
+            if(iv==null) return;
 
             LinearLayout c=card();
             c.addView(tv("실제 매뉴얼 · 압력 탭 위치",16,true));
             c.addView(tv("그림을 누르면 확대해서 볼 수 있습니다.",12,false));
-            ImageView iv=new ImageView(this);
-            iv.setImageBitmap(bmp);
-            iv.setAdjustViewBounds(true);
-            iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            iv.setOnClickListener(v->showCircuit(bmp,"압력 탭 위치"));
             c.addView(iv,new LinearLayout.LayoutParams(-1,dp(430)));
             body.addView(c);
         }catch(Exception e){
