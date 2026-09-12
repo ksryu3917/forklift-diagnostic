@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, random, re, sys
+import json, sys
 from collections import defaultdict, deque
 from pathlib import Path
 
@@ -9,7 +9,7 @@ ASSET_DIR = ROOT / "app/src/main/assets/oem_pages"
 REPORT_MD = ROOT / "build/reports/transmission_graph_validation.md"
 REPORT_JSON = ROOT / "build/reports/transmission_graph_validation.json"
 
-SIMS_PER_GRAPH = 30
+SCENARIOS_PER_RESULT = 30
 MAX_STEPS = 120
 
 FORBIDDEN_PENDING = (
@@ -129,88 +129,100 @@ def structural_validate(sid, graph):
 
     return errors, warnings, seen
 
-def choose_measure_route(node, rng, iteration):
-    keys = []
-    # deterministic coverage first, random afterwards
-    for k in ("next_low","next_normal","next_high","next_cross",
-              "next_common_low","next_f_low","next_r_low","next_cross_apply"):
-        if node.get(k):
-            keys.append(k)
-    if not keys:
-        return None
-    if iteration < len(keys):
-        return node[keys[iteration]]
-    return node[rng.choice(keys)]
+def route_details(node):
+    """Return (next node, input description) pairs without inventing service limits."""
+    out = []
+    if node.get("type") == "question":
+        for choice in node.get("choices", []):
+            if choice.get("next"):
+                out.append((choice["next"], {"answer": choice.get("label", "")}))
+    for key, nxt in node.items():
+        if key.startswith("next_") and isinstance(nxt, str) and nxt:
+            out.append((nxt, {"measurement_class": key.removeprefix("next_")}))
+    return out
 
-def simulate_graph(sid, graph, count=SIMS_PER_GRAPH):
+def shortest_result_paths(graph):
+    """Find an executable shortest path from any declared entry to every result."""
     nodes = graph["nodes"]
-    start = graph["start"]
-    entries = graph.get("entry_points") or [start]
+    entries = graph.get("entry_points") or [graph["start"]]
+    paths = {}
+    queue = deque((entry, []) for entry in entries)
+    best_depth = {}
+    while queue:
+        nid, path = queue.popleft()
+        if nid not in nodes or len(path) > MAX_STEPS:
+            continue
+        if len(path) > best_depth.get(nid, MAX_STEPS + 1):
+            continue
+        best_depth[nid] = len(path)
+        node = nodes[nid]
+        if node.get("type") == "result":
+            paths.setdefault(nid, path)
+            continue
+        for nxt, supplied in route_details(node):
+            if any(step[0] == nxt for step in path):
+                continue
+            queue.append((nxt, path + [(nid, nxt, supplied)]))
+    return paths
 
+def condition_matrix():
+    # These are simulation dimensions, not OEM numeric specifications. 3 x 5 x 2 = 30.
+    for temperature in ("cold_start", "service_temperature", "heat_soaked"):
+        for duty in ("idle", "creep", "travel", "loaded", "post_load_recheck"):
+            for repeat in ("first_occurrence", "repeat_occurrence"):
+                yield {
+                    "temperature_state": temperature,
+                    "duty_state": duty,
+                    "repeatability": repeat,
+                }
+
+def validate_result_scenarios(sid, graph, count=SCENARIOS_PER_RESULT):
+    nodes = graph["nodes"]
     failures = []
     terminal_hits = defaultdict(int)
     edge_hits = defaultdict(int)
+    paths = shortest_result_paths(graph)
+    reachable_results = sorted(nid for nid, node in nodes.items()
+                               if node.get("type") == "result" and nid in paths)
+    contexts = list(condition_matrix())
+    if len(contexts) < count:
+        failures.append(f"condition matrix has only {len(contexts)} variants")
+        return failures, terminal_hits, edge_hits, paths
 
-    sim_index = 0
-
-    for entry in entries:
-        for local_i in range(count):
-            i = sim_index
-            sim_index += 1
-
-            rng = random.Random(f"{sid}:{entry}:{local_i}")
-            nid = entry
-            visited_seq = []
-
-            for step in range(MAX_STEPS):
-                if nid not in nodes:
-                    failures.append(f"sim#{i}: missing node {nid}")
+    fingerprints = set()
+    for result_id in reachable_results:
+        path = paths[result_id]
+        for scenario_no, context in enumerate(contexts[:count], 1):
+            nid = path[0][0] if path else result_id
+            supplied_inputs = []
+            for source, expected_next, supplied in path:
+                if nid != source:
+                    failures.append(f"{result_id}/scenario#{scenario_no}: path desync at {source}")
                     break
-
-                node = nodes[nid]
-                visited_seq.append(nid)
-                typ = node.get("type")
-                nxt = None
-
-                if typ == "result":
-                    terminal_hits[nid] += 1
+                legal = {(nxt, json.dumps(inp, ensure_ascii=False, sort_keys=True))
+                         for nxt, inp in route_details(nodes[source])}
+                token = (expected_next, json.dumps(supplied, ensure_ascii=False, sort_keys=True))
+                if token not in legal:
+                    failures.append(f"{result_id}/scenario#{scenario_no}: illegal route {source}->{expected_next}")
                     break
+                supplied_inputs.append({"node": source, **supplied})
+                edge_hits[(source, expected_next)] += 1
+                nid = expected_next
+            if nid != result_id or nodes.get(nid, {}).get("type") != "result":
+                failures.append(f"{result_id}/scenario#{scenario_no}: ended at {nid}")
+                continue
+            fingerprint = json.dumps({"target": result_id, "context": context,
+                                      "inputs": supplied_inputs}, ensure_ascii=False, sort_keys=True)
+            if fingerprint in fingerprints:
+                failures.append(f"{result_id}/scenario#{scenario_no}: duplicate scenario")
+                continue
+            fingerprints.add(fingerprint)
+            terminal_hits[result_id] += 1
 
-                if typ == "question":
-                    choices = node.get("choices", [])
-                    if not choices:
-                        failures.append(f"sim#{i}: question {nid} has no choices")
-                        break
-
-                    if local_i < len(choices):
-                        idx = local_i
-                    else:
-                        idx = rng.randrange(len(choices))
-
-                    nxt = choices[idx].get("next")
-
-                elif typ in ("measure", "reverse_pair_measure", "clutch_pair_measure"):
-                    nxt = choose_measure_route(node, rng, local_i + step)
-
-                else:
-                    routes = all_nexts(node)
-                    if routes:
-                        nxt = routes[(local_i + step) % len(routes)]
-
-                if not nxt:
-                    failures.append(f"sim#{i}: non-result {nid} has no route")
-                    break
-
-                edge_hits[(nid, nxt)] += 1
-                nid = nxt
-
-            else:
-                failures.append(
-                    f"sim#{i}: exceeded {MAX_STEPS} steps; possible cycle: "
-                    + " -> ".join(visited_seq[-10:])
-                )
-
-    return failures, terminal_hits, edge_hits
+    for result_id in reachable_results:
+        if terminal_hits[result_id] < count:
+            failures.append(f"{result_id}: only {terminal_hits[result_id]}/{count} distinct scenarios passed")
+    return failures, terminal_hits, edge_hits, paths
 
 def main():
     if not JSON_PATH.exists():
@@ -228,7 +240,13 @@ def main():
     for sid in sorted(graphs):
         graph = graphs[sid]
         errors, warnings, reachable = structural_validate(sid, graph)
-        sim_fail, terminals, edges = simulate_graph(sid, graph)
+        sim_fail, terminals, edges, result_paths = validate_result_scenarios(sid, graph)
+
+        all_results = {nid for nid, node in graph.get("nodes", {}).items()
+                       if node.get("type") == "result"}
+        unreachable_results = sorted(all_results - set(result_paths))
+        if unreachable_results:
+            errors.append(f"{sid}: unreachable result(s): " + ", ".join(unreachable_results))
 
         errors.extend(f"{sid}: {x}" for x in sim_fail)
         all_errors.extend(errors)
@@ -238,7 +256,8 @@ def main():
             "sid": sid,
             "nodes": len(graph.get("nodes", {})),
             "reachable": len(reachable),
-            "simulations": SIMS_PER_GRAPH * len(graph.get("entry_points") or [graph.get("start")]),
+            "results": len(all_results),
+            "simulations": len(terminals) * SCENARIOS_PER_RESULT,
             "terminals_hit": len(terminals),
             "errors": len(errors),
             "warnings": len(warnings),
@@ -266,15 +285,15 @@ def main():
     lines.append("")
     lines.append(f"- DB version: `{data.get('version','')}`")
     lines.append(f"- Graphs: **{len(graphs)}**")
-    lines.append(f"- Simulations per graph: **{SIMS_PER_GRAPH}**")
+    lines.append(f"- Scenarios per individual result: **{SCENARIOS_PER_RESULT}**")
     lines.append(f"- Total simulations: **{sum(r['simulations'] for r in graph_rows)}**")
     lines.append(f"- Errors: **{len(all_errors)}**")
     lines.append(f"- Warnings: **{len(all_warnings)}**")
     lines.append("")
-    lines.append("| Symptom | Nodes | Reachable | Simulations | Terminals hit | Errors | Warnings |")
-    lines.append("|---|---:|---:|---:|---:|---:|---:|")
+    lines.append("| Symptom | Nodes | Reachable | Results | Scenarios | Results hit | Errors | Warnings |")
+    lines.append("|---|---:|---:|---:|---:|---:|---:|---:|")
     for r in graph_rows:
-        lines.append(f"| {r['sid']} | {r['nodes']} | {r['reachable']} | {r['simulations']} | {r['terminals_hit']} | {r['errors']} | {r['warnings']} |")
+        lines.append(f"| {r['sid']} | {r['nodes']} | {r['reachable']} | {r['results']} | {r['simulations']} | {r['terminals_hit']} | {r['errors']} | {r['warnings']} |")
 
     if all_errors:
         lines.append("")
