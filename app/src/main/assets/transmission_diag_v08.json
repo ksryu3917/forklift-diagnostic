@@ -1,5 +1,5 @@
 {
-  "version": "0.8.3-sym000-redesign",
+  "version": "0.8.4-sym000-final-sym001",
   "scope": "D20/25/30/33S(SE)-7 transmission",
   "graphs": {
     "SYM000": {
@@ -233,7 +233,7 @@
         },
         "tap1": {
           "type": "measure",
-          "title": "Tap 1 · Tap6 저압 시 비교",
+          "title": "Tap 1 · 메인 압력 (Tap6) 저압 시 비교",
           "prompt": "Tap 1 실측압력",
           "unit": "bar",
           "min": 8.3,
@@ -249,9 +249,9 @@
         },
         "between": {
           "type": "result",
-          "title": "Tap1~Tap6 구간/인칭",
+          "title": "펌프 출구 압력 (Tap1)~메인 압력 (Tap6) 구간/인칭",
           "result": "Tap1은 정상인데 Tap6가 낮습니다.",
-          "action": "Tap1~Tap6 사이 유로 제한 또는 인칭밸브 결함을 우선 확인합니다."
+          "action": "펌프 출구 압력 (Tap1)~메인 압력 (Tap6) 사이 유로 제한 또는 인칭밸브 결함을 우선 확인합니다."
         },
         "common_low": {
           "type": "result",
@@ -262,7 +262,7 @@
         "pair": {
           "type": "clutch_pair_measure",
           "title": "F/R 클러치 압력 4점 측정",
-          "question": "F와 R 각각 선택했을 때 Tap4/Tap5 네 값을 입력하십시오.",
+          "question": "F와 R 각각 선택했을 때 전진 클러치 압력 (Tap4)/후진 클러치 압력 (Tap5) 네 값을 입력하십시오.",
           "conditions": [
             "T/M 오일 49~71°C",
             "저속 공전",
@@ -329,159 +329,171 @@
       }
     },
     "SYM001": {
-      "start": "s0",
+      "start": "start",
       "nodes": {
-        "s0": {
+        "start": {
           "type": "question",
           "title": "전진 정상 / 후진 불가",
-          "question": "전진 방향이 '정상적인 견인력'으로 작동합니까?",
+          "question": "전진이 빈 차뿐 아니라 실제 견인에서도 정상적인 힘으로 작동합니까?",
           "choices": [
             {
-              "label": "정상 견인력",
-              "next": "react"
+              "label": "전진 견인력 정상",
+              "next": "reaction"
             },
             {
-              "label": "힘도 약함",
+              "label": "전진도 힘이 약함",
               "next": "common"
             }
           ]
         },
         "common": {
           "type": "result",
-          "title": "공통압 계통으로 이동",
-          "result": "전진도 힘이 약하면 후진 개별 고장으로 단정할 수 없습니다.",
-          "action": "공통 공급압·오일·흡입 계통을 먼저 진단합니다."
+          "title": "공통 계통으로 재분류",
+          "result": "전진도 약하면 후진 단독고장으로 볼 수 없습니다.",
+          "action": "오일·흡입·메인 압력 (Tap6) 공통압 진단으로 이동합니다."
         },
-        "react": {
+        "reaction": {
           "type": "question",
           "title": "후진 선택 반응",
-          "question": "후진 선택 시 가장 가까운 반응은 무엇입니까?",
+          "question": "R 선택 시 가장 가까운 증상을 고르십시오.",
           "choices": [
             {
-              "label": "엔진 부하 변화 거의 없음",
-              "next": "sol"
+              "label": "엔진 부하 변화가 거의 없음",
+              "next": "r_ctrl"
             },
             {
-              "label": "엔진이 심하게 처짐/차량이 버팀",
-              "next": "pair"
+              "label": "엔진이 심하게 처지거나 차량이 버팀",
+              "next": "r_pair"
             },
             {
-              "label": "N/후진에서도 전진 방향으로 끌림",
-              "next": "release"
+              "label": "R 또는 N에서도 전진쪽으로 끌림",
+              "next": "r_pair"
             }
           ]
         },
-        "sol": {
+        "r_ctrl": {
           "type": "question",
-          "title": "후진 솔레노이드",
-          "question": "후진 솔레노이드가 전기적으로 지령되고 실제 플런저가 움직입니까?",
+          "title": "후진 전기/밸브 1차",
+          "question": "엔진 OFF · KEY ON · 주차브레이크 해제 상태에서 R 선택 시 후진 솔레노이드가 자화됩니까?",
           "choices": [
             {
-              "label": "정상 작동",
-              "next": "applyp"
+              "label": "자화됨",
+              "next": "r_plunger"
             },
             {
-              "label": "지령/작동 이상",
-              "next": "elec"
+              "label": "자화 안 됨",
+              "next": "r_elec"
+            }
+          ]
+        },
+        "r_elec": {
+          "type": "result",
+          "title": "후진 전기회로",
+          "result": "R 선택 지령이 후진 솔레노이드까지 도달하지 않습니다.",
+          "action": "F/R 스위치 전원·R 출력 → FWD/REV 퓨즈 → 하네스 → R 솔레노이드 코일 순으로 확인합니다."
+        },
+        "r_plunger": {
+          "type": "question",
+          "title": "후진 솔레노이드 실제 작동",
+          "question": "R 선택 시 후진 솔레노이드 플런저가 실제로 움직입니까?",
+          "choices": [
+            {
+              "label": "실제 이동 정상",
+              "next": "r_pair"
+            },
+            {
+              "label": "자화되지만 이동 불량",
+              "next": "r_sol_bad"
+            }
+          ]
+        },
+        "r_sol_bad": {
+          "type": "result",
+          "title": "후진 솔레노이드 작동불량",
+          "result": "코일은 자화되지만 플런저가 정상 작동하지 않습니다.",
+          "action": "후진 솔레노이드 플런저 고착/코일 어셈블리를 점검합니다."
+        },
+        "r_ect": {
+          "type": "question",
+          "title": "ECT · 후진 비례제어",
+          "question": "ECT 차량입니다. R 선택 시 컨트롤러의 후진 비례밸브 지령과 실제 밸브 작동이 있습니까?",
+          "choices": [
+            {
+              "label": "지령/작동 정상",
+              "next": "r_pair"
+            },
+            {
+              "label": "지령 또는 작동 이상",
+              "next": "r_ect_bad"
             }
           ],
-          "visual": "SOL_후진"
+          "visual": "ECT"
         },
-        "elec": {
+        "r_ect_bad": {
           "type": "result",
-          "title": "후진 전기/밸브 작동",
-          "result": "후진 클러치가 apply되기 전에 전기 또는 솔레노이드 작동이 끊깁니다.",
-          "action": "방향스위치→하네스→코일→플런저 순으로 확인합니다."
+          "title": "ECT 후진 제어계통",
+          "result": "후진 비례밸브가 정상적으로 제어되지 않습니다.",
+          "action": "F/R 레버 입력 → ECT 컨트롤러 출력 → R proportional valve 전류/작동 순으로 확인합니다."
         },
-        "applyp": {
-          "type": "measure",
-          "title": "후진 클러치 압력 · Tap5",
-          "prompt": "Tap5 압력",
-          "unit": "bar",
-          "min": 7.3,
-          "max": 8.6,
-          "next_low": "low",
-          "next_normal": "mech",
-          "next_high": "high",
+        "r_pair": {
+          "type": "reverse_pair_measure",
+          "title": "R 선택 · 전진 클러치 압력 (Tap4)/후진 클러치 압력 (Tap5) 동시측정",
+          "question": "R 선택 상태에서 전진/후진 클러치 압력을 동시에 입력하십시오.",
           "conditions": [
             "T/M 오일 49~71°C",
-            "저속 공전 기준"
+            "저속 공전",
+            "R 선택 시 후진 클러치 압력 (Tap5) 정상 7.3~8.6 bar",
+            "R 선택 시 Tap4는 0 bar"
           ],
-          "visual": "TAP5"
+          "next_low": "r_hyd_low",
+          "next_normal": "r_mech_question",
+          "next_cross": "f_release",
+          "next_high": "r_high"
         },
-        "low": {
+        "r_hyd_low": {
           "type": "result",
-          "title": "후진 유압회로 저압",
-          "result": "전진는 정상인데 Tap5만 낮아 후진 방향 유압계통 문제입니다.",
-          "action": "후진 selector/modulation 유로 → 피스톤/축 시일 내부누설 순으로 확인합니다."
+          "title": "후진 클러치 회로 저압",
+          "result": "전진은 정상인데 R 선택 시 Tap5가 기준보다 낮습니다.",
+          "action": "후진 selector/modulation 유로 → 후진 클러치 피스톤/축 시일 내부누설 순으로 확인합니다."
         },
-        "high": {
+        "f_release": {
           "type": "result",
-          "title": "후진 압력 비정상 고압",
-          "result": "Tap5가 기준보다 높습니다.",
-          "action": "밸브 고착/회로 제한을 확인합니다."
+          "title": "전진 클러치 해제불량 / 동시체결",
+          "result": "R 선택인데 전진 클러치 압력 (Tap4) 압력이 0으로 떨어지지 않습니다.",
+          "action": "전진 selector/modulation 해제회로와 스풀 고착을 확인합니다. Tap4가 0인데도 전진 끌림이 남으면 전진 클러치 기계적 소착을 의심합니다."
         },
-        "mech": {
+        "r_high": {
           "type": "result",
-          "title": "후진 기계 전달 문제",
-          "result": "Tap5가 정상인데 후진가 전달되지 않습니다.",
-          "action": "후진 클러치 friction/steel plate 및 기어 동력경로를 점검합니다."
+          "title": "후진 클러치 압력 고압",
+          "result": "R 선택 Tap5가 정상범위보다 높습니다.",
+          "action": "밸브 고착/회로 제한 및 공통압 상태를 확인합니다."
         },
-        "pair": {
+        "r_mech_question": {
           "type": "question",
-          "title": "동시 체결 여부",
-          "question": "후진 선택 상태에서 Tap5은 상승하고 Tap4은 0으로 떨어집니까?",
+          "title": "후진 기계 전달",
+          "question": "R 선택 Tap5는 정상이고 Tap4는 0입니다. 후진이 어떤 상태입니까?",
           "choices": [
             {
-              "label": "Tap5 상승 + Tap4도 압력 남음",
-              "next": "dual"
+              "label": "빈 차에서는 움직이나 부하에서 슬립",
+              "next": "r_slip"
             },
             {
-              "label": "Tap5 정상 + Tap4=0",
-              "next": "seized"
+              "label": "후진이 전혀 전달되지 않음",
+              "next": "r_mech"
             }
-          ],
-          "visual": "TAP45"
+          ]
         },
-        "dual": {
+        "r_slip": {
           "type": "result",
-          "title": "두 클러치 동시 체결",
-          "result": "전진 클러치가 유압적으로 해제되지 않아 후진과 동시에 물리고 있습니다.",
-          "action": "전진 selector/modulation 해제 회로를 확인합니다."
+          "title": "후진 클러치 기계적 슬립",
+          "result": "후진 유압 체결압은 정상인데 부하에서만 미끄러집니다.",
+          "action": "후진 클러치 friction/steel plate 마모·열손상 및 기계적 체결상태를 점검합니다."
         },
-        "seized": {
+        "r_mech": {
           "type": "result",
-          "title": "전진 클러치 기계적 소착",
-          "result": "Tap4=0인데도 반대방향 전달력이 남아 기계적 소착 가능성이 높습니다.",
-          "action": "전진 clutch disc/plate 소착·열변형을 점검합니다."
-        },
-        "release": {
-          "type": "question",
-          "title": "전진 해제 확인",
-          "question": "후진 또는 N에서 Tap4 압력이 남아 있습니까?",
-          "choices": [
-            {
-              "label": "압력이 남음",
-              "next": "hyd_release"
-            },
-            {
-              "label": "0 bar인데도 끌림",
-              "next": "mech_release"
-            }
-          ],
-          "visual": "TAP4"
-        },
-        "hyd_release": {
-          "type": "result",
-          "title": "전진 유압 해제 실패",
-          "result": "Tap4 압력이 남아 전진 클러치가 계속 apply됩니다.",
-          "action": "selector/modulation 해제 회로와 스풀 고착을 확인합니다."
-        },
-        "mech_release": {
-          "type": "result",
-          "title": "전진 기계적 소착",
-          "result": "유압은 해제됐지만 전진 전달력이 남습니다.",
-          "action": "클러치팩 소착/열변형을 확인합니다."
+          "title": "후진 클러치/기어 기계고장",
+          "result": "후진 클러치 압력은 정상인데 후진 동력이 전달되지 않습니다.",
+          "action": "후진 클러치팩 → 후진 기어/샤프트 동력경로 순으로 점검합니다."
         }
       }
     },
@@ -552,8 +564,8 @@
         },
         "applyp": {
           "type": "measure",
-          "title": "전진 클러치 압력 · Tap4",
-          "prompt": "Tap4 압력",
+          "title": "전진 클러치 압력 · 전진 클러치 압력 (Tap4)",
+          "prompt": "전진 클러치 압력 (Tap4) 압력",
           "unit": "bar",
           "min": 7.3,
           "max": 8.6,
@@ -590,11 +602,11 @@
           "question": "전진 선택 상태에서 Tap4은 상승하고 Tap5은 0으로 떨어집니까?",
           "choices": [
             {
-              "label": "Tap4 상승 + Tap5도 압력 남음",
+              "label": "전진 클러치 압력 (Tap4) 상승 + Tap5도 압력 남음",
               "next": "dual"
             },
             {
-              "label": "Tap4 정상 + Tap5=0",
+              "label": "전진 클러치 압력 (Tap4) 정상 + 후진 클러치 압력 (Tap5)=0",
               "next": "seized"
             }
           ],
@@ -609,13 +621,13 @@
         "seized": {
           "type": "result",
           "title": "후진 클러치 기계적 소착",
-          "result": "Tap5=0인데도 반대방향 전달력이 남아 기계적 소착 가능성이 높습니다.",
+          "result": "후진 클러치 압력 (Tap5)=0인데도 반대방향 전달력이 남아 기계적 소착 가능성이 높습니다.",
           "action": "후진 clutch disc/plate 소착·열변형을 점검합니다."
         },
         "release": {
           "type": "question",
           "title": "후진 해제 확인",
-          "question": "전진 또는 N에서 Tap5 압력이 남아 있습니까?",
+          "question": "전진 또는 N에서 후진 클러치 압력 (Tap5) 압력이 남아 있습니까?",
           "choices": [
             {
               "label": "압력이 남음",
@@ -631,7 +643,7 @@
         "hyd_release": {
           "type": "result",
           "title": "후진 유압 해제 실패",
-          "result": "Tap5 압력이 남아 후진 클러치가 계속 apply됩니다.",
+          "result": "후진 클러치 압력 (Tap5) 압력이 남아 후진 클러치가 계속 apply됩니다.",
           "action": "selector/modulation 해제 회로와 스풀 고착을 확인합니다."
         },
         "mech_release": {
@@ -704,8 +716,8 @@
         },
         "cool": {
           "type": "measure",
-          "title": "컨버터 출구/쿨러 입구 · Tap2",
-          "prompt": "Tap2 압력",
+          "title": "컨버터 출구/쿨러 입구 · 컨버터 출구 / 쿨러 입구 압력 (Tap2)",
+          "prompt": "컨버터 출구 / 쿨러 입구 압력 (Tap2) 압력",
           "unit": "bar",
           "min": 0.3,
           "max": 0.6,
@@ -721,13 +733,13 @@
         "coolhigh": {
           "type": "result",
           "title": "쿨러/라인 제한",
-          "result": "Tap2 고압은 쿨러 호스·라인·코어 restriction을 우선 지시합니다.",
+          "result": "컨버터 출구 / 쿨러 입구 압력 (Tap2) 고압은 쿨러 호스·라인·코어 restriction을 우선 지시합니다.",
           "action": "호스 꺾임/막힘과 쿨러 내부 제한을 확인합니다."
         },
         "tap3": {
           "type": "measure",
-          "title": "컨버터 충전 · Tap3",
-          "prompt": "Tap3 압력",
+          "title": "컨버터 충전 · 컨버터 충전 압력 (Tap3)",
+          "prompt": "컨버터 충전 압력 (Tap3) 압력",
           "unit": "bar",
           "min": 0.7,
           "max": 1.4,
@@ -744,7 +756,7 @@
           "type": "result",
           "title": "컨버터 상류 공급 확인",
           "result": "Tap3까지 낮으면 쿨러 자체보다 상류 공급 문제 가능성이 큽니다.",
-          "action": "Tap6 공통압과 컨버터 charge/relief 회로를 확인합니다."
+          "action": "메인 압력 (Tap6) 공통압과 컨버터 charge/relief 회로를 확인합니다."
         },
         "coolrelief": {
           "type": "result",
@@ -791,7 +803,7 @@
         "pair": {
           "type": "question",
           "title": "클러치압",
-          "question": "Tap4/Tap5 압력은 정상입니까?",
+          "question": "전진 클러치 압력 (Tap4)/후진 클러치 압력 (Tap5) 압력은 정상입니까?",
           "choices": [
             {
               "label": "낮음",
@@ -908,8 +920,8 @@
         },
         "tap6": {
           "type": "measure",
-          "title": "공통압 · Tap6",
-          "prompt": "Tap6 압력",
+          "title": "공통압 · 메인 압력 (Tap6)",
+          "prompt": "메인 압력 (Tap6) 압력",
           "unit": "bar",
           "min": 8.3,
           "max": 10.3,
@@ -925,13 +937,13 @@
         "common": {
           "type": "result",
           "title": "공통 저압",
-          "result": "양방향 지연과 Tap6 저압이 함께 있습니다.",
+          "result": "양방향 지연과 메인 압력 (Tap6) 저압이 함께 있습니다.",
           "action": "공통 저압 그래프로 이동합니다."
         },
         "high": {
           "type": "result",
           "title": "비정상 고압",
-          "result": "Tap6 고압입니다.",
+          "result": "메인 압력 (Tap6) 고압입니다.",
           "action": "main relief/회로 제한을 확인합니다."
         },
         "mod": {
@@ -943,7 +955,7 @@
         "one": {
           "type": "result",
           "title": "해당 방향 압력/내부누설",
-          "result": "한 방향만 지연되면 공통펌프보다 해당 Tap4/5와 그 방향 내부누설이 우선입니다.",
+          "result": "한 방향만 지연되면 공통펌프보다 해당 전진 클러치 압력 (Tap4)/5와 그 방향 내부누설이 우선입니다.",
           "action": "해당 방향 클러치압을 측정해 저압이면 유로/시일, 정상인데 지연이면 modulation 작동을 확인합니다."
         },
         "ect_inch": {
@@ -997,7 +1009,7 @@
         "pressure": {
           "type": "question",
           "title": "공급압 상태",
-          "question": "Tap6 및 해당 방향 클러치압이 크게 비정상입니까?",
+          "question": "메인 압력 (Tap6) 및 해당 방향 클러치압이 크게 비정상입니까?",
           "choices": [
             {
               "label": "정상 또는 대체로 정상",
@@ -1191,8 +1203,8 @@
         },
         "press": {
           "type": "measure",
-          "title": "펌프압 확인 · Tap6",
-          "prompt": "Tap6 압력",
+          "title": "펌프압 확인 · 메인 압력 (Tap6)",
+          "prompt": "메인 압력 (Tap6) 압력",
           "unit": "bar",
           "min": 8.3,
           "max": 10.3,
@@ -1282,8 +1294,8 @@
       "nodes": {
         "tap6": {
           "type": "measure",
-          "title": "F/R 클러치압 모두 낮음 · Tap6",
-          "prompt": "Tap6 압력",
+          "title": "F/R 클러치압 모두 낮음 · 메인 압력 (Tap6)",
+          "prompt": "메인 압력 (Tap6) 압력",
           "unit": "bar",
           "min": 8.3,
           "max": 10.3,
@@ -1298,8 +1310,8 @@
         },
         "tap1": {
           "type": "measure",
-          "title": "Tap1 비교",
-          "prompt": "Tap1 압력",
+          "title": "펌프 출구 압력 (Tap1) 비교",
+          "prompt": "펌프 출구 압력 (Tap1) 압력",
           "unit": "bar",
           "min": 8.3,
           "max": 10.3,
@@ -1313,26 +1325,26 @@
         },
         "between": {
           "type": "result",
-          "title": "Tap1~Tap6/인칭",
-          "result": "Tap1 정상 + Tap6 저압입니다.",
+          "title": "펌프 출구 압력 (Tap1)~메인 압력 (Tap6)/인칭",
+          "result": "펌프 출구 압력 (Tap1) 정상 + 메인 압력 (Tap6) 저압입니다.",
           "action": "두 포인트 사이 유로 제한 또는 인칭밸브를 확인합니다."
         },
         "common": {
           "type": "result",
           "title": "공통 저압",
-          "result": "Tap1/Tap6 모두 낮습니다.",
+          "result": "펌프 출구 압력 (Tap1)/메인 압력 (Tap6) 모두 낮습니다.",
           "action": "흡입→relief→대규모 내부누설→pump 순으로 확인합니다."
         },
         "ctrl": {
           "type": "result",
           "title": "클러치 공통 제어",
-          "result": "Tap6 정상인데 F/R 클러치압이 모두 낮습니다.",
+          "result": "메인 압력 (Tap6) 정상인데 F/R 클러치압이 모두 낮습니다.",
           "action": "인칭/모듈레이션/selector 공통부와 내부누설을 확인합니다."
         },
         "high": {
           "type": "result",
           "title": "측정 재검증/고압",
-          "result": "증상과 Tap6 고압이 맞지 않습니다.",
+          "result": "증상과 메인 압력 (Tap6) 고압이 맞지 않습니다.",
           "action": "시험조건/포트 연결을 재확인하고 고압계통을 별도로 진단합니다."
         }
       }
@@ -1472,8 +1484,8 @@
         },
         "tap6": {
           "type": "measure",
-          "title": "Tap6 확인",
-          "prompt": "Tap6 압력",
+          "title": "메인 압력 (Tap6) 확인",
+          "prompt": "메인 압력 (Tap6) 압력",
           "unit": "bar",
           "min": 8.3,
           "max": 10.3,
@@ -1500,8 +1512,8 @@
         },
         "tap1": {
           "type": "measure",
-          "title": "Tap1 비교",
-          "prompt": "Tap1 압력",
+          "title": "펌프 출구 압력 (Tap1) 비교",
+          "prompt": "펌프 출구 압력 (Tap1) 압력",
           "unit": "bar",
           "min": 8.3,
           "max": 10.3,
@@ -1509,14 +1521,14 @@
           "next_normal": "between",
           "next_high": "between",
           "conditions": [
-            "Tap6 저압일 때만"
+            "메인 압력 (Tap6) 저압일 때만"
           ],
           "visual": "TAP1"
         },
         "between": {
           "type": "result",
-          "title": "Tap1~Tap6 제한/인칭",
-          "result": "Tap1 정상 + Tap6 저압입니다.",
+          "title": "펌프 출구 압력 (Tap1)~메인 압력 (Tap6) 제한/인칭",
+          "result": "펌프 출구 압력 (Tap1) 정상 + 메인 압력 (Tap6) 저압입니다.",
           "action": "인칭밸브/두 포인트 사이 유로를 확인합니다."
         },
         "common": {
@@ -1543,7 +1555,7 @@
         "pump": {
           "type": "result",
           "title": "내부누설/펌프",
-          "result": "흡입과 relief가 정상인데 Tap1/Tap6 모두 낮습니다.",
+          "result": "흡입과 relief가 정상인데 펌프 출구 압력 (Tap1)/메인 압력 (Tap6) 모두 낮습니다.",
           "action": "대규모 내부누설을 배제한 뒤 펌프 마모/구동을 확인합니다."
         }
       }
@@ -1553,8 +1565,8 @@
       "nodes": {
         "tap7": {
           "type": "measure",
-          "title": "윤활압 · Tap7",
-          "prompt": "Tap7 압력",
+          "title": "윤활압 · 윤활 압력 (Tap7)",
+          "prompt": "윤활 압력 (Tap7) 압력",
           "unit": "bar",
           "min": 0.1,
           "max": 0.7,
@@ -1581,8 +1593,8 @@
         },
         "tap6": {
           "type": "measure",
-          "title": "공통 공급 · Tap6",
-          "prompt": "Tap6 압력",
+          "title": "공통 공급 · 메인 압력 (Tap6)",
+          "prompt": "메인 압력 (Tap6) 압력",
           "unit": "bar",
           "min": 8.3,
           "max": 10.3,
@@ -1604,7 +1616,7 @@
         "lube": {
           "type": "result",
           "title": "윤활 전용 경로",
-          "result": "Tap6 정상 + Tap7 저압입니다.",
+          "result": "메인 압력 (Tap6) 정상 + 윤활 압력 (Tap7) 저압입니다.",
           "action": "윤활 유로 restriction, inching reduction spool, 내부누설, cooler circuit을 확인합니다."
         }
       }
@@ -1614,8 +1626,8 @@
       "nodes": {
         "tap7": {
           "type": "measure",
-          "title": "윤활압 높음 · Tap7",
-          "prompt": "Tap7 압력",
+          "title": "윤활압 높음 · 윤활 압력 (Tap7)",
+          "prompt": "윤활 압력 (Tap7) 압력",
           "unit": "bar",
           "min": 0.1,
           "max": 0.7,
@@ -1653,8 +1665,8 @@
       "nodes": {
         "tap3": {
           "type": "measure",
-          "title": "컨버터 충전압 높음 · Tap3",
-          "prompt": "Tap3 압력",
+          "title": "컨버터 충전압 높음 · 컨버터 충전 압력 (Tap3)",
+          "prompt": "컨버터 충전 압력 (Tap3) 압력",
           "unit": "bar",
           "min": 0.7,
           "max": 1.4,
@@ -1682,7 +1694,7 @@
         "compare": {
           "type": "question",
           "title": "상하류 비교",
-          "question": "Tap6 공통압은 정상이고 Tap2도 높거나 제한 징후가 있습니까?",
+          "question": "메인 압력 (Tap6) 공통압은 정상이고 Tap2도 높거나 제한 징후가 있습니까?",
           "choices": [
             {
               "label": "예",
@@ -1698,13 +1710,13 @@
         "common": {
           "type": "result",
           "title": "공통 고압 우선",
-          "result": "Tap6 자체가 높으면 converter 전용고장으로 단정하지 않습니다.",
+          "result": "메인 압력 (Tap6) 자체가 높으면 converter 전용고장으로 단정하지 않습니다.",
           "action": "SYM011을 먼저 해결합니다."
         },
         "restrict": {
           "type": "result",
           "title": "Converter restriction",
-          "result": "공통압 정상에서 Tap3 고압이면 bypass orifice/컨버터 내부/회로 restriction이 우선입니다.",
+          "result": "공통압 정상에서 컨버터 충전 압력 (Tap3) 고압이면 bypass orifice/컨버터 내부/회로 restriction이 우선입니다.",
           "action": "컨버터 charge→outlet 경로의 제한을 확인합니다."
         }
       }
@@ -1714,8 +1726,8 @@
       "nodes": {
         "tap3": {
           "type": "measure",
-          "title": "컨버터 충전압 낮음 · Tap3",
-          "prompt": "Tap3 압력",
+          "title": "컨버터 충전압 낮음 · 컨버터 충전 압력 (Tap3)",
+          "prompt": "컨버터 충전 압력 (Tap3) 압력",
           "unit": "bar",
           "min": 0.7,
           "max": 1.4,
@@ -1742,8 +1754,8 @@
         },
         "tap6": {
           "type": "measure",
-          "title": "공통압 · Tap6",
-          "prompt": "Tap6 압력",
+          "title": "공통압 · 메인 압력 (Tap6)",
+          "prompt": "메인 압력 (Tap6) 압력",
           "unit": "bar",
           "min": 8.3,
           "max": 10.3,
@@ -1765,7 +1777,7 @@
         "relief": {
           "type": "result",
           "title": "Converter charge/relief 계통",
-          "result": "Tap6 정상 + Tap3 저압입니다.",
+          "result": "메인 압력 (Tap6) 정상 + 컨버터 충전 압력 (Tap3) 저압입니다.",
           "action": "converter relief/center relief 계통을 점검합니다."
         }
       }
@@ -1775,8 +1787,8 @@
       "nodes": {
         "tap2": {
           "type": "measure",
-          "title": "컨버터 출구/쿨러 입구 낮음 · Tap2",
-          "prompt": "Tap2 압력",
+          "title": "컨버터 출구/쿨러 입구 낮음 · 컨버터 출구 / 쿨러 입구 압력 (Tap2)",
+          "prompt": "컨버터 출구 / 쿨러 입구 압력 (Tap2) 압력",
           "unit": "bar",
           "min": 0.3,
           "max": 0.6,
@@ -1803,8 +1815,8 @@
         },
         "tap3": {
           "type": "measure",
-          "title": "컨버터 충전 · Tap3",
-          "prompt": "Tap3 압력",
+          "title": "컨버터 충전 · 컨버터 충전 압력 (Tap3)",
+          "prompt": "컨버터 충전 압력 (Tap3) 압력",
           "unit": "bar",
           "min": 0.7,
           "max": 1.4,
@@ -1826,7 +1838,7 @@
         "cooler": {
           "type": "result",
           "title": "Cooler relief/outlet 경로",
-          "result": "Tap3 정상 + Tap2 저압입니다.",
+          "result": "컨버터 충전 압력 (Tap3) 정상 + 컨버터 출구 / 쿨러 입구 압력 (Tap2) 저압입니다.",
           "action": "cooler relief 열린 고착/출구 유로를 확인합니다."
         }
       }
@@ -1836,8 +1848,8 @@
       "nodes": {
         "tap2": {
           "type": "measure",
-          "title": "컨버터 출구/쿨러 입구 높음 · Tap2",
-          "prompt": "Tap2 압력",
+          "title": "컨버터 출구/쿨러 입구 높음 · 컨버터 출구 / 쿨러 입구 압력 (Tap2)",
+          "prompt": "컨버터 출구 / 쿨러 입구 압력 (Tap2) 압력",
           "unit": "bar",
           "min": 0.3,
           "max": 0.6,
@@ -1865,7 +1877,7 @@
         "restrict": {
           "type": "result",
           "title": "쿨러 라인/코어 제한",
-          "result": "Tap2 고압은 downstream restriction을 우선 지시합니다.",
+          "result": "컨버터 출구 / 쿨러 입구 압력 (Tap2) 고압은 downstream restriction을 우선 지시합니다.",
           "action": "쿨러 호스 꺾임·막힘과 코어 내부 restriction을 확인합니다."
         }
       }
@@ -1999,7 +2011,7 @@
         "press": {
           "type": "question",
           "title": "해당 방향 압력 결과",
-          "question": "해당 Tap4 또는 Tap5는 정상입니까?",
+          "question": "해당 전진 클러치 압력 (Tap4) 또는 Tap5는 정상입니까?",
           "choices": [
             {
               "label": "낮음",

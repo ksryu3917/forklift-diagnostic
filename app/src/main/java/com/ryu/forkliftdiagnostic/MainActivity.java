@@ -121,7 +121,7 @@ public class MainActivity extends Activity {
     }
 
     private void home() throws Exception{
-        baseScreen("지게차 정비 어시스턴트");
+        baseScreen("지게차 정비");
         LinearLayout c=card();c.addView(tv("현재 차량",14,true));
         c.addView(tv(brand+" · "+vehicle,18,true));
         Spinner sp=new Spinner(this);JSONArray models=db.getJSONObject("manual").getJSONArray("models");ArrayList<String> ms=new ArrayList<>();
@@ -547,6 +547,7 @@ public class MainActivity extends Activity {
         if("ECT".equals(tmVariant)){
             if("SYM004".equals(sid) && "inch".equals(nodeId) && nodes.has("ect_inch")) nodeId="ect_inch";
             if("SYM005".equals(sid) && "pressure".equals(nodeId) && nodes.has("ect_shift")) nodeId="ect_shift";
+            if("SYM001".equals(sid) && "r_ctrl".equals(nodeId) && nodes.has("r_ect")) nodeId="r_ect";
         }
         JSONObject n=nodes.getJSONObject(nodeId);
         final String currentNodeId=nodeId;
@@ -576,6 +577,7 @@ public class MainActivity extends Activity {
         if("result".equals(type)){ showTmResult(n); return; }
         if("measure".equals(type)){ showTmMeasure(sid,currentNodeId,n); return; }
         if("clutch_pair_measure".equals(type)){ showTmClutchPairMeasure(sid,currentNodeId,n); return; }
+        if("reverse_pair_measure".equals(type)){ showTmReversePairMeasure(sid,currentNodeId,n); return; }
 
         LinearLayout q=card(); q.addView(tv(n.optString("question"),17,true));
         JSONArray ch=n.optJSONArray("choices");
@@ -620,13 +622,13 @@ public class MainActivity extends Activity {
     private void showTmClutchPairMeasure(String sid,String nodeId,JSONObject n){
         LinearLayout m=card();
         m.addView(tv("F 선택",17,true));
-        EditText f4=tmPressureInput("Tap4 (bar)");
-        EditText f5=tmPressureInput("Tap5 (bar)");
+        EditText f4=tmPressureInput("전진 클러치 압력 (Tap4) · bar");
+        EditText f5=tmPressureInput("후진 클러치 압력 (Tap5) · bar");
         m.addView(f4); m.addView(f5);
 
         m.addView(tv("R 선택",17,true));
-        EditText r4=tmPressureInput("Tap4 (bar)");
-        EditText r5=tmPressureInput("Tap5 (bar)");
+        EditText r4=tmPressureInput("전진 클러치 압력 (Tap4) · bar");
+        EditText r5=tmPressureInput("후진 클러치 압력 (Tap5) · bar");
         m.addView(r4); m.addView(r5);
 
         TextView guide=tv("정상: F 선택 Tap4 7.3~8.6 / Tap5 0 · R 선택 Tap5 7.3~8.6 / Tap4 0",13,false);
@@ -640,11 +642,11 @@ public class MainActivity extends Activity {
                 double rv4=Double.parseDouble(r4.getText().toString().trim());
                 double rv5=Double.parseDouble(r5.getText().toString().trim());
 
-                final double LO=7.3, HI=8.6, ZERO_MAX=0.5;
+                final double LO=7.3, HI=8.6;
                 boolean fApply=fv4>=LO && fv4<=HI;
                 boolean rApply=rv5>=LO && rv5<=HI;
-                boolean fOff=fv5<=ZERO_MAX;
-                boolean rOff=rv4<=ZERO_MAX;
+                boolean fOff=fv5==0.0;
+                boolean rOff=rv4==0.0;
 
                 String next;
                 if(!fOff || !rOff) next=n.optString("next_cross_apply");
@@ -677,6 +679,41 @@ public class MainActivity extends Activity {
         return e;
     }
 
+
+    private void showTmReversePairMeasure(String sid,String nodeId,JSONObject n){
+        LinearLayout m=card();
+        m.addView(tv("R 선택 상태",17,true));
+        EditText t4=tmPressureInput("전진 클러치 압력 (Tap4) · bar");
+        EditText t5=tmPressureInput("후진 클러치 압력 (Tap5) · bar");
+        m.addView(t4); m.addView(t5);
+        m.addView(tv("R 선택 정상: 후진 클러치 압력 (Tap5) 7.3~8.6 bar · 전진 클러치 압력 (Tap4) 0 bar",13,false));
+
+        Button b=btn("2개 실측값으로 판정",true);
+        b.setOnClickListener(v->{
+            try{
+                double p4=Double.parseDouble(t4.getText().toString().trim());
+                double p5=Double.parseDouble(t5.getText().toString().trim());
+                final double LO=7.3, HI=8.6;
+                String next;
+                if(p4!=0.0) next=n.optString("next_cross");
+                else if(p5<LO) next=n.optString("next_low");
+                else if(p5>HI) next=n.optString("next_high");
+                else next=n.optString("next_normal");
+
+                try{
+                    saveDiagLog("TM_V084_"+sid,nodeId,
+                        String.format(Locale.US,"R:T4 %.2f / T5 %.2f",p4,p5));
+                }catch(Exception e){ android.util.Log.w("ForkliftDiag","diag log failed",e); }
+
+                go(new Screen("tm_diag",sid,next));
+            }catch(Exception e){
+                toast("Tap4와 Tap5 값을 모두 숫자로 입력하세요.");
+            }
+        });
+        m.addView(b);
+        body.addView(m);
+    }
+
     private void showTmResult(JSONObject n){
         LinearLayout r=card(); r.addView(tv("판정",16,true)); r.addView(tv(n.optString("result"),17,true));
         if(n.optString("action").length()>0){ r.addView(tv("다음 점검",15,true)); r.addView(tv(n.optString("action"),14,false)); }
@@ -693,9 +730,30 @@ public class MainActivity extends Activity {
             if(iv==null) return;
 
             LinearLayout c=card();
-            c.addView(tv("실제 매뉴얼 · 압력 탭 위치",16,true));
-            c.addView(tv("그림을 누르면 확대해서 볼 수 있습니다.",12,false));
-            c.addView(iv,new LinearLayout.LayoutParams(-1,dp(430)));
+            c.addView(tv("압력 탭 위치 · 확대",16,true));
+            c.addView(tv("매뉴얼 그림 2-22의 탭 위치 부분을 먼저 크게 표시합니다.",12,false));
+            iv.setAdjustViewBounds(false);
+            iv.setScaleType(ImageView.ScaleType.MATRIX);
+            iv.addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob)->{
+                try{
+                    android.graphics.drawable.Drawable dr=iv.getDrawable();
+                    if(dr==null)return;
+                    float vw=iv.getWidth(), vh=iv.getHeight();
+                    float dw=dr.getIntrinsicWidth(), dh=dr.getIntrinsicHeight();
+                    if(vw<=0||vh<=0||dw<=0||dh<=0)return;
+                    float scale=(vw/dw)*1.75f;
+                    android.graphics.Matrix mx=new android.graphics.Matrix();
+                    mx.setScale(scale,scale);
+                    float tx=(vw-dw*scale)/2f;
+                    float ty=-dh*scale*0.055f;
+                    mx.postTranslate(tx,ty);
+                    iv.setImageMatrix(mx);
+                }catch(Exception ignore){}
+            });
+            c.addView(iv,new LinearLayout.LayoutParams(-1,dp(300)));
+            Button full=btn("전체 원본 페이지 보기",false);
+            full.setOnClickListener(v->showEvidence(pages,""));
+            c.addView(full);
             body.addView(c);
         }catch(Exception e){
             android.util.Log.w("ForkliftDiag","manual pressure image failed",e);
@@ -975,7 +1033,7 @@ public class MainActivity extends Activity {
         baseScreen("앱 / 데이터 상태");
         JSONObject norm=db.optJSONObject("diagnostic_normalization");
         LinearLayout c=card();
-        c.addView(tv("FIELD v0.8.3 · SYM000 Field Test · 진단 구조 재설계",18,true));
+        c.addView(tv("FIELD v0.8.4 · SYM001 Field Test · 진단 구조 재설계",18,true));
         c.addView(tv("증상 "+db.getJSONArray("symptoms").length()+"개",13,false));
         c.addView(tv("원인 "+norm.optInt("cause_count",268)+"개 전체 재분류",13,false));
         c.addView(tv("원인 확인 → 필요한 경우에만 계측 → 결과 판정 순서로 표시",13,false));
