@@ -571,6 +571,10 @@ public class MainActivity extends Activity {
             LinearLayout cc=card(); cc.addView(tv("측정 조건",15,true)); addArray(cc,cond,"• "); body.addView(cc);
         }
 
+        JSONArray manualPages=n.optJSONArray("manual_pages");
+        if(manualPages!=null && manualPages.length()>0){
+            addTmManualPages(manualPages,n.optString("manual_title","관련 매뉴얼 원본"));
+        }
         String vis=n.optString("visual");
         if(("SYM000".equals(sid) && ("tap6".equals(currentNodeId) || "tap1".equals(currentNodeId) || "pair".equals(currentNodeId)))
                 || ("SYM001".equals(sid) && "r_pair".equals(currentNodeId))){
@@ -763,6 +767,34 @@ public class MainActivity extends Activity {
             body.addView(c);
         }catch(Exception e){
             android.util.Log.w("ForkliftDiag","manual pressure image failed",e);
+        }
+    }
+
+    private void addTmManualPages(JSONArray pages,String title){
+        try{
+            ImageView iv=loadFirstImage(pages);
+            if(iv==null)return;
+            LinearLayout c=card();
+            c.addView(tv(title,16,true));
+            c.addView(tv("현재 진단 단계에 필요한 실제 매뉴얼 그림입니다. 눌러서 확대하거나 전체 원본을 열 수 있습니다.",12,false));
+            iv.setAdjustViewBounds(true);
+            iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            iv.setOnClickListener(v->{
+                try{
+                    android.graphics.drawable.Drawable dr=iv.getDrawable();
+                    if(dr instanceof android.graphics.drawable.BitmapDrawable){
+                        Bitmap bm=((android.graphics.drawable.BitmapDrawable)dr).getBitmap();
+                        showCircuit(bm,title);
+                    }else showEvidence(pages,"");
+                }catch(Exception e){ showEvidence(pages,""); }
+            });
+            c.addView(iv,new LinearLayout.LayoutParams(-1,dp(360)));
+            Button full=btn("전체 원본 페이지 보기 / 확대",false);
+            full.setOnClickListener(v->showEvidence(pages,""));
+            c.addView(full);
+            body.addView(c);
+        }catch(Exception e){
+            android.util.Log.w("ForkliftDiag","manual page visual failed",e);
         }
     }
 
@@ -966,31 +998,95 @@ public class MainActivity extends Activity {
 
 
 
-    private void showEvidence(JSONArray pages,String source){
-        Dialog d=new Dialog(this);
-        ScrollView sv=new ScrollView(this);
-        LinearLayout l=new LinearLayout(this);
-        l.setOrientation(LinearLayout.VERTICAL);l.setPadding(dp(12),dp(12),dp(12),dp(20));
-        l.addView(tv("세부 도면",18,true));
-        boolean any=false;
-        if(pages!=null)for(int i=0;i<pages.length();i++){
-            int pg=pages.optInt(i);
-            String[] names={String.format(Locale.US,"oem_pages/p%03d.jpg",pg),"oem_pages/p"+pg+".jpg"};
-            for(String n:names){
-                try{
-                    InputStream is=getAssets().open(n);
-                    Bitmap bm=BitmapFactory.decodeStream(is);is.close();
-                    ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);
-                    l.addView(iv);any=true;break;
-                }catch(Exception ignored){}
-            }
+    private Bitmap loadManualPageBitmap(int pg){
+        String[] names={String.format(Locale.US,"oem_pages/p%03d.jpg",pg),"oem_pages/p"+pg+".jpg"};
+        for(String n:names){
+            try{
+                InputStream is=getAssets().open(n);
+                Bitmap bm=BitmapFactory.decodeStream(is);
+                is.close();
+                if(bm!=null)return bm;
+            }catch(Exception ignored){}
         }
-        if(!any)l.addView(tv("표시할 도면 이미지가 없습니다.",13,false));
-        Button close=btn("닫기",true);close.setOnClickListener(v->d.dismiss());l.addView(close);
-        sv.addView(l);d.setContentView(sv);d.show();
-        Window w=d.getWindow();if(w!=null)w.setLayout(-1,-1);
+        return null;
     }
 
+    private void showEvidence(JSONArray pages,String source){
+        final ArrayList<Bitmap> bitmaps=new ArrayList<>();
+        final ArrayList<Integer> pageNos=new ArrayList<>();
+        if(pages!=null){
+            for(int i=0;i<pages.length();i++){
+                int pg=pages.optInt(i);
+                Bitmap bm=loadManualPageBitmap(pg);
+                if(bm!=null){ bitmaps.add(bm); pageNos.add(pg); }
+            }
+        }
+
+        Dialog d=new Dialog(this);
+        LinearLayout root=new LinearLayout(this);
+        root.setOrientation(LinearLayout.VERTICAL);
+        root.setPadding(dp(8),dp(8),dp(8),dp(8));
+        root.setBackgroundColor(Color.WHITE);
+
+        TextView title=tv("세부 도면",18,true);
+        root.addView(title);
+        TextView hint=tv("두 손가락 확대/축소 · 한 손가락 드래그 · 더블탭 확대",11,false);
+        root.addView(hint);
+
+        if(bitmaps.isEmpty()){
+            root.addView(tv("표시할 도면 이미지가 없습니다.",13,false),
+                    new LinearLayout.LayoutParams(-1,0,1));
+        }else{
+            final int[] idx={0};
+            ZoomImageView ziv=new ZoomImageView(this);
+            ziv.setBackgroundColor(Color.rgb(245,245,245));
+            root.addView(ziv,new LinearLayout.LayoutParams(-1,0,1));
+
+            LinearLayout nav=new LinearLayout(this);
+            nav.setOrientation(LinearLayout.HORIZONTAL);
+            nav.setGravity(Gravity.CENTER_VERTICAL);
+
+            Button prev=btn("‹ 이전",false);
+            TextView pageText=tv("",12,true);
+            pageText.setGravity(Gravity.CENTER);
+            Button next=btn("다음 ›",false);
+
+            nav.addView(prev,new LinearLayout.LayoutParams(0,dp(52),1));
+            nav.addView(pageText,new LinearLayout.LayoutParams(0,dp(52),1));
+            nav.addView(next,new LinearLayout.LayoutParams(0,dp(52),1));
+            root.addView(nav);
+
+            Runnable renderPage=()->{
+                ziv.setImageBitmap(bitmaps.get(idx[0]));
+                pageText.setText((idx[0]+1)+"/"+bitmaps.size()+" · PDF "+pageNos.get(idx[0]));
+                prev.setEnabled(idx[0]>0);
+                next.setEnabled(idx[0]<bitmaps.size()-1);
+                ziv.post(()->{
+                    int w=ziv.getWidth(),h=ziv.getHeight();
+                    android.graphics.drawable.Drawable dr=ziv.getDrawable();
+                    if(w>0&&h>0&&dr!=null&&dr.getIntrinsicWidth()>0&&dr.getIntrinsicHeight()>0){
+                        float sc=Math.min((float)w/dr.getIntrinsicWidth(),(float)h/dr.getIntrinsicHeight());
+                        Matrix mx=new Matrix();
+                        mx.postScale(sc,sc);
+                        mx.postTranslate((w-dr.getIntrinsicWidth()*sc)/2f,(h-dr.getIntrinsicHeight()*sc)/2f);
+                        ziv.setImageMatrix(mx);
+                    }
+                });
+            };
+            prev.setOnClickListener(v->{ if(idx[0]>0){ idx[0]--; renderPage.run(); }});
+            next.setOnClickListener(v->{ if(idx[0]<bitmaps.size()-1){ idx[0]++; renderPage.run(); }});
+            renderPage.run();
+        }
+
+        Button close=btn("닫기",true);
+        close.setOnClickListener(v->d.dismiss());
+        root.addView(close);
+
+        d.setContentView(root);
+        d.show();
+        Window w=d.getWindow();
+        if(w!=null)w.setLayout(-1,-1);
+    }
 
     private void showResult(String r,String a){new AlertDialog.Builder(this).setTitle(r).setMessage(a).setPositiveButton("확인",null).show();}
 
@@ -1039,7 +1135,7 @@ public class MainActivity extends Activity {
         baseScreen("앱 / 데이터 상태");
         JSONObject norm=db.optJSONObject("diagnostic_normalization");
         LinearLayout c=card();
-        c.addView(tv("FIELD v0.8.5 · SYM001 Field Complete · 진단 구조 재설계",18,true));
+        c.addView(tv("FIELD v0.8.6 · SYM001 Mechanical Trace · 원본 확대 뷰어",18,true));
         c.addView(tv("증상 "+db.getJSONArray("symptoms").length()+"개",13,false));
         c.addView(tv("원인 "+norm.optInt("cause_count",268)+"개 전체 재분류",13,false));
         c.addView(tv("원인 확인 → 필요한 경우에만 계측 → 결과 판정 순서로 표시",13,false));

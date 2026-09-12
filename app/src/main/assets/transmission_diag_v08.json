@@ -1,5 +1,5 @@
 {
-  "version": "0.8.5-sym001-field-complete",
+  "version": "0.8.6-sym001-viewer-mechanical",
   "scope": "D20/25/30/33S(SE)-7 transmission",
   "graphs": {
     "SYM000": {
@@ -628,7 +628,11 @@
               "next": "r_slip_seal"
             }
           ],
-          "note": "정규화된 현재 DB에는 이 단계의 확정 마모한계 수치가 연결되어 있지 않아 임의 수치로 자동판정하지 않습니다."
+          "note": "정규화된 현재 DB에는 이 단계의 확정 마모한계 수치가 연결되어 있지 않아 임의 수치로 자동판정하지 않습니다.",
+          "manual_pages": [
+            63
+          ],
+          "manual_title": "후진 동력 흐름 · 매뉴얼 그림 2-9"
         },
         "r_slip_found": {
           "type": "result",
@@ -650,7 +654,11 @@
               "next": "r_limit_pending"
             }
           ],
-          "note": "확정 간극/마모한계가 매뉴얼 DB에 연결되기 전에는 숫자를 임의로 만들지 않습니다."
+          "note": "확정 간극/마모한계가 매뉴얼 DB에 연결되기 전에는 숫자를 임의로 만들지 않습니다.",
+          "manual_pages": [
+            63
+          ],
+          "manual_title": "후진 동력 흐름 · 매뉴얼 그림 2-9"
         },
         "r_internal_found": {
           "type": "result",
@@ -677,7 +685,11 @@
               "label": "체결 정상",
               "next": "r_gear_path"
             }
-          ]
+          ],
+          "manual_pages": [
+            63
+          ],
+          "manual_title": "후진 동력 흐름 · 매뉴얼 그림 2-9"
         },
         "r_hub_bad": {
           "type": "result",
@@ -695,10 +707,14 @@
               "next": "r_gear_bad"
             },
             {
-              "label": "이상 없음",
-              "next": "r_path_pending"
+              "label": "외관상 이상 없음",
+              "next": "r_power_trace"
             }
-          ]
+          ],
+          "manual_pages": [
+            63
+          ],
+          "manual_title": "후진 동력 흐름 · 매뉴얼 그림 2-9"
         },
         "r_gear_bad": {
           "type": "result",
@@ -706,11 +722,57 @@
           "result": "후진 클러치 체결압은 정상이나 후진 기어/샤프트 동력경로에서 기계적 단절이 확인됩니다.",
           "action": "확인된 기어·축·스플라인 손상부를 정비합니다."
         },
-        "r_path_pending": {
+        "r_power_trace": {
+          "type": "question",
+          "title": "후진 동력 전달 지점 추적",
+          "manual_pages": [
+            63
+          ],
+          "manual_title": "후진 동력 흐름 · 매뉴얼 그림 2-9",
+          "note": "매뉴얼의 후진 동력 흐름은 입력축 기어(5A) → 후진축 기어(9A)/후진축(9) → 후진 클러치(10) → 후진 기어(11) → 출력 기어(12) → U조인트 순입니다.",
+          "question": "후진 상태에서 회전 전달이 처음 끊기는 지점은 어디입니까?",
+          "choices": [
+            {
+              "label": "입력축 기어(5A) → 후진축 기어(9A)/후진축(9)",
+              "next": "r_revshaft_drive_bad"
+            },
+            {
+              "label": "후진축(9) → 후진 클러치(10) → 후진 기어(11)",
+              "next": "r_clutch_transfer_bad"
+            },
+            {
+              "label": "후진 기어(11) → 출력 기어(12)",
+              "next": "r_output_mesh_bad"
+            },
+            {
+              "label": "출력 기어(12)까지 정상 회전",
+              "next": "r_output_rotates"
+            }
+          ]
+        },
+        "r_revshaft_drive_bad": {
           "type": "result",
-          "title": "후진 내부경로 추가 정밀점검",
-          "result": "후진 클러치와 외관상 기어/샤프트에서 명확한 파손이 확인되지 않았습니다.",
-          "action": "서비스매뉴얼의 세부 분해검사 기준과 치수 기준을 추가 정규화해 다음 판정을 이어갑니다."
+          "title": "후진축 구동부 기계고장",
+          "result": "입력축 기어(5A)에서 후진축 기어(9A)/후진축(9)으로 회전이 전달되지 않습니다.",
+          "action": "5A-9A 기어 맞물림, 기어 치손상, 축/스플라인 체결부를 분해 점검합니다."
+        },
+        "r_clutch_transfer_bad": {
+          "type": "result",
+          "title": "후진 클러치 내부 동력전달 고장",
+          "result": "후진축(9)은 구동되지만 후진 클러치(10)를 통해 후진 기어(11)로 동력이 전달되지 않습니다.",
+          "action": "후진 클러치 피스톤/시일, 마찰판·스틸판, 허브·스플라인 체결부의 손상·소착·마모·변형을 분해 점검합니다. 확정 수치가 없는 항목은 임의 간극값으로 판정하지 않습니다."
+        },
+        "r_output_mesh_bad": {
+          "type": "result",
+          "title": "후진 기어-출력 기어 동력전달 고장",
+          "result": "후진 기어(11)는 회전하지만 출력 기어(12)로 동력이 전달되지 않습니다.",
+          "action": "후진 기어(11)와 출력 기어(12)의 치손상/맞물림, 축·키·스플라인 체결 상태를 점검합니다."
+        },
+        "r_output_rotates": {
+          "type": "result",
+          "title": "T/M 내부 후진 경로 정상 · 증상 재확인",
+          "result": "매뉴얼의 후진 내부 동력경로를 따라 출력 기어(12)까지 회전이 전달됩니다.",
+          "action": "전진이 정상인 차량에서 공통 출력부/U조인트/액슬 고장은 우선순위가 낮습니다. 실제 부하 조건에서 후진 클러치 슬립을 재확인하고, 동적 상태에서 9→10→11 구간의 전달 불량을 다시 좁힙니다."
         }
       }
     },
