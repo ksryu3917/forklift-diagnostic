@@ -3,7 +3,7 @@ name: Build Android APK
 on:
   workflow_dispatch:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main", "master", "v18-rc-auto" ]
 
 jobs:
   build:
@@ -29,12 +29,22 @@ jobs:
         with:
           gradle-version: '8.9'
 
+      - name: Validate diagnostic graphs
+        run: python3 tools/validate_transmission_graph.py
+
       - name: Build debug APK
         run: gradle :app:assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: forklift-diagnostic-apk
+          name: forklift-diagnostic-v18-rc-auto-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
+
+      - name: Upload diagnostic validation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: forklift-diagnostic-v18-validation
+          path: build/reports/transmission_graph_validation.*
           retention-days: 30
