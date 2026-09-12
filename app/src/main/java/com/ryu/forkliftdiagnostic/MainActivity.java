@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
     private LinearLayout body;
     private JSONObject db;
     private JSONObject transDiag;
+    private JSONObject releaseInfo;
     private String vehicle = "D25S-7";
     private String brand = "두산";
     private String tmVariant = "STD";
@@ -47,6 +48,8 @@ public class MainActivity extends Activity {
         catch(Exception e){ fatal("DB 로딩 오류: "+e.getMessage()); return; }
         try { transDiag=new JSONObject(readAsset("transmission_diag_v08.json")); }
         catch(Exception e){ transDiag=new JSONObject(); }
+        try { releaseInfo=new JSONObject(readAsset("diagnostic_release.json")); }
+        catch(Exception e){ releaseInfo=new JSONObject(); }
         show(new Screen("home"),false);
     }
 
@@ -127,6 +130,12 @@ public class MainActivity extends Activity {
 
     private void home() throws Exception{
         baseScreen("지게차 정비");
+        LinearLayout release=card();
+        release.addView(tv(releaseInfo.optString("release","UNKNOWN")+" RELEASE STATE · "+releaseInfo.optString("state","UNKNOWN"),17,true));
+        release.addView(tv("App "+releaseInfo.optString("version_name","UNKNOWN"),13,false));
+        release.addView(tv("Git "+releaseInfo.optString("git_commit_sha","UNKNOWN"),11,false));
+        release.addView(tv("Branch "+releaseInfo.optString("source_branch","UNKNOWN"),11,false));
+        body.addView(release);
         LinearLayout c=card();c.addView(tv("현재 차량",14,true));
         c.addView(tv(brand+" · "+vehicle,18,true));
         Spinner sp=new Spinner(this);JSONArray models=db.getJSONObject("manual").getJSONArray("models");ArrayList<String> ms=new ArrayList<>();
@@ -1182,7 +1191,10 @@ public class MainActivity extends Activity {
         baseScreen("앱 / 데이터 상태");
         JSONObject norm=db.optJSONObject("diagnostic_normalization");
         LinearLayout c=card();
-        c.addView(tv("FIELD v0.8.7 · Diagram Text Layout Fix",18,true));
+        c.addView(tv(releaseInfo.optString("release","UNKNOWN")+" · "+releaseInfo.optString("state","UNKNOWN"),18,true));
+        c.addView(tv("App versionName "+releaseInfo.optString("version_name","UNKNOWN"),13,false));
+        c.addView(tv("Git commit "+releaseInfo.optString("git_commit_sha","UNKNOWN"),11,false));
+        c.addView(tv("Source branch "+releaseInfo.optString("source_branch","UNKNOWN"),11,false));
         c.addView(tv("증상 "+db.getJSONArray("symptoms").length()+"개",13,false));
         c.addView(tv("원인 "+norm.optInt("cause_count",268)+"개 전체 재분류",13,false));
         c.addView(tv("원인 확인 → 필요한 경우에만 계측 → 결과 판정 순서로 표시",13,false));
