@@ -954,10 +954,57 @@ public class MainActivity extends Activity {
     }
 
     private void drawElecBox(Canvas c,Paint p,int l,int t,int r,int b,String text,boolean hi){
-        p.setStyle(Paint.Style.FILL);p.setColor(hi?Color.rgb(225,241,255):Color.rgb(244,247,249));c.drawRoundRect(l,t,r,b,25,25,p);
-        p.setStyle(Paint.Style.STROKE);p.setStrokeWidth(hi?8:4);p.setColor(hi?BLUE:Color.rgb(105,120,132));c.drawRoundRect(l,t,r,b,25,25,p);
-        p.setStyle(Paint.Style.FILL);p.setTypeface(Typeface.DEFAULT_BOLD);p.setTextSize(28);p.setColor(NAVY);p.setTextAlign(Paint.Align.CENTER);
-        drawCentered(c,p,text,(l+r)/2f,(t+b)/2f,r-l-24);p.setTextAlign(Paint.Align.LEFT);
+        p.setStyle(Paint.Style.FILL);
+        p.setColor(hi?Color.rgb(225,241,255):Color.rgb(244,247,249));
+        c.drawRoundRect(l,t,r,b,25,25,p);
+
+        p.setStyle(Paint.Style.STROKE);
+        p.setStrokeWidth(hi?8:4);
+        p.setColor(hi?BLUE:Color.rgb(105,120,132));
+        c.drawRoundRect(l,t,r,b,25,25,p);
+
+        p.setStyle(Paint.Style.FILL);
+        p.setTypeface(Typeface.DEFAULT_BOLD);
+        p.setColor(NAVY);
+        p.setTextAlign(Paint.Align.CENTER);
+
+        String[] lines=text.split("\\n",-1);
+        float boxW=r-l-34f;
+        float boxH=b-t-24f;
+
+        float textSize=32f;
+        if(lines.length>=4)textSize=29f;
+        if(lines.length>=5)textSize=27f;
+        p.setTextSize(textSize);
+
+        float longest=0f;
+        for(String line:lines) longest=Math.max(longest,p.measureText(line));
+        while(longest>boxW && textSize>21f){
+            textSize-=1f;
+            p.setTextSize(textSize);
+            longest=0f;
+            for(String line:lines) longest=Math.max(longest,p.measureText(line));
+        }
+
+        Paint.FontMetrics fm=p.getFontMetrics();
+        float lineH=(fm.descent-fm.ascent)+10f;
+        float totalH=lineH*lines.length-10f;
+
+        if(totalH>boxH){
+            float fit=Math.max(20f,textSize*(boxH/totalH));
+            p.setTextSize(fit);
+            fm=p.getFontMetrics();
+            lineH=(fm.descent-fm.ascent)+8f;
+            totalH=lineH*lines.length-8f;
+        }
+
+        float y=(t+b)/2f-totalH/2f-fm.ascent;
+        for(String line:lines){
+            c.drawText(line,(l+r)/2f,y,p);
+            y+=lineH;
+        }
+
+        p.setTextAlign(Paint.Align.LEFT);
     }
     private void drawWire(Canvas c,Paint p,float x1,float y1,float x2,float y2,boolean hi){
         p.setStyle(Paint.Style.STROKE);p.setStrokeWidth(hi?12:5);p.setColor(hi?BLUE:Color.rgb(105,120,132));c.drawLine(x1,y1,x2,y2,p);p.setStyle(Paint.Style.FILL);
@@ -1135,7 +1182,7 @@ public class MainActivity extends Activity {
         baseScreen("앱 / 데이터 상태");
         JSONObject norm=db.optJSONObject("diagnostic_normalization");
         LinearLayout c=card();
-        c.addView(tv("FIELD v0.8.6 · SYM001 Mechanical Trace · 원본 확대 뷰어",18,true));
+        c.addView(tv("FIELD v0.8.7 · Diagram Text Layout Fix",18,true));
         c.addView(tv("증상 "+db.getJSONArray("symptoms").length()+"개",13,false));
         c.addView(tv("원인 "+norm.optInt("cause_count",268)+"개 전체 재분류",13,false));
         c.addView(tv("원인 확인 → 필요한 경우에만 계측 → 결과 판정 순서로 표시",13,false));
