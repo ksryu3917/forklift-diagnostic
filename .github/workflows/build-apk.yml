@@ -32,19 +32,57 @@ jobs:
       - name: Validate diagnostic graphs
         run: python3 tools/validate_transmission_graph.py
 
+      - name: Stamp diagnostic release identity
+        env:
+          BUILD_SHA: ${{ github.sha }}
+          BUILD_BRANCH: ${{ github.ref_name }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          path = Path("app/src/main/assets/diagnostic_release.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          data["git_commit_sha"] = os.environ["BUILD_SHA"]
+          data["source_branch"] = os.environ["BUILD_BRANCH"]
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          print(json.dumps(data, ensure_ascii=False))
+          PY
+
       - name: Build debug APK
         run: gradle :app:assembleDebug
+
+      - name: Verify APK release identity
+        env:
+          BUILD_SHA: ${{ github.sha }}
+          BUILD_BRANCH: ${{ github.ref_name }}
+        run: |
+          python3 - <<'PY'
+          import json, os, re, zipfile
+          from pathlib import Path
+          gradle = Path("app/build.gradle").read_text(encoding="utf-8")
+          match = re.search(r'versionName\s+"([^"]+)"', gradle)
+          assert match and match.group(1) == "0.18-rc-auto", match.group(1) if match else "missing versionName"
+          apk = Path("app/build/outputs/apk/debug/app-debug.apk")
+          with zipfile.ZipFile(apk) as archive:
+              release = json.loads(archive.read("assets/diagnostic_release.json").decode("utf-8"))
+          assert release["release"] == "v18", release
+          assert release["state"] == "RC AUTO", release
+          assert release["version_name"] == match.group(1), release
+          assert release["git_commit_sha"] == os.environ["BUILD_SHA"], release
+          assert release["source_branch"] == os.environ["BUILD_BRANCH"] == "v18-rc-auto", release
+          print("VERIFIED_APK_RELEASE=" + json.dumps(release, ensure_ascii=False))
+          PY
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: forklift-diagnostic-v18-rc-auto-apk
+          name: forklift-diagnostic-v18-rc-auto-${{ github.sha }}-apk
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
 
       - name: Upload diagnostic validation report
         uses: actions/upload-artifact@v4
         with:
-          name: forklift-diagnostic-v18-validation
+          name: forklift-diagnostic-v18-${{ github.sha }}-validation
           path: build/reports/transmission_graph_validation.*
           retention-days: 30
