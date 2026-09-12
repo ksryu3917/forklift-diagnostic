@@ -54,10 +54,14 @@ def structural_validate(sid, graph):
     errors, warnings = [], []
     nodes = graph.get("nodes", {})
     start = graph.get("start")
+    entries = graph.get("entry_points") or ([start] if start else [])
 
     if not start or start not in nodes:
         errors.append(f"{sid}: start node missing: {start}")
         return errors, warnings, set()
+    for ent in entries:
+        if ent not in nodes:
+            errors.append(f"{sid}: entry point missing: {ent}")
 
     # Link integrity
     for nid, node in nodes.items():
@@ -106,7 +110,7 @@ def structural_validate(sid, graph):
 
     # Reachability
     seen = set()
-    q = deque([start])
+    q = deque(entries)
     while q:
         nid = q.popleft()
         if nid in seen or nid not in nodes:
@@ -141,53 +145,70 @@ def choose_measure_route(node, rng, iteration):
 def simulate_graph(sid, graph, count=SIMS_PER_GRAPH):
     nodes = graph["nodes"]
     start = graph["start"]
+    entries = graph.get("entry_points") or [start]
+
     failures = []
     terminal_hits = defaultdict(int)
     edge_hits = defaultdict(int)
 
-    for i in range(count):
-        rng = random.Random(f"{sid}:{i}")
-        nid = start
-        visited_seq = []
-        for step in range(MAX_STEPS):
-            if nid not in nodes:
-                failures.append(f"sim#{i}: missing node {nid}")
-                break
-            node = nodes[nid]
-            visited_seq.append(nid)
-            typ = node.get("type")
-            nxt = None
+    sim_index = 0
 
-            if typ == "result":
-                terminal_hits[nid] += 1
-                break
+    for entry in entries:
+        for local_i in range(count):
+            i = sim_index
+            sim_index += 1
 
-            if typ == "question":
-                choices = node.get("choices", [])
-                if not choices:
-                    failures.append(f"sim#{i}: question {nid} has no choices")
+            rng = random.Random(f"{sid}:{entry}:{local_i}")
+            nid = entry
+            visited_seq = []
+
+            for step in range(MAX_STEPS):
+                if nid not in nodes:
+                    failures.append(f"sim#{i}: missing node {nid}")
                     break
-                # First simulations sweep choices deterministically.
-                idx = i % len(choices) if step < 8 else rng.randrange(len(choices))
-                nxt = choices[idx].get("next")
 
-            elif typ in ("measure", "reverse_pair_measure", "clutch_pair_measure"):
-                nxt = choose_measure_route(node, rng, i + step)
+                node = nodes[nid]
+                visited_seq.append(nid)
+                typ = node.get("type")
+                nxt = None
+
+                if typ == "result":
+                    terminal_hits[nid] += 1
+                    break
+
+                if typ == "question":
+                    choices = node.get("choices", [])
+                    if not choices:
+                        failures.append(f"sim#{i}: question {nid} has no choices")
+                        break
+
+                    if local_i < len(choices):
+                        idx = local_i
+                    else:
+                        idx = rng.randrange(len(choices))
+
+                    nxt = choices[idx].get("next")
+
+                elif typ in ("measure", "reverse_pair_measure", "clutch_pair_measure"):
+                    nxt = choose_measure_route(node, rng, local_i + step)
+
+                else:
+                    routes = all_nexts(node)
+                    if routes:
+                        nxt = routes[(local_i + step) % len(routes)]
+
+                if not nxt:
+                    failures.append(f"sim#{i}: non-result {nid} has no route")
+                    break
+
+                edge_hits[(nid, nxt)] += 1
+                nid = nxt
 
             else:
-                # custom types may still have next_* routes
-                routes = all_nexts(node)
-                if routes:
-                    nxt = routes[(i + step) % len(routes)]
-
-            if not nxt:
-                failures.append(f"sim#{i}: non-result {nid} has no route")
-                break
-
-            edge_hits[(nid, nxt)] += 1
-            nid = nxt
-        else:
-            failures.append(f"sim#{i}: exceeded {MAX_STEPS} steps; possible cycle: {' -> '.join(visited_seq[-10:])}")
+                failures.append(
+                    f"sim#{i}: exceeded {MAX_STEPS} steps; possible cycle: "
+                    + " -> ".join(visited_seq[-10:])
+                )
 
     return failures, terminal_hits, edge_hits
 
@@ -217,7 +238,7 @@ def main():
             "sid": sid,
             "nodes": len(graph.get("nodes", {})),
             "reachable": len(reachable),
-            "simulations": SIMS_PER_GRAPH,
+            "simulations": SIMS_PER_GRAPH * len(graph.get("entry_points") or [graph.get("start")]),
             "terminals_hit": len(terminals),
             "errors": len(errors),
             "warnings": len(warnings),
@@ -246,7 +267,7 @@ def main():
     lines.append(f"- DB version: `{data.get('version','')}`")
     lines.append(f"- Graphs: **{len(graphs)}**")
     lines.append(f"- Simulations per graph: **{SIMS_PER_GRAPH}**")
-    lines.append(f"- Total simulations: **{len(graphs)*SIMS_PER_GRAPH}**")
+    lines.append(f"- Total simulations: **{sum(r['simulations'] for r in graph_rows)}**")
     lines.append(f"- Errors: **{len(all_errors)}**")
     lines.append(f"- Warnings: **{len(all_warnings)}**")
     lines.append("")

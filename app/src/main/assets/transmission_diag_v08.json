@@ -1,5 +1,5 @@
 {
-  "version": "0.8.6-sym001-viewer-mechanical",
+  "version": "0.8.8-sym001-field-logic-auto-validated",
   "scope": "D20/25/30/33S(SE)-7 transmission",
   "graphs": {
     "SYM000": {
@@ -550,7 +550,7 @@
             },
             {
               "label": "외부 이상 없음",
-              "next": "r_hyd_internal"
+              "next": "r_low_tap6"
             }
           ]
         },
@@ -563,8 +563,8 @@
         "r_hyd_internal": {
           "type": "result",
           "title": "후진 클러치 내부누설 의심",
-          "result": "외부 제어유로 이상이 보이지 않는데 후진 클러치 압력이 낮습니다.",
-          "action": "후진 클러치 피스톤 시일·축 시일 등 내부누설 경로를 점검합니다."
+          "result": "Tap6 공통압은 정상이고 후진 제어유로에도 명확한 이상이 없는데 Tap5만 낮습니다.",
+          "action": "이 단계에서 후진 클러치 피스톤 시일·축 시일 등 내부누설 경로를 분해 점검합니다."
         },
         "f_release": {
           "type": "question",
@@ -577,27 +577,47 @@
             },
             {
               "label": "스풀 복귀 정상",
-              "next": "f_release_mech"
+              "next": "f_release_drain"
             }
           ]
         },
         "f_release_valve": {
-          "type": "result",
-          "title": "전진 해제회로/스풀 고착",
-          "result": "R 선택 중 전진 클러치 압력이 남고 스풀 복귀도 불량합니다.",
-          "action": "전진 selector/modulation 해제회로의 오염·고착을 수리한 뒤 Tap4가 0 bar로 복귀하는지 재측정합니다."
+          "type": "question",
+          "title": "전진 해제 스풀 복귀 불량",
+          "question": "전진 selector/modulation 스풀의 오염·고착을 제거한 뒤 스풀이 완전히 복귀합니까?",
+          "choices": [
+            {
+              "label": "완전 복귀됨",
+              "next": "f_release_remeasure"
+            },
+            {
+              "label": "여전히 복귀 불량",
+              "next": "f_release_valve_persist"
+            }
+          ]
         },
         "f_release_mech": {
           "type": "result",
-          "title": "전진 클러치 기계적 소착 가능",
-          "result": "제어스풀 복귀는 정상인데 전진쪽 끌림이 남습니다.",
-          "action": "전진 클러치 마찰판/스틸판 소착·변형 여부를 점검합니다."
+          "title": "전진 클러치 기계적 소착",
+          "result": "전진 클러치 유압은 0 bar로 완전히 해제됐지만 전진쪽 끌림이 남습니다.",
+          "action": "전진 클러치 마찰판/스틸판 소착·열변형·허브/스플라인 기계구속을 분해 점검합니다."
         },
         "r_high": {
-          "type": "result",
-          "title": "후진 클러치 압력 고압",
-          "result": "후진 클러치 압력 (Tap5)이 7.3~8.6 bar보다 높습니다.",
-          "action": "밸브 고착·회로 제한 및 메인 압력 상태를 확인합니다. 조정은 원인 확인 후 마지막에 합니다."
+          "type": "measure",
+          "title": "Tap5 고압 · 메인압력 확인",
+          "prompt": "메인 압력 (Tap6) 실측값",
+          "unit": "bar",
+          "min": 8.3,
+          "max": 10.3,
+          "next_low": "r_high_mixed",
+          "next_normal": "r_high_local",
+          "next_high": "r_high_common",
+          "conditions": [
+            "T/M 오일 49~71°C",
+            "저속 공전",
+            "Tap5가 8.6 bar보다 높은 상태"
+          ],
+          "visual": "TAP6"
         },
         "r_mech_question": {
           "type": "question",
@@ -630,7 +650,7 @@
           ],
           "note": "정규화된 현재 DB에는 이 단계의 확정 마모한계 수치가 연결되어 있지 않아 임의 수치로 자동판정하지 않습니다.",
           "manual_pages": [
-            63
+            64
           ],
           "manual_title": "후진 동력 흐름 · 매뉴얼 그림 2-9"
         },
@@ -651,12 +671,12 @@
             },
             {
               "label": "이상 없음",
-              "next": "r_limit_pending"
+              "next": "r_clutch_unresolved"
             }
           ],
           "note": "확정 간극/마모한계가 매뉴얼 DB에 연결되기 전에는 숫자를 임의로 만들지 않습니다.",
           "manual_pages": [
-            63
+            64
           ],
           "manual_title": "후진 동력 흐름 · 매뉴얼 그림 2-9"
         },
@@ -665,12 +685,6 @@
           "title": "후진 클러치 내부 기계고장",
           "result": "후진 클러치 피스톤/시일 또는 허브/스플라인에서 이상이 확인됩니다.",
           "action": "확인된 손상부를 정비한 뒤 압력과 부하주행을 재시험합니다."
-        },
-        "r_limit_pending": {
-          "type": "result",
-          "title": "추가 매뉴얼 기준 필요",
-          "result": "현재 확인된 전기·유압·클러치판 외관 점검만으로 원인이 확정되지 않았습니다.",
-          "action": "후진 클러치팩의 모델별 간극/마모한계와 세부 분해검사 기준을 서비스매뉴얼에서 추가 정규화한 뒤 판정합니다."
         },
         "r_no_drive_clutch": {
           "type": "question",
@@ -687,7 +701,7 @@
             }
           ],
           "manual_pages": [
-            63
+            64
           ],
           "manual_title": "후진 동력 흐름 · 매뉴얼 그림 2-9"
         },
@@ -712,7 +726,7 @@
             }
           ],
           "manual_pages": [
-            63
+            64
           ],
           "manual_title": "후진 동력 흐름 · 매뉴얼 그림 2-9"
         },
@@ -726,7 +740,7 @@
           "type": "question",
           "title": "후진 동력 전달 지점 추적",
           "manual_pages": [
-            63
+            64
           ],
           "manual_title": "후진 동력 흐름 · 매뉴얼 그림 2-9",
           "note": "매뉴얼의 후진 동력 흐름은 입력축 기어(5A) → 후진축 기어(9A)/후진축(9) → 후진 클러치(10) → 후진 기어(11) → 출력 기어(12) → U조인트 순입니다.",
@@ -757,24 +771,350 @@
           "action": "5A-9A 기어 맞물림, 기어 치손상, 축/스플라인 체결부를 분해 점검합니다."
         },
         "r_clutch_transfer_bad": {
-          "type": "result",
-          "title": "후진 클러치 내부 동력전달 고장",
+          "type": "question",
+          "title": "후진 클러치(10) 내부 분해점검",
           "result": "후진축(9)은 구동되지만 후진 클러치(10)를 통해 후진 기어(11)로 동력이 전달되지 않습니다.",
-          "action": "후진 클러치 피스톤/시일, 마찰판·스틸판, 허브·스플라인 체결부의 손상·소착·마모·변형을 분해 점검합니다. 확정 수치가 없는 항목은 임의 간극값으로 판정하지 않습니다."
+          "question": "분해점검에서 처음 확인되는 이상은 무엇입니까?",
+          "choices": [
+            {
+              "label": "피스톤/시일 손상·누설 흔적",
+              "next": "r_clutch_piston_bad"
+            },
+            {
+              "label": "마찰판/스틸판 소착·열변형·마모",
+              "next": "r_slip_found"
+            },
+            {
+              "label": "허브/스플라인 파손·헛돎",
+              "next": "r_hub_bad"
+            },
+            {
+              "label": "육안상 명확한 이상 없음",
+              "next": "r_clutch_unresolved"
+            }
+          ],
+          "note": "확정된 모델별 간극/마모한계가 없는 항목은 임의 숫자로 판정하지 않습니다.",
+          "manual_pages": [
+            64
+          ],
+          "manual_title": "후진 동력 흐름 · 매뉴얼 그림 2-9"
         },
         "r_output_mesh_bad": {
-          "type": "result",
-          "title": "후진 기어-출력 기어 동력전달 고장",
+          "type": "question",
+          "title": "후진 기어(11)~출력기어(12) 점검",
           "result": "후진 기어(11)는 회전하지만 출력 기어(12)로 동력이 전달되지 않습니다.",
-          "action": "후진 기어(11)와 출력 기어(12)의 치손상/맞물림, 축·키·스플라인 체결 상태를 점검합니다."
+          "question": "어느 이상이 확인됩니까?",
+          "choices": [
+            {
+              "label": "기어 치손상/맞물림 이상",
+              "next": "r_output_gear_bad"
+            },
+            {
+              "label": "축·키·스플라인 체결 파손/헛돎",
+              "next": "r_output_spline_bad"
+            },
+            {
+              "label": "명확한 손상 없음",
+              "next": "r_output_unresolved"
+            }
+          ],
+          "manual_pages": [
+            64
+          ],
+          "manual_title": "후진 동력 흐름 · 매뉴얼 그림 2-9"
         },
         "r_output_rotates": {
+          "type": "question",
+          "title": "출력기어(12) 정상 · 실제 부하 재현",
+          "result": "무부하 확인에서는 후진 내부 동력경로가 출력기어(12)까지 전달됩니다.",
+          "question": "실제 부하를 걸었을 때 출력기어(12)의 회전 전달은 어떻게 됩니까?",
+          "choices": [
+            {
+              "label": "부하에서 회전이 끊기거나 현저히 미끄러짐",
+              "next": "r_load_slip_pressure"
+            },
+            {
+              "label": "부하에서도 출력기어(12)는 계속 정상 회전",
+              "next": "r_after12"
+            }
+          ],
+          "note": "무부하에서 12까지 정상이라는 결과와 9→10→11 전달불량을 동시에 판정하지 않습니다."
+        },
+        "r_clutch_unresolved": {
           "type": "result",
-          "title": "T/M 내부 후진 경로 정상 · 증상 재확인",
-          "result": "매뉴얼의 후진 내부 동력경로를 따라 출력 기어(12)까지 회전이 전달됩니다.",
-          "action": "전진이 정상인 차량에서 공통 출력부/U조인트/액슬 고장은 우선순위가 낮습니다. 실제 부하 조건에서 후진 클러치 슬립을 재확인하고, 동적 상태에서 9→10→11 구간의 전달 불량을 다시 좁힙니다."
+          "title": "후진 클러치 정밀검사",
+          "result": "전기·유압·클러치판 외관·피스톤/허브 기본점검에서 원인이 특정되지 않았습니다.",
+          "action": "서비스매뉴얼의 해당 클러치 분해검사 항목을 따라 피스톤·시일·허브·스플라인·마찰판/스틸판을 정밀 점검합니다. 현재 확인되지 않은 허용치 숫자는 임의로 판정하지 않습니다."
+        },
+        "r_low_tap6": {
+          "type": "measure",
+          "title": "Tap5 저압 · 메인 압력 확인",
+          "prompt": "메인 압력 (Tap6) 실측값",
+          "unit": "bar",
+          "min": 8.3,
+          "max": 10.3,
+          "next_low": "r_low_tap1",
+          "next_normal": "r_low_local_control",
+          "next_high": "r_low_tap6_high",
+          "conditions": [
+            "T/M 오일 49~71°C",
+            "저속 공전",
+            "0~20.5 bar(0~300 psi) 압력계"
+          ],
+          "visual": "TAP6"
+        },
+        "r_low_tap1": {
+          "type": "measure",
+          "title": "Tap6 저압 · Tap1 비교",
+          "prompt": "펌프 출구 압력 (Tap1) 실측값",
+          "unit": "bar",
+          "min": 8.3,
+          "max": 10.3,
+          "next_low": "r_common_supply_low",
+          "next_normal": "r_between_tap1_tap6",
+          "next_high": "r_between_tap1_tap6",
+          "conditions": [
+            "Tap6가 낮을 때만 측정",
+            "T/M 오일 49~71°C",
+            "저속 공전",
+            "0~20.5 bar(0~300 psi) 압력계"
+          ],
+          "visual": "TAP1"
+        },
+        "r_common_supply_low": {
+          "type": "result",
+          "title": "공통 공급압력 저하",
+          "result": "Tap5가 낮고 Tap6·Tap1도 모두 낮습니다.",
+          "action": "후진 클러치 내부누설로 바로 단정하지 않습니다. 흡입 제한/공기혼입 → 메인 릴리프 열린 고착 → 큰 내부누설 → 펌프 마모/구동 순으로 공통 공급계통을 점검합니다."
+        },
+        "r_between_tap1_tap6": {
+          "type": "result",
+          "title": "Tap1~Tap6 사이 / 인칭 계통",
+          "result": "Tap1은 정상인데 Tap6가 낮습니다.",
+          "action": "펌프 출구(Tap1)~메인라인(Tap6) 사이 유로 제한 또는 인칭밸브 결함을 우선 점검합니다."
+        },
+        "r_low_tap6_high": {
+          "type": "result",
+          "title": "혼합 압력 이상 · 재확인",
+          "result": "Tap5는 낮은데 Tap6 메인압력은 정상보다 높습니다.",
+          "action": "게이지/포트/측정조건을 재확인한 뒤 메인 고압 원인과 후진 전용회로 저압 원인을 각각 분리 진단합니다."
+        },
+        "r_low_local_control": {
+          "type": "question",
+          "title": "Tap6 정상 · 후진 전용회로",
+          "question": "Tap6 메인압력은 정상입니다. 후진 selector/modulation 스풀 또는 후진 유로에 고착·오염·제한이 확인됩니까?",
+          "choices": [
+            {
+              "label": "밸브/유로 이상 확인",
+              "next": "r_low_local_found"
+            },
+            {
+              "label": "밸브/유로 이상 없음",
+              "next": "r_hyd_internal"
+            }
+          ],
+          "note": "공통 공급압력이 정상일 때에만 후진 전용 제어회로와 클러치 내부누설 쪽으로 좁힙니다."
+        },
+        "r_low_local_found": {
+          "type": "result",
+          "title": "후진 전용 제어회로 이상",
+          "result": "Tap6는 정상이고 후진 selector/modulation 유로에서 이상이 확인됩니다.",
+          "action": "확인된 고착·오염·제한을 복구한 뒤 Tap5를 다시 측정합니다."
+        },
+        "f_release_valve_persist": {
+          "type": "result",
+          "title": "전진 해제 밸브 기계불량",
+          "result": "청소/기본 점검 후에도 전진 selector/modulation 스풀이 완전히 복귀하지 않습니다.",
+          "action": "스풀·보어 손상, 스프링/기계구속 등 실제 복귀불량 원인을 수리한 뒤 Tap4를 다시 측정합니다."
+        },
+        "f_release_drain": {
+          "type": "question",
+          "title": "Tap4 잔압 · 해제/리턴 유로",
+          "question": "스풀은 복귀하지만 Tap4에 압력이 남습니다. 전진 클러치 해제 리턴/드레인 유로의 제한 또는 밸브 내부 이상이 확인됩니까?",
+          "choices": [
+            {
+              "label": "이상 확인",
+              "next": "f_release_drain_found"
+            },
+            {
+              "label": "명확한 이상 없음",
+              "next": "f_release_remeasure"
+            }
+          ],
+          "note": "Tap4에 실제 압력이 남아 있는 동안은 마찰판 소착으로 바로 넘어가지 않습니다."
+        },
+        "f_release_drain_found": {
+          "type": "question",
+          "title": "해제 유로 복구 후 재측정",
+          "question": "확인된 리턴/드레인 유로 이상을 복구했습니다. Tap4를 다시 측정하십시오.",
+          "choices": [
+            {
+              "label": "Tap4 재측정",
+              "next": "f_release_remeasure"
+            }
+          ]
+        },
+        "f_release_remeasure": {
+          "type": "measure",
+          "title": "R 선택 · Tap4 재측정",
+          "prompt": "전진 클러치 압력 (Tap4)",
+          "unit": "bar",
+          "min": 0.0,
+          "max": 0.0,
+          "next_low": "f_release_drag_check",
+          "next_normal": "f_release_drag_check",
+          "next_high": "f_release_hyd_persist",
+          "conditions": [
+            "R 선택 상태",
+            "저속 공전",
+            "Tap4 정상값 0 bar"
+          ],
+          "visual": "TAP4"
+        },
+        "f_release_hyd_persist": {
+          "type": "result",
+          "title": "전진 클러치 유압 해제 실패 지속",
+          "result": "스풀 복귀/유로 점검 후에도 R 선택에서 Tap4가 0 bar로 떨어지지 않습니다.",
+          "action": "기계적 클러치 소착보다 전진 해제 밸브바디/유압회로의 잔압 원인을 계속 추적합니다."
+        },
+        "f_release_drag_check": {
+          "type": "question",
+          "title": "유압 해제 후 기계적 끌림 확인",
+          "question": "Tap4가 0 bar로 정상 복귀했습니다. 그런데도 R 또는 N에서 전진 방향 끌림이 남습니까?",
+          "choices": [
+            {
+              "label": "끌림 남음",
+              "next": "f_release_mech"
+            },
+            {
+              "label": "끌림 사라짐",
+              "next": "f_release_fixed"
+            }
+          ]
+        },
+        "f_release_fixed": {
+          "type": "result",
+          "title": "전진 해제회로 복구 확인",
+          "result": "Tap4가 0 bar로 복귀했고 전진쪽 끌림도 사라졌습니다.",
+          "action": "후진 작동을 다시 확인합니다. 최초 증상이 남으면 후진측 진단을 계속합니다."
+        },
+        "r_high_common": {
+          "type": "result",
+          "title": "공통 메인압력 고압",
+          "result": "Tap5뿐 아니라 Tap6 메인압력도 높습니다.",
+          "action": "메인 릴리프 소착/오염 또는 공통 회로 제한을 우선 점검합니다. 압력 조정은 원인 확인 후 마지막에 합니다."
+        },
+        "r_high_mixed": {
+          "type": "result",
+          "title": "압력 조합 재확인",
+          "result": "Tap5는 높은데 Tap6 메인압력은 낮습니다.",
+          "action": "게이지/포트 연결과 측정조건을 먼저 재확인합니다. 값이 재현되면 공통 저압과 후진 회로 이상을 각각 분리 진단합니다."
+        },
+        "r_high_local": {
+          "type": "question",
+          "title": "후진 단독 고압",
+          "question": "Tap6는 정상인데 Tap5만 높습니다. 후진 selector/modulation 스풀 또는 후진 회로의 제한·고착이 확인됩니까?",
+          "choices": [
+            {
+              "label": "이상 확인",
+              "next": "r_high_local_found"
+            },
+            {
+              "label": "명확한 이상 없음",
+              "next": "r_high_local_deep"
+            }
+          ]
+        },
+        "r_high_local_found": {
+          "type": "result",
+          "title": "후진 제어회로 고압 원인 확인",
+          "result": "공통 메인압력은 정상이고 후진 전용 밸브/유로에서 고착 또는 제한이 확인됩니다.",
+          "action": "확인된 원인을 복구한 뒤 Tap5를 다시 측정합니다. 임의 조정으로 먼저 맞추지 않습니다."
+        },
+        "r_high_local_deep": {
+          "type": "result",
+          "title": "후진 밸브바디 정밀점검",
+          "result": "Tap6는 정상인데 Tap5만 높고 외부에서 명확한 제한/고착이 보이지 않습니다.",
+          "action": "후진 selector/modulation 밸브바디 내부의 스풀 작동과 유로 상태를 분해 점검한 뒤 Tap5를 재측정합니다."
+        },
+        "r_load_slip_pressure": {
+          "type": "question",
+          "title": "부하 슬립 · 유압/기계 분리",
+          "question": "부하에서 슬립이 재현될 때 Tap5 압력이 무부하 정상 체결 상태에 비해 크게 떨어지거나 사라집니까?",
+          "choices": [
+            {
+              "label": "슬립 순간 압력도 크게 떨어짐",
+              "next": "r_load_hyd_dynamic"
+            },
+            {
+              "label": "압력은 유지되는데 동력만 미끄러짐",
+              "next": "r_slip_inspect"
+            }
+          ],
+          "note": "부하 상태의 별도 수치 기준은 확인되지 않아 임의 bar 기준을 만들지 않고 압력 유지/붕괴 여부만 비교합니다."
+        },
+        "r_load_hyd_dynamic": {
+          "type": "result",
+          "title": "부하 시 후진 유압 유지 실패",
+          "result": "무부하에서는 Tap5가 정상이나 부하가 걸리면 후진 체결압이 유지되지 않습니다.",
+          "action": "후진 selector/modulation 유로와 부하 시 드러나는 내부누설을 우선 추적합니다."
+        },
+        "r_after12": {
+          "type": "question",
+          "title": "출력기어 이후 실제 회전 확인",
+          "question": "부하에서도 출력기어(12)가 정상 회전합니다. U조인트 입력도 실제로 회전합니까?",
+          "choices": [
+            {
+              "label": "U조인트 입력이 회전하지 않음",
+              "next": "r_output_coupling_bad"
+            },
+            {
+              "label": "U조인트까지 정상 회전",
+              "next": "r_observation_conflict"
+            }
+          ]
+        },
+        "r_output_coupling_bad": {
+          "type": "result",
+          "title": "출력기어~U조인트 연결부 이상",
+          "result": "출력기어(12)는 회전하지만 U조인트 입력으로 회전이 전달되지 않습니다.",
+          "action": "출력 연결부의 스플라인/체결/연결부 파손을 점검합니다."
+        },
+        "r_observation_conflict": {
+          "type": "result",
+          "title": "증상/관찰조건 재확인",
+          "result": "전진은 정상인데 후진에서도 출력기어(12)와 U조인트까지 정상 회전한다면 최초 '후진 동력 없음'과 관찰 결과가 서로 맞지 않습니다.",
+          "action": "차량 고정상태·바퀴 회전·실제 부하 조건을 다시 확인하고 어느 지점에서 회전이 끊기는지 재관찰합니다. 공통 액슬 고장으로 바로 단정하지 않습니다."
+        },
+        "r_clutch_piston_bad": {
+          "type": "result",
+          "title": "후진 클러치 피스톤/시일 이상",
+          "result": "후진 클러치 피스톤 또는 시일에서 손상/누설 흔적이 확인됩니다.",
+          "action": "확인된 피스톤/시일 손상을 정비하고 Tap5 및 부하 후진 시험을 재확인합니다."
+        },
+        "r_output_gear_bad": {
+          "type": "result",
+          "title": "11↔12 기어 맞물림 이상",
+          "result": "후진 기어(11)와 출력 기어(12)의 치손상 또는 맞물림 이상이 확인됩니다.",
+          "action": "확인된 기어 손상을 정비하고 출력 전달을 재시험합니다."
+        },
+        "r_output_spline_bad": {
+          "type": "result",
+          "title": "출력 축/체결부 파손",
+          "result": "기어는 회전하지만 축·키·스플라인 체결부에서 헛돎/파손이 확인됩니다.",
+          "action": "확인된 체결부/축 손상을 정비하고 출력 전달을 재시험합니다."
+        },
+        "r_output_unresolved": {
+          "type": "result",
+          "title": "11→12 전달 단절 정밀검사",
+          "result": "11→12 사이 전달 단절은 확인됐지만 육안상 손상이 특정되지 않았습니다.",
+          "action": "베어링 지지·축 유격·기어 위치 및 내부 체결부를 분해 점검합니다. 확인되지 않은 허용치를 임의 생성하지 않습니다."
         }
-      }
+      },
+      "entry_points": [
+        "start",
+        "r_ect"
+      ]
     },
     "SYM002": {
       "start": "s0",
@@ -1259,7 +1599,11 @@
           "result": "기계식 인칭 링크가 아니라 각도센서→ECT 컨트롤러→비례밸브 제어를 먼저 진단해야 합니다.",
           "action": "인칭 각도센서 신호, F/R 입력, 해당 비례밸브 전류/실제작동을 확인한 뒤 유압압력으로 진행합니다."
         }
-      }
+      },
+      "entry_points": [
+        "s0",
+        "ect_inch"
+      ]
     },
     "SYM005": {
       "start": "s0",
@@ -1345,7 +1689,11 @@
           "result": "ECT 차량의 거친 체결은 기계식 modulation valve로 바로 가지 않습니다.",
           "action": "F/R 입력, 인칭센서, 컨트롤러 출력과 해당 proportional valve를 먼저 확인합니다."
         }
-      }
+      },
+      "entry_points": [
+        "s0",
+        "ect_shift"
+      ]
     },
     "SYM006": {
       "start": "s0",
