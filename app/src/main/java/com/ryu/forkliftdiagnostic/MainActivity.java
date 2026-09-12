@@ -39,6 +39,7 @@ public class MainActivity extends Activity {
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
+        try{ getWindow().setStatusBarColor(NAVY); }catch(Exception ignore){}
         prefs=getSharedPreferences("forklift_diag",MODE_PRIVATE);
         vehicle=prefs.getString("vehicle","D25S-7");
         tmVariant=prefs.getString("tm_variant","STD");
@@ -58,6 +59,10 @@ public class MainActivity extends Activity {
     }
 
     private int dp(int n){return (int)(n*getResources().getDisplayMetrics().density+0.5f);}
+    private int statusBarInset(){
+        int id=getResources().getIdentifier("status_bar_height","dimen","android");
+        return id>0?getResources().getDimensionPixelSize(id):0;
+    }
     private GradientDrawable bg(int c,int r){GradientDrawable g=new GradientDrawable();g.setColor(c);g.setCornerRadius(dp(r));return g;}
 
     private TextView tv(String s,int sp,boolean bold){
@@ -78,7 +83,7 @@ public class MainActivity extends Activity {
 
     private void baseScreen(String title){
         LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);
-        LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(6),dp(10),dp(6));top.setBackgroundColor(NAVY);
+        LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(6)+statusBarInset(),dp(10),dp(6));top.setBackgroundColor(NAVY);
         if(history.size()>1){
             Button back=new Button(this);back.setText("‹");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->back());
             top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));
@@ -567,7 +572,8 @@ public class MainActivity extends Activity {
         }
 
         String vis=n.optString("visual");
-        if("SYM000".equals(sid) && ("tap6".equals(currentNodeId) || "tap1".equals(currentNodeId) || "pair".equals(currentNodeId))){
+        if(("SYM000".equals(sid) && ("tap6".equals(currentNodeId) || "tap1".equals(currentNodeId) || "pair".equals(currentNodeId)))
+                || ("SYM001".equals(sid) && "r_pair".equals(currentNodeId))){
             addTmManualPressureImage();
         }else if(vis.length()>0){
             addTmStepVisual(vis);
@@ -707,7 +713,7 @@ public class MainActivity extends Activity {
 
                 go(new Screen("tm_diag",sid,next));
             }catch(Exception e){
-                toast("Tap4와 Tap5 값을 모두 숫자로 입력하세요.");
+                toast("전진 클러치 압력과 후진 클러치 압력을 모두 숫자로 입력하세요.");
             }
         });
         m.addView(b);
@@ -730,7 +736,7 @@ public class MainActivity extends Activity {
             if(iv==null) return;
 
             LinearLayout c=card();
-            c.addView(tv("압력 탭 위치 · 확대",16,true));
+            c.addView(tv("클러치/메인 압력 측정 포트 · 매뉴얼",16,true));
             c.addView(tv("매뉴얼 그림 2-22의 탭 위치 부분을 먼저 크게 표시합니다.",12,false));
             iv.setAdjustViewBounds(false);
             iv.setScaleType(ImageView.ScaleType.MATRIX);
@@ -1033,7 +1039,7 @@ public class MainActivity extends Activity {
         baseScreen("앱 / 데이터 상태");
         JSONObject norm=db.optJSONObject("diagnostic_normalization");
         LinearLayout c=card();
-        c.addView(tv("FIELD v0.8.4 · SYM001 Field Test · 진단 구조 재설계",18,true));
+        c.addView(tv("FIELD v0.8.5 · SYM001 Field Complete · 진단 구조 재설계",18,true));
         c.addView(tv("증상 "+db.getJSONArray("symptoms").length()+"개",13,false));
         c.addView(tv("원인 "+norm.optInt("cause_count",268)+"개 전체 재분류",13,false));
         c.addView(tv("원인 확인 → 필요한 경우에만 계측 → 결과 판정 순서로 표시",13,false));

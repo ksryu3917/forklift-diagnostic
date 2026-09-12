@@ -1,5 +1,5 @@
 {
-  "version": "0.8.4-sym000-final-sym001",
+  "version": "0.8.5-sym001-field-complete",
   "scope": "D20/25/30/33S(SE)-7 transmission",
   "graphs": {
     "SYM000": {
@@ -334,10 +334,10 @@
         "start": {
           "type": "question",
           "title": "전진 정상 / 후진 불가",
-          "question": "전진이 빈 차뿐 아니라 실제 견인에서도 정상적인 힘으로 작동합니까?",
+          "question": "전진 주행 시 힘이 정상입니까?",
           "choices": [
             {
-              "label": "전진 견인력 정상",
+              "label": "전진 정상",
               "next": "reaction"
             },
             {
@@ -348,70 +348,159 @@
         },
         "common": {
           "type": "result",
-          "title": "공통 계통으로 재분류",
+          "title": "후진 단독고장 아님",
           "result": "전진도 약하면 후진 단독고장으로 볼 수 없습니다.",
-          "action": "오일·흡입·메인 압력 (Tap6) 공통압 진단으로 이동합니다."
+          "action": "오일·흡입계통과 메인 압력 (Tap6) 공통 공급 진단으로 이동합니다."
         },
         "reaction": {
           "type": "question",
-          "title": "후진 선택 반응",
-          "question": "R 선택 시 가장 가까운 증상을 고르십시오.",
+          "title": "R 선택 시 차량 반응",
+          "question": "R에 넣었을 때 가장 가까운 상태를 고르십시오.",
           "choices": [
             {
-              "label": "엔진 부하 변화가 거의 없음",
+              "label": "R에 넣어도 거의 아무 반응 없음",
               "next": "r_ctrl"
             },
             {
-              "label": "엔진이 심하게 처지거나 차량이 버팀",
+              "label": "R에 넣으면 엔진이 심하게 처지거나 차량이 버팀",
               "next": "r_pair"
             },
             {
-              "label": "R 또는 N에서도 전진쪽으로 끌림",
+              "label": "R 또는 N에서도 전진 방향으로 끌림",
               "next": "r_pair"
             }
           ]
         },
         "r_ctrl": {
           "type": "question",
-          "title": "후진 전기/밸브 1차",
-          "question": "엔진 OFF · KEY ON · 주차브레이크 해제 상태에서 R 선택 시 후진 솔레노이드가 자화됩니까?",
+          "title": "후진 솔레노이드 1차 확인",
+          "question": "엔진 OFF · KEY ON · 주차브레이크 해제 상태에서 R 선택 시 후진 솔레노이드에 자력이 생깁니까?",
           "choices": [
             {
-              "label": "자화됨",
+              "label": "자력 생김",
               "next": "r_plunger"
             },
             {
-              "label": "자화 안 됨",
-              "next": "r_elec"
+              "label": "자력 없음",
+              "next": "r_fuse"
             }
-          ]
+          ],
+          "note": "솔레노이드 몸체에 금속 공구를 가까이 대어 자력 유무를 확인합니다. 이 단계는 전기 지령 도달 여부를 빠르게 가르는 예비시험입니다.",
+          "visual": "SOL_후진"
         },
-        "r_elec": {
+        "r_fuse": {
+          "type": "question",
+          "title": "FWD/REV 퓨즈 #3",
+          "question": "FWD/REV 퓨즈 #3가 정상입니까?",
+          "choices": [
+            {
+              "label": "정상",
+              "next": "r_switch"
+            },
+            {
+              "label": "단선/불량",
+              "next": "r_fuse_bad"
+            }
+          ],
+          "visual": "SOL_후진"
+        },
+        "r_fuse_bad": {
           "type": "result",
-          "title": "후진 전기회로",
-          "result": "R 선택 지령이 후진 솔레노이드까지 도달하지 않습니다.",
-          "action": "F/R 스위치 전원·R 출력 → FWD/REV 퓨즈 → 하네스 → R 솔레노이드 코일 순으로 확인합니다."
+          "title": "FWD/REV 퓨즈 #3 불량",
+          "result": "후진 솔레노이드 전원계통의 퓨즈가 불량입니다.",
+          "action": "퓨즈 단선 원인을 먼저 확인한 뒤 규격 퓨즈로 복구하고 R 솔레노이드 자화를 다시 확인합니다."
+        },
+        "r_switch": {
+          "type": "question",
+          "title": "F/R 스위치 · R 접점",
+          "question": "F/R 스위치에서 공통 4↔7 및 R 선택 1↔3 연속성이 정상입니까?",
+          "choices": [
+            {
+              "label": "연속성 정상",
+              "next": "r_coil"
+            },
+            {
+              "label": "접점 불량",
+              "next": "r_switch_bad"
+            }
+          ],
+          "note": "매뉴얼에 확인된 접점 조합: 공통 4↔7, 전진 1↔2, 후진 1↔3.",
+          "visual": "SOL_후진"
+        },
+        "r_switch_bad": {
+          "type": "result",
+          "title": "F/R 스위치 R 접점 불량",
+          "result": "R 선택 시 스위치 접점이 정상적으로 연결되지 않습니다.",
+          "action": "F/R 스위치와 커넥터 접촉상태를 수리한 뒤 후진 솔레노이드 자화를 재확인합니다."
+        },
+        "r_coil": {
+          "type": "measure",
+          "title": "후진 솔레노이드 코일 저항",
+          "prompt": "후진 솔레노이드 코일 저항 실측값",
+          "unit": "Ω",
+          "min": 9.7,
+          "max": 10.3,
+          "next_low": "r_coil_bad",
+          "next_normal": "r_harness",
+          "next_high": "r_coil_bad",
+          "conditions": [
+            "솔레노이드 코일 분리 상태",
+            "기준 온도 25°C",
+            "매뉴얼 기준 10±0.3 Ω"
+          ],
+          "visual": "SOL_후진"
+        },
+        "r_coil_bad": {
+          "type": "result",
+          "title": "후진 솔레노이드 코일 불량",
+          "result": "후진 솔레노이드 코일 저항이 매뉴얼 기준 10±0.3 Ω @25°C를 벗어납니다.",
+          "action": "후진 솔레노이드 코일/어셈블리를 수리 또는 교환한 뒤 다시 진단합니다."
+        },
+        "r_harness": {
+          "type": "question",
+          "title": "후진 솔레노이드 배선",
+          "question": "F/R 스위치 R 접점과 코일 저항은 정상입니다. R 선택 시 후진 솔레노이드 커넥터까지 전원이 도달합니까?",
+          "choices": [
+            {
+              "label": "전원 도달함",
+              "next": "r_plunger"
+            },
+            {
+              "label": "전원 도달하지 않음",
+              "next": "r_harness_bad"
+            }
+          ],
+          "note": "솔레노이드 정격은 12 VDC이며 매뉴얼 표기는 최대 14.5 VDC입니다. 정확한 차량 전압은 실제 배터리 전압과 함께 비교합니다.",
+          "visual": "SOL_후진"
+        },
+        "r_harness_bad": {
+          "type": "result",
+          "title": "후진 솔레노이드 하네스 불량",
+          "result": "스위치와 코일은 정상인데 솔레노이드 커넥터까지 R 지령 전원이 도달하지 않습니다.",
+          "action": "F/R 스위치 출력부터 R 솔레노이드 커넥터까지 하네스 단선·커넥터 접촉불량을 구간별로 추적합니다."
         },
         "r_plunger": {
           "type": "question",
-          "title": "후진 솔레노이드 실제 작동",
-          "question": "R 선택 시 후진 솔레노이드 플런저가 실제로 움직입니까?",
+          "title": "후진 솔레노이드 플런저",
+          "question": "R 선택 시 후진 솔레노이드 플런저가 약 3.18 mm 실제로 이동합니까?",
           "choices": [
             {
-              "label": "실제 이동 정상",
+              "label": "약 3.18 mm 이동 확인",
               "next": "r_pair"
             },
             {
-              "label": "자화되지만 이동 불량",
+              "label": "이동 없음/불충분",
               "next": "r_sol_bad"
             }
-          ]
+          ],
+          "note": "자화만 확인하고 끝내지 않습니다. 매뉴얼에 확인된 플런저 이동량은 약 3.18 mm입니다.",
+          "visual": "SOL_후진"
         },
         "r_sol_bad": {
           "type": "result",
-          "title": "후진 솔레노이드 작동불량",
-          "result": "코일은 자화되지만 플런저가 정상 작동하지 않습니다.",
-          "action": "후진 솔레노이드 플런저 고착/코일 어셈블리를 점검합니다."
+          "title": "후진 솔레노이드 기계작동 불량",
+          "result": "코일은 작동하지만 플런저 이동이 없거나 불충분합니다.",
+          "action": "플런저 고착·오염 또는 솔레노이드 어셈블리 자체를 점검합니다."
         },
         "r_ect": {
           "type": "question",
@@ -433,17 +522,17 @@
           "type": "result",
           "title": "ECT 후진 제어계통",
           "result": "후진 비례밸브가 정상적으로 제어되지 않습니다.",
-          "action": "F/R 레버 입력 → ECT 컨트롤러 출력 → R proportional valve 전류/작동 순으로 확인합니다."
+          "action": "F/R 레버 입력 → ECT 컨트롤러 출력 → R 비례밸브 전류/작동 순으로 확인합니다."
         },
         "r_pair": {
           "type": "reverse_pair_measure",
-          "title": "R 선택 · 전진 클러치 압력 (Tap4)/후진 클러치 압력 (Tap5) 동시측정",
-          "question": "R 선택 상태에서 전진/후진 클러치 압력을 동시에 입력하십시오.",
+          "title": "R 선택 · 전진/후진 클러치 압력",
+          "question": "R 선택 상태에서 두 클러치 압력을 입력하십시오.",
           "conditions": [
             "T/M 오일 49~71°C",
             "저속 공전",
-            "R 선택 시 후진 클러치 압력 (Tap5) 정상 7.3~8.6 bar",
-            "R 선택 시 Tap4는 0 bar"
+            "후진 클러치 압력 (Tap5) 정상 7.3~8.6 bar",
+            "전진 클러치 압력 (Tap4) 정상 0 bar"
           ],
           "next_low": "r_hyd_low",
           "next_normal": "r_mech_question",
@@ -451,49 +540,177 @@
           "next_high": "r_high"
         },
         "r_hyd_low": {
+          "type": "question",
+          "title": "후진 클러치 압력 저하",
+          "question": "후진 클러치 압력 (Tap5)이 낮습니다. 후진 밸브/유로에 외부 누유 또는 명확한 이상이 확인됩니까?",
+          "choices": [
+            {
+              "label": "외부/밸브 이상 확인",
+              "next": "r_hyd_external"
+            },
+            {
+              "label": "외부 이상 없음",
+              "next": "r_hyd_internal"
+            }
+          ]
+        },
+        "r_hyd_external": {
           "type": "result",
-          "title": "후진 클러치 회로 저압",
-          "result": "전진은 정상인데 R 선택 시 Tap5가 기준보다 낮습니다.",
-          "action": "후진 selector/modulation 유로 → 후진 클러치 피스톤/축 시일 내부누설 순으로 확인합니다."
+          "title": "후진 제어유로 이상",
+          "result": "후진 클러치 압력 저하와 함께 밸브/유로 이상이 확인됩니다.",
+          "action": "후진 selector/modulation 유로와 밸브 작동을 복구한 뒤 Tap5 압력을 다시 측정합니다."
+        },
+        "r_hyd_internal": {
+          "type": "result",
+          "title": "후진 클러치 내부누설 의심",
+          "result": "외부 제어유로 이상이 보이지 않는데 후진 클러치 압력이 낮습니다.",
+          "action": "후진 클러치 피스톤 시일·축 시일 등 내부누설 경로를 점검합니다."
         },
         "f_release": {
+          "type": "question",
+          "title": "전진 클러치 해제 불량",
+          "question": "R 선택인데 전진 클러치 압력 (Tap4)이 0 bar로 떨어지지 않습니다. 전진 selector/modulation 스풀이 완전히 복귀합니까?",
+          "choices": [
+            {
+              "label": "복귀 불량/고착",
+              "next": "f_release_valve"
+            },
+            {
+              "label": "스풀 복귀 정상",
+              "next": "f_release_mech"
+            }
+          ]
+        },
+        "f_release_valve": {
           "type": "result",
-          "title": "전진 클러치 해제불량 / 동시체결",
-          "result": "R 선택인데 전진 클러치 압력 (Tap4) 압력이 0으로 떨어지지 않습니다.",
-          "action": "전진 selector/modulation 해제회로와 스풀 고착을 확인합니다. Tap4가 0인데도 전진 끌림이 남으면 전진 클러치 기계적 소착을 의심합니다."
+          "title": "전진 해제회로/스풀 고착",
+          "result": "R 선택 중 전진 클러치 압력이 남고 스풀 복귀도 불량합니다.",
+          "action": "전진 selector/modulation 해제회로의 오염·고착을 수리한 뒤 Tap4가 0 bar로 복귀하는지 재측정합니다."
+        },
+        "f_release_mech": {
+          "type": "result",
+          "title": "전진 클러치 기계적 소착 가능",
+          "result": "제어스풀 복귀는 정상인데 전진쪽 끌림이 남습니다.",
+          "action": "전진 클러치 마찰판/스틸판 소착·변형 여부를 점검합니다."
         },
         "r_high": {
           "type": "result",
           "title": "후진 클러치 압력 고압",
-          "result": "R 선택 Tap5가 정상범위보다 높습니다.",
-          "action": "밸브 고착/회로 제한 및 공통압 상태를 확인합니다."
+          "result": "후진 클러치 압력 (Tap5)이 7.3~8.6 bar보다 높습니다.",
+          "action": "밸브 고착·회로 제한 및 메인 압력 상태를 확인합니다. 조정은 원인 확인 후 마지막에 합니다."
         },
         "r_mech_question": {
           "type": "question",
-          "title": "후진 기계 전달",
-          "question": "R 선택 Tap5는 정상이고 Tap4는 0입니다. 후진이 어떤 상태입니까?",
+          "title": "후진 기계 동력전달",
+          "question": "후진 클러치 압력은 정상이고 전진 클러치 압력은 0 bar입니다. 실제 후진 상태는 어느 쪽입니까?",
           "choices": [
             {
-              "label": "빈 차에서는 움직이나 부하에서 슬립",
-              "next": "r_slip"
+              "label": "빈 차에서는 움직이나 부하에서 미끄러짐",
+              "next": "r_slip_inspect"
             },
             {
-              "label": "후진이 전혀 전달되지 않음",
-              "next": "r_mech"
+              "label": "후진 동력이 전혀 전달되지 않음",
+              "next": "r_no_drive_clutch"
             }
           ]
         },
-        "r_slip": {
-          "type": "result",
-          "title": "후진 클러치 기계적 슬립",
-          "result": "후진 유압 체결압은 정상인데 부하에서만 미끄러집니다.",
-          "action": "후진 클러치 friction/steel plate 마모·열손상 및 기계적 체결상태를 점검합니다."
+        "r_slip_inspect": {
+          "type": "question",
+          "title": "후진 클러치팩 점검",
+          "question": "후진 클러치팩 분해 점검에서 마찰판 또는 스틸판의 마모·열변색·소착·변형이 확인됩니까?",
+          "choices": [
+            {
+              "label": "이상 확인됨",
+              "next": "r_slip_found"
+            },
+            {
+              "label": "뚜렷한 이상 없음",
+              "next": "r_slip_seal"
+            }
+          ],
+          "note": "정규화된 현재 DB에는 이 단계의 확정 마모한계 수치가 연결되어 있지 않아 임의 수치로 자동판정하지 않습니다."
         },
-        "r_mech": {
+        "r_slip_found": {
           "type": "result",
-          "title": "후진 클러치/기어 기계고장",
-          "result": "후진 클러치 압력은 정상인데 후진 동력이 전달되지 않습니다.",
-          "action": "후진 클러치팩 → 후진 기어/샤프트 동력경로 순으로 점검합니다."
+          "title": "후진 클러치팩 손상",
+          "result": "정상 체결압이 형성되지만 후진 클러치 마찰판/스틸판에 기계적 손상이 확인됩니다.",
+          "action": "손상된 마찰판(Friction plate)·스틸판(Steel plate) 및 관련 부품을 정비하고 원인이 된 과열/슬립 원인도 함께 확인합니다."
+        },
+        "r_slip_seal": {
+          "type": "question",
+          "title": "후진 클러치 피스톤/허브",
+          "question": "클러치판 외관 이상이 뚜렷하지 않습니다. 피스톤·시일 및 허브/스플라인에 손상 또는 비정상 유격이 확인됩니까?",
+          "choices": [
+            {
+              "label": "이상 확인됨",
+              "next": "r_internal_found"
+            },
+            {
+              "label": "이상 없음",
+              "next": "r_limit_pending"
+            }
+          ],
+          "note": "확정 간극/마모한계가 매뉴얼 DB에 연결되기 전에는 숫자를 임의로 만들지 않습니다."
+        },
+        "r_internal_found": {
+          "type": "result",
+          "title": "후진 클러치 내부 기계고장",
+          "result": "후진 클러치 피스톤/시일 또는 허브/스플라인에서 이상이 확인됩니다.",
+          "action": "확인된 손상부를 정비한 뒤 압력과 부하주행을 재시험합니다."
+        },
+        "r_limit_pending": {
+          "type": "result",
+          "title": "추가 매뉴얼 기준 필요",
+          "result": "현재 확인된 전기·유압·클러치판 외관 점검만으로 원인이 확정되지 않았습니다.",
+          "action": "후진 클러치팩의 모델별 간극/마모한계와 세부 분해검사 기준을 서비스매뉴얼에서 추가 정규화한 뒤 판정합니다."
+        },
+        "r_no_drive_clutch": {
+          "type": "question",
+          "title": "후진 클러치 동력경로",
+          "question": "후진 클러치팩의 허브·스플라인 체결부에 파손/헛돎이 확인됩니까?",
+          "choices": [
+            {
+              "label": "파손/헛돎 확인",
+              "next": "r_hub_bad"
+            },
+            {
+              "label": "체결 정상",
+              "next": "r_gear_path"
+            }
+          ]
+        },
+        "r_hub_bad": {
+          "type": "result",
+          "title": "후진 클러치 허브/스플라인 파손",
+          "result": "후진 체결압은 정상이나 클러치팩의 기계적 동력이 다음 축으로 전달되지 않습니다.",
+          "action": "손상된 허브/스플라인 및 연관 부품을 정비합니다."
+        },
+        "r_gear_path": {
+          "type": "question",
+          "title": "후진 기어/샤프트",
+          "question": "후진 기어·샤프트 동력경로에서 기어 치손상, 키/스플라인 파손 또는 축 회전 단절이 확인됩니까?",
+          "choices": [
+            {
+              "label": "이상 확인",
+              "next": "r_gear_bad"
+            },
+            {
+              "label": "이상 없음",
+              "next": "r_path_pending"
+            }
+          ]
+        },
+        "r_gear_bad": {
+          "type": "result",
+          "title": "후진 기어/샤프트 기계고장",
+          "result": "후진 클러치 체결압은 정상이나 후진 기어/샤프트 동력경로에서 기계적 단절이 확인됩니다.",
+          "action": "확인된 기어·축·스플라인 손상부를 정비합니다."
+        },
+        "r_path_pending": {
+          "type": "result",
+          "title": "후진 내부경로 추가 정밀점검",
+          "result": "후진 클러치와 외관상 기어/샤프트에서 명확한 파손이 확인되지 않았습니다.",
+          "action": "서비스매뉴얼의 세부 분해검사 기준과 치수 기준을 추가 정규화해 다음 판정을 이어갑니다."
         }
       }
     },
