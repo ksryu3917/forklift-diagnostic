@@ -19,8 +19,10 @@ import java.util.*;
 public class MainActivity extends Activity {
     private LinearLayout body;
     private JSONObject db;
+    private JSONObject transDiag;
     private String vehicle = "D25S-7";
     private String brand = "두산";
+    private String tmVariant = "STD";
     private final ArrayList<Screen> history = new ArrayList<>();
     private SharedPreferences prefs;
     private final int PICK_PDF = 1001;
@@ -39,8 +41,11 @@ public class MainActivity extends Activity {
         super.onCreate(state);
         prefs=getSharedPreferences("forklift_diag",MODE_PRIVATE);
         vehicle=prefs.getString("vehicle","D25S-7");
+        tmVariant=prefs.getString("tm_variant","STD");
         try { db=new JSONObject(readAsset("manual_db.json")); brand=db.optString("brand","두산"); }
         catch(Exception e){ fatal("DB 로딩 오류: "+e.getMessage()); return; }
+        try { transDiag=new JSONObject(readAsset("transmission_diag_v08.json")); }
+        catch(Exception e){ transDiag=new JSONObject(); }
         show(new Screen("home"),false);
     }
 
@@ -79,7 +84,7 @@ public class MainActivity extends Activity {
             top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));
         }
         TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));
-        TextView veh=tv(brand+" · "+vehicle,13,true);veh.setTextColor(Color.WHITE);top.addView(veh);
+        TextView veh=tv(brand+" · "+vehicle+" · "+tmVariant,13,true);veh.setTextColor(Color.WHITE);top.addView(veh);
         Button home=new Button(this);home.setText("⌂");home.setTextSize(24);home.setTextColor(Color.WHITE);home.setBackgroundColor(Color.TRANSPARENT);home.setOnClickListener(v->show(new Screen("home"),false));top.addView(home,new LinearLayout.LayoutParams(dp(52),dp(50)));
         ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);
         root.addView(top);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);
@@ -100,6 +105,7 @@ public class MainActivity extends Activity {
                 case "symptom":symptom(s.a);break;
                 case "cause":cause(s.a,s.b);break;
                 case "graph":graph(s.a,s.b);break;
+                case "tm_diag":tmDiag(s.a,s.b);break;
                 case "manual":manual();break;
                 case "search":manualSearch();break;
                 case "parts":localList("부품 / 가격 DB","parts");break;
@@ -125,7 +131,22 @@ public class MainActivity extends Activity {
             public void onNothingSelected(android.widget.AdapterView<?> p){}
             public void onItemSelected(android.widget.AdapterView<?> p,View v,int pos,long id){vehicle=ms.get(pos);prefs.edit().putString("vehicle",vehicle).apply();}
         });
-        c.addView(sp);body.addView(c);
+        c.addView(sp);
+        c.addView(tv("트랜스미션 사양",13,true));
+        Spinner tvs=new Spinner(this);
+        ArrayList<String> tmo=new ArrayList<>();
+        tmo.add("기본형 (STD)"); tmo.add("ECT 옵션");
+        tvs.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,tmo));
+        tvs.setSelection("ECT".equals(tmVariant)?1:0);
+        tvs.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener(){
+            public void onNothingSelected(android.widget.AdapterView<?> p){}
+            public void onItemSelected(android.widget.AdapterView<?> p,View v,int pos,long id){
+                tmVariant=pos==1?"ECT":"STD";
+                prefs.edit().putString("tm_variant",tmVariant).apply();
+            }
+        });
+        c.addView(tvs);
+        body.addView(c);
         Button a=btn("🔧 차량 진단",true);a.setOnClickListener(v->go(new Screen("diagnosis")));body.addView(a);
         Button b=btn("📘 매뉴얼 관리 / 검색",false);b.setOnClickListener(v->go(new Screen("manual")));body.addView(b);
         Button p=btn("📦 부품 / 가격 DB",false);p.setOnClickListener(v->go(new Screen("parts")));body.addView(p);
@@ -174,6 +195,12 @@ public class MainActivity extends Activity {
 
     private void symptom(String id)throws Exception{
         JSONObject st=findSymptom(id);
+        JSONObject tgs=transDiag==null?null:transDiag.optJSONObject("graphs");
+        JSONObject tg=tgs==null?null:tgs.optJSONObject(id);
+        if(tg!=null){
+            tmDiag(id,tg.optString("start"));
+            return;
+        }
         baseScreen(st.optString("name"));
         LinearLayout c=card();
         c.addView(tv("가능한 원인",17,true));
@@ -512,6 +539,255 @@ public class MainActivity extends Activity {
     }
 
 
+
+    private void tmDiag(String sid,String nodeId)throws Exception{
+        JSONObject graphs=transDiag.getJSONObject("graphs");
+        JSONObject g=graphs.getJSONObject(sid);
+        JSONObject nodes=g.getJSONObject("nodes");
+        if("ECT".equals(tmVariant)){
+            if("SYM004".equals(sid) && "inch".equals(nodeId) && nodes.has("ect_inch")) nodeId="ect_inch";
+            if("SYM005".equals(sid) && "pressure".equals(nodeId) && nodes.has("ect_shift")) nodeId="ect_shift";
+        }
+        JSONObject n=nodes.getJSONObject(nodeId);
+        JSONObject sy=findSymptom(sid);
+        String title=n.optString("title",sy==null?"트랜스미션 진단":sy.optString("name"));
+        baseScreen(title);
+
+        LinearLayout h=card();
+        h.addView(tv(sy==null?title:sy.optString("name"),18,true));
+        String note=n.optString("note");
+        if(note.length()>0)h.addView(tv(note,13,false));
+        body.addView(h);
+
+        JSONArray cond=n.optJSONArray("conditions");
+        if(cond!=null && cond.length()>0){
+            LinearLayout cc=card(); cc.addView(tv("측정 조건",15,true)); addArray(cc,cond,"• "); body.addView(cc);
+        }
+
+        String vis=n.optString("visual");
+        if(vis.length()>0)addTmStepVisual(vis);
+
+        String type=n.optString("type");
+        if("result".equals(type)){ showTmResult(n); return; }
+        if("measure".equals(type)){ showTmMeasure(sid,nodeId,n); return; }
+
+        LinearLayout q=card(); q.addView(tv(n.optString("question"),17,true));
+        JSONArray ch=n.optJSONArray("choices");
+        if(ch!=null)for(int i=0;i<ch.length();i++){
+            JSONObject o=ch.getJSONObject(i);
+            Button b=btn(o.optString("label"),true);
+            String next=o.optString("next");
+            b.setOnClickListener(v->{ saveDiagLog("TM_V08_"+sid,nodeId,o.optString("label")); go(new Screen("tm_diag",sid,next)); });
+            q.addView(b);
+        }
+        body.addView(q);
+    }
+
+    private void showTmMeasure(String sid,String nodeId,JSONObject n){
+        LinearLayout m=card();
+        m.addView(tv(n.optString("prompt"),17,true));
+        double lo=n.optDouble("min"),hi=n.optDouble("max");
+        String unit=n.optString("unit");
+        m.addView(tv(String.format(Locale.US,"정상 범위 · %.1f ~ %.1f %s",lo,hi,unit),15,true));
+        EditText v=new EditText(this);
+        v.setInputType(android.text.InputType.TYPE_CLASS_NUMBER|android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL|android.text.InputType.TYPE_NUMBER_FLAG_SIGNED);
+        v.setHint("실측값 입력");
+        m.addView(v);
+        Button b=btn("실측값으로 판정",true);
+        b.setOnClickListener(x->{
+            try{
+                double val=Double.parseDouble(v.getText().toString().trim());
+                String next=val<lo?n.optString("next_low"):val>hi?n.optString("next_high"):n.optString("next_normal");
+                saveDiagLog("TM_V08_"+sid,nodeId,String.format(Locale.US,"%.2f %s",val,unit));
+                if(next.length()==0){toast("다음 분기 데이터가 없습니다.");return;}
+                go(new Screen("tm_diag",sid,next));
+            }catch(Exception e){toast("숫자로 입력하세요.");}
+        });
+        m.addView(b); body.addView(m);
+    }
+
+    private void showTmResult(JSONObject n){
+        LinearLayout r=card(); r.addView(tv("판정",16,true)); r.addView(tv(n.optString("result"),17,true));
+        if(n.optString("action").length()>0){ r.addView(tv("다음 점검",15,true)); r.addView(tv(n.optString("action"),14,false)); }
+        body.addView(r);
+    }
+
+    private void addTmStepVisual(String code)throws Exception{
+        LinearLayout c=card(); c.addView(tv("측정 위치 / 현재 계통",16,true));
+        Bitmap b=makeTmStepVisual(code);
+        ImageView iv=new ImageView(this); iv.setImageBitmap(b); iv.setAdjustViewBounds(true); iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        iv.setOnClickListener(v->showCircuit(b,"측정 위치"));
+        c.addView(iv,new LinearLayout.LayoutParams(-1,dp(300)));
+        if(code.startsWith("TAP")){
+            JSONObject ps=db.optJSONObject("procedures");
+            JSONObject p=ps==null?null:ps.optJSONObject("T_PRESS");
+            JSONArray pages=p==null?null:p.optJSONArray("pdf_pages");
+            if(loadFirstImage(pages)!=null){
+                Button raw=btn("실제 도면에서 위치 확인",false);
+                raw.setOnClickListener(v->showEvidence(pages,""));
+                c.addView(raw);
+            }
+        }
+        body.addView(c);
+    }
+
+    private Bitmap makeTmStepVisual(String code){
+        Bitmap b=Bitmap.createBitmap(1700,980,Bitmap.Config.ARGB_8888);
+        Canvas c=new Canvas(b); c.drawColor(Color.WHITE);
+        Paint p=new Paint(1); p.setTextAlign(Paint.Align.LEFT);
+        p.setColor(NAVY); p.setTextSize(48); p.setTypeface(Typeface.DEFAULT_BOLD);
+
+        if(code.startsWith("SOL_")){
+            String dir=code.contains("후진")?"R":code.contains("전진")?"F":"BOTH";
+            c.drawText("F/R 전기계통 · 현재 필요한 회로만",55,70,p);
+            drawElecBox(c,p,55,230,280,405,"KEY ON",false);
+            drawWire(c,p,280,318,385,318,false);
+            drawElecBox(c,p,385,205,650,430,"FWD/REV\nFUSE #3",false);
+            drawWire(c,p,650,318,755,318,false);
+            drawElecBox(c,p,755,150,1120,485,"F/R SWITCH\n공통 4↔7\nF 1↔2\nR 1↔3",true);
+            drawWire(c,p,935,485,935,590,false);
+            drawElecBox(c,p,745,590,1125,745,"OSS CONTROLLER\n방향지령 보고",false);
+            boolean hf="F".equals(dir)||"BOTH".equals(dir);
+            boolean hr="R".equals(dir)||"BOTH".equals(dir);
+            drawWire(c,p,1120,250,1260,250,hf);
+            drawElecBox(c,p,1260,145,1640,355,"F SOLENOID\n10±0.3Ω @25°C\nplunger ≈3.18 mm",hf);
+            drawWire(c,p,1120,405,1260,530,hr);
+            drawElecBox(c,p,1260,420,1640,655,"R SOLENOID\n10±0.3Ω @25°C\nplunger ≈3.18 mm",hr);
+            p.setTypeface(Typeface.DEFAULT); p.setTextSize(27); p.setColor(Color.DKGRAY);
+            c.drawText("예비시험: 엔진 OFF · KEY ON · 주차브레이크 해제 · 선택방향 솔레노이드 자화 확인",60,820,p);
+            c.drawText("스위치 전원 0V → FWD/REV 퓨즈 #3 및 전원선 확인",60,865,p);
+            c.drawText("솔레노이드 정격: 12 VDC (최대 14.5 V) · 1.2 A @25°C",60,910,p);
+            return b;
+        }
+
+        if(code.equals("TAP45")){
+            c.drawText("F/R 클러치 압력 · 두 게이지 관계",55,70,p);
+            drawPressurePort(c,p,145,210,"Tap 4","전진 클러치","F 선택","7.3~8.6 bar","R/N: 0 bar",true);
+            drawPressurePort(c,p,950,210,"Tap 5","후진 클러치","R 선택","7.3~8.6 bar","F/N: 0 bar",true);
+            p.setTypeface(Typeface.DEFAULT_BOLD);p.setTextSize(30);p.setColor(NAVY);
+            c.drawText("방향 전환 스톨/끌림에서는 두 압력을 동시에 본다",180,720,p);
+            p.setTypeface(Typeface.DEFAULT);p.setTextSize(26);p.setColor(Color.DKGRAY);
+            c.drawText("정상 예: F 선택 → Tap4 상승 / Tap5 0   ·   R 선택 → Tap5 상승 / Tap4 0",180,770,p);
+            c.drawText("반대 클러치 압력이 남으면 해제 회로부터 진단",180,815,p);
+            c.drawText("시험 오일온도 49~71°C · 표시값은 저속 공전 기준",180,865,p);
+            return b;
+        }
+
+        if(code.equals("TAP6") || code.equals("TAP1")){
+            boolean t6=code.equals("TAP6");
+            c.drawText(t6?"Tap 6 · 공통 메인압 먼저":"Tap 1 · Tap6 저압일 때만",55,70,p);
+            drawHydBox(c,p,70,245,330,430,"SUMP /\nSUCTION",false);
+            drawArrow(c,p,330,338,440,338);
+            drawHydBox(c,p,440,215,725,460,"T/M PUMP",t6);
+            drawArrow(c,p,725,338,825,338);
+            drawHydBox(c,p,825,180,1150,495,"VALVE BODY\nINCHING / MAIN",!t6);
+            drawArrow(c,p,1150,338,1260,338);
+            drawHydBox(c,p,1260,215,1600,460,"SELECTOR /\nCLUTCH",false);
+            drawTapBadge(c,p,t6?595:975,585,t6?"Tap 6":"Tap 1");
+            p.setTypeface(Typeface.DEFAULT); p.setTextSize(28); p.setColor(Color.DKGRAY);
+            if(t6){
+                c.drawText("8.3~10.3 bar @ 저속공전 · 9.0~11.0 bar @ 2000 rpm",80,760,p);
+                c.drawText("Tap6 정상 → Tap1 측정하지 않음",80,810,p);
+                c.drawText("Tap6 저압 → 그때 Tap1 비교",80,855,p);
+            }else{
+                c.drawText("Tap6 저압인 경우에만 비교점으로 사용",80,760,p);
+                c.drawText("Tap1 정상 → Tap1~Tap6 유로/인칭 구간",80,810,p);
+                c.drawText("Tap1도 저압 → 공통 공급 저압",80,855,p);
+            }
+            c.drawText("T/M 오일 49~71°C · 게이지 0~20.5 bar",80,905,p);
+            return b;
+        }
+
+        if(code.equals("TAP3") || code.equals("TAP2") || code.equals("TAP7")){
+            c.drawText("컨버터·쿨러·윤활 유로 · 현재 측정점",55,70,p);
+            drawHydBox(c,p,55,245,300,430,"PUMP /\nSUPPLY",false);
+            drawArrow(c,p,300,338,385,338);
+            drawHydBox(c,p,385,205,690,470,"TORQUE\nCONVERTER",code.equals("TAP3"));
+            drawArrow(c,p,690,338,790,338);
+            drawHydBox(c,p,790,205,1080,470,"COOLER\nINLET",code.equals("TAP2"));
+            drawArrow(c,p,1080,338,1180,338);
+            drawHydBox(c,p,1180,205,1515,470,"OIL COOLER",false);
+            drawArrow(c,p,1350,470,1350,565);
+            drawHydBox(c,p,1130,565,1580,760,"CLUTCH / SHAFT\nLUBRICATION",code.equals("TAP7"));
+            drawTapBadge(c,p,code.equals("TAP3")?535:code.equals("TAP2")?935:1350,820,code.replace("TAP","Tap "));
+            p.setTypeface(Typeface.DEFAULT);p.setTextSize(27);p.setColor(Color.DKGRAY);
+            String spec=code.equals("TAP3")?"0.7~1.4 bar idle · 5.9~8.0 bar @2000":
+                        code.equals("TAP2")?"0.3~0.6 bar idle · 2.5~4.0 bar @2000":
+                        "0.1~0.7 bar idle · 2.4~3.5 bar @2000";
+            c.drawText(spec+" · 오일 49~71°C",60,920,p);
+            return b;
+        }
+
+        if(code.equals("SUCTION")){
+            c.drawText("펌프 소음/저압 · 흡입측만 확인",55,70,p);
+            drawHydBox(c,p,90,270,390,500,"T/M OIL\nLEVEL",false);
+            drawArrow(c,p,390,385,500,385);
+            drawHydBox(c,p,500,230,900,540,"STRAINER /\nSUCTION LINE",true);
+            drawArrow(c,p,900,385,1020,385);
+            drawHydBox(c,p,1020,270,1410,500,"T/M PUMP",false);
+            p.setTypeface(Typeface.DEFAULT);p.setTextSize(29);p.setColor(Color.DKGRAY);
+            c.drawText("먼저: 레벨 → 거품 → 점도/냉간 → 스트레이너 → 흡입 누기",110,700,p);
+            c.drawText("이 구간 정상인데 소음 지속 시에만 압력/펌프 내부로 진행",110,755,p);
+            return b;
+        }
+
+        if(code.equals("STALL")){
+            c.drawText("STALL · 엔진 / 컨버터 / 클러치 분리",55,70,p);
+            drawHydBox(c,p,75,260,410,495,"ENGINE\nOUTPUT",false);
+            drawArrow(c,p,410,378,530,378);
+            drawHydBox(c,p,530,210,980,545,"TORQUE CONVERTER\nONE-WAY CLUTCH",true);
+            drawArrow(c,p,980,378,1100,378);
+            drawHydBox(c,p,1100,250,1570,505,"F/R CLUTCH /\nTRANSMISSION",false);
+            p.setTypeface(Typeface.DEFAULT);p.setTextSize(28);p.setColor(Color.DKGRAY);
+            c.drawText("낮은 stall: 엔진 성능 정상 여부 먼저 → 정상이라면 converter one-way clutch",85,700,p);
+            c.drawText("높은 stall: clutch pressure와 함께 봐서 유압 slip / 기계 slip 분리",85,755,p);
+            c.drawText("한 번의 stall은 최대 10초 · 시험 사이 1200~1500 rpm으로 냉각",85,810,p);
+            return b;
+        }
+
+        if(code.equals("ECT")){
+            c.drawText("ECT 옵션 · 전자식 변속/인칭 제어",55,70,p);
+            drawElecBox(c,p,55,190,365,390,"F/R LEVER\nSIGNAL",false);
+            drawElecBox(c,p,55,520,365,720,"INCH PEDAL\nANGLE SENSOR",false);
+            drawWire(c,p,365,290,550,380,false);
+            drawWire(c,p,365,620,550,500,false);
+            drawElecBox(c,p,550,275,980,610,"ECT CONTROLLER\n입력 → 전류제어",true);
+            drawWire(c,p,980,365,1120,290,true);
+            drawWire(c,p,980,520,1120,610,true);
+            drawElecBox(c,p,1120,175,1620,405,"F PROPORTIONAL\nVALVE",true);
+            drawElecBox(c,p,1120,500,1620,730,"R PROPORTIONAL\nVALVE",true);
+            p.setTypeface(Typeface.DEFAULT);p.setTextSize(27);p.setColor(Color.DKGRAY);
+            c.drawText("기본형 기계식 인칭/모듈레이션 밸브 진단과 혼합하지 않음",80,830,p);
+            c.drawText("방향변환 시 비례밸브를 점진 제어하여 약 1초 내외로 체결",80,875,p);
+            return b;
+        }
+
+        c.drawText("현재 단계",55,70,p);
+        drawHydBox(c,p,390,270,1310,600,code,true);
+        return b;
+    }
+
+    private void drawElecBox(Canvas c,Paint p,int l,int t,int r,int b,String text,boolean hi){
+        p.setStyle(Paint.Style.FILL);p.setColor(hi?Color.rgb(225,241,255):Color.rgb(244,247,249));c.drawRoundRect(l,t,r,b,25,25,p);
+        p.setStyle(Paint.Style.STROKE);p.setStrokeWidth(hi?8:4);p.setColor(hi?BLUE:Color.rgb(105,120,132));c.drawRoundRect(l,t,r,b,25,25,p);
+        p.setStyle(Paint.Style.FILL);p.setTypeface(Typeface.DEFAULT_BOLD);p.setTextSize(28);p.setColor(NAVY);p.setTextAlign(Paint.Align.CENTER);
+        drawCentered(c,p,text,(l+r)/2f,(t+b)/2f,r-l-24);p.setTextAlign(Paint.Align.LEFT);
+    }
+    private void drawWire(Canvas c,Paint p,float x1,float y1,float x2,float y2,boolean hi){
+        p.setStyle(Paint.Style.STROKE);p.setStrokeWidth(hi?12:5);p.setColor(hi?BLUE:Color.rgb(105,120,132));c.drawLine(x1,y1,x2,y2,p);p.setStyle(Paint.Style.FILL);
+    }
+    private void drawHydBox(Canvas c,Paint p,int l,int t,int r,int b,String text,boolean hi){
+        drawElecBox(c,p,l,t,r,b,text,hi);
+    }
+    private void drawTapBadge(Canvas c,Paint p,float cx,float cy,String text){
+        p.setStyle(Paint.Style.FILL);p.setColor(BLUE);c.drawCircle(cx,cy,67,p);
+        p.setTextAlign(Paint.Align.CENTER);p.setTypeface(Typeface.DEFAULT_BOLD);p.setTextSize(28);p.setColor(Color.WHITE);c.drawText(text,cx,cy+10,p);p.setTextAlign(Paint.Align.LEFT);
+    }
+    private void drawPressurePort(Canvas c,Paint p,int x,int y,String tap,String name,String condition,String range,String off,boolean hi){
+        drawElecBox(c,p,x,y,x+600,y+390,name+"\n"+tap+"\n"+condition+" · "+range+"\n"+off,hi);
+        drawTapBadge(c,p,x+300,y+490,tap);
+    }
+
     private void addArray(LinearLayout l,JSONArray a,String p){if(a!=null)for(int i=0;i<a.length();i++)l.addView(tv(p+a.optString(i),13,false));}
 
 
@@ -609,7 +885,7 @@ public class MainActivity extends Activity {
         baseScreen("앱 / 데이터 상태");
         JSONObject norm=db.optJSONObject("diagnostic_normalization");
         LinearLayout c=card();
-        c.addView(tv("FIELD v0.5 · 진단 구조 재설계",18,true));
+        c.addView(tv("FIELD v0.8.2 · T/M Focused Diagnostic · 진단 구조 재설계",18,true));
         c.addView(tv("증상 "+db.getJSONArray("symptoms").length()+"개",13,false));
         c.addView(tv("원인 "+norm.optInt("cause_count",268)+"개 전체 재분류",13,false));
         c.addView(tv("원인 확인 → 필요한 경우에만 계측 → 결과 판정 순서로 표시",13,false));
