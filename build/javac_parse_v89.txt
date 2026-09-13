@@ -1,0 +1,915 @@
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:15: error: cannot find symbol
+public class TestPointLocatorActivity extends Activity {
+                                              ^
+  symbol: class Activity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:16: error: cannot find symbol
+    private JSONObject data, group; private String groupId=""; private LinearLayout body; private final LinkedHashSet<String> pointFilter=new LinkedHashSet<>();
+            ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:16: error: cannot find symbol
+    private JSONObject data, group; private String groupId=""; private LinearLayout body; private final LinkedHashSet<String> pointFilter=new LinkedHashSet<>();
+                                                                       ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:17: error: package android.content does not exist
+    private android.content.SharedPreferences prefs,sessionPref; private TextView sessionSummary,branchSummary; private final LinkedHashSet<String> visiblePointIds=new LinkedHashSet<>();
+                           ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:17: error: cannot find symbol
+    private android.content.SharedPreferences prefs,sessionPref; private TextView sessionSummary,branchSummary; private final LinkedHashSet<String> visiblePointIds=new LinkedHashSet<>();
+                                                                         ^
+  symbol:   class TextView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:21: error: cannot find symbol
+    @Override public void onCreate(Bundle b){super.onCreate(b);prefs=getSharedPreferences("field_measurements_v1",MODE_PRIVATE);sessionPref=getSharedPreferences("field_measurement_session",MODE_PRIVATE);ensureSession();try{data=new JSONObject(readAsset("test_point_locator_v1.json"));resolve();if(group==null)home();else render();}catch(Exception e){fatal("????? ?? ??: "+e.getMessage());}}
+                                   ^
+  symbol:   class Bundle
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:24: error: cannot find symbol
+    private GradientDrawable bg(int c,int r){GradientDrawable g=new GradientDrawable();g.setColor(c);g.setCornerRadius(dp(r));return g;}
+            ^
+  symbol:   class GradientDrawable
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:25: error: cannot find symbol
+    private TextView tv(String s,int sp,boolean bold){TextView v=new TextView(this);v.setText(s);v.setTextSize(sp);v.setTextColor(Color.rgb(25,30,35));v.setPadding(dp(3),dp(5),dp(3),dp(5));if(bold)v.setTypeface(null,Typeface.BOLD);return v;}
+            ^
+  symbol:   class TextView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:26: error: cannot find symbol
+    private LinearLayout card(){LinearLayout c=new LinearLayout(this);c.setOrientation(LinearLayout.VERTICAL);c.setPadding(dp(14),dp(12),dp(14),dp(12));c.setBackground(bg(Color.WHITE,12));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.setMargins(0,0,0,dp(10));c.setLayoutParams(p);return c;}
+            ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:27: error: cannot find symbol
+    private Button btn(String s,boolean primary){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(13);b.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);b.setTextColor(primary?Color.WHITE:Color.rgb(25,30,35));b.setBackground(bg(primary?BLUE:Color.rgb(231,236,240),10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(50));p.setMargins(0,dp(3),0,dp(3));b.setLayoutParams(p);return b;}
+            ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:81: error: cannot find symbol
+    private void addPoint(int num,JSONObject p){
+                                  ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:97: error: cannot find symbol
+    private EditText addAutoEval(LinearLayout parent,JSONObject p,String pid,TextView statusText){
+                                 ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:97: error: cannot find symbol
+    private EditText addAutoEval(LinearLayout parent,JSONObject p,String pid,TextView statusText){
+                                                     ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:97: error: cannot find symbol
+    private EditText addAutoEval(LinearLayout parent,JSONObject p,String pid,TextView statusText){
+                                                                             ^
+  symbol:   class TextView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:97: error: cannot find symbol
+    private EditText addAutoEval(LinearLayout parent,JSONObject p,String pid,TextView statusText){
+            ^
+  symbol:   class EditText
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:115: error: cannot find symbol
+    private void evaluateAutoPoint(JSONObject p,String pid,EditText value,Spinner profileSp,Spinner unitSp,TextView result,TextView statusText,boolean multiProfile,boolean multiUnit){
+                                   ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:115: error: cannot find symbol
+    private void evaluateAutoPoint(JSONObject p,String pid,EditText value,Spinner profileSp,Spinner unitSp,TextView result,TextView statusText,boolean multiProfile,boolean multiUnit){
+                                                           ^
+  symbol:   class EditText
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:115: error: cannot find symbol
+    private void evaluateAutoPoint(JSONObject p,String pid,EditText value,Spinner profileSp,Spinner unitSp,TextView result,TextView statusText,boolean multiProfile,boolean multiUnit){
+                                                                          ^
+  symbol:   class Spinner
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:115: error: cannot find symbol
+    private void evaluateAutoPoint(JSONObject p,String pid,EditText value,Spinner profileSp,Spinner unitSp,TextView result,TextView statusText,boolean multiProfile,boolean multiUnit){
+                                                                                            ^
+  symbol:   class Spinner
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:115: error: cannot find symbol
+    private void evaluateAutoPoint(JSONObject p,String pid,EditText value,Spinner profileSp,Spinner unitSp,TextView result,TextView statusText,boolean multiProfile,boolean multiUnit){
+                                                                                                           ^
+  symbol:   class TextView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:115: error: cannot find symbol
+    private void evaluateAutoPoint(JSONObject p,String pid,EditText value,Spinner profileSp,Spinner unitSp,TextView result,TextView statusText,boolean multiProfile,boolean multiUnit){
+                                                                                                                           ^
+  symbol:   class TextView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:133: error: cannot find symbol
+    private TextWatcher saveWatcher(final String pid,final String field){return new TextWatcher(){public void beforeTextChanged(CharSequence s,int st,int c,int a){}public void onTextChanged(CharSequence s,int st,int before,int count){prefs.edit().putString(key(pid,field),s.toString()).apply();updateSessionSummary();}public void afterTextChanged(Editable e){}};}
+            ^
+  symbol:   class TextWatcher
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:134: error: cannot find symbol
+    private Button miniBtn(String s){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(11);b.setPadding(dp(2),0,dp(2),0);b.setBackground(bg(Color.rgb(231,236,240),8));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,dp(44),1);p.setMargins(dp(2),0,dp(2),0);b.setLayoutParams(p);return b;}
+            ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:135: error: cannot find symbol
+    private void refreshStatusText(TextView v,JSONObject p){String pid=p.optString("id"),st=pref(pid,"status"),src=pref(pid,"status_source");String tag="OEM_AUTO".equals(src)?" [OEM ????]":"";if("PASS".equals(st)){v.setText("? ???? ??"+tag+" ? ?? ???? ??");v.setTextColor(GREEN);}else if("FAIL".equals(st)){v.setText("? ???? ??"+tag+" ? ?? ??: "+p.optString("decision","?? ??? ??/??"));v.setTextColor(Color.rgb(180,45,45));}else if("HOLD".equals(st)){v.setText("? ?? ? ????/OEM ?? ?? ? ??");v.setTextColor(ORANGE);}else{v.setText("? ???");v.setTextColor(Color.GRAY);}}
+                                   ^
+  symbol:   class TextView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:135: error: cannot find symbol
+    private void refreshStatusText(TextView v,JSONObject p){String pid=p.optString("id"),st=pref(pid,"status"),src=pref(pid,"status_source");String tag="OEM_AUTO".equals(src)?" [OEM ????]":"";if("PASS".equals(st)){v.setText("? ???? ??"+tag+" ? ?? ???? ??");v.setTextColor(GREEN);}else if("FAIL".equals(st)){v.setText("? ???? ??"+tag+" ? ?? ??: "+p.optString("decision","?? ??? ??/??"));v.setTextColor(Color.rgb(180,45,45));}else if("HOLD".equals(st)){v.setText("? ?? ? ????/OEM ?? ?? ? ??");v.setTextColor(ORANGE);}else{v.setText("? ???");v.setTextColor(Color.GRAY);}}
+                                              ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:149: error: cannot find symbol
+    private boolean ruleMatches(JSONObject r){try{JSONObject w=r.getJSONObject("when");Iterator<String> it=w.keys();while(it.hasNext()){String id=it.next();if(!w.optString(id).equals(pref(id,"status")))return false;}return w.length()>0;}catch(Exception e){return false;}}
+                                ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:150: error: cannot find symbol
+    private JSONObject matchedAdaptiveRule(){JSONObject ab=group.optJSONObject("adaptive_branch");if(ab==null)return null;JSONArray a=ab.optJSONArray("rules");if(a==null)return null;for(int i=0;i<a.length();i++){JSONObject r=a.optJSONObject(i);if(r!=null&&ruleMatches(r))return r;}return null;}
+            ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:151: error: cannot find symbol
+    private JSONObject pointById(String id){JSONArray pts=group.optJSONArray("points");if(pts!=null)for(int i=0;i<pts.length();i++){JSONObject p=pts.optJSONObject(i);if(p!=null&&id.equals(p.optString("id")))return p;}return null;}
+            ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:152: error: cannot find symbol
+    private String nextPointText(JSONObject r){StringBuilder sb=new StringBuilder();JSONArray a=r==null?null:r.optJSONArray("next_points");if(a!=null&&a.length()>0){for(int i=0;i<a.length();i++){String id=a.optString(i);JSONObject p=pointById(id);if(i>0)sb.append("\n");sb.append("[").append(id).append("] ").append(p==null?id:p.optString("label"));}}else{JSONArray pts=group.optJSONArray("points");if(pts!=null)for(int i=0;i<pts.length();i++){JSONObject p=pts.optJSONObject(i);String id=p.optString("id");if(!visiblePointIds.contains(id))continue;if(pref(id,"status").isEmpty()){sb.append("[").append(id).append("] ").append(p.optString("label"));break;}}}return sb.toString();}
+                                 ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:166: error: cannot find symbol
+    private Bitmap drawPointMap()throws Exception{
+            ^
+  symbol:   class Bitmap
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:205: error: cannot find symbol
+    private void drawLabel(Canvas c,Paint p,String s,float x,float y){String[] a=wrap(s,18);for(int i=0;i<a.length;i++)c.drawText(a[i],x,y+i*28,p);}private String[] wrap(String s,int n){if(s.length()<=n)return new String[]{s};ArrayList<String>a=new ArrayList<>();for(int i=0;i<s.length();i+=n)a.add(s.substring(i,Math.min(s.length(),i+n)));return a.toArray(new String[0]);}
+                           ^
+  symbol:   class Canvas
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:205: error: cannot find symbol
+    private void drawLabel(Canvas c,Paint p,String s,float x,float y){String[] a=wrap(s,18);for(int i=0;i<a.length;i++)c.drawText(a[i],x,y+i*28,p);}private String[] wrap(String s,int n){if(s.length()<=n)return new String[]{s};ArrayList<String>a=new ArrayList<>();for(int i=0;i<s.length();i+=n)a.add(s.substring(i,Math.min(s.length(),i+n)));return a.toArray(new String[0]);}
+                                    ^
+  symbol:   class Paint
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:207: error: cannot find symbol
+    private void showBitmap(Bitmap bm){Dialog d=new Dialog(this);ScrollView sv=new ScrollView(this);ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);sv.addView(iv);d.setContentView(sv);d.show();if(d.getWindow()!=null)d.getWindow().setLayout(-1,-1);}
+                            ^
+  symbol:   class Bitmap
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:3: error: package android.app does not exist
+import android.app.*;
+^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:4: error: package android.os does not exist
+import android.os.*;
+^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:5: error: package android.graphics does not exist
+import android.graphics.*;
+^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:6: error: package android.graphics.drawable does not exist
+import android.graphics.drawable.*;
+^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:7: error: package android.view does not exist
+import android.view.*;
+^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:8: error: package android.widget does not exist
+import android.widget.*;
+^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:9: error: package android.text does not exist
+import android.text.*;
+^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:10: error: package org.json does not exist
+import org.json.*;
+^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:19: error: cannot find symbol
+    private final int NAVY=Color.rgb(16,38,58), BLUE=Color.rgb(17,117,214), ORANGE=Color.rgb(222,126,20), BG=Color.rgb(242,245,247), GREEN=Color.rgb(28,125,80);
+                           ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:19: error: cannot find symbol
+    private final int NAVY=Color.rgb(16,38,58), BLUE=Color.rgb(17,117,214), ORANGE=Color.rgb(222,126,20), BG=Color.rgb(242,245,247), GREEN=Color.rgb(28,125,80);
+                                                     ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:19: error: cannot find symbol
+    private final int NAVY=Color.rgb(16,38,58), BLUE=Color.rgb(17,117,214), ORANGE=Color.rgb(222,126,20), BG=Color.rgb(242,245,247), GREEN=Color.rgb(28,125,80);
+                                                                                   ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:19: error: cannot find symbol
+    private final int NAVY=Color.rgb(16,38,58), BLUE=Color.rgb(17,117,214), ORANGE=Color.rgb(222,126,20), BG=Color.rgb(242,245,247), GREEN=Color.rgb(28,125,80);
+                                                                                                             ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:19: error: cannot find symbol
+    private final int NAVY=Color.rgb(16,38,58), BLUE=Color.rgb(17,117,214), ORANGE=Color.rgb(222,126,20), BG=Color.rgb(242,245,247), GREEN=Color.rgb(28,125,80);
+                                                                                                                                           ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:21: error: method does not override or implement a method from a supertype
+    @Override public void onCreate(Bundle b){super.onCreate(b);prefs=getSharedPreferences("field_measurements_v1",MODE_PRIVATE);sessionPref=getSharedPreferences("field_measurement_session",MODE_PRIVATE);ensureSession();try{data=new JSONObject(readAsset("test_point_locator_v1.json"));resolve();if(group==null)home();else render();}catch(Exception e){fatal("????? ?? ??: "+e.getMessage());}}
+    ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:21: error: cannot find symbol
+    @Override public void onCreate(Bundle b){super.onCreate(b);prefs=getSharedPreferences("field_measurements_v1",MODE_PRIVATE);sessionPref=getSharedPreferences("field_measurement_session",MODE_PRIVATE);ensureSession();try{data=new JSONObject(readAsset("test_point_locator_v1.json"));resolve();if(group==null)home();else render();}catch(Exception e){fatal("????? ?? ??: "+e.getMessage());}}
+                                             ^
+  symbol:   variable super
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:21: error: cannot find symbol
+    @Override public void onCreate(Bundle b){super.onCreate(b);prefs=getSharedPreferences("field_measurements_v1",MODE_PRIVATE);sessionPref=getSharedPreferences("field_measurement_session",MODE_PRIVATE);ensureSession();try{data=new JSONObject(readAsset("test_point_locator_v1.json"));resolve();if(group==null)home();else render();}catch(Exception e){fatal("????? ?? ??: "+e.getMessage());}}
+                                                                                                                  ^
+  symbol:   variable MODE_PRIVATE
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:21: error: cannot find symbol
+    @Override public void onCreate(Bundle b){super.onCreate(b);prefs=getSharedPreferences("field_measurements_v1",MODE_PRIVATE);sessionPref=getSharedPreferences("field_measurement_session",MODE_PRIVATE);ensureSession();try{data=new JSONObject(readAsset("test_point_locator_v1.json"));resolve();if(group==null)home();else render();}catch(Exception e){fatal("????? ?? ??: "+e.getMessage());}}
+                                                                                                                                                                                             ^
+  symbol:   variable MODE_PRIVATE
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:21: error: cannot find symbol
+    @Override public void onCreate(Bundle b){super.onCreate(b);prefs=getSharedPreferences("field_measurements_v1",MODE_PRIVATE);sessionPref=getSharedPreferences("field_measurement_session",MODE_PRIVATE);ensureSession();try{data=new JSONObject(readAsset("test_point_locator_v1.json"));resolve();if(group==null)home();else render();}catch(Exception e){fatal("????? ?? ??: "+e.getMessage());}}
+                                                                                                                                                                                                                                        ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:22: error: cannot find symbol
+    private String readAsset(String n)throws Exception{InputStream is=getAssets().open(n);ByteArrayOutputStream os=new ByteArrayOutputStream();byte[] b=new byte[8192];int r;while((r=is.read(b))>0)os.write(b,0,r);is.close();return os.toString(StandardCharsets.UTF_8.name());}
+                                                                      ^
+  symbol:   method getAssets()
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:23: error: cannot find symbol
+    private int dp(int n){return (int)(n*getResources().getDisplayMetrics().density+0.5f);} 
+                                         ^
+  symbol:   method getResources()
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:24: error: cannot find symbol
+    private GradientDrawable bg(int c,int r){GradientDrawable g=new GradientDrawable();g.setColor(c);g.setCornerRadius(dp(r));return g;}
+                                             ^
+  symbol:   class GradientDrawable
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:24: error: cannot find symbol
+    private GradientDrawable bg(int c,int r){GradientDrawable g=new GradientDrawable();g.setColor(c);g.setCornerRadius(dp(r));return g;}
+                                                                    ^
+  symbol:   class GradientDrawable
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:25: error: cannot find symbol
+    private TextView tv(String s,int sp,boolean bold){TextView v=new TextView(this);v.setText(s);v.setTextSize(sp);v.setTextColor(Color.rgb(25,30,35));v.setPadding(dp(3),dp(5),dp(3),dp(5));if(bold)v.setTypeface(null,Typeface.BOLD);return v;}
+                                                      ^
+  symbol:   class TextView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:25: error: cannot find symbol
+    private TextView tv(String s,int sp,boolean bold){TextView v=new TextView(this);v.setText(s);v.setTextSize(sp);v.setTextColor(Color.rgb(25,30,35));v.setPadding(dp(3),dp(5),dp(3),dp(5));if(bold)v.setTypeface(null,Typeface.BOLD);return v;}
+                                                                     ^
+  symbol:   class TextView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:25: error: cannot find symbol
+    private TextView tv(String s,int sp,boolean bold){TextView v=new TextView(this);v.setText(s);v.setTextSize(sp);v.setTextColor(Color.rgb(25,30,35));v.setPadding(dp(3),dp(5),dp(3),dp(5));if(bold)v.setTypeface(null,Typeface.BOLD);return v;}
+                                                                                                                                  ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:25: error: cannot find symbol
+    private TextView tv(String s,int sp,boolean bold){TextView v=new TextView(this);v.setText(s);v.setTextSize(sp);v.setTextColor(Color.rgb(25,30,35));v.setPadding(dp(3),dp(5),dp(3),dp(5));if(bold)v.setTypeface(null,Typeface.BOLD);return v;}
+                                                                                                                                                                                                                        ^
+  symbol:   variable Typeface
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:26: error: cannot find symbol
+    private LinearLayout card(){LinearLayout c=new LinearLayout(this);c.setOrientation(LinearLayout.VERTICAL);c.setPadding(dp(14),dp(12),dp(14),dp(12));c.setBackground(bg(Color.WHITE,12));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.setMargins(0,0,0,dp(10));c.setLayoutParams(p);return c;}
+                                ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:26: error: cannot find symbol
+    private LinearLayout card(){LinearLayout c=new LinearLayout(this);c.setOrientation(LinearLayout.VERTICAL);c.setPadding(dp(14),dp(12),dp(14),dp(12));c.setBackground(bg(Color.WHITE,12));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.setMargins(0,0,0,dp(10));c.setLayoutParams(p);return c;}
+                                                   ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:26: error: cannot find symbol
+    private LinearLayout card(){LinearLayout c=new LinearLayout(this);c.setOrientation(LinearLayout.VERTICAL);c.setPadding(dp(14),dp(12),dp(14),dp(12));c.setBackground(bg(Color.WHITE,12));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.setMargins(0,0,0,dp(10));c.setLayoutParams(p);return c;}
+                                                                                       ^
+  symbol:   variable LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:26: error: cannot find symbol
+    private LinearLayout card(){LinearLayout c=new LinearLayout(this);c.setOrientation(LinearLayout.VERTICAL);c.setPadding(dp(14),dp(12),dp(14),dp(12));c.setBackground(bg(Color.WHITE,12));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.setMargins(0,0,0,dp(10));c.setLayoutParams(p);return c;}
+                                                                                                                                                                           ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:26: error: package LinearLayout does not exist
+    private LinearLayout card(){LinearLayout c=new LinearLayout(this);c.setOrientation(LinearLayout.VERTICAL);c.setPadding(dp(14),dp(12),dp(14),dp(12));c.setBackground(bg(Color.WHITE,12));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.setMargins(0,0,0,dp(10));c.setLayoutParams(p);return c;}
+                                                                                                                                                                                                        ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:26: error: package LinearLayout does not exist
+    private LinearLayout card(){LinearLayout c=new LinearLayout(this);c.setOrientation(LinearLayout.VERTICAL);c.setPadding(dp(14),dp(12),dp(14),dp(12));c.setBackground(bg(Color.WHITE,12));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.setMargins(0,0,0,dp(10));c.setLayoutParams(p);return c;}
+                                                                                                                                                                                                                                        ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:27: error: cannot find symbol
+    private Button btn(String s,boolean primary){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(13);b.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);b.setTextColor(primary?Color.WHITE:Color.rgb(25,30,35));b.setBackground(bg(primary?BLUE:Color.rgb(231,236,240),10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(50));p.setMargins(0,dp(3),0,dp(3));b.setLayoutParams(p);return b;}
+                                                 ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:27: error: cannot find symbol
+    private Button btn(String s,boolean primary){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(13);b.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);b.setTextColor(primary?Color.WHITE:Color.rgb(25,30,35));b.setBackground(bg(primary?BLUE:Color.rgb(231,236,240),10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(50));p.setMargins(0,dp(3),0,dp(3));b.setLayoutParams(p);return b;}
+                                                              ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:27: error: cannot find symbol
+    private Button btn(String s,boolean primary){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(13);b.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);b.setTextColor(primary?Color.WHITE:Color.rgb(25,30,35));b.setBackground(bg(primary?BLUE:Color.rgb(231,236,240),10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(50));p.setMargins(0,dp(3),0,dp(3));b.setLayoutParams(p);return b;}
+                                                                                                                                           ^
+  symbol:   variable Gravity
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:27: error: cannot find symbol
+    private Button btn(String s,boolean primary){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(13);b.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);b.setTextColor(primary?Color.WHITE:Color.rgb(25,30,35));b.setBackground(bg(primary?BLUE:Color.rgb(231,236,240),10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(50));p.setMargins(0,dp(3),0,dp(3));b.setLayoutParams(p);return b;}
+                                                                                                                                                        ^
+  symbol:   variable Gravity
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:27: error: cannot find symbol
+    private Button btn(String s,boolean primary){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(13);b.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);b.setTextColor(primary?Color.WHITE:Color.rgb(25,30,35));b.setBackground(bg(primary?BLUE:Color.rgb(231,236,240),10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(50));p.setMargins(0,dp(3),0,dp(3));b.setLayoutParams(p);return b;}
+                                                                                                                                                                                                        ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:27: error: cannot find symbol
+    private Button btn(String s,boolean primary){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(13);b.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);b.setTextColor(primary?Color.WHITE:Color.rgb(25,30,35));b.setBackground(bg(primary?BLUE:Color.rgb(231,236,240),10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(50));p.setMargins(0,dp(3),0,dp(3));b.setLayoutParams(p);return b;}
+                                                                                                                                                                                                                    ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:27: error: cannot find symbol
+    private Button btn(String s,boolean primary){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(13);b.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);b.setTextColor(primary?Color.WHITE:Color.rgb(25,30,35));b.setBackground(bg(primary?BLUE:Color.rgb(231,236,240),10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(50));p.setMargins(0,dp(3),0,dp(3));b.setLayoutParams(p);return b;}
+                                                                                                                                                                                                                                                                         ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:27: error: package LinearLayout does not exist
+    private Button btn(String s,boolean primary){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(13);b.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);b.setTextColor(primary?Color.WHITE:Color.rgb(25,30,35));b.setBackground(bg(primary?BLUE:Color.rgb(231,236,240),10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(50));p.setMargins(0,dp(3),0,dp(3));b.setLayoutParams(p);return b;}
+                                                                                                                                                                                                                                                                                                                 ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:27: error: package LinearLayout does not exist
+    private Button btn(String s,boolean primary){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(13);b.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);b.setTextColor(primary?Color.WHITE:Color.rgb(25,30,35));b.setBackground(bg(primary?BLUE:Color.rgb(231,236,240),10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(50));p.setMargins(0,dp(3),0,dp(3));b.setLayoutParams(p);return b;}
+                                                                                                                                                                                                                                                                                                                                                 ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:30: error: cannot find symbol
+        String id=getIntent().getStringExtra("group_id");
+                  ^
+  symbol:   method getIntent()
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:31: error: cannot find symbol
+        String cid=getIntent().getStringExtra("cause_id");
+                   ^
+  symbol:   method getIntent()
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:33: error: cannot find symbol
+            JSONObject cm=data.optJSONObject("cause_map");
+            ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:34: error: cannot find symbol
+            JSONObject m=cm==null?null:cm.optJSONObject(cid);
+            ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:35: error: cannot find symbol
+            if(m!=null){id=m.optString("group");JSONArray a=m.optJSONArray("point_ids");if(a!=null)for(int i=0;i<a.length();i++)pointFilter.add(a.optString(i));}
+                                                ^
+  symbol:   class JSONArray
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:38: error: cannot find symbol
+            String gid=getIntent().getStringExtra("graph_id");
+                       ^
+  symbol:   method getIntent()
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:42: error: cannot find symbol
+            String sys=getIntent().getStringExtra("system");
+                       ^
+  symbol:   method getIntent()
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                    ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                          ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                 ^
+  symbol:   variable LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                    ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                         ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                           ^
+  symbol:   variable Gravity
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                         ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                         ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                                                                                               ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                                                                                                                                    ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
+  symbol:   method finish()
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: package LinearLayout does not exist
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ^
+  symbol:   class TextView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: package LinearLayout does not exist
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ^
+  symbol:   class ScrollView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^
+  symbol:   class ScrollView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: cannot find symbol
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
+  symbol:   variable LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:47: error: package LinearLayout does not exist
+    private void base(String title){LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(dp(8),dp(7),dp(8),dp(7));top.setBackgroundColor(NAVY);Button back=new Button(this);back.setText("?");back.setTextSize(28);back.setTextColor(Color.WHITE);back.setBackgroundColor(Color.TRANSPARENT);back.setOnClickListener(v->finish());top.addView(back,new LinearLayout.LayoutParams(dp(48),dp(50)));TextView t=tv(title,18,true);t.setTextColor(Color.WHITE);top.addView(t,new LinearLayout.LayoutParams(0,dp(50),1));root.addView(top);ScrollView sv=new ScrollView(this);body=new LinearLayout(this);body.setOrientation(LinearLayout.VERTICAL);body.setPadding(dp(10),dp(10),dp(10),dp(30));sv.addView(body);root.addView(sv,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:49: error: cannot find symbol
+    private void home()throws Exception{base("????? / ???");LinearLayout i=card();i.addView(tv("?????? ?? ? ??? ???/???? ???",17,true));i.addView(tv(data.optString("rule"),12,false));body.addView(i);JSONObject gs=data.getJSONObject("groups");Iterator<String> it=gs.keys();while(it.hasNext()){String id=it.next();JSONObject g=gs.getJSONObject(id);Button b=btn(g.optString("title"),false);b.setOnClickListener(v->{android.content.Intent x=getIntent();x.putExtra("group_id",id);x.removeExtra("graph_id");x.removeExtra("system");recreate();});body.addView(b);}}
+                                                            ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:49: error: cannot find symbol
+    private void home()throws Exception{base("????? / ???");LinearLayout i=card();i.addView(tv("?????? ?? ? ??? ???/???? ???",17,true));i.addView(tv(data.optString("rule"),12,false));body.addView(i);JSONObject gs=data.getJSONObject("groups");Iterator<String> it=gs.keys();while(it.hasNext()){String id=it.next();JSONObject g=gs.getJSONObject(id);Button b=btn(g.optString("title"),false);b.setOnClickListener(v->{android.content.Intent x=getIntent();x.putExtra("group_id",id);x.removeExtra("graph_id");x.removeExtra("system");recreate();});body.addView(b);}}
+                                                                                                                                                                                                       ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:49: error: cannot find symbol
+    private void home()throws Exception{base("????? / ???");LinearLayout i=card();i.addView(tv("?????? ?? ? ??? ???/???? ???",17,true));i.addView(tv(data.optString("rule"),12,false));body.addView(i);JSONObject gs=data.getJSONObject("groups");Iterator<String> it=gs.keys();while(it.hasNext()){String id=it.next();JSONObject g=gs.getJSONObject(id);Button b=btn(g.optString("title"),false);b.setOnClickListener(v->{android.content.Intent x=getIntent();x.putExtra("group_id",id);x.removeExtra("graph_id");x.removeExtra("system");recreate();});body.addView(b);}}
+                                                                                                                                                                                                                                                                                                                        ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:49: error: cannot find symbol
+    private void home()throws Exception{base("????? / ???");LinearLayout i=card();i.addView(tv("?????? ?? ? ??? ???/???? ???",17,true));i.addView(tv(data.optString("rule"),12,false));body.addView(i);JSONObject gs=data.getJSONObject("groups");Iterator<String> it=gs.keys();while(it.hasNext()){String id=it.next();JSONObject g=gs.getJSONObject(id);Button b=btn(g.optString("title"),false);b.setOnClickListener(v->{android.content.Intent x=getIntent();x.putExtra("group_id",id);x.removeExtra("graph_id");x.removeExtra("system");recreate();});body.addView(b);}}
+                                                                                                                                                                                                                                                                                                                                                          ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:49: error: package android.content does not exist
+    private void home()throws Exception{base("????? / ???");LinearLayout i=card();i.addView(tv("?????? ?? ? ??? ???/???? ???",17,true));i.addView(tv(data.optString("rule"),12,false));body.addView(i);JSONObject gs=data.getJSONObject("groups");Iterator<String> it=gs.keys();while(it.hasNext()){String id=it.next();JSONObject g=gs.getJSONObject(id);Button b=btn(g.optString("title"),false);b.setOnClickListener(v->{android.content.Intent x=getIntent();x.putExtra("group_id",id);x.removeExtra("graph_id");x.removeExtra("system");recreate();});body.addView(b);}}
+                                                                                                                                                                                                                                                                                                                                                                                                                                           ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:49: error: cannot find symbol
+    private void home()throws Exception{base("????? / ???");LinearLayout i=card();i.addView(tv("?????? ?? ? ??? ???/???? ???",17,true));i.addView(tv(data.optString("rule"),12,false));body.addView(i);JSONObject gs=data.getJSONObject("groups");Iterator<String> it=gs.keys();while(it.hasNext()){String id=it.next();JSONObject g=gs.getJSONObject(id);Button b=btn(g.optString("title"),false);b.setOnClickListener(v->{android.content.Intent x=getIntent();x.putExtra("group_id",id);x.removeExtra("graph_id");x.removeExtra("system");recreate();});body.addView(b);}}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^
+  symbol:   method getIntent()
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:49: error: cannot find symbol
+    private void home()throws Exception{base("????? / ???");LinearLayout i=card();i.addView(tv("?????? ?? ? ??? ???/???? ???",17,true));i.addView(tv(data.optString("rule"),12,false));body.addView(i);JSONObject gs=data.getJSONObject("groups");Iterator<String> it=gs.keys();while(it.hasNext()){String id=it.next();JSONObject g=gs.getJSONObject(id);Button b=btn(g.optString("title"),false);b.setOnClickListener(v->{android.content.Intent x=getIntent();x.putExtra("group_id",id);x.removeExtra("graph_id");x.removeExtra("system");recreate();});body.addView(b);}}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ^
+  symbol:   method recreate()
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:53: error: cannot find symbol
+        LinearLayout intro=card();intro.addView(tv(group.optString("title"),18,true));intro.addView(tv(group.optString("summary"),13,false));intro.addView(tv("?? ?? ? OEM exact / ?? ?? / OEM VERIFY? ?? ??",11,true));if(!pointFilter.isEmpty())intro.addView(tv("?? ?? ?? ???? ?? ? "+pointFilter.size()+"?",12,true));body.addView(intro);
+        ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:54: error: cannot find symbol
+        visiblePointIds.clear();JSONArray allPtsForSession=group.getJSONArray("points");for(int i=0;i<allPtsForSession.length();i++){JSONObject x=allPtsForSession.getJSONObject(i);if(pointFilter.isEmpty()||pointFilter.contains(x.optString("id")))visiblePointIds.add(x.optString("id"));}
+                                ^
+  symbol:   class JSONArray
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:54: error: cannot find symbol
+        visiblePointIds.clear();JSONArray allPtsForSession=group.getJSONArray("points");for(int i=0;i<allPtsForSession.length();i++){JSONObject x=allPtsForSession.getJSONObject(i);if(pointFilter.isEmpty()||pointFilter.contains(x.optString("id")))visiblePointIds.add(x.optString("id"));}
+                                                                                                                                     ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:58: error: cannot find symbol
+        Button loc=btn("??".equals(group.optString("system"))?"? D24 ??/?? ?? ?? ??":"? ???? ? ?? ?? ?? ??",true);
+        ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:14: error: cannot find symbol
+public class EngineSensorMapActivity extends Activity {
+                                             ^
+  symbol: class Activity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:15: error: cannot find symbol
+    private JSONObject data; private LinearLayout body; private final LinkedHashSet<String> focus=new LinkedHashSet<>();
+            ^
+  symbol:   class JSONObject
+  location: class EngineSensorMapActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:15: error: cannot find symbol
+    private JSONObject data; private LinearLayout body; private final LinkedHashSet<String> focus=new LinkedHashSet<>();
+                                     ^
+  symbol:   class LinearLayout
+  location: class EngineSensorMapActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:17: error: cannot find symbol
+    @Override public void onCreate(Bundle b){super.onCreate(b);try{data=new JSONObject(readAsset("engine_sensor_map_d24_v1.json"));String f=getIntent().getStringExtra("focus_ids");if(f!=null)for(String x:f.split(","))if(!x.trim().isEmpty())focus.add(x.trim());render();}catch(Exception e){TextView t=new TextView(this);t.setText("?? ??? ??: "+e);setContentView(t);}}
+                                   ^
+  symbol:   class Bundle
+  location: class EngineSensorMapActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:19: error: cannot find symbol
+    private int dp(int n){return (int)(n*getResources().getDisplayMetrics().density+0.5f);} private GradientDrawable bg(int c,int r){GradientDrawable g=new GradientDrawable();g.setColor(c);g.setCornerRadius(dp(r));return g;}
+                                                                                                    ^
+  symbol:   class GradientDrawable
+  location: class EngineSensorMapActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:20: error: cannot find symbol
+    private TextView tv(String s,int sp,boolean bold){TextView v=new TextView(this);v.setText(s);v.setTextSize(sp);v.setTextColor(Color.rgb(25,30,35));v.setPadding(dp(3),dp(5),dp(3),dp(5));if(bold)v.setTypeface(null,Typeface.BOLD);return v;}
+            ^
+  symbol:   class TextView
+  location: class EngineSensorMapActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:21: error: cannot find symbol
+    private LinearLayout card(){LinearLayout c=new LinearLayout(this);c.setOrientation(LinearLayout.VERTICAL);c.setPadding(dp(14),dp(12),dp(14),dp(12));c.setBackground(bg(Color.WHITE,12));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.setMargins(0,0,0,dp(10));c.setLayoutParams(p);return c;}
+            ^
+  symbol:   class LinearLayout
+  location: class EngineSensorMapActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:22: error: cannot find symbol
+    private Button btn(String s){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(13);b.setTextColor(Color.rgb(25,30,35));b.setBackground(bg(Color.rgb(231,236,240),10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(48));p.setMargins(0,dp(3),0,dp(3));b.setLayoutParams(p);return b;}
+            ^
+  symbol:   class Button
+  location: class EngineSensorMapActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:34: error: cannot find symbol
+    private Bitmap drawIso()throws Exception{
+            ^
+  symbol:   class Bitmap
+  location: class EngineSensorMapActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:45: error: cannot find symbol
+    private String shortNames(List<JSONObject> ss){StringBuilder x=new StringBuilder();for(int i=0;i<ss.size();i++){if(i>0)x.append("/");x.append(ss.get(i).optString("id"));}return x.toString();}
+                                   ^
+  symbol:   class JSONObject
+  location: class EngineSensorMapActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:46: error: cannot find symbol
+    private void drawLines(Canvas c,Paint p,String s,float x,float y){String[] a=s.split("\\n");for(int i=0;i<a.length;i++)c.drawText(a[i],x,y+i*28,p);}
+                           ^
+  symbol:   class Canvas
+  location: class EngineSensorMapActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:46: error: cannot find symbol
+    private void drawLines(Canvas c,Paint p,String s,float x,float y){String[] a=s.split("\\n");for(int i=0;i<a.length;i++)c.drawText(a[i],x,y+i*28,p);}
+                                    ^
+  symbol:   class Paint
+  location: class EngineSensorMapActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:49: error: cannot find symbol
+    private void showSensor(JSONObject s){Dialog d=new Dialog(this);ScrollView sv=new ScrollView(this);LinearLayout c=new LinearLayout(this);c.setOrientation(LinearLayout.VERTICAL);c.setPadding(dp(18),dp(18),dp(18),dp(22));c.addView(tv((s.isNull("callout")?"":"OEM #"+s.optInt("callout")+" ? ")+s.optString("kr"),19,true));c.addView(tv(s.optString("name"),13,false));c.addView(tv("?? ? "+s.optString("location"),15,true));c.addView(tv("?/?? ? "+s.optString("pins"),13,false));c.addView(tv("?? ? "+s.optString("oem_ref"),12,false));
+                            ^
+  symbol:   class JSONObject
+  location: class EngineSensorMapActivity
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:3: error: package android.app does not exist
+import android.app.*;
+^
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:4: error: package android.os does not exist
+import android.os.*;
+^
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:5: error: package android.graphics does not exist
+import android.graphics.*;
+^
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:6: error: package android.graphics.drawable does not exist
+import android.graphics.drawable.*;
+^
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:7: error: package android.view does not exist
+import android.view.*;
+^
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:8: error: package android.widget does not exist
+import android.widget.*;
+^
+./com/ryu/forkliftdiagnostic/EngineSensorMapActivity.java:9: error: package org.json does not exist
+import org.json.*;
+^
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:14: error: cannot find symbol
+public class FieldLocationMapActivity extends Activity {
+                                              ^
+  symbol: class Activity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:15: error: cannot find symbol
+    private JSONObject data; private LinearLayout body; private final LinkedHashSet<String> focus=new LinkedHashSet<>();
+            ^
+  symbol:   class JSONObject
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:15: error: cannot find symbol
+    private JSONObject data; private LinearLayout body; private final LinkedHashSet<String> focus=new LinkedHashSet<>();
+                                     ^
+  symbol:   class LinearLayout
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:18: error: cannot find symbol
+    @Override public void onCreate(Bundle b){super.onCreate(b);try{
+                                   ^
+  symbol:   class Bundle
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:25: error: cannot find symbol
+    private GradientDrawable bg(int c,int r){GradientDrawable g=new GradientDrawable();g.setColor(c);g.setCornerRadius(dp(r));return g;}
+            ^
+  symbol:   class GradientDrawable
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:26: error: cannot find symbol
+    private TextView tv(String s,int sp,boolean bold){TextView v=new TextView(this);v.setText(s);v.setTextSize(sp);v.setTextColor(Color.rgb(25,30,35));v.setPadding(dp(3),dp(5),dp(3),dp(5));if(bold)v.setTypeface(null,Typeface.BOLD);return v;}
+            ^
+  symbol:   class TextView
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:27: error: cannot find symbol
+    private LinearLayout card(){LinearLayout c=new LinearLayout(this);c.setOrientation(LinearLayout.VERTICAL);c.setPadding(dp(14),dp(12),dp(14),dp(12));c.setBackground(bg(Color.WHITE,12));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.setMargins(0,0,0,dp(10));c.setLayoutParams(p);return c;}
+            ^
+  symbol:   class LinearLayout
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:28: error: cannot find symbol
+    private Button btn(String s){Button b=new Button(this);b.setText(s);b.setAllCaps(false);b.setTextSize(13);b.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);b.setTextColor(Color.rgb(25,30,35));b.setBackground(bg(Color.rgb(231,236,240),10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(50));p.setMargins(0,dp(3),0,dp(3));b.setLayoutParams(p);return b;}
+            ^
+  symbol:   class Button
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:38: error: cannot find symbol
+    private void addIds(JSONArray a){if(a==null)return;for(int i=0;i<a.length();i++)focus.add(a.optString(i));}
+                        ^
+  symbol:   class JSONArray
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:63: error: cannot find symbol
+    private void addZoneCard(String id,JSONObject z,boolean primary){
+                                       ^
+  symbol:   class JSONObject
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:73: error: cannot find symbol
+    private Bitmap drawTruck()throws Exception{
+            ^
+  symbol:   class Bitmap
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:94: error: cannot find symbol
+    private void drawLabel(Canvas c,Paint p,String s,float x,float y){String[] a=wrap(s,15);for(int i=0;i<a.length;i++)c.drawText(a[i],x,y+i*27,p);}
+                           ^
+  symbol:   class Canvas
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:94: error: cannot find symbol
+    private void drawLabel(Canvas c,Paint p,String s,float x,float y){String[] a=wrap(s,15);for(int i=0;i<a.length;i++)c.drawText(a[i],x,y+i*27,p);}
+                                    ^
+  symbol:   class Paint
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:100: error: cannot find symbol
+    private void showBitmap(Bitmap bm){Dialog d=new Dialog(this);ScrollView sv=new ScrollView(this);ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);sv.addView(iv);d.setContentView(sv);d.show();if(d.getWindow()!=null)d.getWindow().setLayout(-1,-1);}
+                            ^
+  symbol:   class Bitmap
+  location: class FieldLocationMapActivity
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:3: error: package android.app does not exist
+import android.app.*;
+^
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:4: error: package android.os does not exist
+import android.os.*;
+^
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:5: error: package android.graphics does not exist
+import android.graphics.*;
+^
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:6: error: package android.graphics.drawable does not exist
+import android.graphics.drawable.*;
+^
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:7: error: package android.view does not exist
+import android.view.*;
+^
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:8: error: package android.widget does not exist
+import android.widget.*;
+^
+./com/ryu/forkliftdiagnostic/FieldLocationMapActivity.java:9: error: package org.json does not exist
+import org.json.*;
+^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:61: error: package android.content does not exist
+                android.content.Intent it=new android.content.Intent(this,EngineSensorMapActivity.class);
+                               ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:61: error: package android.content does not exist
+                android.content.Intent it=new android.content.Intent(this,EngineSensorMapActivity.class);
+                                                             ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:62: error: cannot find symbol
+                JSONArray a=group.optJSONArray("sensor_focus_ids");StringBuilder s=new StringBuilder();if(a!=null)for(int k=0;k<a.length();k++){if(k>0)s.append(",");s.append(a.optString(k));}
+                ^
+  symbol:   class JSONArray
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:65: error: package android.content does not exist
+                android.content.Intent it=new android.content.Intent(this,FieldLocationMapActivity.class);JSONArray a=group.optJSONArray("focus_ids");StringBuilder s=new StringBuilder();if(a!=null)for(int k=0;k<a.length();k++){if(k>0)s.append(",");s.append(a.optString(k));}it.putExtra("focus_ids",s.toString());startActivity(it);
+                               ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:65: error: package android.content does not exist
+                android.content.Intent it=new android.content.Intent(this,FieldLocationMapActivity.class);JSONArray a=group.optJSONArray("focus_ids");StringBuilder s=new StringBuilder();if(a!=null)for(int k=0;k<a.length();k++){if(k>0)s.append(",");s.append(a.optString(k));}it.putExtra("focus_ids",s.toString());startActivity(it);
+                                                             ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:65: error: cannot find symbol
+                android.content.Intent it=new android.content.Intent(this,FieldLocationMapActivity.class);JSONArray a=group.optJSONArray("focus_ids");StringBuilder s=new StringBuilder();if(a!=null)for(int k=0;k<a.length();k++){if(k>0)s.append(",");s.append(a.optString(k));}it.putExtra("focus_ids",s.toString());startActivity(it);
+                                                                                                          ^
+  symbol:   class JSONArray
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:69: error: cannot find symbol
+        Bitmap bm=drawPointMap();LinearLayout mc=card();mc.addView(tv("???? ??? ????",16,true));mc.addView(tv(group.optString("diagram_note"),11,false));ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);iv.setOnClickListener(v->showBitmap(bm));mc.addView(iv,new LinearLayout.LayoutParams(-1,dp(360)));mc.addView(tv("? ??=OEM exact/????  ? ??=?? ?????  ? ??=OEM ???? ??",11,true));body.addView(mc);
+        ^
+  symbol:   class Bitmap
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:69: error: cannot find symbol
+        Bitmap bm=drawPointMap();LinearLayout mc=card();mc.addView(tv("???? ??? ????",16,true));mc.addView(tv(group.optString("diagram_note"),11,false));ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);iv.setOnClickListener(v->showBitmap(bm));mc.addView(iv,new LinearLayout.LayoutParams(-1,dp(360)));mc.addView(tv("? ??=OEM exact/????  ? ??=?? ?????  ? ??=OEM ???? ??",11,true));body.addView(mc);
+                                 ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:69: error: cannot find symbol
+        Bitmap bm=drawPointMap();LinearLayout mc=card();mc.addView(tv("???? ??? ????",16,true));mc.addView(tv(group.optString("diagram_note"),11,false));ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);iv.setOnClickListener(v->showBitmap(bm));mc.addView(iv,new LinearLayout.LayoutParams(-1,dp(360)));mc.addView(tv("? ??=OEM exact/????  ? ??=?? ?????  ? ??=OEM ???? ??",11,true));body.addView(mc);
+                                                                                                                                                         ^
+  symbol:   class ImageView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:69: error: cannot find symbol
+        Bitmap bm=drawPointMap();LinearLayout mc=card();mc.addView(tv("???? ??? ????",16,true));mc.addView(tv(group.optString("diagram_note"),11,false));ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);iv.setOnClickListener(v->showBitmap(bm));mc.addView(iv,new LinearLayout.LayoutParams(-1,dp(360)));mc.addView(tv("? ??=OEM exact/????  ? ??=?? ?????  ? ??=OEM ???? ??",11,true));body.addView(mc);
+                                                                                                                                                                          ^
+  symbol:   class ImageView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:69: error: package ImageView does not exist
+        Bitmap bm=drawPointMap();LinearLayout mc=card();mc.addView(tv("???? ??? ????",16,true));mc.addView(tv(group.optString("diagram_note"),11,false));ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);iv.setOnClickListener(v->showBitmap(bm));mc.addView(iv,new LinearLayout.LayoutParams(-1,dp(360)));mc.addView(tv("? ??=OEM exact/????  ? ??=?? ?????  ? ??=OEM ???? ??",11,true));body.addView(mc);
+                                                                                                                                                                                                                                                                      ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:69: error: package LinearLayout does not exist
+        Bitmap bm=drawPointMap();LinearLayout mc=card();mc.addView(tv("???? ??? ????",16,true));mc.addView(tv(group.optString("diagram_note"),11,false));ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);iv.setOnClickListener(v->showBitmap(bm));mc.addView(iv,new LinearLayout.LayoutParams(-1,dp(360)));mc.addView(tv("? ??=OEM exact/????  ? ??=?? ?????  ? ??=OEM ???? ??",11,true));body.addView(mc);
+                                                                                                                                                                                                                                                                                                                                                                    ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:71: error: cannot find symbol
+        JSONArray cond=group.optJSONArray("conditions");if(cond!=null){LinearLayout c=card();c.addView(tv("?? ? ??",16,true));for(int i=0;i<cond.length();i++)c.addView(tv("? "+cond.optString(i),13,false));body.addView(c);}
+        ^
+  symbol:   class JSONArray
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:71: error: cannot find symbol
+        JSONArray cond=group.optJSONArray("conditions");if(cond!=null){LinearLayout c=card();c.addView(tv("?? ? ??",16,true));for(int i=0;i<cond.length();i++)c.addView(tv("? "+cond.optString(i),13,false));body.addView(c);}
+                                                                       ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:72: error: cannot find symbol
+        JSONArray tools=group.optJSONArray("tools");if(tools!=null){LinearLayout c=card();c.addView(tv("??",15,true));for(int i=0;i<tools.length();i++)c.addView(tv("? "+tools.optString(i),13,false));body.addView(c);}
+        ^
+  symbol:   class JSONArray
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:72: error: cannot find symbol
+        JSONArray tools=group.optJSONArray("tools");if(tools!=null){LinearLayout c=card();c.addView(tv("??",15,true));for(int i=0;i<tools.length();i++)c.addView(tv("? "+tools.optString(i),13,false));body.addView(c);}
+                                                                    ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:74: error: cannot find symbol
+        body.addView(tv("?? ?? / ?? ??",17,true));JSONArray pts=group.getJSONArray("points");int shown=0;for(int i=0;i<pts.length();i++){JSONObject x=pts.getJSONObject(i);if(!pointFilter.isEmpty()&&!pointFilter.contains(x.optString("id")))continue;addPoint(++shown,x);}
+                                                  ^
+  symbol:   class JSONArray
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:74: error: cannot find symbol
+        body.addView(tv("?? ?? / ?? ??",17,true));JSONArray pts=group.getJSONArray("points");int shown=0;for(int i=0;i<pts.length();i++){JSONObject x=pts.getJSONObject(i);if(!pointFilter.isEmpty()&&!pointFilter.contains(x.optString("id")))continue;addPoint(++shown,x);}
+                                                                                                                                         ^
+  symbol:   class JSONObject
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:75: error: cannot find symbol
+        JSONArray rules=group.optJSONArray("decision_rules");if(rules!=null){LinearLayout c=card();c.addView(tv("??? ??? ???",16,true));for(int i=0;i<rules.length();i++)c.addView(tv("? "+rules.optString(i),13,false));body.addView(c);}
+        ^
+  symbol:   class JSONArray
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:75: error: cannot find symbol
+        JSONArray rules=group.optJSONArray("decision_rules");if(rules!=null){LinearLayout c=card();c.addView(tv("??? ??? ???",16,true));for(int i=0;i<rules.length();i++)c.addView(tv("? "+rules.optString(i),13,false));body.addView(c);}
+                                                                             ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:76: error: cannot find symbol
+        JSONArray lim=group.optJSONArray("limitations");if(lim!=null&&lim.length()>0){LinearLayout c=card();c.addView(tv("OEM ??? / ???? ??",15,true));for(int i=0;i<lim.length();i++)c.addView(tv("? "+lim.optString(i),12,false));body.addView(c);}
+        ^
+  symbol:   class JSONArray
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:76: error: cannot find symbol
+        JSONArray lim=group.optJSONArray("limitations");if(lim!=null&&lim.length()>0){LinearLayout c=card();c.addView(tv("OEM ??? / ???? ??",15,true));for(int i=0;i<lim.length();i++)c.addView(tv("? "+lim.optString(i),12,false));body.addView(c);}
+                                                                                      ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:77: error: cannot find symbol
+        JSONArray refs=group.optJSONArray("source_refs");if(refs!=null){LinearLayout c=card();c.addView(tv("??",14,true));for(int i=0;i<refs.length();i++)c.addView(tv("? "+refs.optString(i),12,false));body.addView(c);}
+        ^
+  symbol:   class JSONArray
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:77: error: cannot find symbol
+        JSONArray refs=group.optJSONArray("source_refs");if(refs!=null){LinearLayout c=card();c.addView(tv("??",14,true));for(int i=0;i<refs.length();i++)c.addView(tv("? "+refs.optString(i),12,false));body.addView(c);}
+                                                                        ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:78: error: cannot find symbol
+        JSONArray imgs=group.optJSONArray("oem_images");if(imgs!=null&&imgs.length()>0){LinearLayout c=card();c.addView(tv("OEM ??? ??? ???",15,true));for(int i=0;i<imgs.length();i++){final String a=imgs.optString(i);Button b=btn("OEM ?? ?? ? "+a.substring(a.lastIndexOf('/')+1),false);b.setOnClickListener(v->showAsset(a));c.addView(b);}body.addView(c);}
+        ^
+  symbol:   class JSONArray
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:78: error: cannot find symbol
+        JSONArray imgs=group.optJSONArray("oem_images");if(imgs!=null&&imgs.length()>0){LinearLayout c=card();c.addView(tv("OEM ??? ??? ???",15,true));for(int i=0;i<imgs.length();i++){final String a=imgs.optString(i);Button b=btn("OEM ?? ?? ? "+a.substring(a.lastIndexOf('/')+1),false);b.setOnClickListener(v->showAsset(a));c.addView(b);}body.addView(c);}
+                                                                                        ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:78: error: cannot find symbol
+        JSONArray imgs=group.optJSONArray("oem_images");if(imgs!=null&&imgs.length()>0){LinearLayout c=card();c.addView(tv("OEM ??? ??? ???",15,true));for(int i=0;i<imgs.length();i++){final String a=imgs.optString(i);Button b=btn("OEM ?? ?? ? "+a.substring(a.lastIndexOf('/')+1),false);b.setOnClickListener(v->showAsset(a));c.addView(b);}body.addView(c);}
+                                                                                                                                                                                                                         ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:82: error: cannot find symbol
+        LinearLayout c=card();String cls=p.optString("source_class"),pid=p.optString("id");TextView h=tv(num+". "+p.optString("label"),16,true);if(cls.contains("VERIFY"))h.setTextColor(ORANGE);else if(cls.startsWith("OEM"))h.setTextColor(GREEN);else h.setTextColor(BLUE);c.addView(h);c.addView(tv("?? ?? ? "+p.optString("where"),14,true));c.addView(tv("??? ?? ? "+p.optString("connect"),13,false));c.addView(tv("?? ?? ? "+p.optString("condition"),13,false));if(p.optString("expected").length()>0)c.addView(tv("OEM/?? ?? ? "+p.optString("expected"),13,true));if(p.optString("decision").length()>0)c.addView(tv("?? ?? ? "+p.optString("decision"),13,false));if(p.optString("note").length()>0)c.addView(tv("?? ? "+p.optString("note"),11,false));c.addView(tv("???? ? "+sourceLabel(cls),11,true));
+        ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:82: error: cannot find symbol
+        LinearLayout c=card();String cls=p.optString("source_class"),pid=p.optString("id");TextView h=tv(num+". "+p.optString("label"),16,true);if(cls.contains("VERIFY"))h.setTextColor(ORANGE);else if(cls.startsWith("OEM"))h.setTextColor(GREEN);else h.setTextColor(BLUE);c.addView(h);c.addView(tv("?? ?? ? "+p.optString("where"),14,true));c.addView(tv("??? ?? ? "+p.optString("connect"),13,false));c.addView(tv("?? ?? ? "+p.optString("condition"),13,false));if(p.optString("expected").length()>0)c.addView(tv("OEM/?? ?? ? "+p.optString("expected"),13,true));if(p.optString("decision").length()>0)c.addView(tv("?? ?? ? "+p.optString("decision"),13,false));if(p.optString("note").length()>0)c.addView(tv("?? ? "+p.optString("note"),11,false));c.addView(tv("???? ? "+sourceLabel(cls),11,true));
+                                                                                           ^
+  symbol:   class TextView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:84: error: cannot find symbol
+        TextView st=tv("",12,true);
+        ^
+  symbol:   class TextView
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:85: error: cannot find symbol
+        final EditText value;
+              ^
+  symbol:   class EditText
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:87: error: cannot find symbol
+            value=new EditText(this);value.setSingleLine(false);value.setMinLines(1);value.setHint("??? ? ?? ?? (?: 10.8 V / 195 bar / ?? ??)");value.setText(pref(pid,"value"));value.setTextSize(13);value.setPadding(dp(10),dp(8),dp(10),dp(8));value.setBackground(bg(Color.rgb(246,248,250),8));c.addView(value,new LinearLayout.LayoutParams(-1,-2));value.addTextChangedListener(saveWatcher(pid,"value"));
+                      ^
+  symbol:   class EditText
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:87: error: cannot find symbol
+            value=new EditText(this);value.setSingleLine(false);value.setMinLines(1);value.setHint("??? ? ?? ?? (?: 10.8 V / 195 bar / ?? ??)");value.setText(pref(pid,"value"));value.setTextSize(13);value.setPadding(dp(10),dp(8),dp(10),dp(8));value.setBackground(bg(Color.rgb(246,248,250),8));c.addView(value,new LinearLayout.LayoutParams(-1,-2));value.addTextChangedListener(saveWatcher(pid,"value"));
+                                                                                                                                                                                                                                                                          ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:87: error: package LinearLayout does not exist
+            value=new EditText(this);value.setSingleLine(false);value.setMinLines(1);value.setHint("??? ? ?? ?? (?: 10.8 V / 195 bar / ?? ??)");value.setText(pref(pid,"value"));value.setTextSize(13);value.setPadding(dp(10),dp(8),dp(10),dp(8));value.setBackground(bg(Color.rgb(246,248,250),8));c.addView(value,new LinearLayout.LayoutParams(-1,-2));value.addTextChangedListener(saveWatcher(pid,"value"));
+                                                                                                                                                                                                                                                                                                                                     ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:89: error: cannot find symbol
+        EditText note=new EditText(this);note.setSingleLine(false);note.setMinLines(1);note.setHint("?? ?? ? ????/????/??? ?? ?");note.setText(pref(pid,"note"));note.setTextSize(12);note.setPadding(dp(10),dp(8),dp(10),dp(8));note.setBackground(bg(Color.rgb(246,248,250),8));LinearLayout.LayoutParams np=new LinearLayout.LayoutParams(-1,-2);np.setMargins(0,dp(6),0,0);c.addView(note,np);note.addTextChangedListener(saveWatcher(pid,"note"));
+        ^
+  symbol:   class EditText
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:89: error: cannot find symbol
+        EditText note=new EditText(this);note.setSingleLine(false);note.setMinLines(1);note.setHint("?? ?? ? ????/????/??? ?? ?");note.setText(pref(pid,"note"));note.setTextSize(12);note.setPadding(dp(10),dp(8),dp(10),dp(8));note.setBackground(bg(Color.rgb(246,248,250),8));LinearLayout.LayoutParams np=new LinearLayout.LayoutParams(-1,-2);np.setMargins(0,dp(6),0,0);c.addView(note,np);note.addTextChangedListener(saveWatcher(pid,"note"));
+                          ^
+  symbol:   class EditText
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:89: error: cannot find symbol
+        EditText note=new EditText(this);note.setSingleLine(false);note.setMinLines(1);note.setHint("?? ?? ? ????/????/??? ?? ?");note.setText(pref(pid,"note"));note.setTextSize(12);note.setPadding(dp(10),dp(8),dp(10),dp(8));note.setBackground(bg(Color.rgb(246,248,250),8));LinearLayout.LayoutParams np=new LinearLayout.LayoutParams(-1,-2);np.setMargins(0,dp(6),0,0);c.addView(note,np);note.addTextChangedListener(saveWatcher(pid,"note"));
+                                                                                                                                                                                                                                                       ^
+  symbol:   variable Color
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:89: error: package LinearLayout does not exist
+        EditText note=new EditText(this);note.setSingleLine(false);note.setMinLines(1);note.setHint("?? ?? ? ????/????/??? ?? ?");note.setText(pref(pid,"note"));note.setTextSize(12);note.setPadding(dp(10),dp(8),dp(10),dp(8));note.setBackground(bg(Color.rgb(246,248,250),8));LinearLayout.LayoutParams np=new LinearLayout.LayoutParams(-1,-2);np.setMargins(0,dp(6),0,0);c.addView(note,np);note.addTextChangedListener(saveWatcher(pid,"note"));
+                                                                                                                                                                                                                                                                                              ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:89: error: package LinearLayout does not exist
+        EditText note=new EditText(this);note.setSingleLine(false);note.setMinLines(1);note.setHint("?? ?? ? ????/????/??? ?? ?");note.setText(pref(pid,"note"));note.setTextSize(12);note.setPadding(dp(10),dp(8),dp(10),dp(8));note.setBackground(bg(Color.rgb(246,248,250),8));LinearLayout.LayoutParams np=new LinearLayout.LayoutParams(-1,-2);np.setMargins(0,dp(6),0,0);c.addView(note,np);note.addTextChangedListener(saveWatcher(pid,"note"));
+                                                                                                                                                                                                                                                                                                                               ^
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:91: error: cannot find symbol
+        LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.HORIZONTAL);row.setPadding(0,dp(5),0,0);
+        ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:91: error: cannot find symbol
+        LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.HORIZONTAL);row.setPadding(0,dp(5),0,0);
+                             ^
+  symbol:   class LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:91: error: cannot find symbol
+        LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.HORIZONTAL);row.setPadding(0,dp(5),0,0);
+                                                                   ^
+  symbol:   variable LinearLayout
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:92: error: cannot find symbol
+        Button ok=miniBtn(p.optJSONObject("auto_eval")!=null?"?? ??":"??");Button bad=miniBtn(p.optJSONObject("auto_eval")!=null?"?? ??":"??");Button hold=miniBtn("??");Button clear=miniBtn("???");
+        ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:92: error: cannot find symbol
+        Button ok=miniBtn(p.optJSONObject("auto_eval")!=null?"?? ??":"??");Button bad=miniBtn(p.optJSONObject("auto_eval")!=null?"?? ??":"??");Button hold=miniBtn("??");Button clear=miniBtn("???");
+                                                                           ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:92: error: cannot find symbol
+        Button ok=miniBtn(p.optJSONObject("auto_eval")!=null?"?? ??":"??");Button bad=miniBtn(p.optJSONObject("auto_eval")!=null?"?? ??":"??");Button hold=miniBtn("??");Button clear=miniBtn("???");
+                                                                                                                                               ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:92: error: cannot find symbol
+        Button ok=miniBtn(p.optJSONObject("auto_eval")!=null?"?? ??":"??");Button bad=miniBtn(p.optJSONObject("auto_eval")!=null?"?? ??":"??");Button hold=miniBtn("??");Button clear=miniBtn("???");
+                                                                                                                                                                         ^
+  symbol:   class Button
+  location: class TestPointLocatorActivity
+com/ryu/forkliftdiagnostic/TestPointLocatorActivity.java:94: error: package LinearLayout does not exist
+        row.addView(ok,new LinearLayout.LayoutParams(0,dp(44),1));row.addView(bad,new LinearLayout.LayoutParams(0,dp(44),1));row.addView(hold,new LinearLayout.LayoutParams(0,dp(44),1));row.addView(clear,new LinearLayout.LayoutParams(0,dp(44),1));c.addView(row);c.addView(st);body.addView(c);
+                                       ^
+200 errors
+only showing the first 200 errors, of 577 total; use -Xmaxerrs if you would like to see more

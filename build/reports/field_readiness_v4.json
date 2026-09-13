@@ -1,0 +1,38 @@
+{
+  "verdict": "NOT_ALL_TARGET_LEVEL",
+  "manual_causes": {
+    "TARGET_LEVEL": 122,
+    "FIELD_USABLE_PARTIAL": 146
+  },
+  "electrical": {
+    "FIELD_USABLE_PARTIAL": 29,
+    "TARGET_LEVEL": 7
+  },
+  "engine": {
+    "benchmark_bundles": 21,
+    "graphs": 21,
+    "results": 110,
+    "simulations": 3300,
+    "errors": 0,
+    "warnings": 0,
+    "oem_pin_executable": 7,
+    "field_executable_source_limited": 14
+  },
+  "sensor_map": {
+    "items": 18,
+    "oem_numbered_callouts": 16,
+    "geometry": "pseudo-isometric technician locator"
+  },
+  "ui_modules": [
+    "ElectricalDiagnosticActivity",
+    "ExpertDiagnosticActivity",
+    "EngineExpertDiagnosticActivity",
+    "EngineSensorMapActivity"
+  ],
+  "release_gate": [
+    "268 원인 중 146 partial을 고장전용 측정/도면 수준으로 올릴 것",
+    "전장 29 partial의 정확 fuse/relay/connector/pin을 차량 사양별 확정할 것",
+    "전장/엔진 위치정보와 테스트포트 위치를 더 연결할 것",
+    "Parts Book/부품번호/가격/공임은 별도 검증 DB 필요"
+  ]
+}

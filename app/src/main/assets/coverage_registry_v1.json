@@ -1,0 +1,119 @@
+{
+  "version": "1.1-expert-v7-strict",
+  "manual_scope": {
+    "symptoms": 64,
+    "causes": 268,
+    "target_level": 268,
+    "a_oem_executable": 127,
+    "b_field_executable": 141,
+    "logic_simulations": 8040
+  },
+  "electrical_scope": {
+    "catalog": 36,
+    "graphs": 36,
+    "target_level": 17,
+    "field_usable_partial": 19,
+    "nodes": 350,
+    "results": 192,
+    "logic_simulations": 5760
+  },
+  "transmission_scope": {
+    "graphs": 24,
+    "results": 151,
+    "logic_simulations": 4530
+  },
+  "expert_cause_logic_simulations": 8040,
+  "areas": [
+    {
+      "area": "정비지침서 64증상/268원인",
+      "status": "PASS_EXPERT_FORMAT",
+      "evidence": "268/268 cause items; A=127, B=141",
+      "remaining": "B등급은 OEM 숫자/핀 한계가 없는 항목으로 비교·격리 기반. 수치가 확보되면 A로 승격."
+    },
+    {
+      "area": "트랜스미션 실행 그래프",
+      "status": "PASS",
+      "evidence": "24 graphs / 151 terminals / 4530 path simulations",
+      "remaining": "실차 로그 축적 후 확률/우선순위 보정 필요."
+    },
+    {
+      "area": "브레이크 내부누설/피스톤시일",
+      "status": "PASS_FIELD_LOGIC",
+      "evidence": "외부누유→에어→마스터/서보 vs 액슬 격리→좌/우 격리→유체 이동→분해 gate",
+      "remaining": "OEM 전용 leakage-rate 수치가 없는 경우 임의 bar/sec 기준 사용 금지."
+    },
+    {
+      "area": "전기/차체전장 현재 카탈로그",
+      "status": "PASS_CURRENT_CATALOG",
+      "evidence": "21 graphs catalog / 117 result terminals / 3510 logic simulations",
+      "remaining": "차량 전체 전장기능을 모두 개별 증상화한 것은 아님. 아래 gap 항목 추가 필요."
+    },
+    {
+      "area": "재작성 회로 UI",
+      "status": "PASS_ARCHITECTURE",
+      "evidence": "모든 실행 전장 circuit에 simplified_diagram + measure_points; OEM 원본은 secondary evidence",
+      "remaining": "미확정 connector/fuse numeric ID는 고해상도 OEM source 확보 후 확정."
+    },
+    {
+      "area": "OSS/시트 인터록",
+      "status": "PASS_FIELD_LOGIC / PARTIAL_PINOUT",
+      "evidence": "센서 점퍼→OSS 입력→5V→외부 5V 부하 격리→CAN→B+/IGN/GND→출력",
+      "remaining": "OSS 커넥터 전체 숫자 pin map과 5V branch별 OEM 정상범위는 추가 source 필요."
+    },
+    {
+      "area": "A/C 냉매 진단",
+      "status": "PASS",
+      "evidence": "OEM pressure condition: RECIRC, 30~35C, 1500rpm, blower4, COOL; LOW 1.5~2.5bar / HIGH 13.7~15.7bar",
+      "remaining": "냉매 회로와 실내 blower 공기측을 분리해 재작성 완료."
+    },
+    {
+      "area": "A/C 전원/콘덴서팬",
+      "status": "PASS_FIELD_LOGIC / PARTIAL_PINOUT",
+      "evidence": "전원 dead / blower dead / cooling command + condenser fan B+/GND/direct power/relay-driver split",
+      "remaining": "A/C 전용 fuse cavity, fan relay exact ID, controller numeric pinout은 현재 OEM source 미확정."
+    },
+    {
+      "area": "CAN 진단",
+      "status": "PASS_FIELD_LOGIC / PARTIAL_TOPOLOGY",
+      "evidence": "global vs single-node→node power/GND→local CAN H/L→5V external-load isolation→controller",
+      "remaining": "이 모델의 종단저항 위치/전체 topology가 OEM 검증되기 전 60Ω을 모델 기준으로 하드코딩하지 않음."
+    },
+    {
+      "area": "D24NAP 엔진 진단",
+      "status": "MAJOR_GAP",
+      "evidence": "현재 앱 엔진 화면은 D34 참고자료이며 D24 전용값으로 사용하지 않는다고 표시",
+      "remaining": "D24NAP 950106-01198 전용 자료의 sensor/switch/harness/ECU/engine troubleshooting을 실제 DB로 ingest해야 함."
+    },
+    {
+      "area": "전장 전체 증상 universe",
+      "status": "GAP",
+      "evidence": "600123-00120 1/4~4/4에서 현재 21개 주요 증상만 실행 그래프화",
+      "remaining": "seat belt switch, license lamp, hourmeter 개별, 각 gauge 개별, MAIN relay/ECU power, D24 ECU sensor/actuator 개별, optional circuits를 독립 증상그래프로 확장."
+    },
+    {
+      "area": "Cab/wiper/washer 및 옵션장비",
+      "status": "SOURCE_REQUIRED",
+      "evidence": "현재 확보된 600123-00120 4-sheet 범위만으로 모든 cab option 회로를 확정할 수 없음",
+      "remaining": "해당 옵션 전장 회로/connector view 자료 확보 필요."
+    },
+    {
+      "area": "부품번호/가격/공임",
+      "status": "GAP",
+      "evidence": "진단 확정까지는 강화됐으나 모든 원인에 Parts Book part number/price/labor가 연결된 상태는 아님",
+      "remaining": "Parts Book + 실제 매입/영수증 DB 연동 필요."
+    }
+  ],
+  "release_gate": {
+    "all_current_validators_zero": true,
+    "whole_vehicle_complete": false,
+    "reason": "19 electrical exact pin/option/source-limited gaps + parts/price/labor + real-machine fleet validation remain"
+  },
+  "engine_scope": {
+    "core_bundles": 21,
+    "graphs": 21,
+    "results": 110,
+    "logic_simulations": 3300,
+    "sensor_locator_items": 18,
+    "oem_numbered_callouts": 16
+  }
+}

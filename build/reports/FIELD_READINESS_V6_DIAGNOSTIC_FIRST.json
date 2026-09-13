@@ -1,0 +1,211 @@
+{
+  "version": "V8.2_DIAGNOSTIC_FIRST",
+  "verdict": "DIAGNOSTIC_CORE_PASS__ELECTRICAL_SOURCE_LIMITED",
+  "priority": [
+    "증상 재현/안전",
+    "고장 전용 재작성 회로·유압도",
+    "측정/점검 위치",
+    "부하·동적 측정",
+    "정상측 비교/격리/바이패스",
+    "확정조건/분해게이트",
+    "OEM 근거",
+    "분해도/장착 위치",
+    "참고 품번",
+    "가격/공임"
+  ],
+  "part_number_policy": "진단 readiness와 분리. Parts Book은 위치·조립관계·분해도 중심. 실제 주문은 차대번호 기준 부품점/EPC 최종확인.",
+  "manual_causes": {
+    "total": 268,
+    "target": 268,
+    "partial": 0,
+    "logic_simulations": 8040,
+    "errors": 0,
+    "warnings": 0
+  },
+  "transmission": {
+    "graphs": 24,
+    "result_paths": 4530,
+    "status": "PASS"
+  },
+  "electrical": {
+    "graphs": 38,
+    "target": 17,
+    "partial": 21,
+    "nodes": 373,
+    "results": 205,
+    "logic_simulations": 6150,
+    "validator_errors": 0,
+    "validator_warnings": 0,
+    "partial_graphs": [
+      {
+        "id": "E_STOP_NO",
+        "title": "브레이크등 미점등 · 현장 전기진단",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_STOP_ON",
+        "title": "브레이크등 상시점등 · 현장 전기진단",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_HEAD_NO",
+        "title": "헤드램프가 안 들어옴 · 회로 추적",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_TURN_NO",
+        "title": "방향지시등/비상등이 작동하지 않음 · 회로 추적",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_PARK_INPUT",
+        "title": "주차브레이크 전기 신호 이상 · 회로 추적",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_GAUGE",
+        "title": "연료/수온/TM온도 계기 이상 · 회로 추적",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_WORK_LAMP",
+        "title": "리어램프/스트로브/작업등 불량 · 회로 추적",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_OSS_SEAT_LOCK",
+        "title": "시트/OSS 인터록이 풀리지 않음 · 센서/5V/CAN/간헐 통합진단",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_AC_POWER_NO",
+        "title": "에어컨 전원 자체가 켜지지 않음 · 전원/컨트롤러/블로워 분리진단",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_AC_COND_FAN_NO",
+        "title": "A/C는 작동하는데 컨덴서 팬이 안 돎 · 팬회로 분리진단",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_PREHEAT_NO",
+        "title": "예열/글로우 작동 안 됨 · 회로 추적",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_FUEL_HEATER_NO",
+        "title": "연료히터 작동 안 됨 · 회로 추적",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_BRAKE_OIL_WARN",
+        "title": "브레이크오일 경고 입력 이상 · 회로 추적",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_CLUSTER_POWER_NO",
+        "title": "계기판/모니터 전원 안 켜짐 · 회로 추적",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_CAN_NETWORK",
+        "title": "진단기 통신/CAN 이상 · 노드 전원/배선/컨트롤러 분리진단",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_HOURMETER_NO",
+        "title": "아워미터가 작동/적산하지 않음 · 현장 회로추적",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_WATER_GAUGE",
+        "title": "수온 게이지만 비정상 · 센서/표시 분리진단",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_TM_TEMP_GAUGE",
+        "title": "T/M 오일온도 게이지만 비정상 · 센서/표시 분리진단",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_FUEL_GAUGE_ONLY",
+        "title": "연료 게이지만 비정상 · 센서/표시 분리진단",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_WIPER_NO",
+        "title": "전/후 와이퍼가 작동하지 않음 · 부하전압/모터/명령 분리",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      },
+      {
+        "id": "E_WASHER_NO",
+        "title": "와셔액이 분사되지 않음 · 유로/펌프전원/스위치 분리",
+        "gaps": [
+          "정확 pin/fuse/cavity 일부 미확정"
+        ]
+      }
+    ]
+  },
+  "engine": {
+    "core_bundles": 21,
+    "graphs": 21,
+    "results": 110,
+    "logic_simulations": 3300,
+    "errors": 0,
+    "warnings": 0
+  },
+  "sensor_map": {
+    "items": 18,
+    "oem_numbered_callouts": 16,
+    "geometry": "pseudo-isometric technician locator",
+    "flow": "diagnosis -> focused sensor -> location -> sensor pin -> ECU pin -> OEM evidence"
+  },
+  "release_gate": {
+    "diagnostic_core_parts_number_blocker": false,
+    "remaining_core_blockers": [
+      "전장 21개 그래프의 정확 connector pin/cavity/option schematic/transfer-curve 등 source-limited 항목",
+      "엔진/차체/유압 부품의 실제 접근 위치를 더 빠르게 찾는 정비사용 위치맵 확대",
+      "논리 시뮬레이션을 실차 고장사례 로그로 계속 교차검증"
+    ]
+  }
+}

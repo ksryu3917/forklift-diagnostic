@@ -1,0 +1,3407 @@
+{
+  "version": "1.1-parts-profile-serial-aware",
+  "source": {
+    "title": "D20S-7/D25S-7/D30S-7/D33S-7 Parts Book",
+    "document_id": "SB5120C05",
+    "engine": "D24 / DL02-LEF00 / Tier4",
+    "models": {
+      "D20S-7": "FDA0U",
+      "D25S-7": "FDA0V",
+      "D30S-7": "FDA0W",
+      "D33S-7": "FDA0X"
+    },
+    "rule": "정확 품번은 모델코드와 Serial No. 적용범위를 확인한 뒤 확정. Parts Book에 변경(C), 삭제(DEL), 선택사양/옵션이 있는 경우 단일 품번으로 자동확정 금지.",
+    "profile_rule": "현재차량 모델과 Serial을 저장해 applications 범위가 있는 품번은 자동 일치/제외 표시. 옵션 의존품은 Serial 일치만으로 자동확정하지 않음."
+  },
+  "groups": {
+    "WHOLE_LOCATION": {
+      "title": "차량 위치 차트",
+      "option": "950211-00188",
+      "pages": [
+        1570,
+        1571,
+        1572
+      ],
+      "views": [
+        "parts_views/parts_p1570.png",
+        "parts_views/parts_p1571.png",
+        "parts_views/parts_p1572.png"
+      ],
+      "serial_required": false
+    },
+    "ENGINE_ECU": {
+      "title": "D24 ECU",
+      "option": "EDL02-P713-001",
+      "pages": [
+        210
+      ],
+      "views": [
+        "parts_views/parts_p210.png"
+      ],
+      "parts": [
+        {
+          "no": "300618-00037B",
+          "name": "엔진컨트롤유니트",
+          "qty": 1
+        }
+      ],
+      "serial_required": false
+    },
+    "ENGINE_SENSOR": {
+      "title": "D24 스위치 & 센서",
+      "option": "EDL02-P709-048",
+      "pages": [
+        211
+      ],
+      "views": [
+        "parts_views/parts_p211.png"
+      ],
+      "parts": [
+        {
+          "no": "301318-00012A",
+          "name": "부스트 센서",
+          "qty": 1,
+          "note": "Parts Book 대체/변경품 병기됨; Serial/사양 확인 필요"
+        },
+        {
+          "no": "301318-00013B",
+          "name": "부스트 센서",
+          "qty": 1,
+          "note": "대체 후보; 정확 적용범위 별도 확인"
+        },
+        {
+          "no": "301318-00007A",
+          "name": "부스트 센서",
+          "qty": 1,
+          "note": "C 변경품 표기; 정확 적용범위 별도 확인"
+        },
+        {
+          "no": "301317-00014D",
+          "name": "수온센서",
+          "qty": 1
+        },
+        {
+          "no": "65.27427-7001",
+          "name": "오일 압력 및 온도 센서",
+          "qty": 1
+        },
+        {
+          "no": "301308-00135A",
+          "name": "캠 스피드 센서",
+          "qty": 1
+        },
+        {
+          "no": "301308-00376",
+          "name": "공기 흐름 센서",
+          "qty": 1
+        },
+        {
+          "no": "301308-00480",
+          "name": "센서",
+          "qty": 2,
+          "note": "Parts Book 명칭이 generic; 기능 자동확정 금지"
+        },
+        {
+          "no": "65.27103-7014",
+          "name": "센서",
+          "qty": 1,
+          "note": "Parts Book 명칭이 generic; 기능 자동확정 금지"
+        }
+      ],
+      "serial_required": true
+    },
+    "ENGINE_HARNESS": {
+      "title": "D24 엔진 와이어 하네스",
+      "option": "EDL02-P705-220",
+      "pages": [
+        212
+      ],
+      "views": [
+        "parts_views/parts_p212.png"
+      ],
+      "parts": [
+        {
+          "no": "310207-02855E",
+          "name": "엔진하네스어셈블리",
+          "qty": 1
+        }
+      ],
+      "serial_required": false
+    },
+    "ENGINE_GLOW": {
+      "title": "D24 에어히터/글로우",
+      "option": "EDL02-P704-042",
+      "pages": [
+        213
+      ],
+      "views": [
+        "parts_views/parts_p213.png"
+      ],
+      "parts": [
+        {
+          "no": "300622-00002D",
+          "name": "글로우 플러그",
+          "qty": 4
+        },
+        {
+          "no": "300203-00021",
+          "name": "전기 컨넥터",
+          "qty": 1
+        }
+      ],
+      "serial_required": false
+    },
+    "STARTER": {
+      "title": "D24 시동 전동기",
+      "option": "EDL02-P701-042",
+      "pages": [
+        248
+      ],
+      "views": [
+        "parts_views/parts_p248.png"
+      ],
+      "parts": [
+        {
+          "no": "300516-00034A",
+          "name": "시동 전동기",
+          "qty": 1
+        }
+      ],
+      "serial_required": false
+    },
+    "AC_SYSTEM": {
+      "title": "A/C 시스템",
+      "option": "620204-06246",
+      "pages": [
+        268,
+        269,
+        270
+      ],
+      "views": [
+        "parts_views/parts_p268.png",
+        "parts_views/parts_p269.png",
+        "parts_views/parts_p270.png"
+      ],
+      "serial_required": true,
+      "parts": [
+        {
+          "no": "440205-00126",
+          "name": "에어컨디셔너어셈블리",
+          "qty": 1,
+          "apply": "중간 생산구간; 모델별 Serial 범위가 page269에 표기"
+        },
+        {
+          "no": "440205-00144",
+          "name": "에어컨디셔너어셈블리",
+          "qty": 1,
+          "apply": "후기 생산구간; 모델별 Serial 범위가 page269에 표기"
+        },
+        {
+          "no": "400815-00029",
+          "name": "증발기어셈블리",
+          "qty": 1,
+          "apply": "초/중기 Serial 범위"
+        },
+        {
+          "no": "400815-00004",
+          "name": "증발기어셈블리",
+          "qty": 1,
+          "apply": "후기/서비스 구성 page270"
+        },
+        {
+          "no": "440204-00059",
+          "name": "콘덴서어셈블리",
+          "qty": 1
+        },
+        {
+          "no": "210101-00490",
+          "name": "팬어셈블리",
+          "qty": 1,
+          "apply": "초기 계열: FDA0U≤202, FDA0V≤842, FDA0W≤2357, FDA0X≤476",
+          "applications": [
+            {
+              "code": "FDA0U",
+              "min": 1,
+              "max": 202
+            },
+            {
+              "code": "FDA0V",
+              "min": 1,
+              "max": 842
+            },
+            {
+              "code": "FDA0W",
+              "min": 1,
+              "max": 2357
+            },
+            {
+              "code": "FDA0X",
+              "min": 1,
+              "max": 476
+            }
+          ]
+        },
+        {
+          "no": "210101-00569",
+          "name": "팬어셈블리;콘덴서",
+          "qty": 2,
+          "apply": "후기 계열: FDA0U≥203, FDA0V≥843, FDA0W≥2358, FDA0X≥477",
+          "applications": [
+            {
+              "code": "FDA0U",
+              "min": 203,
+              "max": 999999
+            },
+            {
+              "code": "FDA0V",
+              "min": 843,
+              "max": 999999
+            },
+            {
+              "code": "FDA0W",
+              "min": 2358,
+              "max": 999999
+            },
+            {
+              "code": "FDA0X",
+              "min": 477,
+              "max": 999999
+            }
+          ]
+        },
+        {
+          "no": "310207-06478",
+          "name": "하네스어셈블리",
+          "qty": 1,
+          "apply": "page270 변경품; Serial 확인 필요"
+        }
+      ]
+    },
+    "AC_COMPRESSOR": {
+      "title": "A/C 컴프레서 장착",
+      "option": "620204-06297",
+      "pages": [
+        501,
+        502
+      ],
+      "views": [
+        "parts_views/parts_p501.png",
+        "parts_views/parts_p502.png"
+      ],
+      "serial_required": true,
+      "parts": [
+        {
+          "no": "440205-00026",
+          "name": "에어컨디셔너컴프레서어셈블",
+          "qty": 1
+        },
+        {
+          "no": "130202-00060",
+          "name": "에어콘벨트",
+          "qty": 1
+        },
+        {
+          "no": "310207-06728",
+          "name": "하네스어셈블리; D25S-7 NEWOPC AIRC",
+          "qty": 1
+        },
+        {
+          "no": "A404157",
+          "name": "릴레이어셈블리",
+          "qty": 3,
+          "note": "3개 릴레이의 개별 기능은 Parts Book만으로 특정 금지"
+        },
+        {
+          "no": "310207-02713",
+          "name": "하네스어셈블리",
+          "qty": 1
+        }
+      ]
+    },
+    "PARK_ACTUATOR": {
+      "title": "주차브레이크 액추에이터",
+      "option": "400805-00012",
+      "pages": [
+        99
+      ],
+      "views": [
+        "parts_views/parts_p99.png"
+      ],
+      "serial_required": false,
+      "parts": [
+        {
+          "no": "410111-00035",
+          "name": "유압밸브",
+          "qty": 1
+        },
+        {
+          "no": "300715-00153",
+          "name": "코일",
+          "qty": 1
+        },
+        {
+          "no": "401107-02158",
+          "name": "로드씨일키트",
+          "qty": 1
+        },
+        {
+          "no": "410104-00556",
+          "name": "체크밸브",
+          "qty": 1
+        }
+      ]
+    },
+    "OSS_OPTION": {
+      "title": "OSS/EPB 옵션 배선·컨트롤러",
+      "option": "620204-07892",
+      "pages": [
+        450
+      ],
+      "views": [
+        "parts_views/parts_p450.png"
+      ],
+      "serial_required": true,
+      "parts": [
+        {
+          "no": "300611-01180",
+          "name": "콘트롤러어셈블리; CT100 OSS FOR E",
+          "qty": 1,
+          "note": "EPB 옵션 페이지 부품. 현재차량 옵션/Serial 확인 후 적용"
+        },
+        {
+          "no": "301409-00034",
+          "name": "키스위치어셈블리",
+          "qty": 1
+        },
+        {
+          "no": "301404-00034",
+          "name": "방향스위치어셈블리",
+          "qty": 1
+        },
+        {
+          "no": "A404157",
+          "name": "릴레이어셈블리",
+          "qty": 1
+        },
+        {
+          "no": "310207-05711",
+          "name": "하네스어셈블리",
+          "qty": 1
+        }
+      ]
+    },
+    "SEATBELT_INTERLOCK": {
+      "title": "시트벨트 인터로크",
+      "option": "D812926",
+      "pages": [
+        372
+      ],
+      "views": [
+        "parts_views/parts_p372.png"
+      ],
+      "serial_required": false,
+      "parts": [
+        {
+          "no": "310207-01549",
+          "name": "하네스어셈블리",
+          "qty": 1
+        }
+      ]
+    },
+    "MAIN_CONTROL_VALVE": {
+      "title": "메인 컨트롤 밸브/리프트 섹션",
+      "option": "D518009 / D513675",
+      "pages": [
+        294,
+        297
+      ],
+      "views": [
+        "parts_views/parts_p294.png",
+        "parts_views/parts_p297.png"
+      ],
+      "serial_required": true,
+      "parts": [
+        {
+          "no": "D513675",
+          "name": "리프트 섹션 밸브어셈블리",
+          "qty": 1
+        },
+        {
+          "no": "D515344",
+          "name": "틸트섹션밸브그룹",
+          "qty": 1
+        },
+        {
+          "no": "D513676",
+          "name": "밸브어셈블리; 듀얼 디바이더",
+          "qty": 1
+        },
+        {
+          "no": "D513680",
+          "name": "솔레노이드밸브조립품",
+          "qty": 1
+        },
+        {
+          "no": "D513502",
+          "name": "솔레노이드밸브그룹",
+          "qty": 1
+        }
+      ]
+    },
+    "LIFT_LOCK_OPTION": {
+      "title": "리프트락/락킹 디바이스 옵션",
+      "option": "620204-16262 / 410116-01959 / 410116-01866",
+      "pages": [
+        534,
+        536,
+        538
+      ],
+      "views": [
+        "parts_views/parts_p534.png",
+        "parts_views/parts_p536.png",
+        "parts_views/parts_p538.png"
+      ],
+      "serial_required": true,
+      "parts": [
+        {
+          "no": "600109-00187",
+          "name": "솔레노이드 장착밸브",
+          "qty": 1
+        },
+        {
+          "no": "D840775",
+          "name": "하네스어셈블리",
+          "qty": 1
+        },
+        {
+          "no": "A404157",
+          "name": "릴레이어셈블리",
+          "qty": 1
+        },
+        {
+          "no": "410135-01088",
+          "name": "솔레노이드밸브어셈블리",
+          "qty": 1
+        }
+      ]
+    },
+    "TRANSMISSION_GROUP": {
+      "title": "트랜스미션 그룹/펌프/파킹 액추에이터",
+      "option": "130902-02417/02418/02331/02332",
+      "pages": [
+        119,
+        121,
+        123,
+        133
+      ],
+      "views": [
+        "parts_views/parts_p119.png",
+        "parts_views/parts_p121.png",
+        "parts_views/parts_p123.png",
+        "parts_views/parts_p133.png"
+      ],
+      "serial_required": true,
+      "parts": [
+        {
+          "no": "130902-02329",
+          "name": "트랜스미션어셈블리",
+          "qty": 1
+        },
+        {
+          "no": "D518253",
+          "name": "기어펌프",
+          "qty": 1,
+          "apply": "D20/25/30 계열 일부"
+        },
+        {
+          "no": "D514185",
+          "name": "펌프어셈블리",
+          "qty": 1,
+          "apply": "D33 계열 일부"
+        },
+        {
+          "no": "A334203",
+          "name": "온도스위치어셈블리",
+          "qty": 1
+        },
+        {
+          "no": "400805-00012",
+          "name": "파킹브레이크작동기",
+          "qty": 1
+        },
+        {
+          "no": "301413-00354",
+          "name": "압력스위치",
+          "qty": 1
+        }
+      ]
+    },
+    "CHASSIS_CORE": {
+      "title": "차체 기본그룹/브레이크·스티어링·배선",
+      "option": "general chassis",
+      "pages": [
+        31,
+        32
+      ],
+      "views": [
+        "parts_views/parts_p31.png",
+        "parts_views/parts_p32.png"
+      ],
+      "serial_required": true,
+      "parts": [
+        {
+          "no": "420212-14898",
+          "name": "브레이크 라인즈 그룹",
+          "qty": 1
+        },
+        {
+          "no": "410102-00001",
+          "name": "마스터 실린더 조립품",
+          "qty": 1
+        },
+        {
+          "no": "410102-00014",
+          "name": "브레이크 밸브 조립품",
+          "qty": 1
+        },
+        {
+          "no": "400322-00049",
+          "name": "마스터 실린더 조립품",
+          "qty": 1
+        },
+        {
+          "no": "190104-00116",
+          "name": "스티어 엑슬 그룹",
+          "qty": 1
+        },
+        {
+          "no": "400331-00072",
+          "name": "스티어 실린더 그룹",
+          "qty": 1
+        },
+        {
+          "no": "310208-00564",
+          "name": "배선 그룹",
+          "qty": 1
+        }
+      ]
+    },
+    "MAST_CONFIG": {
+      "title": "마스트/리프트 실린더 구성",
+      "option": "model mast arrangement",
+      "pages": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "views": [],
+      "serial_required": true,
+      "note": "마스트 종류(STD/FFL/FFT/QD), 높이, 모델에 따라 실린더/그룹 품번이 다름. 현재차량 마스트 사양 선택 전 단일 품번 금지."
+    },
+    "BRAKE_MODULE": {
+      "title": "브레이크 모듈 · Serial 변경점",
+      "option": "620101-01355 / 01461 / 01356 / 01462",
+      "pages": [
+        52,
+        54,
+        71,
+        72
+      ],
+      "views": [
+        "parts_views/parts_p52.png",
+        "parts_views/parts_p54.png",
+        "parts_views/parts_p71.png",
+        "parts_views/parts_p72.png"
+      ],
+      "serial_required": true,
+      "note": "브레이크 모듈 자체가 모델/Serial 경계에서 변경된다. 내부 정비품은 현재 모듈 식별 후 확정.",
+      "parts": [
+        {
+          "no": "620101-01355",
+          "name": "브레이크 모듈",
+          "qty": 1,
+          "applications": [
+            {
+              "code": "FDA0U",
+              "min": 1,
+              "max": 177
+            },
+            {
+              "code": "FDA0V",
+              "min": 1,
+              "max": 754
+            },
+            {
+              "code": "FDA0W",
+              "min": 1,
+              "max": 2233
+            }
+          ]
+        },
+        {
+          "no": "620101-01461",
+          "name": "브레이크 모듈",
+          "qty": 1,
+          "applications": [
+            {
+              "code": "FDA0U",
+              "min": 178,
+              "max": 999999
+            },
+            {
+              "code": "FDA0V",
+              "min": 755,
+              "max": 999999
+            },
+            {
+              "code": "FDA0W",
+              "min": 2234,
+              "max": 999999
+            }
+          ]
+        },
+        {
+          "no": "620101-01356",
+          "name": "브레이크 모듈 · D33",
+          "qty": 1,
+          "applications": [
+            {
+              "code": "FDA0X",
+              "min": 1,
+              "max": 449
+            }
+          ]
+        },
+        {
+          "no": "620101-01462",
+          "name": "브레이크 모듈 · D33",
+          "qty": 1,
+          "applications": [
+            {
+              "code": "FDA0X",
+              "min": 450,
+              "max": 999999
+            }
+          ]
+        },
+        {
+          "no": "420212-14898",
+          "name": "브레이크 라인즈 그룹",
+          "qty": 1,
+          "note": "모듈과 함께 차체 구성 확인"
+        },
+        {
+          "no": "410102-00001",
+          "name": "마스터 실린더 조립품",
+          "qty": 1,
+          "note": "차체 목록상 서비스 부품; 현재 모듈/실차 구성 대조"
+        },
+        {
+          "no": "410102-00014",
+          "name": "브레이크 밸브 조립품",
+          "qty": 1,
+          "note": "차체 목록상 서비스 부품; 현재 모듈/실차 구성 대조"
+        },
+        {
+          "no": "400322-00049",
+          "name": "마스터 실린더 조립품",
+          "qty": 1,
+          "note": "변경 구성 가능; 실차 부품 식별 우선"
+        }
+      ]
+    },
+    "STEER_CYLINDER": {
+      "title": "스티어 실린더 · 씰/로드 구성",
+      "option": "400331-00072",
+      "pages": [
+        93
+      ],
+      "views": [
+        "parts_views/parts_p93.png"
+      ],
+      "serial_required": false,
+      "parts": [
+        {
+          "no": "D511839",
+          "name": "실린더튜브어셈블리",
+          "qty": 1
+        },
+        {
+          "no": "400337-00768",
+          "name": "실린더로드어셈블리",
+          "qty": 1
+        },
+        {
+          "no": "401106-00461",
+          "name": "오일씨일키트",
+          "qty": 1
+        }
+      ]
+    },
+    "LIGHTING_STD": {
+      "title": "램프/경광등 서비스 부품",
+      "option": "620204-06242 / 06243 / 06244",
+      "pages": [
+        355,
+        357,
+        358,
+        409,
+        414,
+        436
+      ],
+      "views": [
+        "parts_views/parts_p355.png",
+        "parts_views/parts_p357.png",
+        "parts_views/parts_p358.png",
+        "parts_views/parts_p409.png",
+        "parts_views/parts_p414.png",
+        "parts_views/parts_p436.png"
+      ],
+      "serial_required": true,
+      "note": "STD/옵션 램프 구성이 공존한다. 현재 장착 램프 형상/옵션을 부품도와 대조.",
+      "parts": [
+        {
+          "no": "301005-01649",
+          "name": "콤비램프 어셈블리",
+          "qty": 2,
+          "note": "620204-06242"
+        },
+        {
+          "no": "301005-01747",
+          "name": "램프어셈블리",
+          "qty": 2,
+          "note": "620204-06242"
+        },
+        {
+          "no": "301005-01628",
+          "name": "후미 램프어셈블리",
+          "qty": 1,
+          "note": "620204-06243"
+        },
+        {
+          "no": "301008-00061",
+          "name": "스트로브 어셈블리",
+          "qty": 1,
+          "note": "620204-06244"
+        },
+        {
+          "no": "301005-01757",
+          "name": "리어 램프어셈블리",
+          "qty": 1,
+          "note": "620204-08689"
+        },
+        {
+          "no": "301005-01300",
+          "name": "옵션 콤비네이션 램프",
+          "qty": 2,
+          "note": "620204-08406"
+        },
+        {
+          "no": "301005-01449",
+          "name": "옵션 전방 램프",
+          "qty": 2,
+          "note": "620204-08404"
+        }
+      ]
+    },
+    "WIPER_FRONT": {
+      "title": "전방 와이퍼/와셔 · Serial 변경점",
+      "option": "620204-07141",
+      "pages": [
+        487,
+        488
+      ],
+      "views": [
+        "parts_views/parts_p488.png"
+      ],
+      "serial_required": true,
+      "note": "모듈러 캐빈 전방 와이퍼 기준. 캐빈/옵션 형식이 다르면 해당 옵션 부품도를 별도 확인.",
+      "parts": [
+        {
+          "no": "450108-00013",
+          "name": "윈도우와셔탱크",
+          "qty": 1
+        },
+        {
+          "no": "A214302",
+          "name": "와이퍼모터",
+          "qty": 1,
+          "applications": [
+            {
+              "code": "FDA0U",
+              "min": 1,
+              "max": 324
+            },
+            {
+              "code": "FDA0V",
+              "min": 1,
+              "max": 1344
+            },
+            {
+              "code": "FDA0W",
+              "min": 1,
+              "max": 3582
+            },
+            {
+              "code": "FDA0X",
+              "min": 1,
+              "max": 642
+            }
+          ]
+        },
+        {
+          "no": "300512-00042",
+          "name": "와이퍼모터",
+          "qty": 1,
+          "applications": [
+            {
+              "code": "FDA0U",
+              "min": 325,
+              "max": 999999
+            },
+            {
+              "code": "FDA0V",
+              "min": 1345,
+              "max": 999999
+            },
+            {
+              "code": "FDA0W",
+              "min": 3583,
+              "max": 999999
+            },
+            {
+              "code": "FDA0X",
+              "min": 643,
+              "max": 999999
+            }
+          ]
+        },
+        {
+          "no": "A334166",
+          "name": "하네스조립품",
+          "qty": 1,
+          "applications": [
+            {
+              "code": "FDA0U",
+              "min": 1,
+              "max": 324
+            },
+            {
+              "code": "FDA0V",
+              "min": 1,
+              "max": 1344
+            },
+            {
+              "code": "FDA0W",
+              "min": 1,
+              "max": 3582
+            },
+            {
+              "code": "FDA0X",
+              "min": 1,
+              "max": 642
+            }
+          ]
+        },
+        {
+          "no": "310207-08884",
+          "name": "하네스어셈블리",
+          "qty": 1,
+          "applications": [
+            {
+              "code": "FDA0U",
+              "min": 325,
+              "max": 999999
+            },
+            {
+              "code": "FDA0V",
+              "min": 1345,
+              "max": 999999
+            },
+            {
+              "code": "FDA0W",
+              "min": 3583,
+              "max": 999999
+            },
+            {
+              "code": "FDA0X",
+              "min": 643,
+              "max": 999999
+            }
+          ],
+          "note": "부품책 변경품"
+        },
+        {
+          "no": "301405-00139",
+          "name": "방향스위치어셈블리",
+          "qty": 1,
+          "note": "와이퍼 옵션군에서 확인; 핀기능은 별도 회로 근거 필요"
+        }
+      ]
+    },
+    "WIPER_REAR": {
+      "title": "리어 와이퍼 · Serial 변경점",
+      "option": "620204-08467 / 620204-09003",
+      "pages": [
+        422,
+        486
+      ],
+      "views": [
+        "parts_views/parts_p422.png",
+        "parts_views/parts_p486.png"
+      ],
+      "serial_required": true,
+      "note": "모듈러 캐빈/캐빈 옵션에 따라 그룹이 다르다. 현재 캐빈 옵션 확인 필수.",
+      "parts": [
+        {
+          "no": "A214302",
+          "name": "리어 와이퍼모터 · 초기",
+          "qty": 1,
+          "applications": [
+            {
+              "code": "FDA0U",
+              "min": 1,
+              "max": 324
+            },
+            {
+              "code": "FDA0V",
+              "min": 1,
+              "max": 1344
+            },
+            {
+              "code": "FDA0W",
+              "min": 1,
+              "max": 3582
+            },
+            {
+              "code": "FDA0X",
+              "min": 1,
+              "max": 642
+            }
+          ]
+        },
+        {
+          "no": "220210-01910",
+          "name": "리어 와이퍼모터 · 변경품",
+          "qty": 1,
+          "applications": [
+            {
+              "code": "FDA0U",
+              "min": 325,
+              "max": 999999
+            },
+            {
+              "code": "FDA0V",
+              "min": 1345,
+              "max": 999999
+            },
+            {
+              "code": "FDA0W",
+              "min": 3583,
+              "max": 999999
+            },
+            {
+              "code": "FDA0X",
+              "min": 643,
+              "max": 999999
+            }
+          ]
+        },
+        {
+          "no": "A404124",
+          "name": "리어 와이퍼 하네스 · 초기",
+          "qty": 1,
+          "applications": [
+            {
+              "code": "FDA0U",
+              "min": 1,
+              "max": 324
+            },
+            {
+              "code": "FDA0V",
+              "min": 1,
+              "max": 1344
+            },
+            {
+              "code": "FDA0W",
+              "min": 1,
+              "max": 3582
+            },
+            {
+              "code": "FDA0X",
+              "min": 1,
+              "max": 642
+            }
+          ]
+        },
+        {
+          "no": "310207-10236",
+          "name": "리어 와이퍼 하네스 · 변경품",
+          "qty": 1,
+          "applications": [
+            {
+              "code": "FDA0U",
+              "min": 325,
+              "max": 999999
+            },
+            {
+              "code": "FDA0V",
+              "min": 1345,
+              "max": 999999
+            },
+            {
+              "code": "FDA0W",
+              "min": 3583,
+              "max": 999999
+            },
+            {
+              "code": "FDA0X",
+              "min": 643,
+              "max": 999999
+            }
+          ]
+        },
+        {
+          "no": "301405-00139",
+          "name": "방향스위치어셈블리",
+          "qty": 1
+        }
+      ]
+    }
+  },
+  "links": {
+    "expert": {
+      "SYM000_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP",
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM000_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM000_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM000_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM000_C05": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM000_C06": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM000_C07": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM000_C08": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM000_C09": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM000_C10": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM000_C11": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM000_C12": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM001_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM001_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP",
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM001_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM002_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM002_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP",
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM002_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM003_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM003_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM003_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM003_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM003_C05": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM003_C06": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM003_C07": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM003_C08": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM003_C09": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM003_C10": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM003_C11": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM004_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM004_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM004_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM004_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM005_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM006_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM006_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM007_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM007_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM007_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM008_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM008_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM009_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM009_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM009_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM009_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM010_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM010_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM010_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM010_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM010_C05": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM010_C06": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM010_C07": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM011_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM011_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM011_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM012_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM012_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM012_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM013_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM013_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM013_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM013_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM013_C05": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM014_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM014_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM014_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM014_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM014_C05": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM015_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM015_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM016_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM016_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM016_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM017_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM017_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM018_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM018_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM019_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM020_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM020_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM021_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM021_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM021_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM021_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM022_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM022_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM022_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM023_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM023_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP",
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM023_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM023_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM023_C05": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM024_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM024_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM024_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM024_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM024_C05": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM024_C06": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM024_C07": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM025_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM025_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM025_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM025_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM026_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM026_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM026_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM026_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM027_C01": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM027_C02": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM027_C03": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM027_C04": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM027_C05": {
+        "groups": [
+          "TRANSMISSION_GROUP"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM028_C01": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM028_C02": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM028_C03": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM028_C04": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM028_C05": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM028_C06": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM029_C01": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM029_C02": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM029_C03": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM029_C04": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM029_C05": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM029_C06": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM029_C07": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM030_C01": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM030_C02": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM030_C03": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM030_C04": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM030_C05": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM031_C01": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM031_C02": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM031_C03": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM031_C04": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM031_C05": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM031_C06": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM032_C01": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM032_C02": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM032_C03": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM033_C01": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM033_C02": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM033_C03": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM033_C04": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM033_C05": {
+        "groups": [
+          "MAIN_CONTROL_VALVE",
+          "LIFT_LOCK_OPTION"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM033_C06": {
+        "groups": [
+          "MAIN_CONTROL_VALVE",
+          "LIFT_LOCK_OPTION"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM033_C07": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM033_C08": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM034_C01": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM034_C02": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM034_C03": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM034_C04": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM035_C01": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM035_C02": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM035_C03": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM035_C04": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM036_C01": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM036_C02": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM036_C03": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM036_C04": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM036_C05": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM037_C01": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM037_C02": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM037_C03": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM037_C04": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM037_C05": {
+        "groups": [
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM038_C01": {
+        "groups": [
+          "MAST_CONFIG"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM038_C02": {
+        "groups": [
+          "MAST_CONFIG"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM039_C01": {
+        "groups": [
+          "MAST_CONFIG"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM039_C02": {
+        "groups": [
+          "MAST_CONFIG"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM040_C01": {
+        "groups": [
+          "MAST_CONFIG"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM040_C02": {
+        "groups": [
+          "MAST_CONFIG"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM041_C01": {
+        "groups": [
+          "MAST_CONFIG"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM041_C02": {
+        "groups": [
+          "MAST_CONFIG"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM042_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM042_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM042_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM042_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM042_C05": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM042_C06": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM042_C07": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM042_C08": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM042_C09": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM043_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM043_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM043_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM043_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM044_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM044_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM045_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM045_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM045_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM045_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM045_C05": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM046_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM046_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM046_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM046_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM046_C05": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM046_C06": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM047_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM047_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM047_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM047_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM047_C05": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM047_C06": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM047_C07": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM048_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM048_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM048_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM048_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM048_C05": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM049_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM049_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM049_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM049_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM049_C05": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM050_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM050_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM050_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM051_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM051_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM051_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM051_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM052_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM052_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM052_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM053_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM053_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM053_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM053_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM053_C05": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM054_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM054_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM054_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM054_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM054_C05": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM054_C06": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM055_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM055_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM055_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM055_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM055_C05": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM055_C06": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM056_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM056_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM056_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM056_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM057_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM057_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM057_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM057_C04": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM058_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM058_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM059_C01": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM059_C02": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM059_C03": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM060_C01": {
+        "groups": [
+          "PARK_ACTUATOR"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM060_C02": {
+        "groups": [
+          "PARK_ACTUATOR"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM060_C03": {
+        "groups": [
+          "PARK_ACTUATOR"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM061_C01": {
+        "groups": [
+          "AC_SYSTEM",
+          "AC_COMPRESSOR"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM061_C02": {
+        "groups": [
+          "AC_SYSTEM",
+          "AC_COMPRESSOR"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM062_C01": {
+        "groups": [
+          "AC_SYSTEM",
+          "AC_COMPRESSOR"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM062_C02": {
+        "groups": [
+          "AC_SYSTEM",
+          "AC_COMPRESSOR"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM063_C01": {
+        "groups": [
+          "AC_SYSTEM",
+          "AC_COMPRESSOR"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM063_C02": {
+        "groups": [
+          "AC_SYSTEM",
+          "AC_COMPRESSOR"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM063_C03": {
+        "groups": [
+          "AC_SYSTEM",
+          "AC_COMPRESSOR"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM063_C04": {
+        "groups": [
+          "AC_SYSTEM",
+          "AC_COMPRESSOR"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      },
+      "SYM063_C05": {
+        "groups": [
+          "AC_SYSTEM",
+          "AC_COMPRESSOR"
+        ],
+        "mode": "candidate_group",
+        "note": "진단결과와 연결된 부품군. 정확 교환품번은 현재차량 모델/Serial/옵션 확인 후 확정."
+      }
+    },
+    "electrical": {
+      "E_STOP_NO": {
+        "groups": [
+          "LIGHTING_STD",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_STOP_ON": {
+        "groups": [
+          "LIGHTING_STD",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_HEAD_NO": {
+        "groups": [
+          "LIGHTING_STD",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_TURN_NO": {
+        "groups": [
+          "LIGHTING_STD",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_HORN_NO": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_BACKUP_NO": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_START_NO": {
+        "groups": [
+          "STARTER",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_CHARGE": {
+        "groups": [
+          "ENGINE_HARNESS",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_PARK_INPUT": {
+        "groups": [
+          "PARK_ACTUATOR",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_LIFT_LOCK": {
+        "groups": [
+          "LIFT_LOCK_OPTION",
+          "MAIN_CONTROL_VALVE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_GAUGE": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_WORK_LAMP": {
+        "groups": [
+          "LIGHTING_STD",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_FR_CONTROL": {
+        "groups": [
+          "TRANSMISSION_GROUP",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_OSS_SEAT_LOCK": {
+        "groups": [
+          "OSS_OPTION",
+          "SEATBELT_INTERLOCK",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_AC_POWER_NO": {
+        "groups": [
+          "AC_SYSTEM",
+          "AC_COMPRESSOR"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_AC_COND_FAN_NO": {
+        "groups": [
+          "AC_SYSTEM",
+          "AC_COMPRESSOR"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_PREHEAT_NO": {
+        "groups": [
+          "ENGINE_GLOW",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_FUEL_HEATER_NO": {
+        "groups": [
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_BRAKE_OIL_WARN": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_CLUSTER_POWER_NO": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_CAN_NETWORK": {
+        "groups": [
+          "ENGINE_ECU",
+          "ENGINE_HARNESS",
+          "OSS_OPTION",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_SEATBELT_INPUT": {
+        "groups": [
+          "SEATBELT_INTERLOCK",
+          "OSS_OPTION"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_LICENSE_NO": {
+        "groups": [
+          "LIGHTING_STD",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_HOURMETER_NO": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_REAR_LAMP_NO": {
+        "groups": [
+          "LIGHTING_STD",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_STROBE_NO": {
+        "groups": [
+          "LIGHTING_STD",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_WATER_GAUGE": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_TM_TEMP_GAUGE": {
+        "groups": [
+          "TRANSMISSION_GROUP",
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_FUEL_GAUGE_ONLY": {
+        "groups": [
+          "CHASSIS_CORE"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_RAIL_PRESSURE": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_BOOST_PRESSURE": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_WATER_TEMP": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_MAF": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_5V_REF": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS",
+          "ENGINE_ECU"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_ECU_NO_COMM": {
+        "groups": [
+          "ENGINE_ECU",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_CRANK_NO_START": {
+        "groups": [
+          "STARTER",
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS",
+          "ENGINE_ECU"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_WIPER_NO": {
+        "groups": [
+          "WIPER_FRONT",
+          "WIPER_REAR"
+        ],
+        "mode": "diagnostic_link",
+        "note": "캐빈 옵션 및 Serial에 따라 와이퍼 모터/하네스 변경"
+      },
+      "E_WASHER_NO": {
+        "groups": [
+          "WIPER_FRONT",
+          "WIPER_REAR"
+        ],
+        "mode": "diagnostic_link",
+        "note": "캐빈 옵션 및 Serial에 따라 와이퍼 모터/하네스 변경"
+      }
+    },
+    "engine": {
+      "E_D24_CRANK_NO_START": {
+        "groups": [
+          "STARTER",
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS",
+          "ENGINE_ECU"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_ECU_NO_COMM": {
+        "groups": [
+          "ENGINE_ECU",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_5V_REF": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS",
+          "ENGINE_ECU"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_RAIL_PRESSURE": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_BOOST_PRESSURE": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_WATER_TEMP": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "E_D24_MAF": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_HARD_START": {
+        "groups": [
+          "STARTER",
+          "ENGINE_GLOW",
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_STALL": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS",
+          "ENGINE_ECU"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_LOW_POWER": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_ROUGH_IDLE": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_BLACK_SMOKE": {
+        "groups": [
+          "ENGINE_SENSOR"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_WHITE_SMOKE": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_GLOW"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_BLUE_SMOKE": {
+        "groups": [
+          "ENGINE_SENSOR"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_OVERHEAT": {
+        "groups": [
+          "ENGINE_SENSOR"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_LOW_OIL_PRESS": {
+        "groups": [
+          "ENGINE_SENSOR"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_LOW_BOOST": {
+        "groups": [
+          "ENGINE_SENSOR"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_PREHEAT": {
+        "groups": [
+          "ENGINE_GLOW",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_FUEL_PRESSURE": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_CRK_CAM_SYNC": {
+        "groups": [
+          "ENGINE_SENSOR",
+          "ENGINE_HARNESS"
+        ],
+        "mode": "diagnostic_link"
+      },
+      "EN_INJECTOR_SEPARATE": {
+        "groups": [
+          "ENGINE_HARNESS",
+          "ENGINE_SENSOR"
+        ],
+        "mode": "diagnostic_link"
+      }
+    }
+  },
+  "coverage": {
+    "expert_links": 268,
+    "expert_total": 268,
+    "electrical_links": 36,
+    "electrical_total": 36,
+    "engine_links": 21,
+    "engine_total": 21,
+    "part_groups": 21
+  },
+  "display_rules": [
+    "현재차량 모델/Serial을 먼저 표시하고 Serial 범위가 구조화된 품번은 적용/제외를 자동 표시",
+    "옵션/형상 의존품은 Serial이 맞아도 실차 옵션 확인 전 자동확정 금지",
+    "부품번호보다 진단 결론과 적용조건을 먼저 표시",
+    "진단결과에서 관련 exploded view를 바로 열 수 있게 함",
+    "OEM 부품도는 근거/위치 확인용; 진단 회로도와 혼합하지 않음"
+  ]
+}

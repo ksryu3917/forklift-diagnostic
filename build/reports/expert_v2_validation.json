@@ -1,0 +1,24 @@
+{
+  "version": "2.9-field-expert-specificity-boundary-v831",
+  "symptoms": 64,
+  "causes": 268,
+  "levels": {
+    "A_OEM_EXECUTABLE": 127,
+    "B_FIELD_EXECUTABLE": 141
+  },
+  "systems": {
+    "트랜스미션": 92,
+    "드라이브 액슬": 20,
+    "유압": 27,
+    "작업장치": 26,
+    "마스트": 8,
+    "스티어링": 38,
+    "브레이크": 45,
+    "주차 브레이크": 3,
+    "에어컨": 9
+  },
+  "scenarios_per_cause": 30,
+  "logic_simulations": 8040,
+  "errors": [],
+  "warnings": []
+}

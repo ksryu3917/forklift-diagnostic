@@ -1,0 +1,11 @@
+{
+  "version": "1.8-rc-expert-v8.1-parts-wiper",
+  "catalog": 38,
+  "graphs": 38,
+  "nodes": 373,
+  "results": 205,
+  "scenarios_per_result": 30,
+  "simulations": 6150,
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,406 @@
+{
+  "version": "1.2-d24-field-location-two-oem-views",
+  "engine": "D24NAP",
+  "manual": "950106-01198",
+  "source_pages": [
+    "3-14~3-29 outside/isometric drawings",
+    "12-3 electric parts",
+    "12-11~12-16 switches and sensors"
+  ],
+  "display_rule": "앱 기본은 재작성 아이소메트릭 zone. 정확 부품도 item이 확인된 센서는 p211의 해당 엔진 방향만 잘라낸 근거뷰를 바로 열고, 전체 p211은 2차 근거로 연다.",
+  "views": [
+    {
+      "id": "iso",
+      "title": "아이소메트릭 빠른 위치",
+      "zones": [
+        {
+          "id": "rail",
+          "label": "커먼레일/상부",
+          "x": 0.57,
+          "y": 0.24
+        },
+        {
+          "id": "top",
+          "label": "인젝터 상부",
+          "x": 0.5,
+          "y": 0.18
+        },
+        {
+          "id": "intake",
+          "label": "흡기매니폴드",
+          "x": 0.68,
+          "y": 0.4
+        },
+        {
+          "id": "air_inlet",
+          "label": "흡기덕트",
+          "x": 0.84,
+          "y": 0.25
+        },
+        {
+          "id": "exhaust",
+          "label": "터보/배기",
+          "x": 0.22,
+          "y": 0.32
+        },
+        {
+          "id": "egr",
+          "label": "EGR",
+          "x": 0.28,
+          "y": 0.23
+        },
+        {
+          "id": "pump",
+          "label": "고압펌프",
+          "x": 0.67,
+          "y": 0.58
+        },
+        {
+          "id": "coolant",
+          "label": "냉각수/서모스탯",
+          "x": 0.38,
+          "y": 0.34
+        },
+        {
+          "id": "timing_top",
+          "label": "타이밍 상부",
+          "x": 0.38,
+          "y": 0.2
+        },
+        {
+          "id": "timing_low",
+          "label": "크랭크/타이밍 하부",
+          "x": 0.34,
+          "y": 0.65
+        },
+        {
+          "id": "block",
+          "label": "실린더블록 측면",
+          "x": 0.47,
+          "y": 0.56
+        },
+        {
+          "id": "fuel_filter",
+          "label": "연료필터 외부",
+          "x": 0.86,
+          "y": 0.66
+        }
+      ]
+    }
+  ],
+  "sensors": [
+    {
+      "id": "EGTS",
+      "callout": 1,
+      "name": "Exhaust Gas Temperature Sensor",
+      "kr": "배기가스 온도센서",
+      "zone": "exhaust",
+      "location": "터보차저 배기측/배기가스 경로",
+      "oem_ref": "D24 §12-3 callout 1 / §12-11",
+      "pins": "2핀; ECU169 GND / ECU194 temperature signal",
+      "parts": {
+        "status": "GROUP_ONLY",
+        "part_numbers": [],
+        "name": "배기가스 온도센서"
+      }
+    },
+    {
+      "id": "CAM",
+      "callout": 2,
+      "name": "Cam Shaft Position Sensor",
+      "kr": "캠축 위치센서",
+      "zone": "timing_top",
+      "location": "실린더헤드/캠 기준 위치, 타이밍기어 측 상부",
+      "oem_ref": "D24 §12-3 callout 2 / §12-14",
+      "pins": "sensor pin2→ECU159 signal, pin3→ECU147 GND; supply 12V (manual table layout must be rechecked before numeric connector-face rendering)",
+      "parts": {
+        "status": "EXACT",
+        "parts_book_item": 4,
+        "part_numbers": [
+          "301308-00135A"
+        ],
+        "name": "캠 스피드 센서"
+      },
+      "parts_location_view": "parts_views/parts_p211_viewB.png",
+      "parts_location_note": "SB5120C05 p211 스위치&센서 부품도에서 해당 item이 표시되는 엔진 방향만 잘라낸 OEM 근거뷰. 앱 기본 아이소메트릭을 대체하지 않음."
+    },
+    {
+      "id": "CRK",
+      "callout": 3,
+      "name": "Crank Shaft Position Sensor",
+      "kr": "크랭크축 위치센서",
+      "zone": "timing_low",
+      "location": "크랭크/타이밍기어 측 하부",
+      "oem_ref": "D24 §12-3 callout 3 / §12-14",
+      "pins": "ECU136 CRS NEG / ECU160 CRS POS / ECU187 shield",
+      "parts": {
+        "status": "GROUP_ONLY",
+        "part_numbers": [],
+        "name": "크랭크 센서",
+        "note": "Parts Book item 8은 CRANK SENSOR 와이어하네스 브라켓만 명시. generic item 6/7을 크랭크센서로 임의 지정하지 않음."
+      }
+    },
+    {
+      "id": "EGR",
+      "callout": 4,
+      "name": "EGR Valve Position Sensor",
+      "kr": "EGR 위치센서",
+      "zone": "egr",
+      "location": "EGR 밸브 어셈블리",
+      "oem_ref": "D24 §12-3 callout 4 / §12-15",
+      "pins": "VREF3/position/GND + H-bridge control; exact connector-face map from §12-15",
+      "parts": {
+        "status": "GROUP_OR_OTHER_PARTS_PAGE",
+        "part_numbers": [],
+        "note": "현재 Parts Book sensor group에서 단일 품번 자동확정하지 않음."
+      }
+    },
+    {
+      "id": "WTS",
+      "callout": 5,
+      "name": "Water Temperature Sensor",
+      "kr": "냉각수 온도센서",
+      "zone": "coolant",
+      "location": "엔진 냉각수 통로/서모스탯 계통",
+      "oem_ref": "D24 §12-3 callout 5 / §12-12",
+      "pins": "pin1→ECU145 GND, pin2→ECU109 temperature signal; 20°C 2.5kΩ, 110°C 0.148kΩ in specifications",
+      "parts": {
+        "status": "EXACT",
+        "parts_book_item": 2,
+        "part_numbers": [
+          "301317-00014D"
+        ],
+        "name": "수온센서"
+      },
+      "parts_location_view": "parts_views/parts_p211_viewB.png",
+      "parts_location_note": "SB5120C05 p211 스위치&센서 부품도에서 해당 item이 표시되는 엔진 방향만 잘라낸 OEM 근거뷰. 앱 기본 아이소메트릭을 대체하지 않음."
+    },
+    {
+      "id": "BTS",
+      "callout": 6,
+      "name": "Boost Temperature Sensor",
+      "kr": "부스트/흡기온도센서",
+      "zone": "intake",
+      "location": "흡기 매니폴드/부스트 공기 통로",
+      "oem_ref": "D24 §12-3 callout 6 / §12-11",
+      "pins": "pin1→ECU123 GND, pin2→ECU106 temperature signal",
+      "parts": {
+        "status": "GROUP_ONLY",
+        "part_numbers": [],
+        "name": "흡기온도/부스트온도센서"
+      }
+    },
+    {
+      "id": "FTS",
+      "callout": 7,
+      "name": "Fuel Temperature Sensor",
+      "kr": "연료 온도센서",
+      "zone": "pump",
+      "location": "고압 연료펌프",
+      "oem_ref": "D24 §12-3 callout 7 / §12-12",
+      "pins": "pin1→ECU110 temperature signal, pin2→ECU146 GND",
+      "parts": {
+        "status": "GROUP_ONLY",
+        "part_numbers": [],
+        "name": "연료온도센서"
+      }
+    },
+    {
+      "id": "IMV",
+      "callout": 8,
+      "name": "Inlet Metering Valve",
+      "kr": "연료 계량밸브(IMV)",
+      "zone": "pump",
+      "location": "고압 연료펌프 입구 계량부",
+      "oem_ref": "D24 §12-3 callout 8 / §12-15",
+      "pins": "PWM control ECU177 (manual circuit table)",
+      "parts": {
+        "status": "GROUP_OR_OTHER_PARTS_PAGE",
+        "part_numbers": [],
+        "note": "현재 Parts Book sensor group에서 단일 품번 자동확정하지 않음."
+      }
+    },
+    {
+      "id": "OPTS",
+      "callout": 9,
+      "name": "Oil Pressure and Temperature Sensor",
+      "kr": "오일 압력/온도센서",
+      "zone": "block",
+      "location": "엔진 블록 오일 갤러리/윤활계통",
+      "oem_ref": "D24 §12-3 callout 9 / §12-12",
+      "pins": "pin1→ECU148 GND, pin2→ECU104 temp, pin3→ECU165 5V, pin4→ECU111 pressure",
+      "parts": {
+        "status": "EXACT",
+        "parts_book_item": 3,
+        "part_numbers": [
+          "65.27427-7001"
+        ],
+        "name": "오일 압력 및 온도 센서"
+      },
+      "parts_location_view": "parts_views/parts_p211_viewB.png",
+      "parts_location_note": "SB5120C05 p211 스위치&센서 부품도에서 해당 item이 표시되는 엔진 방향만 잘라낸 OEM 근거뷰. 앱 기본 아이소메트릭을 대체하지 않음."
+    },
+    {
+      "id": "KNOCK",
+      "callout": 10,
+      "name": "Knock Sensor",
+      "kr": "노크센서",
+      "zone": "block",
+      "location": "실린더 블록 측면",
+      "oem_ref": "D24 §12-3 callout 10 / §12-14~15",
+      "pins": "piezo sensor; exact #1/#2 pins per §12-14~15",
+      "parts": {
+        "status": "GROUP_ONLY",
+        "part_numbers": [],
+        "name": "노크센서"
+      }
+    },
+    {
+      "id": "BPS",
+      "callout": 11,
+      "name": "Boost Pressure Sensor",
+      "kr": "부스트 압력센서",
+      "zone": "intake",
+      "location": "흡기 매니폴드",
+      "oem_ref": "D24 §12-3 callout 11 / §12-11",
+      "pins": "pin1→ECU161 5V, pin2→ECU167 GND, pin3→ECU112 pressure",
+      "parts": {
+        "status": "EXACT_FAMILY_WITH_ALTERNATES",
+        "parts_book_item": 1,
+        "part_numbers": [
+          "301318-00012A",
+          "301318-00013B",
+          "301318-00007A"
+        ],
+        "name": "부스트 센서",
+        "note": "Parts Book에 대체/변경 후보가 함께 표기. 모델/Serial/현물 확인 후 확정."
+      },
+      "parts_location_view": "parts_views/parts_p211_viewA.png",
+      "parts_location_note": "SB5120C05 p211 스위치&센서 부품도에서 해당 item이 표시되는 엔진 방향만 잘라낸 OEM 근거뷰. 앱 기본 아이소메트릭을 대체하지 않음."
+    },
+    {
+      "id": "RPS",
+      "callout": 12,
+      "name": "Rail Pressure Sensor",
+      "kr": "레일압력센서",
+      "zone": "rail",
+      "location": "커먼레일 끝단",
+      "oem_ref": "D24 §12-3 callout 12 / §12-12",
+      "pins": "pin1→ECU135 pressure, pin2→ECU119 GND, pin3→ECU138 5V",
+      "parts": {
+        "status": "GROUP_ONLY",
+        "part_numbers": [],
+        "name": "레일압력센서",
+        "note": "Parts Book page211의 generic 센서 item 6/7 기능을 원문이 특정하지 않아 품번 자동확정 금지."
+      }
+    },
+    {
+      "id": "INJ4",
+      "callout": 13,
+      "name": "Injector #4",
+      "kr": "4번 인젝터",
+      "zone": "top",
+      "location": "실린더헤드 상부 #4",
+      "oem_ref": "D24 §12-3 callout 13 / §12-13",
+      "pins": "ECU125 low side / ECU103 high side",
+      "parts": {
+        "status": "GROUP_OR_OTHER_PARTS_PAGE",
+        "part_numbers": [],
+        "note": "현재 Parts Book sensor group에서 단일 품번 자동확정하지 않음."
+      }
+    },
+    {
+      "id": "INJ3",
+      "callout": 14,
+      "name": "Injector #3",
+      "kr": "3번 인젝터",
+      "zone": "top",
+      "location": "실린더헤드 상부 #3",
+      "oem_ref": "D24 §12-3 callout 14 / §12-13",
+      "pins": "ECU175 low side / ECU151 high side",
+      "parts": {
+        "status": "GROUP_OR_OTHER_PARTS_PAGE",
+        "part_numbers": [],
+        "note": "현재 Parts Book sensor group에서 단일 품번 자동확정하지 않음."
+      }
+    },
+    {
+      "id": "INJ2",
+      "callout": 15,
+      "name": "Injector #2",
+      "kr": "2번 인젝터",
+      "zone": "top",
+      "location": "실린더헤드 상부 #2",
+      "oem_ref": "D24 §12-3 callout 15 / §12-13",
+      "pins": "ECU174 low side / ECU150 high side",
+      "parts": {
+        "status": "GROUP_OR_OTHER_PARTS_PAGE",
+        "part_numbers": [],
+        "note": "현재 Parts Book sensor group에서 단일 품번 자동확정하지 않음."
+      }
+    },
+    {
+      "id": "INJ1",
+      "callout": 16,
+      "name": "Injector #1",
+      "kr": "1번 인젝터",
+      "zone": "top",
+      "location": "실린더헤드 상부 #1",
+      "oem_ref": "D24 §12-3 callout 16 / §12-13",
+      "pins": "ECU126 low side / ECU127 high side",
+      "parts": {
+        "status": "GROUP_OR_OTHER_PARTS_PAGE",
+        "part_numbers": [],
+        "note": "현재 Parts Book sensor group에서 단일 품번 자동확정하지 않음."
+      }
+    },
+    {
+      "id": "MAF",
+      "callout": null,
+      "name": "Mass Air Flow Sensor",
+      "kr": "흡입공기유량/온도센서(MAF)",
+      "zone": "air_inlet",
+      "location": "에어클리너 이후 초기 흡기 덕트",
+      "oem_ref": "D24 §12-11",
+      "pins": "pin1→ECU228 flow frequency, pin2→ECU235 intake temp, pin3→ECU120 GND, pin4→ECU137 12V",
+      "parts": {
+        "status": "EXACT",
+        "parts_book_item": 5,
+        "part_numbers": [
+          "301308-00376"
+        ],
+        "name": "공기 흐름 센서"
+      },
+      "parts_location_view": "parts_views/parts_p211_viewB.png",
+      "parts_location_note": "SB5120C05 p211 스위치&센서 부품도에서 해당 item이 표시되는 엔진 방향만 잘라낸 OEM 근거뷰. 앱 기본 아이소메트릭을 대체하지 않음."
+    },
+    {
+      "id": "WIFS",
+      "callout": null,
+      "name": "Water In Fuel Sensor",
+      "kr": "연료 수분센서",
+      "zone": "fuel_filter",
+      "location": "연료필터/수분분리기",
+      "oem_ref": "D24 §12-16",
+      "pins": "connector pin map from §12-16; do not invent if raster unavailable",
+      "parts": {
+        "status": "GROUP_OR_OTHER_PARTS_PAGE",
+        "part_numbers": [],
+        "note": "현재 Parts Book sensor group에서 단일 품번 자동확정하지 않음."
+      }
+    }
+  ],
+  "accuracy": {
+    "zone_geometry": "APP_REDRAW_NOT_DIMENSIONAL",
+    "callout_1_16": "OEM §12-3 NUMBERED",
+    "connector_pins": "OEM text/table where recorded",
+    "warning": "장착 사양(DL02-...)에 따라 외형 배치가 다를 수 있으므로 차량 엔진 코드/사양을 선택한 후 표시"
+  },
+  "parts_book": {
+    "title": "SB5120C05",
+    "group": "EDL02-P709-048 스위치 & 센서",
+    "pdf_page": 211,
+    "asset": "parts_views/parts_p211.png",
+    "rule": "Parts Book item 번호와 D24 정비매뉴얼 §12-3 callout 번호는 서로 다른 체계이므로 동일 번호로 간주하지 않는다."
+  }
+}
