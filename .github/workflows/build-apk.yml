@@ -29,8 +29,50 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Validate diagnostic graphs
-        run: python3 tools/validate_transmission_graph.py
+      - name: Validate field-executable diagnostics
+        run: python3 tools/validate_field_diagnostics.py
+
+      - name: Validate electrical diagnostics
+        run: python3 tools/validate_electrical_diagnostics.py
+
+      - name: Validate expert cause diagnostics
+        run: python3 tools/validate_expert_v2.py
+
+      - name: Validate D24 engine diagnostics
+        run: python3 tools/validate_engine_d24_v2.py
+
+      - name: Validate strict field readiness
+        run: |
+          python3 tools/validate_field_readiness_v3.py
+          python3 tools/build_field_readiness_v5.py
+
+      - name: Validate Parts Book integration
+        run: python3 tools/validate_parts_reference.py
+
+      - name: Validate diagnostic-first UI priority
+        run: python3 tools/validate_diagnostic_first_priority.py
+
+      - name: Validate technician location map
+        run: |
+          python3 tools/validate_field_location_map.py .
+          python3 tools/validate_engine_sensor_locator.py .
+
+      - name: Validate measurement / test-point locator
+        run: python3 tools/validate_test_point_locator.py .
+
+      - name: Validate field measurement worksheet
+        run: python3 tools/validate_measurement_worksheet.py .
+
+      - name: Validate OEM-exact automatic evaluation
+        run: python3 tools/validate_oem_auto_evaluation.py .
+
+      - name: Validate adaptive multi-point branch engine
+        run: python3 tools/validate_adaptive_branch_v89.py .
+
+      - name: Audit cause-specific diagnostic separation
+        run: |
+          python3 tools/validate_diagnostic_specificity.py .
+          python3 tools/build_field_readiness_v7.py .
 
       - name: Stamp diagnostic release identity
         env:
@@ -61,12 +103,12 @@ jobs:
           from pathlib import Path
           gradle = Path("app/build.gradle").read_text(encoding="utf-8")
           match = re.search(r'versionName\s+"([^"]+)"', gradle)
-          assert match and match.group(1) == "0.18-rc-auto", match.group(1) if match else "missing versionName"
+          assert match and match.group(1) == "0.18-rc-expert-v8.9-adaptive-branch", match.group(1) if match else "missing versionName"
           apk = Path("app/build/outputs/apk/debug/app-debug.apk")
           with zipfile.ZipFile(apk) as archive:
               release = json.loads(archive.read("assets/diagnostic_release.json").decode("utf-8"))
           assert release["release"] == "v18", release
-          assert release["state"] == "RC AUTO", release
+          assert release["state"] == "RC EXPERT V8.9 ADAPTIVE BRANCH", release
           assert release["version_name"] == match.group(1), release
           assert release["git_commit_sha"] == os.environ["BUILD_SHA"], release
           assert release["source_branch"] == os.environ["BUILD_BRANCH"] == "v18-rc-auto", release
@@ -76,13 +118,27 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: forklift-diagnostic-v18-rc-auto-${{ github.sha }}-apk
+          name: forklift-diagnostic-v18-rc-expert-v8.9-adaptive-branch-${{ github.sha }}-apk
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
 
-      - name: Upload diagnostic validation report
+      - name: Upload diagnostic validation reports
         uses: actions/upload-artifact@v4
         with:
-          name: forklift-diagnostic-v18-${{ github.sha }}-validation
-          path: build/reports/transmission_graph_validation.*
+          name: forklift-diagnostic-v18-expert-v8.9-adaptive-branch-${{ github.sha }}-validation
+          path: |
+            build/reports/field_exec_validation.*
+            build/reports/electrical_validation.*
+            build/reports/expert_v2_validation.*
+            build/reports/engine_d24_v2_validation.*
+            build/reports/parts_reference_validation.*
+            build/reports/diagnostic_specificity_v83.md
+            build/reports/test_point_locator_v86.md
+            build/reports/measurement_worksheet_v87.md
+            build/reports/oem_auto_eval_v88.md
+            build/reports/adaptive_branch_v89.md
+            build/reports/FIELD_READINESS_V5.*
+            build/reports/FIELD_READINESS_V7_LOCATION.md
+            build/reports/FULL_REASSESSMENT.md
+            FIELD_DIAGNOSTIC_AUDIT.md
           retention-days: 30
