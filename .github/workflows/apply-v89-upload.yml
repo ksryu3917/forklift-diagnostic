@@ -3,7 +3,8 @@ name: Apply uploaded V8.9 patch
 on:
   push:
     branches: [v18-rc-auto]
-    paths: [forklift_field_expert_v8_9_adaptive_branch.zip]
+    paths:
+      - 'v89.zip.part.*'
 
 permissions:
   contents: write
@@ -16,13 +17,15 @@ jobs:
         with:
           ref: v18-rc-auto
           fetch-depth: 0
-      - name: Expand patch into repository
+      - name: Reassemble and expand patch
         run: |
-          rm -rf "$RUNNER_TEMP/v89"
+          cat v89.zip.part.* > "$RUNNER_TEMP/v89.zip"
+          echo "361246b53ff95dd3283fb55da05d2e1c56cba84208e9151cd81156e96318591a  $RUNNER_TEMP/v89.zip" | sha256sum -c -
           mkdir -p "$RUNNER_TEMP/v89"
-          unzip -q forklift_field_expert_v8_9_adaptive_branch.zip -d "$RUNNER_TEMP/v89"
+          unzip -q "$RUNNER_TEMP/v89.zip" -d "$RUNNER_TEMP/v89"
           rsync -a "$RUNNER_TEMP/v89/expert_v89/" ./
           rm -f forklift_field_expert_v8_9_adaptive_branch.zip
+          rm -f v89.zip.part.*
           rm -f .github/workflows/apply-v89-upload.yml
       - name: Commit applied source
         run: |
