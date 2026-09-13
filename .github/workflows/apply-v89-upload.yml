@@ -4,7 +4,7 @@ on:
   push:
     branches: [v18-rc-auto]
     paths:
-      - 'v89.zip.part.*'
+      - 'apply-v89-now.txt'
 
 permissions:
   contents: write
@@ -23,14 +23,15 @@ jobs:
           echo "361246b53ff95dd3283fb55da05d2e1c56cba84208e9151cd81156e96318591a  $RUNNER_TEMP/v89.zip" | sha256sum -c -
           mkdir -p "$RUNNER_TEMP/v89"
           unzip -q "$RUNNER_TEMP/v89.zip" -d "$RUNNER_TEMP/v89"
-          rsync -a "$RUNNER_TEMP/v89/expert_v89/" ./
+          rsync -a --exclude '.github/workflows/build-apk.yml' "$RUNNER_TEMP/v89/expert_v89/" ./
           rm -f forklift_field_expert_v8_9_adaptive_branch.zip
           rm -f v89.zip.part.*
+          rm -f apply-v89-now.txt
           rm -f .github/workflows/apply-v89-upload.yml
       - name: Commit applied source
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add -A
-          git commit -m "Apply RC EXPERT V8.9 adaptive branch"
+          git commit -m "Apply RC EXPERT V8.9 adaptive branch source"
           git push origin HEAD:v18-rc-auto
