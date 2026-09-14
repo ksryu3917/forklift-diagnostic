@@ -178,14 +178,22 @@ jobs:
           profile: pixel_2
           disable-animations: true
           script: |
-            gradle :app:connectedDebugAndroidTest
+            test_status=0
+            gradle :app:connectedDebugAndroidTest || test_status=$?
             mkdir -p build/runtime-ui
-            adb pull /sdcard/Download/v892-runtime/. build/runtime-ui/
-            test "$(find build/runtime-ui -name '*.png' | wc -l)" -eq 9
+            adb pull /sdcard/Download/v892-runtime/. build/runtime-ui/ || true
+            if [ "$test_status" -eq 0 ]; then
+              test "$(find build/runtime-ui -name '*.png' | wc -l)" -eq 9
+            fi
+            exit "$test_status"
 
       - name: Upload actual runtime screenshots
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: forklift-diagnostic-v892-runtime-ui-${{ github.sha }}
-          path: build/runtime-ui/*.png
+          path: |
+            build/runtime-ui/*.png
+            app/build/outputs/androidTest-results/connected/**
+            app/build/reports/androidTests/connected/**
           retention-days: 30
