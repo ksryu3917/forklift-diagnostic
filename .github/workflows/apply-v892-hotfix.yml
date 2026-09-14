@@ -1,0 +1,35 @@
+name: Apply V8.9.2 quick UI overlay
+
+on:
+  push:
+    branches: [v18-rc-auto]
+    paths: [forklift_v8_9_2_quick_ui_hotfix_runtime.zip]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v18-rc-auto
+          fetch-depth: 0
+      - name: Overlay V8.9.2 files
+        run: |
+          rm -rf "$RUNNER_TEMP/v892"
+          mkdir -p "$RUNNER_TEMP/v892"
+          unzip -q forklift_v8_9_2_quick_ui_hotfix_runtime.zip -d "$RUNNER_TEMP/v892"
+          rsync -a --exclude '.github/workflows/build-apk.yml' "$RUNNER_TEMP/v892/" ./
+          rm -f forklift_v8_9_2_quick_ui_hotfix_runtime.zip
+          rm -f .github/workflows/apply-v892-hotfix.yml
+      - name: Validate overlay package
+        run: python3 tools/validate_v892_quick_ui.py .
+      - name: Commit overlay source
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Apply V8.9.2 QUICK UI overlay"
+          git push origin HEAD:v18-rc-auto
