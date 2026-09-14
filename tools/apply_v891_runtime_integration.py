@@ -19,9 +19,9 @@ if 'EngineExpertDiagnosticActivity.class' not in s:
     s=s.replace(old_engine,new_engine,1)
 
 # 2) Electrical expert entry on the vehicle-diagnosis screen.
-needle='''        body.addView(c);\n    }\n\n    private void searchSymptoms(String term){'''
+needle='''body.addView(c);\n    }\n\n    private void searchSymptoms(String term){'''
 if 'Button el=btn("⚡ 전기 / 차체전장 진단"' not in s:
-    replacement='''        Button el=btn("⚡ 전기 / 차체전장 진단",true);el.setOnClickListener(v->startActivity(new Intent(MainActivity.this,ElectricalDiagnosticActivity.class)));c.addView(el);\n        body.addView(c);\n    }\n\n    private void searchSymptoms(String term){'''
+    replacement='''Button el=btn("⚡ 전기 / 차체전장 진단",true);el.setOnClickListener(v->startActivity(new Intent(MainActivity.this,ElectricalDiagnosticActivity.class)));c.addView(el);\n        body.addView(c);\n    }\n\n    private void searchSymptoms(String term){'''
     n=s.count(needle)
     if n!=1: raise SystemExit(f'electrical entry baseline mismatch: {n}')
     s=s.replace(needle,replacement,1)
