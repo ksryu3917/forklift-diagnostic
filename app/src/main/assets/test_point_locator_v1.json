@@ -7183,7 +7183,7 @@
     "EL_LICENSE": {
       "title": "번호판등 · lamp B+/GND",
       "system": "전장",
-      "summary": "다른 tail/rear lamp와 비교해 공통 lamp relay/feed인지 번호판등 로컬 branch인지 가른다",
+      "summary": "번호판등 단독 불량이면 소켓 +전원→접지→전구/소켓 순으로 끝낸다. 다른 미등도 함께 불량일 때만 공통 LAMP 전원/릴레이/스위치로 올라간다.",
       "tools": [
         "DMM MIN/MAX",
         "백프로브",
@@ -7197,52 +7197,56 @@
       "points": [
         {
           "id": "LP1",
-          "label": "다른 rear/tail lamp 비교",
-          "where": "rear lamp group",
-          "connect": "같은 light-switch 상태에서 동시작동 비교",
-          "condition": "LIGHT ON",
+          "label": "다른 미등/후미등 정상 여부",
+          "where": "후미등/미등 그룹",
+          "connect": "같은 라이트 스위치 상태에서 다른 미등/후미등 작동 비교",
+          "condition": "라이트 ON",
           "source_class": "FIELD_ISOLATION",
           "x": 0.18,
           "y": 0.3,
-          "decision": "다른 rear lamps도 dead→common feed; license only→local"
+          "decision": "다른 미등도 꺼짐 → 공통 전원계통; 번호판등만 꺼짐 → 로컬 분기"
         },
         {
           "id": "LP2",
-          "label": "License lamp B+",
-          "where": "license lamp connector/socket",
-          "connect": "B+↔local GND loaded voltage",
-          "condition": "LIGHT ON",
+          "label": "번호판등 +전원",
+          "where": "번호판등 소켓/커넥터",
+          "connect": "번호판등 +단자 ↔ 로컬 접지 간 부하전압",
+          "condition": "라이트 ON",
           "source_class": "FIELD_METHOD",
           "x": 0.55,
           "y": 0.3,
-          "decision": "B+ 없음→branch/harness; 있음→GND/bulb"
+          "decision": "+전원 없음 → 번호판등 분기배선/하네스; 있음 → 접지/전구 쪽"
         },
         {
           "id": "LP3",
-          "label": "License GND drop",
-          "where": "lamp GND↔battery -POST",
-          "connect": "loaded voltage drop",
-          "condition": "LIGHT ON",
+          "label": "번호판등 접지 전압강하",
+          "where": "번호판등 접지 ↔ 배터리 -포스트",
+          "connect": "점등 명령 상태에서 부하 전압강하",
+          "condition": "라이트 ON",
           "source_class": "FIELD_METHOD",
           "x": 0.78,
           "y": 0.55,
-          "decision": "B+ normal+GND bad→ground"
+          "decision": "+전원 정상 + 접지 전압강하 이상 → 접지선/접지점"
         },
         {
           "id": "LP4",
-          "label": "LAMP relay/light-switch common",
-          "where": "relay #4 / light switch feed",
-          "connect": "common rear-light output comparison",
-          "condition": "LIGHT ON",
-          "source_class": "OEM_PLUS_FIELD",
+          "label": "공통 LAMP 릴레이 / 라이트 스위치",
+          "where": "LAMP 릴레이 #4 / 라이트 스위치 전원",
+          "connect": "다른 후미등도 함께 불량일 때 공통 전원 출력 비교",
+          "condition": "라이트 ON",
+          "source_class": "OEM_VERIFY",
           "x": 0.35,
           "y": 0.58,
-          "expected": "BAT2 20A→LAMP relay #4; ACC15 light-switch feed",
-          "decision": "other lamps also fail only"
+          "expected": "LAMP relay #4/라이트 스위치 공통경로. 퓨즈 정격은 매뉴얼 세대/사양별 표기가 달라 현재 차량 퓨즈표·회로도로 확인.",
+          "decision": "공통등도 함께 불량일 때만 상류 전원/릴레이/스위치 추적",
+          "note": "서비스 매뉴얼의 램프 퓨즈 표기와 D24 O&M의 BAT2 표기가 상충하므로 정격을 한 값으로 단정하지 않는다."
         }
       ],
       "decision_rules": [
-        "번호판등 단독불량이면 relay부터 바꾸지 말고 socket B+/GND 먼저."
+        "다른 미등/후미등이 정상이면 공통 릴레이부터 건드리지 않는다.",
+        "번호판등 소켓 +전원이 없으면 로컬 분기/후방 하네스를 추적한다.",
+        "+전원과 접지가 모두 정상인데 점등하지 않으면 전구/소켓 접촉을 확인한다.",
+        "다른 미등도 함께 불량일 때만 공통 LAMP 전원/릴레이/라이트 스위치를 확인한다."
       ],
       "oem_images": [
         "oem_pages/p370.jpg"
@@ -7256,7 +7260,114 @@
       "focus_ids": [
         "REAR_LIGHT",
         "UNDER_SEAT_RELAY"
-      ]
+      ],
+      "adaptive_branch": {
+        "mode": "ordered_first_match",
+        "rule": "번호판등 단독불량과 공통 램프불량을 먼저 나눈 뒤 필요한 한 점만 보여준다.",
+        "note": "공통등이 정상인데 LAMP 릴레이부터 교환하지 않는다.",
+        "rules": [
+          {
+            "id": "LP-R3",
+            "when": {
+              "LP1": "PASS",
+              "LP2": "PASS",
+              "LP3": "FAIL"
+            },
+            "title": "번호판등 접지계통",
+            "level": "ISOLATED",
+            "assessment": "소켓 +전원은 정상이고 접지 전압강하가 비정상이다.",
+            "excludes": [
+              "공통 전원",
+              "번호판등 +전원 분기"
+            ],
+            "next_points": [],
+            "caution": "접지선/접지점 체결·부식·크림프를 확인."
+          },
+          {
+            "id": "LP-R4",
+            "when": {
+              "LP1": "PASS",
+              "LP2": "PASS",
+              "LP3": "PASS"
+            },
+            "title": "전구/소켓 접촉 영역",
+            "level": "ISOLATED",
+            "assessment": "번호판등 소켓 +전원과 접지가 모두 정상이다. 전구/LED 모듈/소켓 접촉을 확인한다.",
+            "excludes": [
+              "공통 전원",
+              "후방 +전원 분기",
+              "접지선"
+            ],
+            "next_points": [],
+            "caution": "부하가 걸린 상태에서 +전원과 접지를 확인한 결과여야 한다."
+          },
+          {
+            "id": "LP-R2",
+            "when": {
+              "LP1": "PASS",
+              "LP2": "FAIL"
+            },
+            "title": "번호판등 로컬 +전원 분기",
+            "level": "ISOLATED",
+            "assessment": "다른 미등은 정상인데 번호판등 소켓에 +전원이 없다. 후방 하네스의 번호판등 분기/커넥터를 추적한다.",
+            "excludes": [
+              "공통 LAMP 릴레이",
+              "전구 자체 단선만의 문제"
+            ],
+            "next_points": [],
+            "caution": "근처 정상 미등 +전원과 비교하면 분기 지점을 빠르게 찾을 수 있다."
+          },
+          {
+            "id": "LP-R6",
+            "when": {
+              "LP1": "PASS",
+              "LP2": "PASS"
+            },
+            "title": "접지 확인",
+            "level": "NARROWED",
+            "assessment": "번호판등 +전원이 들어온다. 다음은 접지 전압강하다.",
+            "excludes": [
+              "번호판등 +전원 단선"
+            ],
+            "next_points": [
+              "LP3"
+            ],
+            "caution": ""
+          },
+          {
+            "id": "LP-R1",
+            "when": {
+              "LP1": "FAIL"
+            },
+            "title": "공통 램프 전원계통으로 이동",
+            "level": "UPSTREAM",
+            "assessment": "번호판등뿐 아니라 다른 미등/후미등도 함께 불량이다.",
+            "excludes": [
+              "번호판등 단독 로컬불량"
+            ],
+            "next_points": [
+              "LP4"
+            ],
+            "caution": "현재 차량 퓨즈 정격/사양을 먼저 확인."
+          },
+          {
+            "id": "LP-R5",
+            "when": {
+              "LP1": "PASS"
+            },
+            "title": "번호판등 단독불량 경로",
+            "level": "NARROWED",
+            "assessment": "다른 미등/후미등이 정상이다. 공통 램프계통은 우선순위를 낮추고 번호판등 소켓부터 본다.",
+            "excludes": [
+              "공통 LAMP relay 1순위"
+            ],
+            "next_points": [
+              "LP2"
+            ],
+            "caution": ""
+          }
+        ]
+      }
     },
     "EL_HOURMETER": {
       "title": "아워미터 · supply/run-signal/ground",

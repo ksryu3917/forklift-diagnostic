@@ -14,6 +14,7 @@ import java.util.*;
 public class ElectricalDiagnosticActivity extends Activity {
     private LinearLayout body;
     private JSONObject data;
+    private boolean detailEvidence=false;
     private final int NAVY=Color.rgb(16,38,58), BLUE=Color.rgb(17,117,214), BG=Color.rgb(242,245,247);
 
     @Override public void onCreate(Bundle b){
@@ -106,23 +107,40 @@ public class ElectricalDiagnosticActivity extends Activity {
     private void renderGraph(String gid,String nodeId)throws Exception{
         JSONObject g=data.getJSONObject("graphs").getJSONObject(gid),n=g.getJSONObject("nodes").getJSONObject(nodeId);
         base(g.optString("title"));
-        JSONObject item=catalogItem(gid);if(item!=null)sourceCard(item);
-        Button loc=btn("◎ 이 고장 점검 위치맵",true); loc.setOnClickListener(v->{android.content.Intent it=new android.content.Intent(this,FieldLocationMapActivity.class);it.putExtra("graph_id",gid);startActivity(it);}); body.addView(loc);
-        if(hasTestPointGraph(gid)){
-            Button tp=btn("⊙ 프로브 / 측정포인트 바로보기",true);
-            tp.setOnClickListener(v->{android.content.Intent it=new android.content.Intent(this,TestPointLocatorActivity.class);it.putExtra("graph_id",gid);startActivity(it);});
-            body.addView(tp);
-        }
-        if(g.optString("engine_sensor_map").length()>0){ Button sm=btn("D24 센서 위치 / 핀맵",false); sm.setOnClickListener(v->startActivity(new android.content.Intent(this,EngineSensorMapActivity.class))); body.addView(sm); }
-        JSONObject cir=data.getJSONObject("circuits").optJSONObject(g.optString("circuit"));
-        if(cir!=null)addCircuitEvidence(cir,nodeId);
-        LinearLayout h=card();h.addView(tv(n.optString("title"),18,true));
+
+        LinearLayout h=card();
+        h.addView(tv("지금 확인",13,true));
+        h.addView(tv(n.optString("title"),19,true));
         if(n.optString("question").length()>0)h.addView(tv(n.optString("question"),16,true));
-        addSection(h,"현장 확인 방법",n.optJSONArray("field_method"),"① ");
-        addSection(h,"공구",n.optJSONArray("tools"),"• ");body.addView(h);
-        if("result".equals(n.optString("type"))){showResult(n);Button pr=btn("분해도 / 부품 위치 참고 (품번은 후순위)",false);pr.setOnClickListener(v->openParts("electrical",gid));body.addView(pr);return;}
-        JSONArray ch=n.optJSONArray("choices");if(ch!=null)for(int i=0;i<ch.length();i++){
-            JSONObject o=ch.getJSONObject(i);Button b=btn(o.optString("label"),i==0);final String next=o.optString("next");b.setOnClickListener(v->{try{renderGraph(gid,next);}catch(Exception e){fatal(e.toString());}});body.addView(b);
+        JSONArray fm=n.optJSONArray("field_method");if(fm!=null){for(int i=0;i<fm.length()&&i<3;i++)h.addView(tv("• "+fm.optString(i),13,false));}
+        body.addView(h);
+
+        if("result".equals(n.optString("type"))){
+            LinearLayout r=card();r.addView(tv("판정",14,true));r.addView(tv(n.optString("result"),18,true));
+            JSONArray ci=n.optJSONArray("confirm_if");if(ci!=null&&ci.length()>0)r.addView(tv("확정 · "+ci.optString(0),13,true));
+            if(n.optString("disassembly_gate").length()>0)r.addView(tv("분해/교환 · "+n.optString("disassembly_gate"),12,false));body.addView(r);
+        }else{
+            JSONArray ch=n.optJSONArray("choices");if(ch!=null)for(int i=0;i<ch.length();i++){
+                JSONObject o=ch.getJSONObject(i);Button b=btn(o.optString("label"),i==0);final String next=o.optString("next");b.setOnClickListener(v->{try{detailEvidence=false;renderGraph(gid,next);}catch(Exception e){fatal(e.toString());}});body.addView(b);
+            }
+        }
+
+        if(hasTestPointGraph(gid)){
+            Button tp=btn("▶ 바로 측정 · 다음 한 점만 보기",true);
+            tp.setOnClickListener(v->{android.content.Intent it=new android.content.Intent(this,TestPointLocatorActivity.class);it.putExtra("graph_id",gid);startActivity(it);});body.addView(tp);
+        }
+        Button loc=btn("◎ 차량에서 점검 위치 보기",false);loc.setOnClickListener(v->{android.content.Intent it=new android.content.Intent(this,FieldLocationMapActivity.class);it.putExtra("graph_id",gid);startActivity(it);});body.addView(loc);
+        if(g.optString("engine_sensor_map").length()>0){Button sm=btn("◎ D24 센서 위치 / 핀맵",false);sm.setOnClickListener(v->startActivity(new android.content.Intent(this,EngineSensorMapActivity.class)));body.addView(sm);}
+
+        JSONObject cir=data.getJSONObject("circuits").optJSONObject(g.optString("circuit"));
+        if(!detailEvidence){
+            Button more=btn("회로 · 퓨즈/릴레이 · OEM 근거 보기",false);more.setOnClickListener(v->{try{detailEvidence=true;renderGraph(gid,nodeId);}catch(Exception e){fatal(e.toString());}});body.addView(more);
+        }else{
+            Button less=btn("← 상세 근거 접기",false);less.setOnClickListener(v->{try{detailEvidence=false;renderGraph(gid,nodeId);}catch(Exception e){fatal(e.toString());}});body.addView(less);
+            JSONObject item=catalogItem(gid);if(item!=null)sourceCard(item);
+            if(cir!=null)addCircuitEvidence(cir,nodeId);
+            LinearLayout tools=card();addSection(tools,"공구",n.optJSONArray("tools"),"• ");if(tools.getChildCount()>0)body.addView(tools);
+            if("result".equals(n.optString("type"))){showResult(n);Button pr=btn("분해도 / 부품 위치 참고 (품번은 후순위)",false);pr.setOnClickListener(v->openParts("electrical",gid));body.addView(pr);}
         }
     }
 
@@ -218,7 +236,7 @@ public class ElectricalDiagnosticActivity extends Activity {
     private void addAssetImage(String asset){
         try{InputStream is=getAssets().open(asset);Bitmap bm=BitmapFactory.decodeStream(is);is.close();if(bm==null)return;LinearLayout c=card();c.addView(tv("회로 확대 · "+asset.substring(asset.lastIndexOf('/')+1),13,true));ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);iv.setOnClickListener(v->showBitmap(bm));c.addView(iv,new LinearLayout.LayoutParams(-1,dp(280)));body.addView(c);}catch(Exception ignore){}
     }
-    private void showBitmap(Bitmap bm){Dialog d=new Dialog(this);ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);d.setContentView(iv);Window w=d.getWindow();if(w!=null)w.setLayout(-1,-1);d.show();if(d.getWindow()!=null)d.getWindow().setLayout(-1,-1);}
+    private void showBitmap(Bitmap bm){ZoomImageDialog.show(this,bm);}
     private void showResult(JSONObject n){
         LinearLayout r=card();r.addView(tv("판정",16,true));r.addView(tv(n.optString("result"),17,true));body.addView(r);
         addResult("현장 공구",n.optJSONArray("field_tools"));addResult("현장 확인 / 재현 시험",n.optJSONArray("field_test"));addResult("먼저 배제한 원인",n.optJSONArray("rule_out"));addResult("확정 조건",n.optJSONArray("confirm_if"));

@@ -97,6 +97,6 @@ public class FieldLocationMapActivity extends Activity {
     private void showLocationCharts(){final String[] a={"parts_views/parts_p1570.png","parts_views/parts_p1571.png","parts_views/parts_p1572.png"};showAssetList(a,0);}
     private void showAssetList(String[] a,int i){if(i>=a.length)return;showAsset(a[i]);}
     private void showAsset(String asset){try{InputStream is=getAssets().open(asset);Bitmap bm=BitmapFactory.decodeStream(is);is.close();if(bm!=null)showBitmap(bm);}catch(Exception e){Toast.makeText(this,"OEM 이미지를 열 수 없습니다: "+asset,Toast.LENGTH_SHORT).show();}}
-    private void showBitmap(Bitmap bm){Dialog d=new Dialog(this);ScrollView sv=new ScrollView(this);ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);sv.addView(iv);d.setContentView(sv);d.show();if(d.getWindow()!=null)d.getWindow().setLayout(-1,-1);}
+    private void showBitmap(Bitmap bm){ZoomImageDialog.show(this,bm);}
     private void fatal(String s){TextView t=new TextView(this);t.setText(s);t.setTextSize(16);t.setPadding(30,30,30,30);setContentView(t);}
 }

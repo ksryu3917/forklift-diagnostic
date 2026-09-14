@@ -1,7 +1,7 @@
 {
   "release": "v18",
-  "state": "RC EXPERT V8.9.1 INTEGRATION",
-  "version_name": "0.18-rc-expert-v8.9.1-integration",
+  "state": "RC EXPERT V8.9.2 QUICK UI",
+  "version_name": "0.18-rc-expert-v8.9.2-quick-ui",
   "source_branch": "v18-rc-auto",
   "git_commit_sha": "UNSTAMPED_LOCAL_PATCH"
 }

@@ -16,6 +16,7 @@ public class TestPointLocatorActivity extends Activity {
     private JSONObject data, group; private String groupId=""; private LinearLayout body; private final LinkedHashSet<String> pointFilter=new LinkedHashSet<>();
     private android.content.SharedPreferences prefs,sessionPref; private TextView sessionSummary,branchSummary; private final LinkedHashSet<String> visiblePointIds=new LinkedHashSet<>();
     private String activeSession="",sessionLabel="";
+    private String sourceGraphId=""; private boolean detailMode=false;
     private final int NAVY=Color.rgb(16,38,58), BLUE=Color.rgb(17,117,214), ORANGE=Color.rgb(222,126,20), BG=Color.rgb(242,245,247), GREEN=Color.rgb(28,125,80);
 
     @Override public void onCreate(Bundle b){super.onCreate(b);prefs=getSharedPreferences("field_measurements_v1",MODE_PRIVATE);sessionPref=getSharedPreferences("field_measurement_session",MODE_PRIVATE);ensureSession();try{data=new JSONObject(readAsset("test_point_locator_v1.json"));resolve();if(group==null)home();else render();}catch(Exception e){fatal("측정포인트 로딩 오류: "+e.getMessage());}}
@@ -28,6 +29,7 @@ public class TestPointLocatorActivity extends Activity {
 
     private void resolve()throws Exception{
         String id=getIntent().getStringExtra("group_id");
+        String directGraph=getIntent().getStringExtra("graph_id"); if(directGraph!=null) sourceGraphId=directGraph;
         String cid=getIntent().getStringExtra("cause_id");
         if((id==null||id.isEmpty())&&cid!=null&&!cid.isEmpty()){
             JSONObject cm=data.optJSONObject("cause_map");
@@ -36,7 +38,7 @@ public class TestPointLocatorActivity extends Activity {
         }
         if(id==null||id.isEmpty()){
             String gid=getIntent().getStringExtra("graph_id");
-            if(gid!=null)id=data.getJSONObject("graph_map").optString(gid,"");
+            if(gid!=null){sourceGraphId=gid;id=data.getJSONObject("graph_map").optString(gid,"");}
         }
         if(id==null||id.isEmpty()){
             String sys=getIntent().getStringExtra("system");
@@ -49,50 +51,171 @@ public class TestPointLocatorActivity extends Activity {
     private void home()throws Exception{base("측정포인트 / 압력탭");LinearLayout i=card();i.addView(tv("부품번호보다 먼저 · 어디에 프로브/게이지를 물릴지",17,true));i.addView(tv(data.optString("rule"),12,false));body.addView(i);JSONObject gs=data.getJSONObject("groups");Iterator<String> it=gs.keys();while(it.hasNext()){String id=it.next();JSONObject g=gs.getJSONObject(id);Button b=btn(g.optString("title"),false);b.setOnClickListener(v->{android.content.Intent x=getIntent();x.putExtra("group_id",id);x.removeExtra("graph_id");x.removeExtra("system");recreate();});body.addView(b);}}
 
     private void render()throws Exception{
-        base("측정포인트 · "+group.optString("system"));
-        LinearLayout intro=card();intro.addView(tv(group.optString("title"),18,true));intro.addView(tv(group.optString("summary"),13,false));intro.addView(tv("판정 기준 · OEM exact / 현장 격리 / OEM VERIFY를 분리 표시",11,true));if(!pointFilter.isEmpty())intro.addView(tv("현재 원인 관련 포인트만 표시 · "+pointFilter.size()+"개",12,true));body.addView(intro);
-        visiblePointIds.clear();JSONArray allPtsForSession=group.getJSONArray("points");for(int i=0;i<allPtsForSession.length();i++){JSONObject x=allPtsForSession.getJSONObject(i);if(pointFilter.isEmpty()||pointFilter.contains(x.optString("id")))visiblePointIds.add(x.optString("id"));}
-        addSessionCard();
-        addAdaptiveBranchCard();
-
-        Button loc=btn("엔진".equals(group.optString("system"))?"◎ D24 센서/측정 위치 먼저 보기":"◎ 차량에서 이 점검 위치 먼저 보기",true);
-        loc.setOnClickListener(v->{
-            if("엔진".equals(group.optString("system"))){
-                android.content.Intent it=new android.content.Intent(this,EngineSensorMapActivity.class);
-                JSONArray a=group.optJSONArray("sensor_focus_ids");StringBuilder s=new StringBuilder();if(a!=null)for(int k=0;k<a.length();k++){if(k>0)s.append(",");s.append(a.optString(k));}
-                it.putExtra("focus_ids",s.toString());startActivity(it);
-            }else{
-                android.content.Intent it=new android.content.Intent(this,FieldLocationMapActivity.class);JSONArray a=group.optJSONArray("focus_ids");StringBuilder s=new StringBuilder();if(a!=null)for(int k=0;k<a.length();k++){if(k>0)s.append(",");s.append(a.optString(k));}it.putExtra("focus_ids",s.toString());startActivity(it);
-            }
-        });body.addView(loc);
-
-        Bitmap bm=drawPointMap();LinearLayout mc=card();mc.addView(tv("정비사용 재작성 포인트맵",16,true));mc.addView(tv(group.optString("diagram_note"),11,false));ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);iv.setOnClickListener(v->showBitmap(bm));mc.addView(iv,new LinearLayout.LayoutParams(-1,dp(360)));mc.addView(tv("● 녹색=OEM exact/기능확인  ● 파랑=현장 격리·비교  ● 주황=OEM 추가확인 필요",11,true));body.addView(mc);
-
-        JSONArray cond=group.optJSONArray("conditions");if(cond!=null){LinearLayout c=card();c.addView(tv("시험 전 조건",16,true));for(int i=0;i<cond.length();i++)c.addView(tv("• "+cond.optString(i),13,false));body.addView(c);}
-        JSONArray tools=group.optJSONArray("tools");if(tools!=null){LinearLayout c=card();c.addView(tv("공구",15,true));for(int i=0;i<tools.length();i++)c.addView(tv("• "+tools.optString(i),13,false));body.addView(c);}
-
-        body.addView(tv("측정 순서 / 연결 위치",17,true));JSONArray pts=group.getJSONArray("points");int shown=0;for(int i=0;i<pts.length();i++){JSONObject x=pts.getJSONObject(i);if(!pointFilter.isEmpty()&&!pointFilter.contains(x.optString("id")))continue;addPoint(++shown,x);}
-        JSONArray rules=group.optJSONArray("decision_rules");if(rules!=null){LinearLayout c=card();c.addView(tv("결과를 이렇게 가른다",16,true));for(int i=0;i<rules.length();i++)c.addView(tv("→ "+rules.optString(i),13,false));body.addView(c);}
-        JSONArray lim=group.optJSONArray("limitations");if(lim!=null&&lim.length()>0){LinearLayout c=card();c.addView(tv("OEM 미확정 / 과잉판정 금지",15,true));for(int i=0;i<lim.length();i++)c.addView(tv("• "+lim.optString(i),12,false));body.addView(c);}
-        JSONArray refs=group.optJSONArray("source_refs");if(refs!=null){LinearLayout c=card();c.addView(tv("근거",14,true));for(int i=0;i<refs.length();i++)c.addView(tv("• "+refs.optString(i),12,false));body.addView(c);}
-        JSONArray imgs=group.optJSONArray("oem_images");if(imgs!=null&&imgs.length()>0){LinearLayout c=card();c.addView(tv("OEM 원본은 마지막 확인용",15,true));for(int i=0;i<imgs.length();i++){final String a=imgs.optString(i);Button b=btn("OEM 근거 보기 · "+a.substring(a.lastIndexOf('/')+1),false);b.setOnClickListener(v->showAsset(a));c.addView(b);}body.addView(c);}
-    }
-
-    private void addPoint(int num,JSONObject p){
-        LinearLayout c=card();String cls=p.optString("source_class"),pid=p.optString("id");TextView h=tv(num+". "+p.optString("label"),16,true);if(cls.contains("VERIFY"))h.setTextColor(ORANGE);else if(cls.startsWith("OEM"))h.setTextColor(GREEN);else h.setTextColor(BLUE);c.addView(h);c.addView(tv("연결 위치 · "+p.optString("where"),14,true));c.addView(tv("무엇을 연결 · "+p.optString("connect"),13,false));c.addView(tv("시험 상태 · "+p.optString("condition"),13,false));if(p.optString("expected").length()>0)c.addView(tv("OEM/비교 기준 · "+p.optString("expected"),13,true));if(p.optString("decision").length()>0)c.addView(tv("결과 분기 · "+p.optString("decision"),13,false));if(p.optString("note").length()>0)c.addView(tv("주의 · "+p.optString("note"),11,false));c.addView(tv("근거등급 · "+sourceLabel(cls),11,true));
-        c.addView(tv("현장 측정 기록",14,true));
-        TextView st=tv("",12,true);
-        final EditText value;
-        if(p.optJSONObject("auto_eval")!=null)value=addAutoEval(c,p,pid,st);else{
-            value=new EditText(this);value.setSingleLine(false);value.setMinLines(1);value.setHint("측정값 · 단위 포함 (예: 10.8 V / 195 bar / 파형 정상)");value.setText(pref(pid,"value"));value.setTextSize(13);value.setPadding(dp(10),dp(8),dp(10),dp(8));value.setBackground(bg(Color.rgb(246,248,250),8));c.addView(value,new LinearLayout.LayoutParams(-1,-2));value.addTextChangedListener(saveWatcher(pid,"value"));
+        base("빠른점검 · "+group.optString("system"));
+        visiblePointIds.clear();
+        JSONArray all=group.getJSONArray("points");
+        for(int i=0;i<all.length();i++){
+            JSONObject x=all.getJSONObject(i);
+            if(pointFilter.isEmpty()||pointFilter.contains(x.optString("id"))) visiblePointIds.add(x.optString("id"));
         }
-        EditText note=new EditText(this);note.setSingleLine(false);note.setMinLines(1);note.setHint("현장 메모 · 재현조건/좌우비교/흔들림 반응 등");note.setText(pref(pid,"note"));note.setTextSize(12);note.setPadding(dp(10),dp(8),dp(10),dp(8));note.setBackground(bg(Color.rgb(246,248,250),8));LinearLayout.LayoutParams np=new LinearLayout.LayoutParams(-1,-2);np.setMargins(0,dp(6),0,0);c.addView(note,np);note.addTextChangedListener(saveWatcher(pid,"note"));
-        refreshStatusText(st,p);
-        LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.HORIZONTAL);row.setPadding(0,dp(5),0,0);
-        Button ok=miniBtn(p.optJSONObject("auto_eval")!=null?"수동 정상":"정상");Button bad=miniBtn(p.optJSONObject("auto_eval")!=null?"수동 이상":"이상");Button hold=miniBtn("보류");Button clear=miniBtn("초기화");
-        ok.setOnClickListener(v->{setStatus(pid,"PASS");prefs.edit().putString(key(pid,"status_source"),"MANUAL").apply();refreshStatusText(st,p);updateSessionSummary();});bad.setOnClickListener(v->{setStatus(pid,"FAIL");prefs.edit().putString(key(pid,"status_source"),"MANUAL").apply();refreshStatusText(st,p);updateSessionSummary();});hold.setOnClickListener(v->{setStatus(pid,"HOLD");prefs.edit().putString(key(pid,"status_source"),"MANUAL").apply();refreshStatusText(st,p);updateSessionSummary();});clear.setOnClickListener(v->{prefs.edit().remove(key(pid,"status")).remove(key(pid,"value")).remove(key(pid,"note")).remove(key(pid,"status_source")).remove(key(pid,"auto_profile")).remove(key(pid,"auto_unit")).remove(key(pid,"auto_base_value")).apply();value.setText("");note.setText("");refreshStatusText(st,p);updateSessionSummary();});
-        row.addView(ok,new LinearLayout.LayoutParams(0,dp(44),1));row.addView(bad,new LinearLayout.LayoutParams(0,dp(44),1));row.addView(hold,new LinearLayout.LayoutParams(0,dp(44),1));row.addView(clear,new LinearLayout.LayoutParams(0,dp(44),1));c.addView(row);c.addView(st);body.addView(c);
+        String mode=getIntent().getStringExtra("mode"); detailMode="detail".equals(mode);
+        if(detailMode) renderDetail(); else renderQuick();
     }
+
+    private void renderQuick()throws Exception{
+        LinearLayout head=card();
+        head.addView(tv(group.optString("title"),19,true));
+        head.addView(tv(group.optString("summary"),12,false));
+        TextView sess=tv("작업 · "+sessionLabel+"   |   "+progressText(),11,true);sess.setTextColor(Color.rgb(75,85,95));head.addView(sess);
+        body.addView(head);
+
+        JSONObject rule=matchedAdaptiveRule();
+        if(rule!=null){
+            LinearLayout branch=card();
+            branch.addView(tv("현재까지 판정",14,true));
+            String a=rule.optString("assessment"); if(a.isEmpty()) a=rule.optString("title");
+            branch.addView(tv(a,13,true));
+            JSONArray ex=rule.optJSONArray("excludes");
+            if(ex!=null&&ex.length()>0){StringBuilder b=new StringBuilder("우선순위 하향 · ");for(int i=0;i<ex.length();i++){if(i>0)b.append(" / ");b.append(ex.optString(i));}branch.addView(tv(b.toString(),11,false));}
+            body.addView(branch);
+        }
+
+        JSONObject current=currentPoint(rule);
+        if(current!=null){
+            addQuickPoint(current);
+        }else{
+            LinearLayout done=card();
+            JSONObject fail=firstFailedPoint();
+            if(fail!=null){done.addView(tv("이상 구간이 잡혔습니다.",18,true));if(!fail.optString("decision").isEmpty())done.addView(tv(displayText(fail.optString("decision")),14,true));}
+            else done.addView(tv("이 화면의 필수 점검이 끝났습니다.",18,true));
+            String sum=adaptiveSummaryText();if(!sum.isEmpty())done.addView(tv(displayText(sum),13,false));
+            Button abnormal=btn("이상으로 기록된 항목만 보기",true);abnormal.setOnClickListener(v->showAbnormalSummary());done.addView(abnormal);body.addView(done);
+        }
+
+        LinearLayout nav=card();
+        Button loc=btn("◎ 위치 / 실제 회로 보기",true);loc.setOnClickListener(v->openLocationOrCircuit());nav.addView(loc);
+        Button detail=btn("전체 측정항목 · 상세기록 보기",false);detail.setOnClickListener(v->{getIntent().putExtra("mode","detail");recreate();});nav.addView(detail);
+        Button record=btn("작업기록 · 새 작업 / 복사 / 초기화",false);record.setOnClickListener(v->showWorkMenu());nav.addView(record);
+        Button evidence=btn("시험조건 · OEM 근거 / 제한 보기",false);evidence.setOnClickListener(v->showEvidenceDialog());nav.addView(evidence);
+        body.addView(nav);
+    }
+
+    private void renderDetail()throws Exception{
+        LinearLayout head=card();head.addView(tv(group.optString("title"),18,true));head.addView(tv("상세모드 · 모든 포인트를 한 번에 확인할 때만 사용",12,false));head.addView(tv("작업 · "+sessionLabel+"   |   "+progressText(),11,true));body.addView(head);
+        Button quick=btn("← 빠른진단으로 돌아가기",true);quick.setOnClickListener(v->{getIntent().removeExtra("mode");recreate();});body.addView(quick);
+        Button loc=btn("◎ 위치 / 실제 회로 보기",false);loc.setOnClickListener(v->openLocationOrCircuit());body.addView(loc);
+        if(shouldShowPointMap()){
+            Bitmap bm=drawPointMap();LinearLayout mc=card();mc.addView(tv("측정 위치 개요",15,true));ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);iv.setOnClickListener(v->showBitmap(bm));mc.addView(iv,new LinearLayout.LayoutParams(-1,dp(250)));mc.addView(tv("그림을 누르면 두 손가락 확대 가능",11,false));body.addView(mc);
+        }
+        JSONArray pts=group.getJSONArray("points");int shown=0;for(int i=0;i<pts.length();i++){JSONObject x=pts.getJSONObject(i);if(!visiblePointIds.contains(x.optString("id")))continue;addDetailedPoint(++shown,x);}
+        Button evidence=btn("시험조건 · OEM 근거 / 제한 보기",false);evidence.setOnClickListener(v->showEvidenceDialog());body.addView(evidence);
+    }
+
+    private JSONObject currentPoint(JSONObject rule){
+        JSONArray preferred=rule==null?null:rule.optJSONArray("next_points");
+        if(rule!=null && preferred!=null){
+            for(int i=0;i<preferred.length();i++){JSONObject p=pointById(preferred.optString(i));if(p!=null&&visiblePointIds.contains(p.optString("id"))&&pref(p.optString("id"),"status").isEmpty())return p;}
+            return null;
+        }
+        JSONArray pts=group.optJSONArray("points");
+        boolean hasAdaptive=group.optJSONObject("adaptive_branch")!=null;
+        if(pts!=null)for(int i=0;i<pts.length();i++){
+            JSONObject p=pts.optJSONObject(i);if(p==null)continue;String id=p.optString("id");if(!visiblePointIds.contains(id))continue;
+            String st=pref(id,"status");
+            if(!hasAdaptive && "FAIL".equals(st)) return null;
+            if(st.isEmpty()) return p;
+        }
+        return null;
+    }
+
+    private JSONObject firstFailedPoint(){JSONArray pts=group.optJSONArray("points");if(pts!=null)for(int i=0;i<pts.length();i++){JSONObject p=pts.optJSONObject(i);if(p!=null&&visiblePointIds.contains(p.optString("id"))&&"FAIL".equals(pref(p.optString("id"),"status")))return p;}return null;}
+
+    private void addQuickPoint(JSONObject p){
+        final String pid=p.optString("id");
+        LinearLayout c=card();
+        TextView now=tv("지금 할 점검",14,true);now.setTextColor(BLUE);c.addView(now);
+        TextView title=tv(displayText(p.optString("label")),21,true);c.addView(title);
+        c.addView(tv("어디서 · "+displayText(p.optString("where")),15,true));
+        c.addView(tv("연결 · "+displayText(p.optString("connect")),14,false));
+        c.addView(tv("상태 · "+displayText(p.optString("condition")),14,false));
+        if(!p.optString("expected").isEmpty())c.addView(tv("기준 · "+displayText(p.optString("expected")),14,true));
+        if(!p.optString("note").isEmpty())c.addView(tv("주의 · "+displayText(p.optString("note")),11,false));
+
+        if(p.optJSONObject("auto_eval")!=null){
+            Button value=btn("측정값 입력 → OEM 자동판정",true);value.setOnClickListener(v->showPointRecordDialog(p,true));c.addView(value);
+            LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.HORIZONTAL);
+            Button ok=miniBtn("수동 정상");Button bad=miniBtn("수동 이상");
+            ok.setOnClickListener(v->{setManualStatus(pid,"PASS");recreate();});bad.setOnClickListener(v->{setManualStatus(pid,"FAIL");recreate();});
+            row.addView(ok);row.addView(bad);c.addView(row);
+        }else{
+            LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.HORIZONTAL);
+            Button ok=decisionBtn("정상",GREEN);Button bad=decisionBtn("이상",Color.rgb(180,45,45));
+            ok.setOnClickListener(v->{setManualStatus(pid,"PASS");recreate();});bad.setOnClickListener(v->{setManualStatus(pid,"FAIL");recreate();});
+            row.addView(ok,new LinearLayout.LayoutParams(0,dp(58),1));row.addView(bad,new LinearLayout.LayoutParams(0,dp(58),1));c.addView(row);
+        }
+        Button note=btn("측정값 / 메모 기록",false);note.setOnClickListener(v->showPointRecordDialog(p,false));c.addView(note);
+        String old=pref(pid,"status");if(!old.isEmpty())c.addView(tv("현재 기록 · "+statusKo(old),12,true));
+        body.addView(c);
+
+        if(!p.optString("decision").isEmpty()){
+            LinearLayout next=card();next.addView(tv("이상이면",13,true));next.addView(tv(displayText(p.optString("decision")),14,true));body.addView(next);
+        }
+    }
+
+    private Button decisionBtn(String text,int color){Button b=new Button(this);b.setText(text);b.setAllCaps(false);b.setTextSize(17);b.setTextColor(Color.WHITE);b.setBackground(bg(color,10));LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0,dp(58),1);p.setMargins(dp(3),dp(4),dp(3),dp(4));b.setLayoutParams(p);return b;}
+    private void setManualStatus(String pid,String st){setStatus(pid,st);prefs.edit().putString(key(pid,"status_source"),"MANUAL").apply();}
+
+    private void addDetailedPoint(int num,JSONObject p){
+        LinearLayout c=card();String pid=p.optString("id");TextView h=tv(num+". "+displayText(p.optString("label")),16,true);String cls=p.optString("source_class");if(cls.contains("VERIFY"))h.setTextColor(ORANGE);else if(cls.startsWith("OEM"))h.setTextColor(GREEN);else h.setTextColor(BLUE);c.addView(h);
+        c.addView(tv("위치 · "+displayText(p.optString("where")),13,true));c.addView(tv("연결 · "+displayText(p.optString("connect")),12,false));c.addView(tv("상태 · "+displayText(p.optString("condition")),12,false));
+        if(!p.optString("expected").isEmpty())c.addView(tv("기준 · "+displayText(p.optString("expected")),12,true));
+        String st=pref(pid,"status");c.addView(tv("판정 · "+statusKo(st)+(pref(pid,"value").isEmpty()?"":" · 측정 "+pref(pid,"value")),12,true));
+        Button rec=btn("기록 / 판정 수정",false);rec.setOnClickListener(v->showPointRecordDialog(p,p.optJSONObject("auto_eval")!=null));c.addView(rec);body.addView(c);
+    }
+
+    private void showPointRecordDialog(JSONObject p,boolean focusValue){
+        String pid=p.optString("id"); final Dialog d=new Dialog(this);LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setPadding(dp(16),dp(14),dp(16),dp(14));root.setBackgroundColor(Color.WHITE);
+        root.addView(tv(displayText(p.optString("label")),18,true));root.addView(tv("위치 · "+displayText(p.optString("where")),12,false));
+        TextView st=tv("",12,true);final EditText value;
+        if(p.optJSONObject("auto_eval")!=null)value=addAutoEval(root,p,pid,st);else{value=new EditText(this);value.setHint("측정값 · 단위 포함");value.setText(pref(pid,"value"));value.setTextSize(14);value.setBackground(bg(Color.rgb(246,248,250),8));value.setPadding(dp(10),dp(10),dp(10),dp(10));root.addView(value);value.addTextChangedListener(saveWatcher(pid,"value"));}
+        EditText note=new EditText(this);note.setHint("현장 메모 · 재현조건/좌우비교/흔들림 반응");note.setText(pref(pid,"note"));note.setMinLines(2);note.setBackground(bg(Color.rgb(246,248,250),8));note.setPadding(dp(10),dp(10),dp(10),dp(10));root.addView(note);note.addTextChangedListener(saveWatcher(pid,"note"));
+        LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.HORIZONTAL);Button ok=miniBtn("정상");Button bad=miniBtn("이상");Button hold=miniBtn("보류");Button clear=miniBtn("초기화");
+        ok.setOnClickListener(v->{setManualStatus(pid,"PASS");refreshStatusText(st,p);});bad.setOnClickListener(v->{setManualStatus(pid,"FAIL");refreshStatusText(st,p);});hold.setOnClickListener(v->{setManualStatus(pid,"HOLD");refreshStatusText(st,p);});clear.setOnClickListener(v->{prefs.edit().remove(key(pid,"status")).remove(key(pid,"value")).remove(key(pid,"note")).remove(key(pid,"status_source")).remove(key(pid,"auto_profile")).remove(key(pid,"auto_unit")).remove(key(pid,"auto_base_value")).apply();value.setText("");note.setText("");refreshStatusText(st,p);});
+        row.addView(ok);row.addView(bad);row.addView(hold);row.addView(clear);root.addView(row);refreshStatusText(st,p);root.addView(st);
+        Button close=btn("저장하고 닫기",true);close.setOnClickListener(v->{d.dismiss();recreate();});root.addView(close);
+        ScrollView sv=new ScrollView(this);sv.addView(root);d.setContentView(sv);d.setOnDismissListener(x->updateSessionSummary());d.show();if(d.getWindow()!=null)d.getWindow().setLayout(-1,-2);if(focusValue)value.requestFocus();
+    }
+
+    private void openLocationOrCircuit(){
+        String sys=group.optString("system");
+        if(("전장".equals(sys)||"에어컨".equals(sys))&&!sourceGraphId.isEmpty()){
+            android.content.Intent it=new android.content.Intent(this,ElectricalDiagnosticActivity.class);it.putExtra("graph_id",sourceGraphId);startActivity(it);return;
+        }
+        if("엔진".equals(sys)){
+            android.content.Intent it=new android.content.Intent(this,EngineSensorMapActivity.class);JSONArray a=group.optJSONArray("sensor_focus_ids");StringBuilder s=new StringBuilder();if(a!=null)for(int k=0;k<a.length();k++){if(k>0)s.append(",");s.append(a.optString(k));}it.putExtra("focus_ids",s.toString());startActivity(it);return;
+        }
+        android.content.Intent it=new android.content.Intent(this,FieldLocationMapActivity.class);JSONArray a=group.optJSONArray("focus_ids");StringBuilder s=new StringBuilder();if(a!=null)for(int k=0;k<a.length();k++){if(k>0)s.append(",");s.append(a.optString(k));}it.putExtra("focus_ids",s.toString());startActivity(it);
+    }
+
+    private boolean shouldShowPointMap(){String sys=group.optString("system");return !("전장".equals(sys)||"에어컨".equals(sys));}
+
+    private String progressText(){int total=0,done=0,fail=0;JSONArray pts=group.optJSONArray("points");if(pts!=null)for(int i=0;i<pts.length();i++){JSONObject p=pts.optJSONObject(i);if(p==null||!visiblePointIds.contains(p.optString("id")))continue;total++;String st=pref(p.optString("id"),"status");if(!st.isEmpty())done++;if("FAIL".equals(st))fail++;}return done+"/"+total+" 판정"+(fail>0?" · 이상 "+fail:"");}
+
+    private void showWorkMenu(){
+        final String[] items={"현재 기록 요약 복사","이상 항목만 보기","새 작업 시작","현재 화면 기록 초기화"};
+        new AlertDialog.Builder(this).setTitle("작업기록 · "+sessionLabel).setItems(items,(d,w)->{if(w==0)copySessionSummary();else if(w==1)showAbnormalSummary();else if(w==2)newSessionDialog();else confirmResetSession();}).setNegativeButton("닫기",null).show();
+    }
+
+    private void showEvidenceDialog(){
+        StringBuilder sb=new StringBuilder();JSONArray a=group.optJSONArray("conditions");if(a!=null&&a.length()>0){sb.append("[시험 전 조건]\n");for(int i=0;i<a.length();i++)sb.append("• ").append(displayText(a.optString(i))).append("\n");}
+        a=group.optJSONArray("tools");if(a!=null&&a.length()>0){sb.append("\n[공구]\n");for(int i=0;i<a.length();i++)sb.append("• ").append(displayText(a.optString(i))).append("\n");}
+        a=group.optJSONArray("limitations");if(a!=null&&a.length()>0){sb.append("\n[OEM 미확정 / 과잉판정 금지]\n");for(int i=0;i<a.length();i++)sb.append("• ").append(displayText(a.optString(i))).append("\n");}
+        a=group.optJSONArray("source_refs");if(a!=null&&a.length()>0){sb.append("\n[근거]\n");for(int i=0;i<a.length();i++)sb.append("• ").append(a.optString(i)).append("\n");}
+        AlertDialog dialog=new AlertDialog.Builder(this).setTitle("시험조건 / 근거").setMessage(sb.length()==0?"추가 표시 정보 없음":sb.toString()).setPositiveButton("닫기",null).setNeutralButton("OEM 이미지",null).create();dialog.setOnShowListener(x->{Button b=dialog.getButton(AlertDialog.BUTTON_NEUTRAL);b.setOnClickListener(v->showFirstOemImage());});dialog.show();
+    }
+    private void showFirstOemImage(){JSONArray imgs=group.optJSONArray("oem_images");if(imgs==null||imgs.length()==0){Toast.makeText(this,"연결된 OEM 이미지가 없습니다.",Toast.LENGTH_SHORT).show();return;}if(imgs.length()==1){showAsset(imgs.optString(0));return;}String[] names=new String[imgs.length()];for(int i=0;i<imgs.length();i++){String a=imgs.optString(i);names[i]=a.substring(a.lastIndexOf('/')+1);}new AlertDialog.Builder(this).setTitle("OEM 근거 선택").setItems(names,(d,w)->showAsset(imgs.optString(w))).show();}
+
+    private String displayText(String s){if(s==null)return "";String x=s;String[][] r={{"License lamp","번호판등"},{"license lamp","번호판등"},{"License GND drop","번호판등 접지 전압강하"},{"rear/tail lamp","후미등/미등"},{"rear lamp","후미등"},{"rear lamps","후미등"},{"tail lamp","미등"},{"loaded voltage drop","부하 전압강하"},{"loaded voltage","부하전압"},{"common rear-light output comparison","공통 후미등 출력 비교"},{"common feed","공통전원"},{"branch/harness","분기배선/하네스"},{"light switch","라이트 스위치"},{"relay","릴레이"},{"LIGHT ON","라이트 ON"},{"battery -POST","배터리 -포스트"},{"socket","소켓"},{"connector","커넥터"},{"ground","접지"},{"GND","접지(GND)"}};for(String[] q:r)x=x.replace(q[0],q[1]);return x;}
 
     private EditText addAutoEval(LinearLayout parent,JSONObject p,String pid,TextView statusText){
         JSONObject ae=p.optJSONObject("auto_eval");LinearLayout panel=new LinearLayout(this);panel.setOrientation(LinearLayout.VERTICAL);panel.setPadding(dp(10),dp(9),dp(10),dp(9));panel.setBackground(bg(Color.rgb(235,247,239),9));LinearLayout.LayoutParams pp=new LinearLayout.LayoutParams(-1,-2);pp.setMargins(0,dp(4),0,dp(5));panel.setLayoutParams(pp);panel.addView(tv("OEM exact 자동판정 · 구조화된 허용범위만",13,true));panel.addView(tv("시험조건/모델과 단위를 맞춘 뒤 숫자만 입력합니다. 자동판정은 이 측정점의 정상/이상만 판정하며 원인 확정은 다음 격리분기를 계속 따라갑니다.",11,false));
@@ -184,26 +307,13 @@ public class TestPointLocatorActivity extends Activity {
             c.drawLine(1220,430,1450,430,p);
             c.drawRect(500,150,950,260,p);
         }
-        else if("전장".equals(group.optString("system"))||"에어컨".equals(group.optString("system"))){
-            // Generic technician signal-flow backdrop for circuit-specific probe groups.
-            // Exact connector geometry remains in the OEM evidence; this view answers where to probe next.
-            c.drawRoundRect(new RectF(90,285,340,575),42,42,p);
-            c.drawLine(340,430,520,430,p);
-            c.drawRoundRect(new RectF(520,250,820,610),50,50,p);
-            c.drawLine(820,430,1010,430,p);
-            c.drawRoundRect(new RectF(1010,250,1320,610),50,50,p);
-            c.drawLine(1320,430,1490,430,p);
-            c.drawLine(1165,610,1165,720,p);
-            p.setStyle(Paint.Style.FILL);p.setTextSize(27);p.setTypeface(Typeface.DEFAULT_BOLD);p.setColor(Color.rgb(75,90,100));
-            c.drawText("SOURCE",145,445,p);c.drawText("CONTROL / HARNESS",545,445,p);c.drawText("LOAD / SIGNAL",1040,445,p);c.drawText("GND",1125,755,p);
-            p.setStyle(Paint.Style.STROKE);p.setStrokeWidth(10);p.setColor(Color.rgb(100,115,125));
-        }
+
         p.setStyle(Paint.Style.FILL);JSONArray pts=group.getJSONArray("points");for(int i=0;i<pts.length();i++){JSONObject x=pts.getJSONObject(i);if(!pointFilter.isEmpty()&&!pointFilter.contains(x.optString("id")))continue;float px=(float)(x.optDouble("x",.5)*w),py=(float)(x.optDouble("y",.5)*h);String sc=x.optString("source_class");p.setColor(sc.contains("VERIFY")?ORANGE:(sc.startsWith("OEM")?GREEN:BLUE));c.drawCircle(px,py,23,p);p.setStyle(Paint.Style.STROKE);p.setStrokeWidth(5);c.drawCircle(px,py,34,p);p.setStyle(Paint.Style.FILL);p.setColor(Color.rgb(25,30,35));p.setTextSize(23);p.setTypeface(Typeface.DEFAULT_BOLD);String label=x.optString("id")+" "+shortLabel(x.optString("label"));drawLabel(c,p,label,px+42,py-6);}
         p.setColor(Color.DKGRAY);p.setTextSize(18);p.setTypeface(Typeface.DEFAULT);c.drawText("※ 포인트를 찾는 재작성 그림. 정확 피팅/커넥터 형상은 OEM 근거에서 최종 확인.",45,820,p);return b;
     }
     private String shortLabel(String s){int k=s.indexOf('·');if(k>=0&&k+1<s.length())s=s.substring(k+1).trim();return s.length()>20?s.substring(0,20)+"…":s;}
     private void drawLabel(Canvas c,Paint p,String s,float x,float y){String[] a=wrap(s,18);for(int i=0;i<a.length;i++)c.drawText(a[i],x,y+i*28,p);}private String[] wrap(String s,int n){if(s.length()<=n)return new String[]{s};ArrayList<String>a=new ArrayList<>();for(int i=0;i<s.length();i+=n)a.add(s.substring(i,Math.min(s.length(),i+n)));return a.toArray(new String[0]);}
     private void showAsset(String a){try{InputStream is=getAssets().open(a);Bitmap bm=BitmapFactory.decodeStream(is);is.close();if(bm!=null)showBitmap(bm);}catch(Exception e){Toast.makeText(this,"OEM 근거 이미지를 열 수 없습니다: "+a,Toast.LENGTH_SHORT).show();}}
-    private void showBitmap(Bitmap bm){Dialog d=new Dialog(this);ScrollView sv=new ScrollView(this);ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);sv.addView(iv);d.setContentView(sv);d.show();if(d.getWindow()!=null)d.getWindow().setLayout(-1,-1);}
+    private void showBitmap(Bitmap bm){ZoomImageDialog.show(this,bm);}
     private void fatal(String s){TextView t=new TextView(this);t.setText(s);t.setTextSize(16);t.setPadding(30,30,30,30);setContentView(t);}
 }

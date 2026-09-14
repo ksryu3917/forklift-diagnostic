@@ -202,8 +202,9 @@ j=ROOT/'app/src/main/java/com/ryu/forkliftdiagnostic/TestPointLocatorActivity.ja
 if not j.exists(): errors.append('TestPointLocatorActivity missing')
 else:
     js=j.read_text(encoding='utf-8')
-    for s in ['측정 순서 / 연결 위치','OEM 미확정 / 과잉판정 금지','source_class','FieldLocationMapActivity','cause_id','pointFilter','DRIVE_AXLE_MECH','WORK_EQUIPMENT_CONTROL','MAST_CYLINDER_DIAG','PARK_BRAKE_ADJUST_TEST']:
+    for s in ['지금 할 점검','전체 측정항목 · 상세기록 보기','시험조건 · OEM 근거 / 제한 보기','source_class','FieldLocationMapActivity','cause_id','pointFilter','DRIVE_AXLE_MECH','WORK_EQUIPMENT_CONTROL','MAST_CYLINDER_DIAG','PARK_BRAKE_ADJUST_TEST']:
         if s not in js: errors.append('activity UI gate missing '+s)
+    if 'Generic technician signal-flow backdrop' in js: errors.append('generic electrical point-map must not be user-visible')
 expj=(ROOT/'app/src/main/java/com/ryu/forkliftdiagnostic/ExpertDiagnosticActivity.java').read_text(encoding='utf-8')
 if 'TestPointLocatorActivity.class' not in expj: errors.append('ExpertDiagnosticActivity no test-point link')
 if 'cause_id' not in expj: errors.append('ExpertDiagnosticActivity does not pass cause_id')

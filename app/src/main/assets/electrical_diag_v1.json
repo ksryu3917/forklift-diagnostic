@@ -2592,54 +2592,63 @@
         "oem_pages/p370.jpg"
       ],
       "simplified_diagram": {
-        "title": "시트벨트 스위치/경고 입력 이상 · 필요한 경로만",
+        "title": "시트벨트 입력 · 스위치→OSS 입력",
         "nodes": [
           {
-            "id": "source",
-            "label": "B+/IGN",
+            "id": "bat",
+            "label": "BAT4 20A\nOSS B+",
             "kind": "source",
             "verified": true
           },
           {
-            "id": "control",
-            "label": "SEAT BELT SW / OSS input",
+            "id": "ign",
+            "label": "IGN3 15A\nOSS signal",
+            "kind": "source",
+            "verified": true
+          },
+          {
+            "id": "sw",
+            "label": "SEAT BELT SW",
+            "kind": "sensor",
+            "verified": true
+          },
+          {
+            "id": "oss",
+            "label": "OSS INPUT",
             "kind": "control",
             "verified": true
           },
           {
-            "id": "load",
-            "label": "SEAT BELT SW / OSS input",
-            "kind": "load",
-            "verified": true
-          },
-          {
             "id": "gnd",
-            "label": "GND",
+            "label": "OSS GND",
             "kind": "ground",
             "verified": true
           }
         ],
         "edges": [
           {
-            "from": "source",
-            "to": "control"
+            "from": "bat",
+            "to": "oss"
           },
           {
-            "from": "control",
-            "to": "load"
+            "from": "ign",
+            "to": "oss"
           },
           {
-            "from": "load",
+            "from": "sw",
+            "to": "oss"
+          },
+          {
+            "from": "oss",
             "to": "gnd"
           }
         ],
         "measure_points": [
-          "B+/IGN",
-          "제어 입력/출력",
-          "부하 B+",
-          "GND 전압강하"
+          "Seat-belt switch",
+          "OSS seat-belt input",
+          "OSS BAT4/IGN3/GND"
         ],
-        "note": "전체 도면이 아니라 이 기능의 전원-제어-부하-접지만 재작성. 핀번호는 OEM에서 명확한 값만 사용."
+        "note": "시트벨트 스위치 상태와 OSS 입력을 같은 조건에서 비교한다."
       },
       "verified_protection_control": [
         "BAT4 20A: OSS controller power",
@@ -2665,23 +2674,35 @@
         "oem_pages/p370.jpg"
       ],
       "simplified_diagram": {
-        "title": "번호판등이 안 들어옴 · 필요한 경로만",
+        "title": "번호판등 · 단독불량 vs 공통불량",
         "nodes": [
           {
-            "id": "source",
-            "label": "B+/IGN",
+            "id": "common",
+            "label": "LAMP 공통전원\n정격은 차량사양 확인",
             "kind": "source",
-            "verified": true
+            "verified": false
           },
           {
-            "id": "control",
-            "label": "스위치/제어",
+            "id": "relay",
+            "label": "LAMP RELAY #4",
             "kind": "control",
             "verified": true
           },
           {
-            "id": "load",
-            "label": "LICENCE LAMP",
+            "id": "switch",
+            "label": "LIGHT SWITCH",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "rear",
+            "label": "REAR/TAIL FEED",
+            "kind": "branch",
+            "verified": true
+          },
+          {
+            "id": "lic",
+            "label": "LICENSE LAMP\nB+",
             "kind": "load",
             "verified": true
           },
@@ -2690,29 +2711,47 @@
             "label": "GND",
             "kind": "ground",
             "verified": true
+          },
+          {
+            "id": "acc",
+            "label": "ACC15\nLIGHT-SW feed",
+            "kind": "source",
+            "verified": true
           }
         ],
         "edges": [
           {
-            "from": "source",
-            "to": "control"
+            "from": "common",
+            "to": "relay"
           },
           {
-            "from": "control",
-            "to": "load"
+            "from": "relay",
+            "to": "rear"
           },
           {
-            "from": "load",
+            "from": "rear",
+            "to": "lic"
+          },
+          {
+            "from": "lic",
             "to": "gnd"
+          },
+          {
+            "from": "acc",
+            "to": "switch"
+          },
+          {
+            "from": "switch",
+            "to": "relay"
           }
         ],
         "measure_points": [
-          "B+/IGN",
-          "제어 입력/출력",
-          "부하 B+",
-          "GND 전압강하"
+          "다른 미등/후미등 정상 여부",
+          "번호판등 소켓 B+",
+          "번호판등 GND 전압강하",
+          "공통등도 불량일 때만 LAMP relay/switch"
         ],
-        "note": "전체 도면이 아니라 이 기능의 전원-제어-부하-접지만 재작성. 핀번호는 OEM에서 명확한 값만 사용."
+        "note": "비교시험은 회로부품으로 그리지 않는다. 번호판등 단독불량은 소켓 B+/GND부터, 공통불량일 때만 상류로 올라간다."
       },
       "verified_protection_control": [
         "BAT2 20A: LAMP relay power",
@@ -2720,7 +2759,10 @@
         "ACC 15A: light switch feed"
       ],
       "protection_source": "SB2401C12 D20/25/30/33S-7 D24NAP Tier-4 O&M fuse/relay table; multilingual editions cross-checked",
-      "fuse_reference": "BAT2 20A → LAMP relay #4; ACC 15A light-switch feed"
+      "fuse_reference": "BAT2 20A → LAMP relay #4; ACC 15A light-switch feed",
+      "unverified": [
+        "램프 공통 퓨즈 정격은 서비스 매뉴얼과 D24 O&M 표기가 다르므로 현재 차량 퓨즈표/사양 확인 후 사용."
+      ]
     },
     "HOURMETER": {
       "schematic_id": "600123-00120",
@@ -2741,22 +2783,22 @@
         "oem_pages/p369.jpg"
       ],
       "simplified_diagram": {
-        "title": "아워미터가 작동/적산하지 않음 · 필요한 경로만",
+        "title": "아워미터 · 전원/운전신호/접지",
         "nodes": [
           {
-            "id": "source",
-            "label": "B+/IGN",
+            "id": "supply",
+            "label": "CLUSTER/COMMON\nSUPPLY",
             "kind": "source",
-            "verified": true
+            "verified": false
           },
           {
-            "id": "control",
-            "label": "스위치/제어",
+            "id": "run",
+            "label": "RUN/ENABLE\nSIGNAL",
             "kind": "control",
-            "verified": true
+            "verified": false
           },
           {
-            "id": "load",
+            "id": "hm",
             "label": "HOURMETER",
             "kind": "load",
             "verified": true
@@ -2770,25 +2812,25 @@
         ],
         "edges": [
           {
-            "from": "source",
-            "to": "control"
+            "from": "supply",
+            "to": "hm"
           },
           {
-            "from": "control",
-            "to": "load"
+            "from": "run",
+            "to": "hm"
           },
           {
-            "from": "load",
+            "from": "hm",
             "to": "gnd"
           }
         ],
         "measure_points": [
-          "B+/IGN",
-          "제어 입력/출력",
-          "부하 B+",
+          "공통전원 비교",
+          "아워미터 B+/IGN",
+          "RUN/enable 기능선",
           "GND 전압강하"
         ],
-        "note": "전체 도면이 아니라 이 기능의 전원-제어-부하-접지만 재작성. 핀번호는 OEM에서 명확한 값만 사용."
+        "note": "운전시간 enable 숫자핀은 OEM에서 확정된 경우만 표시한다."
       },
       "unverified": [
         "exact fuse cavity/connector numeric pin if not legible"
@@ -2811,54 +2853,63 @@
         "oem_pages/p370.jpg"
       ],
       "simplified_diagram": {
-        "title": "리어램프가 안 들어옴 · 필요한 경로만",
+        "title": "리어램프 · 공통전원에서 후방분기까지",
         "nodes": [
           {
-            "id": "source",
-            "label": "B+/IGN",
+            "id": "common",
+            "label": "LAMP 공통전원\n차량사양 확인",
             "kind": "source",
-            "verified": true
+            "verified": false
           },
           {
-            "id": "control",
-            "label": "스위치/제어",
+            "id": "relay",
+            "label": "LAMP RELAY #4",
             "kind": "control",
             "verified": true
           },
           {
-            "id": "load",
-            "label": "REAR LAMP",
+            "id": "switch",
+            "label": "LIGHT SWITCH",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "rear",
+            "label": "REAR LAMP B+",
             "kind": "load",
             "verified": true
           },
           {
             "id": "gnd",
-            "label": "GND",
+            "label": "REAR GND",
             "kind": "ground",
             "verified": true
           }
         ],
         "edges": [
           {
-            "from": "source",
-            "to": "control"
+            "from": "common",
+            "to": "relay"
           },
           {
-            "from": "control",
-            "to": "load"
+            "from": "switch",
+            "to": "relay"
           },
           {
-            "from": "load",
+            "from": "relay",
+            "to": "rear"
+          },
+          {
+            "from": "rear",
             "to": "gnd"
           }
         ],
         "measure_points": [
-          "B+/IGN",
-          "제어 입력/출력",
-          "부하 B+",
-          "GND 전압강하"
+          "LAMP relay #4 출력",
+          "Rear lamp B+",
+          "Rear lamp GND 전압강하"
         ],
-        "note": "전체 도면이 아니라 이 기능의 전원-제어-부하-접지만 재작성. 핀번호는 OEM에서 명확한 값만 사용."
+        "note": "다른 램프와 비교해 공통부와 후방 로컬 분기를 가른다."
       },
       "verified_protection_control": [
         "BAT2 20A: LAMP relay power",
@@ -2866,7 +2917,10 @@
         "ACC 15A: light switch feed"
       ],
       "protection_source": "SB2401C12 D20/25/30/33S-7 D24NAP Tier-4 O&M fuse/relay table; multilingual editions cross-checked",
-      "fuse_reference": "BAT2 20A → LAMP relay #4; ACC 15A light-switch feed"
+      "fuse_reference": "BAT2 20A → LAMP relay #4; ACC 15A light-switch feed",
+      "unverified": [
+        "공통 램프 퓨즈 정격/세대는 현재 차량 퓨즈표와 대조."
+      ]
     },
     "STROBE": {
       "schematic_id": "600123-00120",
@@ -2885,22 +2939,28 @@
         "oem_pages/p370.jpg"
       ],
       "simplified_diagram": {
-        "title": "스트로브/경광등이 안 켜짐 · 필요한 경로만",
+        "title": "경광등 · ACC 전원→스위치→부하→접지",
         "nodes": [
           {
-            "id": "source",
-            "label": "B+/IGN",
+            "id": "acc",
+            "label": "ACC 15A",
             "kind": "source",
             "verified": true
           },
           {
-            "id": "control",
-            "label": "스위치/제어",
+            "id": "sw",
+            "label": "STROBE SWITCH",
             "kind": "control",
-            "verified": true
+            "verified": false
           },
           {
-            "id": "load",
+            "id": "harness",
+            "label": "OPTION HARNESS",
+            "kind": "branch",
+            "verified": false
+          },
+          {
+            "id": "lamp",
             "label": "STROBE",
             "kind": "load",
             "verified": true
@@ -2914,25 +2974,29 @@
         ],
         "edges": [
           {
-            "from": "source",
-            "to": "control"
+            "from": "acc",
+            "to": "sw"
           },
           {
-            "from": "control",
-            "to": "load"
+            "from": "sw",
+            "to": "harness"
           },
           {
-            "from": "load",
+            "from": "harness",
+            "to": "lamp"
+          },
+          {
+            "from": "lamp",
             "to": "gnd"
           }
         ],
         "measure_points": [
-          "B+/IGN",
-          "제어 입력/출력",
-          "부하 B+",
+          "ACC15 양단",
+          "스위치 출력",
+          "경광등 B+",
           "GND 전압강하"
         ],
-        "note": "전체 도면이 아니라 이 기능의 전원-제어-부하-접지만 재작성. 핀번호는 OEM에서 명확한 값만 사용."
+        "note": "옵션 스위치/하네스 cavity는 미확정이므로 기능선으로 측정한다."
       },
       "verified_protection_control": [
         "ACC 15A: turn signal / STOP-strobe / light switch"

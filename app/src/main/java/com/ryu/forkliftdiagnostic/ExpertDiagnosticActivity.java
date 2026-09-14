@@ -55,19 +55,25 @@ public class ExpertDiagnosticActivity extends Activity {
         LinearLayout h=card();
         h.addView(tv(item.optString("system")+" · "+item.optString("symptom"),13,false));
         h.addView(tv(item.optString("cause"),20,true));
-        String level=item.optString("level");
-        h.addView(tv("진단 등급 · "+("A_OEM_EXECUTABLE".equals(level)?"A · OEM 절차/수치 연결":"B · 현장 격리/비교 실행형"),12,true));
         body.addView(h);
 
         addQuickView(item.optJSONObject("quick_view"));
-        // All 268 expert causes are mapped in test_point_locator_v1.json.
-        // The test-point screen comes before parts and before any teardown decision.
-        Button tp=btn("⊙ 이 원인 측정포인트 / 압력탭 바로보기",true);
+
+        Button tp=btn("▶ 바로 측정 시작 · 다음 한 점만 보기",true);
         tp.setOnClickListener(v->{android.content.Intent it=new android.content.Intent(this,TestPointLocatorActivity.class);it.putExtra("cause_id",item.optString("id"));it.putExtra("system",item.optString("system"));startActivity(it);});
         body.addView(tp);
-        Button loc=btn("◎ 이 고장 점검 위치맵",true);
+        Button loc=btn("◎ 점검 위치 보기",false);
         loc.setOnClickListener(v->{android.content.Intent it=new android.content.Intent(this,FieldLocationMapActivity.class);it.putExtra("system",item.optString("system"));it.putExtra("context",item.optString("cause"));startActivity(it);});
         body.addView(loc);
+
+        boolean detail="detail".equals(getIntent().getStringExtra("mode"));
+        if(!detail){
+            Button more=btn("상세 근거 · 도면 · 분해조건 보기",false);more.setOnClickListener(v->{getIntent().putExtra("mode","detail");render();});body.addView(more);
+            return;
+        }
+        Button less=btn("← 빠른 화면으로",true);less.setOnClickListener(v->{getIntent().removeExtra("mode");render();});body.addView(less);
+        String level=item.optString("level");
+        LinearLayout lv=card();lv.addView(tv("진단 등급 · "+("A_OEM_EXECUTABLE".equals(level)?"A · OEM 절차/수치 연결":"B · 현장 격리/비교 실행형"),12,true));body.addView(lv);
         addComponentLocator(item.optJSONObject("component_locator"));
         addSimplifiedDiagram(item.getJSONObject("diagram"));
         addMeasurementPoints(item.optJSONArray("measurement_points"));
@@ -76,15 +82,11 @@ public class ExpertDiagnosticActivity extends Activity {
         addArrayCard("먼저 배제할 원인",item.optJSONArray("rule_out"),"• ");
         addArrayCard("확정 조건",item.optJSONArray("confirm_if"),"• ");
         addSpecificityGate(item.optJSONObject("specificity_gate"), item.optJSONObject("diagnostic_limit"));
-
         LinearLayout g=card();g.addView(tv("분해/교환 조건",16,true));g.addView(tv(item.optString("disassembly_gate"),14,true));body.addView(g);
         LinearLayout lim=card();lim.addView(tv("정확도 게이트",15,true));lim.addView(tv(item.optString("accuracy_gate"),12,false));body.addView(lim);
         addSourceEvidence(item.optJSONObject("oem_source"));
-        Button parts=btn("분해도 / 부품 위치 참고 (품번은 후순위)",false);
-        parts.setOnClickListener(v->openParts("expert",item.optString("id")));
-        body.addView(parts);
+        Button parts=btn("분해도 / 부품 위치 참고 (품번은 후순위)",false);parts.setOnClickListener(v->openParts("expert",item.optString("id")));body.addView(parts);
     }
-
 
     private void addSpecificityGate(JSONObject sg, JSONObject lim){
         if(sg==null)return;
@@ -180,7 +182,7 @@ public class ExpertDiagnosticActivity extends Activity {
         Bitmap bm=loadPage(pg);if(bm==null){Toast.makeText(this,"해당 OEM 페이지 이미지가 APK에 없습니다.",Toast.LENGTH_SHORT).show();return;}showBitmap(bm);
     }
     private Bitmap loadPage(int pg){String[] names={String.format(Locale.US,"oem_pages/p%03d.jpg",pg),"oem_pages/p"+pg+".jpg",String.format(Locale.US,"oem_pages/p%03d.png",pg),"oem_pages/p"+pg+".png"};for(String n:names){try{InputStream is=getAssets().open(n);Bitmap b=BitmapFactory.decodeStream(is);is.close();if(b!=null)return b;}catch(Exception ignore){}}return null;}
-    private void showBitmap(Bitmap bm){Dialog d=new Dialog(this);ScrollView sv=new ScrollView(this);ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);sv.addView(iv);d.setContentView(sv);d.show();if(d.getWindow()!=null)d.getWindow().setLayout(-1,-1);}
+    private void showBitmap(Bitmap bm){ZoomImageDialog.show(this,bm);}
     private void openParts(String domain,String ref){android.content.Intent it=new android.content.Intent(this,PartsReferenceActivity.class);it.putExtra("domain",domain);it.putExtra("ref_id",ref);startActivity(it);}
     private void fatal(String s){TextView t=new TextView(this);t.setText(s);t.setTextSize(16);t.setPadding(30,30,30,30);setContentView(t);}
 }
