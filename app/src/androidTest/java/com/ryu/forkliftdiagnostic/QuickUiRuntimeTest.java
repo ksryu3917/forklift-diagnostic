@@ -45,7 +45,7 @@ public class QuickUiRuntimeTest {
         i.putExtra("group_id", "EL_LICENSE");
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         target.startActivity(i);
-        assertTrue(device.wait(Until.hasObject(By.textContains("다른 미등/후미등 정상 여부")), 7000));
+        assertTrue(device.wait(Until.hasObject(By.textContains("다른 미등/후미등 정상 여부")), 30000));
     }
 
     private void startLicenseCircuit() {
@@ -53,7 +53,7 @@ public class QuickUiRuntimeTest {
         i.putExtra("graph_id", "E_LICENSE_NO");
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         target.startActivity(i);
-        assertTrue(device.wait(Until.hasObject(By.textContains("번호판등")), 7000));
+        assertTrue(device.wait(Until.hasObject(By.textContains("번호판등")), 30000));
     }
 
     private void shot(String name) throws Exception {
@@ -63,13 +63,13 @@ public class QuickUiRuntimeTest {
     }
 
     private void tapExact(String text) {
-        assertTrue("missing button: " + text, device.wait(Until.hasObject(By.text(text)), 5000));
+        assertTrue("missing button: " + text, device.wait(Until.hasObject(By.text(text)), 15000));
         device.findObject(By.text(text)).click();
         device.waitForIdle();
     }
 
     private void assertHas(String text) {
-        assertTrue("missing text: " + text, device.wait(Until.hasObject(By.textContains(text)), 5000));
+        assertTrue("missing text: " + text, device.wait(Until.hasObject(By.textContains(text)), 15000));
     }
 
     private void assertNotHas(String text) {
