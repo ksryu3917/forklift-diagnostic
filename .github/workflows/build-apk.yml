@@ -29,6 +29,12 @@ jobs:
         with:
           gradle-version: '8.9'
 
+
+      - name: Apply and validate V8.9.1 runtime integration
+        run: |
+          python3 tools/apply_v891_runtime_integration.py .
+          python3 tools/validate_v891_runtime_integration.py .
+
       - name: Validate field-executable diagnostics
         run: python3 tools/validate_field_diagnostics.py
 
@@ -103,12 +109,12 @@ jobs:
           from pathlib import Path
           gradle = Path("app/build.gradle").read_text(encoding="utf-8")
           match = re.search(r'versionName\s+"([^"]+)"', gradle)
-          assert match and match.group(1) == "0.18-rc-expert-v8.9-adaptive-branch", match.group(1) if match else "missing versionName"
+          assert match and match.group(1) == "0.18-rc-expert-v8.9.1-integration", match.group(1) if match else "missing versionName"
           apk = Path("app/build/outputs/apk/debug/app-debug.apk")
           with zipfile.ZipFile(apk) as archive:
               release = json.loads(archive.read("assets/diagnostic_release.json").decode("utf-8"))
           assert release["release"] == "v18", release
-          assert release["state"] == "RC EXPERT V8.9 ADAPTIVE BRANCH", release
+          assert release["state"] == "RC EXPERT V8.9.1 INTEGRATION", release
           assert release["version_name"] == match.group(1), release
           assert release["git_commit_sha"] == os.environ["BUILD_SHA"], release
           assert release["source_branch"] == os.environ["BUILD_BRANCH"] == "v18-rc-auto", release
@@ -118,14 +124,14 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: forklift-diagnostic-v18-rc-expert-v8.9-adaptive-branch-${{ github.sha }}-apk
+          name: forklift-diagnostic-v18-rc-expert-v8.9.1-integration-${{ github.sha }}-apk
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
 
       - name: Upload diagnostic validation reports
         uses: actions/upload-artifact@v4
         with:
-          name: forklift-diagnostic-v18-expert-v8.9-adaptive-branch-${{ github.sha }}-validation
+          name: forklift-diagnostic-v18-expert-v8.9.1-integration-${{ github.sha }}-validation
           path: |
             build/reports/field_exec_validation.*
             build/reports/electrical_validation.*
