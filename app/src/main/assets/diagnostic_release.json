@@ -1,7 +1,7 @@
 {
   "release": "v18",
-  "state": "RC EXPERT V8.9 ADAPTIVE BRANCH",
-  "version_name": "0.18-rc-expert-v8.9-adaptive-branch",
+  "state": "RC EXPERT V8.9.1 INTEGRATION",
+  "version_name": "0.18-rc-expert-v8.9.1-integration",
   "source_branch": "v18-rc-auto",
   "git_commit_sha": "UNSTAMPED_LOCAL_PATCH"
 }

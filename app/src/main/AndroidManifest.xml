@@ -4,6 +4,13 @@
       android:allowBackup="true"
       android:label="지게차 진단"
       android:theme="@style/AppTheme">
+    <activity android:name=".ElectricalDiagnosticActivity" android:exported="false" />
+    <activity android:name=".EngineExpertDiagnosticActivity" android:exported="false" />
+    <activity android:name=".EngineSensorMapActivity" android:exported="false" />
+    <activity android:name=".ExpertDiagnosticActivity" android:exported="false" />
+    <activity android:name=".FieldLocationMapActivity" android:exported="false" />
+    <activity android:name=".PartsReferenceActivity" android:exported="false" />
+    <activity android:name=".TestPointLocatorActivity" android:exported="false" />
     <activity
         android:name=".MainActivity"
         android:exported="true">
