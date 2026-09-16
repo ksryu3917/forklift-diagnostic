@@ -25,6 +25,7 @@ public final class ZoomImageDialog {
         bar.setPadding(dp(activity, 10), dp(activity, 4), dp(activity, 8), dp(activity, 4));
         TextView hint = new TextView(activity);
         hint.setText("두 손가락 확대 · 드래그 이동 · 더블탭 확대/원위치");
+        hint.setContentDescription("zoom-hint");
         hint.setTextColor(Color.WHITE);
         hint.setTextSize(13);
         bar.addView(hint, new LinearLayout.LayoutParams(0, dp(activity, 48), 1));
@@ -38,6 +39,7 @@ public final class ZoomImageDialog {
         root.addView(bar);
 
         ZoomImageView view = new ZoomImageView(activity);
+        view.setContentDescription("zoom-image");
         view.setBackgroundColor(Color.BLACK);
         view.setImageBitmap(bitmap);
         root.addView(view, new LinearLayout.LayoutParams(-1, 0, 1));

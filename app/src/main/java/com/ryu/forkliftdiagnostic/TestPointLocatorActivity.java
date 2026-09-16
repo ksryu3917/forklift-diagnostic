@@ -52,6 +52,7 @@ public class TestPointLocatorActivity extends Activity {
 
     private void render()throws Exception{
         base("빠른점검 · "+group.optString("system"));
+        body.setContentDescription("testpoint-group:"+groupId);
         visiblePointIds.clear();
         JSONArray all=group.getJSONArray("points");
         for(int i=0;i<all.length();i++){
@@ -134,7 +135,7 @@ public class TestPointLocatorActivity extends Activity {
         final String pid=p.optString("id");
         LinearLayout c=card();
         TextView now=tv("지금 할 점검",14,true);now.setTextColor(BLUE);c.addView(now);
-        TextView title=tv(displayText(p.optString("label")),21,true);c.addView(title);
+        TextView title=tv(displayText(p.optString("label")),21,true);title.setContentDescription("quick-point:"+pid);c.addView(title);
         c.addView(tv("어디서 · "+displayText(p.optString("where")),15,true));
         c.addView(tv("연결 · "+displayText(p.optString("connect")),14,false));
         c.addView(tv("상태 · "+displayText(p.optString("condition")),14,false));
@@ -149,7 +150,7 @@ public class TestPointLocatorActivity extends Activity {
             row.addView(ok);row.addView(bad);c.addView(row);
         }else{
             LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.HORIZONTAL);
-            Button ok=decisionBtn("정상",GREEN);Button bad=decisionBtn("이상",Color.rgb(180,45,45));
+            Button ok=decisionBtn("정상",GREEN);Button bad=decisionBtn("이상",Color.rgb(180,45,45));ok.setContentDescription("quick-pass:"+pid);bad.setContentDescription("quick-fail:"+pid);
             ok.setOnClickListener(v->{setManualStatus(pid,"PASS");recreate();});bad.setOnClickListener(v->{setManualStatus(pid,"FAIL");recreate();});
             row.addView(ok,new LinearLayout.LayoutParams(0,dp(58),1));row.addView(bad,new LinearLayout.LayoutParams(0,dp(58),1));c.addView(row);
         }

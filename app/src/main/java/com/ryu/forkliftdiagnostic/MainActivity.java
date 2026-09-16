@@ -175,7 +175,8 @@ public class MainActivity extends Activity {
         EditText q=new EditText(this);q.setHint("예: 전진 안됨, 브레이크, 조향");c.addView(q);
         Button s=btn("증상 검색",true);s.setOnClickListener(v->{String term=q.getText().toString().trim();if(term.length()==0)go(new Screen("systems"));else searchSymptoms(term);});c.addView(s);
         Button y=btn("계통별로 찾기",false);y.setOnClickListener(v->go(new Screen("systems")));c.addView(y);
-        Button e=btn("⚙ 엔진 진단 (D34 임시 기준)",false);e.setOnClickListener(v->go(new Screen("engine")));c.addView(e);body.addView(c);
+        Button e=btn("⚙ D24 엔진 현장진단",true);e.setOnClickListener(v->startActivity(new Intent(MainActivity.this,EngineExpertDiagnosticActivity.class)));c.addView(e);Button el=btn("⚡ 전기 / 차체전장 진단",true);el.setOnClickListener(v->startActivity(new Intent(MainActivity.this,ElectricalDiagnosticActivity.class)));c.addView(el);
+        body.addView(c);
     }
 
     private void searchSymptoms(String term){
@@ -183,7 +184,9 @@ public class MainActivity extends Activity {
             baseScreen("검색: "+term);JSONArray sy=db.getJSONArray("symptoms");int count=0;
             for(int i=0;i<sy.length();i++){JSONObject s=sy.getJSONObject(i);String hay=s.optString("name")+" "+s.optString("system")+" "+s.optJSONArray("causes");
                 if(hay.toLowerCase().contains(term.toLowerCase())){Button b=btn(s.optString("system")+" · "+s.optString("name"),false);String id=s.optString("id");b.setOnClickListener(v->go(new Screen("symptom",id)));body.addView(b);count++;}}
-            if(count==0)body.addView(tv("검색 결과가 없습니다.",15,true));
+            Intent ei=new Intent(MainActivity.this,ElectricalDiagnosticActivity.class);ei.putExtra("query",term);
+            Button eb=btn("⚡ 전기/차체전장에서도 검색 · "+term,false);eb.setOnClickListener(v->startActivity(ei));body.addView(eb);
+            if(count==0)body.addView(tv("기계/유압 증상 일치 없음 · 전장 검색을 확인하세요.",15,true));
         }catch(Exception e){fatal(e.toString());}
     }
 

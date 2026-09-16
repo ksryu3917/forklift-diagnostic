@@ -107,6 +107,7 @@ public class ElectricalDiagnosticActivity extends Activity {
     private void renderGraph(String gid,String nodeId)throws Exception{
         JSONObject g=data.getJSONObject("graphs").getJSONObject(gid),n=g.getJSONObject("nodes").getJSONObject(nodeId);
         base(g.optString("title"));
+        body.setContentDescription("electrical-graph:"+gid);
 
         LinearLayout h=card();
         h.addView(tv("지금 확인",13,true));
@@ -134,17 +135,17 @@ public class ElectricalDiagnosticActivity extends Activity {
 
         JSONObject cir=data.getJSONObject("circuits").optJSONObject(g.optString("circuit"));
         if(!detailEvidence){
-            Button more=btn("회로 · 퓨즈/릴레이 · OEM 근거 보기",false);more.setOnClickListener(v->{try{detailEvidence=true;renderGraph(gid,nodeId);}catch(Exception e){fatal(e.toString());}});body.addView(more);
+            Button more=btn("회로 · 퓨즈/릴레이 · OEM 근거 보기",false);more.setContentDescription("circuit-evidence:"+gid);more.setOnClickListener(v->{try{detailEvidence=true;renderGraph(gid,nodeId);}catch(Exception e){fatal(e.toString());}});body.addView(more);
         }else{
             Button less=btn("← 상세 근거 접기",false);less.setOnClickListener(v->{try{detailEvidence=false;renderGraph(gid,nodeId);}catch(Exception e){fatal(e.toString());}});body.addView(less);
             JSONObject item=catalogItem(gid);if(item!=null)sourceCard(item);
-            if(cir!=null)addCircuitEvidence(cir,nodeId);
+            if(cir!=null)addCircuitEvidence(cir,nodeId,gid);
             LinearLayout tools=card();addSection(tools,"공구",n.optJSONArray("tools"),"• ");if(tools.getChildCount()>0)body.addView(tools);
             if("result".equals(n.optString("type"))){showResult(n);Button pr=btn("분해도 / 부품 위치 참고 (품번은 후순위)",false);pr.setOnClickListener(v->openParts("electrical",gid));body.addView(pr);}
         }
     }
 
-    private void addCircuitEvidence(JSONObject c,String nodeId){
+    private void addCircuitEvidence(JSONObject c,String nodeId,String gid){
         try{
             JSONObject sd=c.optJSONObject("simplified_diagram");
             if(sd!=null){
@@ -152,7 +153,7 @@ public class ElectricalDiagnosticActivity extends Activity {
                 d.addView(tv("고장 전용 재작성 회로",16,true));
                 d.addView(tv("원본 전체 회로를 복사하지 않고 이 증상을 가르는 전원·제어·부하·접지·측정점만 표시",12,false));
                 Bitmap bm=drawSimplifiedCircuit(sd);
-                ImageView iv=new ImageView(this);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                ImageView iv=new ImageView(this);iv.setContentDescription("circuit-image:"+gid);iv.setImageBitmap(bm);iv.setAdjustViewBounds(true);iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 iv.setOnClickListener(v->showBitmap(bm));
                 d.addView(iv,new LinearLayout.LayoutParams(-1,dp(320)));
                 JSONArray mp=sd.optJSONArray("measure_points");
