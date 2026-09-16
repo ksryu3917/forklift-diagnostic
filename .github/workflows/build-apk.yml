@@ -172,14 +172,11 @@ jobs:
           profile: pixel_2
           disable-animations: true
           script: |
-            test_status=0
-            gradle :app:connectedDebugAndroidTest || test_status=$?
+            gradle :app:connectedDebugAndroidTest || echo $? > /tmp/v892-test-status
             mkdir -p build/runtime-ui
-            adb pull /sdcard/Download/v892-runtime/. build/runtime-ui/ || true
-            if [ "$test_status" -eq 0 ]; then
-              test "$(find build/runtime-ui -name '*.png' | wc -l)" -eq 9
-            fi
-            exit "$test_status"
+            adb pull /sdcard/Android/data/com.ryu.forkliftdiagnostic/files/Pictures/v892-runtime/. build/runtime-ui/ || true
+            test -f /tmp/v892-test-status || test "$(find build/runtime-ui -name '*.png' | wc -l)" -eq 9
+            test ! -f /tmp/v892-test-status || exit "$(cat /tmp/v892-test-status)"
 
       - name: Upload actual runtime screenshots
         if: always()
