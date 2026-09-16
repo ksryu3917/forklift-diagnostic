@@ -173,7 +173,7 @@ jobs:
       - name: Run V8.9.2 on-device UI and gesture checks
         uses: ReactiveCircus/android-emulator-runner@v2
         with:
-          api-level: 35
+          api-level: 29
           arch: x86_64
           profile: pixel_2
           disable-animations: true
