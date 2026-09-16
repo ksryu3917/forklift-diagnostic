@@ -48,12 +48,8 @@ jobs:
 
       - name: Enable KVM when available
         run: |
-          if [ -e /dev/kvm ]; then
-            sudo chmod 666 /dev/kvm
-            ls -l /dev/kvm
-          else
-            echo "KVM device unavailable; continue without blind retry."
-          fi
+          [ ! -e /dev/kvm ] || sudo chmod 666 /dev/kvm
+          ls -l /dev/kvm || echo "KVM device unavailable; continue without blind retry."
 
       - name: Run exact V8.9.3 runtime tests
         uses: ReactiveCircus/android-emulator-runner@v2
@@ -64,30 +60,28 @@ jobs:
           disable-animations: true
           emulator-boot-timeout: 600
           script: |
-            set +e
-            gradle :app:connectedDebugAndroidTest
-            TEST_STATUS=$?
-            set -e
-
             mkdir -p build/runtime-ui
-            adb pull /sdcard/Download/v893-runtime/. build/runtime-ui/ || true
-
-            if [ "$TEST_STATUS" -ne 0 ]; then
-              echo "Instrumentation failed; evidence was pulled before exit."
-              exit "$TEST_STATUS"
-            fi
-
-            for f in \
-              01-license-initial-LP1.png \
-              02-license-LP2-power.png \
-              03-license-LP3-ground-drop.png \
-              04-license-bulb-socket-stop.png \
-              05-license-common-LAMP.png \
-              06-zoom-before.png \
-              07-zoom-after-pinch.png \
-              08-zoom-after-drag.png; do
-                test -s "build/runtime-ui/$f"
-            done
+            mkdir -p build/runtime-ui/results
+            gradle :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.ryu.forkliftdiagnostic.QuickUiRuntimeTest#licenseLocalBranchShowsExactlyOnePointAtATime
+            adb pull /sdcard/Download/v893-runtime/. build/runtime-ui/
+            cp app/build/outputs/androidTest-results/connected/debug/TEST-*.xml build/runtime-ui/results/01-license-local.xml
+            gradle :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.ryu.forkliftdiagnostic.QuickUiRuntimeTest#licenseCommonFailureMovesOnlyToLampPath
+            adb pull /sdcard/Download/v893-runtime/. build/runtime-ui/
+            cp app/build/outputs/androidTest-results/connected/debug/TEST-*.xml build/runtime-ui/results/02-license-common.xml
+            gradle :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.ryu.forkliftdiagnostic.QuickUiRuntimeTest#circuitViewerPinchAndDragChangesRenderedImage
+            adb pull /sdcard/Download/v893-runtime/. build/runtime-ui/
+            cp app/build/outputs/androidTest-results/connected/debug/TEST-*.xml build/runtime-ui/results/03-zoom.xml
+            test -s build/runtime-ui/01-license-initial-LP1.png
+            test -s build/runtime-ui/02-license-LP2-power.png
+            test -s build/runtime-ui/03-license-LP3-ground-drop.png
+            test -s build/runtime-ui/04-license-bulb-socket-stop.png
+            test -s build/runtime-ui/05-license-common-LAMP.png
+            test -s build/runtime-ui/06-zoom-before.png
+            test -s build/runtime-ui/07-zoom-after-pinch.png
+            test -s build/runtime-ui/08-zoom-after-drag.png
+            grep -q 'tests="1" failures="0" errors="0" skipped="0"' build/runtime-ui/results/01-license-local.xml
+            grep -q 'tests="1" failures="0" errors="0" skipped="0"' build/runtime-ui/results/02-license-common.xml
+            grep -q 'tests="1" failures="0" errors="0" skipped="0"' build/runtime-ui/results/03-zoom.xml
 
       - name: Verify final APK identity
         env:
