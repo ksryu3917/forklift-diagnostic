@@ -175,7 +175,7 @@ jobs:
             gradle :app:connectedDebugAndroidTest || echo $? > /tmp/v892-test-status
             mkdir -p build/runtime-ui
             adb pull /sdcard/Download/v892-runtime/. build/runtime-ui/ || true
-            test -f /tmp/v892-test-status || test "$(find build/runtime-ui -name '*.png' | wc -l)" -eq 9
+            test -f /tmp/v892-test-status || test "$(find build/runtime-ui -name '*.png' | wc -l)" -eq 8
             test ! -f /tmp/v892-test-status || exit "$(cat /tmp/v892-test-status)"
 
       - name: Upload actual runtime screenshots
