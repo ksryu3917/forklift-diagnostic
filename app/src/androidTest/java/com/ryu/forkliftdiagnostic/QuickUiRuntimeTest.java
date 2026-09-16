@@ -38,6 +38,7 @@ public class QuickUiRuntimeTest {
         target.getSharedPreferences("field_measurement_session", Context.MODE_PRIVATE).edit().clear().commit();
         shots = new File(target.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "v892-runtime");
         assertTrue(shots.exists() || shots.mkdirs());
+        device.executeShellCommand("mkdir -p /sdcard/Download/v892-runtime");
     }
 
     private void startLicenseQuick() {
@@ -60,6 +61,9 @@ public class QuickUiRuntimeTest {
         File f = new File(shots, name + ".png");
         assertTrue("screenshot failed: " + f, device.takeScreenshot(f));
         assertTrue(f.length() > 1000);
+        device.executeShellCommand("cp " + f.getAbsolutePath() + " /sdcard/Download/v892-runtime/" + name + ".png");
+        String size = device.executeShellCommand("stat -c %s /sdcard/Download/v892-runtime/" + name + ".png").trim();
+        assertTrue("public screenshot copy failed: " + name, Long.parseLong(size) > 1000);
     }
 
     private void tapExact(String text) {
@@ -74,6 +78,20 @@ public class QuickUiRuntimeTest {
 
     private void assertNotHas(String text) {
         assertFalse("unexpected text: " + text, device.hasObject(By.textContains(text)));
+    }
+
+    private void assertNoActiveQuickPoint() {
+        assertFalse("unexpected active quick-point PASS button", device.hasObject(By.text("정상")));
+        assertFalse("unexpected active quick-point FAIL button", device.hasObject(By.text("이상")));
+    }
+
+    private void scrollToText(String text) {
+        for (int n=0; n<10 && !device.hasObject(By.textContains(text)); n++) {
+            device.swipe(device.getDisplayWidth()/2, device.getDisplayHeight()*3/4,
+                    device.getDisplayWidth()/2, device.getDisplayHeight()/4, 18);
+            device.waitForIdle();
+        }
+        assertHas(text);
     }
 
     @Test public void licenseLocalBranchShowsOnePointAtATime() throws Exception {
@@ -97,7 +115,7 @@ public class QuickUiRuntimeTest {
 
         tapExact("정상");
         assertHas("전구/소켓 접촉 영역");
-        assertNotHas("공통 LAMP 릴레이 / 라이트 스위치");
+        assertNoActiveQuickPoint();
         shot("04-license-bulb-socket-stop");
     }
 
@@ -113,7 +131,7 @@ public class QuickUiRuntimeTest {
     @Test public void circuitViewerPinchDragDoubleTapChangesRenderedImage() throws Exception {
         startLicenseCircuit();
         tapExact("회로 · 퓨즈/릴레이 · OEM 근거 보기");
-        assertHas("고장 전용 재작성 회로");
+        scrollToText("고장 전용 재작성 회로");
         UiObject image = device.findObject(new UiSelector().className("android.widget.ImageView"));
         for (int n=0; n<8 && !image.exists(); n++) {
             device.swipe(device.getDisplayWidth()/2, device.getDisplayHeight()*3/4,
