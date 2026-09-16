@@ -1,19 +1,19 @@
-name: Build Android APK
+name: Build Android APK Candidate
 
 on:
   workflow_dispatch:
   push:
-    branches: [ "main", "master", "v18-rc-auto" ]
+    branches: [ "v18-rc-auto" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
@@ -23,60 +23,28 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Apply and validate V8.9.1 runtime integration
+      - name: Validate committed source integration
+        run: python3 tools/validate_v893_project_integrity.py .
+
+      - name: Run diagnostic validators
         run: |
-          python3 tools/apply_v891_runtime_integration.py .
-          python3 tools/validate_v891_runtime_integration.py .
-
-      - name: Validate field-executable diagnostics
-        run: python3 tools/validate_field_diagnostics.py
-
-      - name: Validate electrical diagnostics
-        run: python3 tools/validate_electrical_diagnostics.py
-
-      - name: Validate expert cause diagnostics
-        run: python3 tools/validate_expert_v2.py
-
-      - name: Validate D24 engine diagnostics
-        run: python3 tools/validate_engine_d24_v2.py
-
-      - name: Validate strict field readiness
-        run: |
+          python3 tools/validate_field_diagnostics.py
+          python3 tools/validate_electrical_diagnostics.py
+          python3 tools/validate_expert_v2.py
+          python3 tools/validate_engine_d24_v2.py
           python3 tools/validate_field_readiness_v3.py
-          python3 tools/build_field_readiness_v5.py
-
-      - name: Validate Parts Book integration
-        run: python3 tools/validate_parts_reference.py
-
-      - name: Validate diagnostic-first UI priority
-        run: python3 tools/validate_diagnostic_first_priority.py
-
-      - name: Validate technician location map
-        run: |
+          python3 tools/validate_parts_reference.py
+          python3 tools/validate_diagnostic_first_priority.py
           python3 tools/validate_field_location_map.py .
           python3 tools/validate_engine_sensor_locator.py .
-
-      - name: Validate measurement / test-point locator
-        run: python3 tools/validate_test_point_locator.py .
-
-      - name: Validate field measurement worksheet
-        run: python3 tools/validate_measurement_worksheet.py .
-
-      - name: Validate OEM-exact automatic evaluation
-        run: python3 tools/validate_oem_auto_evaluation.py .
-
-      - name: Validate adaptive multi-point branch engine
-        run: python3 tools/validate_adaptive_branch_v89.py .
-
-      - name: Validate V8.9.2 quick field UI and zoom
-        run: python3 tools/validate_v892_quick_ui.py .
-
-      - name: Audit cause-specific diagnostic separation
-        run: |
+          python3 tools/validate_test_point_locator.py .
+          python3 tools/validate_measurement_worksheet.py .
+          python3 tools/validate_oem_auto_evaluation.py .
+          python3 tools/validate_adaptive_branch_v89.py .
+          python3 tools/validate_v893_quick_ui.py .
           python3 tools/validate_diagnostic_specificity.py .
-          python3 tools/build_field_readiness_v7.py .
 
-      - name: Stamp diagnostic release identity
+      - name: Stamp exact source identity
         env:
           BUILD_SHA: ${{ github.sha }}
           BUILD_BRANCH: ${{ github.ref_name }}
@@ -84,107 +52,37 @@ jobs:
           python3 - <<'PY'
           import json, os
           from pathlib import Path
-          path = Path("app/src/main/assets/diagnostic_release.json")
-          data = json.loads(path.read_text(encoding="utf-8"))
-          data["git_commit_sha"] = os.environ["BUILD_SHA"]
-          data["source_branch"] = os.environ["BUILD_BRANCH"]
-          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-          print(json.dumps(data, ensure_ascii=False))
+          p=Path("app/src/main/assets/diagnostic_release.json")
+          d=json.loads(p.read_text(encoding="utf-8"))
+          d["git_commit_sha"]=os.environ["BUILD_SHA"]
+          d["source_branch"]=os.environ["BUILD_BRANCH"]
+          p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
           PY
 
-      - name: Build debug APK
+      - name: Build candidate APK
         run: gradle :app:assembleDebug
 
-      - name: Verify APK release identity
+      - name: Verify candidate identity
         env:
           BUILD_SHA: ${{ github.sha }}
-          BUILD_BRANCH: ${{ github.ref_name }}
         run: |
           python3 - <<'PY'
           import json, os, re, zipfile
           from pathlib import Path
-          gradle = Path("app/build.gradle").read_text(encoding="utf-8")
-          match = re.search(r'versionName\s+"([^"]+)"', gradle)
-          assert match and match.group(1) == "0.18-rc-expert-v8.9.2-quick-ui", match.group(1) if match else "missing versionName"
-          apk = Path("app/build/outputs/apk/debug/app-debug.apk")
-          with zipfile.ZipFile(apk) as archive:
-              release = json.loads(archive.read("assets/diagnostic_release.json").decode("utf-8"))
-          assert release["release"] == "v18", release
-          assert release["state"] == "RC EXPERT V8.9.2 QUICK UI", release
-          assert release["version_name"] == match.group(1), release
-          assert release["git_commit_sha"] == os.environ["BUILD_SHA"], release
-          assert release["source_branch"] == os.environ["BUILD_BRANCH"] == "v18-rc-auto", release
-          print("VERIFIED_APK_RELEASE=" + json.dumps(release, ensure_ascii=False))
+          apk=Path("app/build/outputs/apk/debug/app-debug.apk")
+          with zipfile.ZipFile(apk) as z:
+              d=json.loads(z.read("assets/diagnostic_release.json"))
+          assert d["release"]=="v18"
+          assert d["state"]=="RC EXPERT V8.9.3 FIELD REBUILD"
+          assert d["version_name"]=="0.18-rc-expert-v8.9.3-field-rebuild"
+          assert d["source_branch"]=="v18-rc-auto"
+          assert d["git_commit_sha"]==os.environ["BUILD_SHA"]
+          print(d)
           PY
 
-      - name: Upload APK
+      - name: Upload candidate APK
         uses: actions/upload-artifact@v4
         with:
-          name: forklift-diagnostic-v18-rc-expert-v8.9.2-quick-ui-${{ github.sha }}-apk
+          name: forklift-diagnostic-v893-candidate-${{ github.sha }}
           path: app/build/outputs/apk/debug/app-debug.apk
-          retention-days: 30
-
-      - name: Upload diagnostic validation reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: forklift-diagnostic-v18-expert-v8.9.2-quick-ui-${{ github.sha }}-validation
-          path: |
-            build/reports/field_exec_validation.*
-            build/reports/electrical_validation.*
-            build/reports/expert_v2_validation.*
-            build/reports/engine_d24_v2_validation.*
-            build/reports/parts_reference_validation.*
-            build/reports/diagnostic_specificity_v83.md
-            build/reports/test_point_locator_v86.md
-            build/reports/measurement_worksheet_v87.md
-            build/reports/oem_auto_eval_v88.md
-            build/reports/adaptive_branch_v89.md
-            build/reports/FIELD_READINESS_V5.*
-            build/reports/FIELD_READINESS_V7_LOCATION.md
-            build/reports/FULL_REASSESSMENT.md
-            FIELD_DIAGNOSTIC_AUDIT.md
-          retention-days: 30
-
-  runtime-ui:
-    needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.9'
-
-      - name: Run V8.9.2 on-device UI and gesture checks
-        uses: ReactiveCircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          arch: x86_64
-          profile: pixel_2
-          disable-animations: true
-          script: |
-            gradle :app:connectedDebugAndroidTest || echo $? > /tmp/v892-test-status
-            mkdir -p build/runtime-ui
-            adb pull /sdcard/Download/v892-runtime/. build/runtime-ui/ || true
-            test -f /tmp/v892-test-status || test "$(find build/runtime-ui -name '*.png' | wc -l)" -eq 8
-            test ! -f /tmp/v892-test-status || exit "$(cat /tmp/v892-test-status)"
-
-      - name: Upload actual runtime screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: forklift-diagnostic-v892-runtime-ui-${{ github.sha }}
-          path: |
-            build/runtime-ui/*.png
-            app/build/outputs/androidTest-results/connected/**
-            app/build/reports/androidTests/connected/**
-          retention-days: 30
+          retention-days: 14

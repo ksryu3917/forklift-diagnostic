@@ -1,0 +1,26 @@
+{
+  "name": "forklift_v8_9_3_field_rebuild",
+  "base_branch": "v18-rc-auto",
+  "base_head_reviewed": "0c823ebfdf7f21efe143d4a6c3201db8c8a91e1d",
+  "version_code": 37,
+  "version_name": "0.18-rc-expert-v8.9.3-field-rebuild",
+  "state": "RC EXPERT V8.9.3 FIELD REBUILD",
+  "files": [
+    ".github/workflows/build-apk.yml",
+    ".github/workflows/runtime-ui.yml",
+    "PROJECT_REASSESSMENT_V893.md",
+    "V893_QuickUiRuntimeTest.java",
+    "WORK_APPLY_V8_9_3.md",
+    "tools/apply_v893_rebuild.py",
+    "tools/validate_v893_project_integrity.py",
+    "tools/validate_v893_quick_ui.py"
+  ],
+  "self_review": {
+    "python_syntax": "PASS",
+    "yaml_parse": "PASS",
+    "release_sensitive_v892_validator_removed_from_ci": true,
+    "ui_automator_selector_api_reviewed": true,
+    "failure_evidence_pulled_before_exit": true,
+    "espresso_readiness_marker": "content-view body"
+  }
+}
