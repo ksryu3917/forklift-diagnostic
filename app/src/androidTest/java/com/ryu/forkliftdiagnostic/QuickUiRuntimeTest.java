@@ -36,7 +36,7 @@ public class QuickUiRuntimeTest {
         target = instrumentation.getTargetContext();
         target.getSharedPreferences("field_measurements_v1", Context.MODE_PRIVATE).edit().clear().commit();
         target.getSharedPreferences("field_measurement_session", Context.MODE_PRIVATE).edit().clear().commit();
-        shots = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "v892-runtime");
+        shots = new File(target.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "v892-runtime");
         assertTrue(shots.exists() || shots.mkdirs());
     }
 
