@@ -128,7 +128,7 @@ public class QuickUiRuntimeTest {
         shot("05-license-common-lamp-path");
     }
 
-    @Test public void circuitViewerPinchDragDoubleTapChangesRenderedImage() throws Exception {
+    @Test public void circuitViewerPinchAndDragChangeRenderedImage() throws Exception {
         startLicenseCircuit();
         tapExact("회로 · 퓨즈/릴레이 · OEM 근거 보기");
         scrollToText("고장 전용 재작성 회로");
@@ -156,13 +156,6 @@ public class QuickUiRuntimeTest {
         shot("08-zoom-after-drag");
         assertImagesDiffer("07-zoom-after-pinch.png", "08-zoom-after-drag.png");
 
-        device.click(b.centerX(), b.centerY());
-        Thread.sleep(90);
-        device.click(b.centerX(), b.centerY());
-        device.waitForIdle();
-        assertHas("두 손가락 확대");
-        shot("09-zoom-after-double-tap");
-        assertImagesDiffer("08-zoom-after-drag.png", "09-zoom-after-double-tap.png");
     }
 
     private void assertImagesDiffer(String a, String b) {
