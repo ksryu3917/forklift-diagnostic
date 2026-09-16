@@ -7,8 +7,16 @@ jobs:
   runtime-gate:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      TARGET_SHA: 57e1edb02d1e0b0cdc05892856c2a1df9c409ccf
+      TARGET_BRANCH: v18-rc-auto
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TARGET_SHA }}
+
+      - name: Verify immutable candidate checkout
+        run: test "$(git rev-parse HEAD)" = "$TARGET_SHA"
 
       - name: Set up JDK 17
         uses: actions/setup-java@v5
@@ -30,8 +38,8 @@ jobs:
 
       - name: Stamp exact source identity
         env:
-          BUILD_SHA: ${{ github.sha }}
-          BUILD_BRANCH: ${{ github.ref_name }}
+          BUILD_SHA: ${{ env.TARGET_SHA }}
+          BUILD_BRANCH: ${{ env.TARGET_BRANCH }}
         run: |
           python3 - <<'PY'
           import json, os
@@ -85,7 +93,7 @@ jobs:
 
       - name: Verify final APK identity
         env:
-          BUILD_SHA: ${{ github.sha }}
+          BUILD_SHA: ${{ env.TARGET_SHA }}
         run: |
           python3 - <<'PY'
           import json, os, zipfile
@@ -105,7 +113,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: forklift-diagnostic-v893-runtime-evidence-${{ github.sha }}
+          name: forklift-diagnostic-v893-runtime-evidence-${{ env.TARGET_SHA }}
           path: |
             build/runtime-ui/**
             app/build/outputs/androidTest-results/connected/**
@@ -115,6 +123,6 @@ jobs:
       - name: Upload verified APK
         uses: actions/upload-artifact@v4
         with:
-          name: forklift-diagnostic-v893-VERIFIED-${{ github.sha }}-apk
+          name: forklift-diagnostic-v893-VERIFIED-${{ env.TARGET_SHA }}-apk
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
