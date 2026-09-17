@@ -3,6 +3,7 @@ package com.ryu.forkliftdiagnostic;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -109,6 +110,7 @@ public class QuickUiRuntimeTest {
 
             onView(withContentDescription("quick-pass:LP3")).perform(click());
             onView(withText(containsString("전구/소켓 접촉 영역"))).check(matches(isDisplayed()));
+            onView(withText(containsString("다음 측정: [LP4]"))).check(doesNotExist());
             assertNoActiveQuickPoint();
             shot("04-license-bulb-socket-stop");
         } catch (Throwable t) {
