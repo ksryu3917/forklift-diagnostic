@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      TARGET_SHA: 57e1edb02d1e0b0cdc05892856c2a1df9c409ccf
+      TARGET_SHA: 13dd2d10392465e6ef167651ef4a96920d589474
       TARGET_BRANCH: v18-rc-auto
     steps:
       - uses: actions/checkout@v4
@@ -27,7 +27,7 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-                TARGET_SHA: 13dd2d10392465e6ef167651ef4a96920d589474
+          gradle-version: '8.9'
 
       - name: Validate committed source
         run: |
