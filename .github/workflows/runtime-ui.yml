@@ -27,7 +27,7 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.9'
+                TARGET_SHA: 13dd2d10392465e6ef167651ef4a96920d589474
 
       - name: Validate committed source
         run: |
