@@ -24,7 +24,9 @@ jobs:
           gradle-version: '8.9'
 
       - name: Validate committed source integration
-        run: python3 tools/validate_v893_project_integrity.py .
+        run: |
+          python3 tools/validate_v893_project_integrity.py .
+          python3 tools/validate_manual_library_catalog.py .
 
       - name: Run diagnostic validators
         run: |
@@ -73,8 +75,8 @@ jobs:
           with zipfile.ZipFile(apk) as z:
               d=json.loads(z.read("assets/diagnostic_release.json"))
           assert d["release"]=="v18"
-          assert d["state"]=="RC EXPERT V8.9.3 FIELD REBUILD"
-          assert d["version_name"]=="0.18-rc-expert-v8.9.3-field-rebuild"
+          assert d["state"]=="RC EXPERT V8.9.4 MANUAL LIBRARY"
+          assert d["version_name"]=="0.18-rc-expert-v8.9.4-manual-library"
           assert d["source_branch"]=="v18-rc-auto"
           assert d["git_commit_sha"]==os.environ["BUILD_SHA"]
           print(d)
@@ -83,6 +85,6 @@ jobs:
       - name: Upload candidate APK
         uses: actions/upload-artifact@v4
         with:
-          name: forklift-diagnostic-v893-candidate-${{ github.sha }}
+          name: forklift-diagnostic-v894-manual-library-candidate-${{ github.sha }}
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 14
