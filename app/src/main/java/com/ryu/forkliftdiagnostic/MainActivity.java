@@ -21,6 +21,7 @@ public class MainActivity extends Activity {
     private JSONObject db;
     private JSONObject transDiag;
     private JSONObject releaseInfo;
+    private JSONObject manualLibrary;
     private String vehicle = "D25S-7";
     private String brand = "두산";
     private String tmVariant = "STD";
@@ -50,6 +51,8 @@ public class MainActivity extends Activity {
         catch(Exception e){ transDiag=new JSONObject(); }
         try { releaseInfo=new JSONObject(readAsset("diagnostic_release.json")); }
         catch(Exception e){ releaseInfo=new JSONObject(); }
+        try { manualLibrary=new JSONObject(readAsset("manual_library_catalog.json")); }
+        catch(Exception e){ manualLibrary=new JSONObject(); }
         show(new Screen("home"),false);
     }
 
@@ -1156,10 +1159,20 @@ public class MainActivity extends Activity {
 
     private void manual()throws Exception{
         baseScreen("매뉴얼 관리");JSONObject m=db.getJSONObject("manual");LinearLayout c=card();c.addView(tv(m.optString("title"),17,true));c.addView(tv("판본 "+m.optString("edition")+" · "+m.optInt("page_count")+"쪽",13,false));c.addView(tv("브랜드 "+brand+" · 증상 "+db.getJSONArray("symptoms").length()+"개 / 원인 268개 정규화",13,false));body.addView(c);
+        if(manualLibrary!=null && manualLibrary.length()>0){
+            LinearLayout lib=card();
+            int cnt=manualLibrary.optInt("documents_indexed",0);
+            JSONObject sum=manualLibrary.optJSONObject("summary");
+            JSONObject mc=sum==null?null:sum.optJSONObject("manufacturer_counts");
+            lib.addView(tv("정비자료 라이브러리 · "+cnt+"개 색인",17,true));
+            if(mc!=null)lib.addView(tv("두산 "+mc.optInt("Doosan")+" · 현대 "+mc.optInt("Hyundai")+" · Toyota "+mc.optInt("Toyota")+" · Yanmar "+mc.optInt("Yanmar")+" · Kubota "+mc.optInt("Kubota"),12,false));
+            lib.addView(tv("색인(indexed)은 자료 보유를 뜻합니다. 모델/판본별 원문 검증이 끝난 값만 진단 분기에 연결합니다.",12,false));
+            body.addView(lib);
+        }
         Button s=btn("매뉴얼 / 데이터 검색",true);s.setOnClickListener(v->go(new Screen("search")));body.addView(s);
         Button add=btn("＋ 새 PDF 매뉴얼 등록",false);add.setOnClickListener(v->pickPdf());body.addView(add);
         JSONArray pending=loadArray("manuals_pending");if(pending.length()>0){LinearLayout p=card();p.addView(tv("추가 등록된 매뉴얼",15,true));for(int i=0;i<pending.length();i++)p.addView(tv("• "+pending.optJSONObject(i).optString("name")+" · AI 분석 연결 대기",13,false));body.addView(p);}
-        LinearLayout rule=card();rule.addView(tv("새 매뉴얼 분석 원칙",15,true));rule.addView(tv("증상 → 원인 → STEP → 해당 STEP에 필요한 회로/위치/측정자료 → 결과 입력 → 다음 분기. 분기 참조가 끝까지 연결되지 않으면 분석 완료 처리하지 않습니다.",13,false));body.addView(rule);
+        LinearLayout rule=card();rule.addView(tv("새 매뉴얼 분석 원칙",15,true));rule.addView(tv("측정 위치 → 공구 → 시험조건 → 정상/이상 기준 → 회로/계통 격리 → 확정 조건 → 분해/교환 허용조건 순서로 현장 절차화합니다. 모델·판본·옵션이 다른 수치/핀맵은 자동 병합하지 않습니다.",13,false));body.addView(rule);
     }
 
     private void pickPdf(){Intent i=new Intent(Intent.ACTION_OPEN_DOCUMENT);i.setType("application/pdf");i.addCategory(Intent.CATEGORY_OPENABLE);startActivityForResult(i,PICK_PDF);}
@@ -1171,12 +1184,33 @@ public class MainActivity extends Activity {
     private void renderManualResults(String term){
         try{
             baseScreen("검색: "+term);
-            JSONArray sy=db.getJSONArray("symptoms");int n=0;
+            int n=0; String q=term.toLowerCase();
+            JSONArray docs=manualLibrary==null?null:manualLibrary.optJSONArray("documents");
+            if(docs!=null){
+                for(int i=0;i<docs.length();i++){
+                    JSONObject d=docs.optJSONObject(i); if(d==null)continue;
+                    JSONArray facts=d.optJSONArray("verified_field_facts");
+                    String factText=facts==null?"":facts.toString();
+                    String hay=(d.optString("name")+" "+d.optString("manufacturer")+" "+d.optString("document_type")+" "+d.optString("search_text")+" "+d.optJSONArray("models")+" "+d.optString("manual_code")+" "+factText).toLowerCase();
+                    if(!hay.contains(q))continue;
+                    LinearLayout c=card();
+                    c.addView(tv(d.optString("manufacturer")+" · "+d.optString("document_type"),12,true));
+                    c.addView(tv(d.optString("name"),15,true));
+                    if(d.optString("manual_code").length()>0)c.addView(tv("문서번호 · "+d.optString("manual_code"),12,false));
+                    JSONArray models=d.optJSONArray("models");if(models!=null&&models.length()>0)c.addView(tv("적용모델 · "+models.toString(),12,false));
+                    String rs=d.optString("review_state");
+                    String label="identity_verified".equals(rs)?"원문 식별 확인":"partial_source".equals(rs)?"부분자료":"rejected_nonmanual".equals(rs)?"정비자료 아님":"자료 색인";
+                    c.addView(tv("자료상태 · "+label,11,false));
+                    if(facts!=null){for(int fi=0;fi<facts.length();fi++){JSONObject f=facts.optJSONObject(fi);if(f==null)continue;String fh=(f.optString("id")+" "+f.optString("system")+" "+f.optString("source_section")+" "+f.optString("fact")).toLowerCase();if(fh.contains(q)){c.addView(tv("현장근거 · "+f.optString("source_section"),12,true));c.addView(tv(f.optString("fact"),12,false));}}}
+                    body.addView(c);n++;
+                }
+            }
+            JSONArray sy=db.getJSONArray("symptoms");
             for(int i=0;i<sy.length();i++){
                 JSONObject s=sy.getJSONObject(i);
-                if((s.optString("name")+" "+s.optJSONArray("causes")).toLowerCase().contains(term.toLowerCase())){
+                if((s.optString("name")+" "+s.optJSONArray("causes")).toLowerCase().contains(q)){
                     LinearLayout c=card();
-                    c.addView(tv(s.optString("system")+" · "+s.optString("name"),15,true));
+                    c.addView(tv("정규화 진단 · "+s.optString("system")+" · "+s.optString("name"),15,true));
                     c.addView(tv("원인: "+s.optJSONArray("causes"),12,false));
                     body.addView(c);n++;
                 }
@@ -1198,6 +1232,7 @@ public class MainActivity extends Activity {
         c.addView(tv("App versionName "+releaseInfo.optString("version_name","UNKNOWN"),13,false));
         c.addView(tv("Git commit "+releaseInfo.optString("git_commit_sha","UNKNOWN"),11,false));
         c.addView(tv("Source branch "+releaseInfo.optString("source_branch","UNKNOWN"),11,false));
+        c.addView(tv("정비자료 색인 "+(manualLibrary==null?0:manualLibrary.optInt("documents_indexed",0))+"개",13,false));
         c.addView(tv("증상 "+db.getJSONArray("symptoms").length()+"개",13,false));
         c.addView(tv("원인 "+norm.optInt("cause_count",268)+"개 전체 재분류",13,false));
         c.addView(tv("원인 확인 → 필요한 경우에만 계측 → 결과 판정 순서로 표시",13,false));
