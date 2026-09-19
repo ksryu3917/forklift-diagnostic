@@ -13,10 +13,10 @@ def need(cond, msg):
 # Release identity.
 g=(ROOT/"app/build.gradle").read_text(encoding="utf-8")
 r=json.loads((A/"diagnostic_release.json").read_text(encoding="utf-8"))
-need("versionCode 37" in g, "versionCode 37 missing")
-need('versionName "0.18-rc-expert-v8.9.3-field-rebuild"' in g, "V8.9.3 versionName missing")
-need(r.get("state")=="RC EXPERT V8.9.3 FIELD REBUILD", "release state mismatch")
-need(r.get("version_name")=="0.18-rc-expert-v8.9.3-field-rebuild", "release version mismatch")
+need("versionCode 38" in g, "versionCode 38 missing")
+need('versionName "0.18-rc-expert-v8.9.4-manual-library"' in g, "V8.9.3 versionName missing")
+need(r.get("state")=="RC EXPERT V8.9.4 MANUAL LIBRARY", "release state mismatch")
+need(r.get("version_name")=="0.18-rc-expert-v8.9.4-manual-library", "release version mismatch")
 
 # Source must already contain the runtime integration. A build may validate
 # source, but may not generate/patch MainActivity or Manifest.

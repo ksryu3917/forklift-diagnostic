@@ -25,11 +25,11 @@ if points < 250: errors.append('unexpectedly low test-point count: '+str(points)
 if len(data.get('groups',{})) < 50: errors.append('unexpectedly low group count: '+str(len(data.get('groups',{}))))
 # Release identity gates.
 gradle=(ROOT/'app/build.gradle').read_text(encoding='utf-8')
-if 'versionCode 37' not in gradle: errors.append('versionCode 37 missing')
-if 'versionName "0.18-rc-expert-v8.9.3-field-rebuild"' not in gradle: errors.append('V8.9.3 versionName missing')
+if 'versionCode 38' not in gradle: errors.append('versionCode 38 missing')
+if 'versionName "0.18-rc-expert-v8.9.4-manual-library"' not in gradle: errors.append('V8.9.3 versionName missing')
 rel=json.loads((ROOT/'app/src/main/assets/diagnostic_release.json').read_text(encoding='utf-8'))
-if rel.get('state')!='RC EXPERT V8.9.3 FIELD REBUILD': errors.append('release state mismatch')
-if rel.get('version_name')!='0.18-rc-expert-v8.9.3-field-rebuild': errors.append('release version mismatch')
+if rel.get('state')!='RC EXPERT V8.9.4 MANUAL LIBRARY': errors.append('release state mismatch')
+if rel.get('version_name')!='0.18-rc-expert-v8.9.4-manual-library': errors.append('release version mismatch')
 
 R.parent.mkdir(parents=True,exist_ok=True)
 R.write_text('# V8.8 Field Measurement Worksheet Validation\n\n'

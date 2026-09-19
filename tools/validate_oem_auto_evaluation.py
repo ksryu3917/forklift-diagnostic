@@ -82,10 +82,10 @@ for hard in ['181','195','215.5','240','155','28','26','100','3.18','10.3','9.7'
     if hard in method:errors.append('hard-coded OEM threshold in Java evaluator: '+hard)
 # Release gates
 gradle=(ROOT/'app/build.gradle').read_text(encoding='utf-8');rel=json.loads((ROOT/'app/src/main/assets/diagnostic_release.json').read_text(encoding='utf-8'))
-if 'versionCode 37' not in gradle:errors.append('versionCode 37 missing')
-if 'versionName "0.18-rc-expert-v8.9.3-field-rebuild"' not in gradle:errors.append('V8.9.3 versionName missing')
-if rel.get('state')!='RC EXPERT V8.9.3 FIELD REBUILD':errors.append('release state mismatch')
-if rel.get('version_name')!='0.18-rc-expert-v8.9.3-field-rebuild':errors.append('release version mismatch')
+if 'versionCode 38' not in gradle:errors.append('versionCode 38 missing')
+if 'versionName "0.18-rc-expert-v8.9.4-manual-library"' not in gradle:errors.append('V8.9.3 versionName missing')
+if rel.get('state')!='RC EXPERT V8.9.4 MANUAL LIBRARY':errors.append('release state mismatch')
+if rel.get('version_name')!='0.18-rc-expert-v8.9.4-manual-library':errors.append('release version mismatch')
 R.parent.mkdir(parents=True,exist_ok=True)
 rows=[]
 for gid,p in auto:rows.append(f'- `{gid}/{p["id"]}` · {p.get("label")} · {len(p["auto_eval"].get("profiles",[]))} profile(s) · {p["auto_eval"].get("base_unit")}')

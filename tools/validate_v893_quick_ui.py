@@ -74,10 +74,10 @@ for token in ['LAMP RELAY #4','REAR/TAIL FEED','LICENSE LAMP']:
 
 b=(ROOT/'app/build.gradle').read_text(encoding='utf-8')
 r=json.loads((A/'diagnostic_release.json').read_text(encoding='utf-8'))
-need('versionCode 37' in b,'versionCode 37 missing')
-need('versionName "0.18-rc-expert-v8.9.3-field-rebuild"' in b,'V8.9.3 versionName missing')
-need(r.get('state')=='RC EXPERT V8.9.3 FIELD REBUILD','release state mismatch')
-need(r.get('version_name')=='0.18-rc-expert-v8.9.3-field-rebuild','release version mismatch')
+need('versionCode 38' in b,'versionCode 38 missing')
+need('versionName "0.18-rc-expert-v8.9.4-manual-library"' in b,'V8.9.3 versionName missing')
+need(r.get('state')=='RC EXPERT V8.9.4 MANUAL LIBRARY','release state mismatch')
+need(r.get('version_name')=='0.18-rc-expert-v8.9.4-manual-library','release version mismatch')
 
 for f in J.glob('*.java'):
     s=f.read_text(encoding='utf-8')
