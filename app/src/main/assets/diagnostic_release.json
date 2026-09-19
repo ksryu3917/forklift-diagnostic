@@ -1,7 +1,7 @@
 {
   "release": "v18",
-  "state": "RC EXPERT V8.9.3 FIELD REBUILD",
-  "version_name": "0.18-rc-expert-v8.9.3-field-rebuild",
+  "state": "RC EXPERT V8.9.4 MANUAL LIBRARY",
+  "version_name": "0.18-rc-expert-v8.9.4-manual-library",
   "source_branch": "v18-rc-auto",
   "git_commit_sha": "UNSTAMPED_SOURCE"
 }
