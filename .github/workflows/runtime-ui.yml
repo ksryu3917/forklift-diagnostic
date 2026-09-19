@@ -65,7 +65,7 @@ jobs:
           disable-animations: true
           emulator-boot-timeout: 600
           script: |
-            bash -lc 'set +e; gradle :app:connectedDebugAndroidTest; TEST_STATUS=$?; set -e; mkdir -p build/runtime-ui; adb pull /sdcard/Download/v893-runtime/. build/runtime-ui/ || true; if [ "$TEST_STATUS" -ne 0 ]; then echo "Instrumentation failed; evidence was pulled before exit."; exit "$TEST_STATUS"; fi; for f in 01-license-initial-LP1.png 02-license-LP2-power.png 03-license-LP3-ground-drop.png 04-license-bulb-socket-stop.png 05-license-common-LAMP.png 06-zoom-before.png 07-zoom-after-pinch.png 08-zoom-after-drag.png; do test -s "build/runtime-ui/$f"; done'
+            bash -lc 'set -e; mkdir -p build/runtime-ui; for t in licenseLocalBranchShowsExactlyOnePointAtATime licenseCommonFailureMovesOnlyToLampPath circuitViewerPinchAndDragChangesRenderedImage; do set +e; gradle :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.ryu.forkliftdiagnostic.QuickUiRuntimeTest#$t; TEST_STATUS=$?; set -e; adb pull /sdcard/Download/v893-runtime/. build/runtime-ui/ || true; if [ "$TEST_STATUS" -ne 0 ]; then echo "Instrumentation failed; evidence was pulled before exit."; exit "$TEST_STATUS"; fi; done; for f in 01-license-initial-LP1.png 02-license-LP2-power.png 03-license-LP3-ground-drop.png 04-license-bulb-socket-stop.png 05-license-common-LAMP.png 06-zoom-before.png 07-zoom-after-pinch.png 08-zoom-after-drag.png; do test -s "build/runtime-ui/$f"; done'
 
       - name: Verify final APK identity
         env:
