@@ -1,0 +1,19 @@
+{
+  "release": "v20",
+  "state": "CLEAN REBUILD ALPHA",
+  "version_code": 100,
+  "version_name": "0.20.0-clean-alpha.1",
+  "source_branch": "v20-clean-rebuild",
+  "git_commit_sha": "UNSTAMPED_SOURCE",
+  "application_id": "com.ryu.forkliftdiagnostic",
+  "schema_version": 20,
+  "authoritative": true,
+  "legacy_runtime_source_allowed": false,
+  "legacy_overlays_apply_in_sequence": false,
+  "required_runtime_screenshots": 16,
+  "scenario_policy": {
+    "per_terminal_min_distinct_scenarios": 30,
+    "repeated_identical_path_does_not_count": true
+  },
+  "completion_label": "VERIFIED"
+}
