@@ -1,0 +1,2044 @@
+{
+  "schema_version": "1.0",
+  "catalog_revision": "V8.9.4-MANUAL-LIBRARY-2026-09-19",
+  "generated_from": "ChatGPT Library inventory",
+  "documents_indexed": 169,
+  "total_size_bytes": 5162155241,
+  "summary": {
+    "manufacturer_counts": {
+      "Doosan": 83,
+      "Hyundai": 69,
+      "Kubota": 1,
+      "Other": 1,
+      "Toyota": 8,
+      "Yanmar": 7
+    },
+    "document_type_counts": {
+      "brochure_spec": 6,
+      "engine_manual": 18,
+      "invalid_or_stub": 1,
+      "operator_manual": 1,
+      "partial_extract": 5,
+      "parts_book": 38,
+      "reference": 6,
+      "service_manual": 89,
+      "wiring_diagram": 5
+    },
+    "review_state_counts": {
+      "identity_verified": 13,
+      "indexed": 150,
+      "partial_source": 5,
+      "rejected_nonmanual": 1
+    }
+  },
+  "excluded_non_maintenance_files": [
+    "26062204701.pdf",
+    "downloadfile.pdf"
+  ],
+  "diagnostic_source_policy": {
+    "field_priority": [
+      "측정 위치",
+      "사용 공구",
+      "시험 조건",
+      "정상/이상 기준",
+      "회로/계통 격리",
+      "확정 조건",
+      "분해/교환 허용조건"
+    ],
+    "no_cross_model_guess": "모델/판본/옵션이 다른 수치와 핀맵은 자동 병합하지 않는다.",
+    "no_unverified_threshold": "원문 근거가 확인되지 않은 전압·압력·저항·간극 임계값은 생성하지 않는다.",
+    "catalog_is_not_diagnosis": "indexed/identity_verified 상태는 자료 보유·식별 확인을 뜻하며 해당 자료 전체가 진단 그래프로 정규화되었다는 뜻이 아니다."
+  },
+  "documents": [
+    {
+      "id": "MAN-001",
+      "name": "정비_D25S(SE)-7~D33S(SE).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 58268401,
+      "review_state": "identity_verified",
+      "search_text": "정비 D25S SE -7~D33S SE .pdf",
+      "duplicate_group": "dup-90f9d30a",
+      "duplicate_count": 2,
+      "page_count": 374,
+      "models": [
+        "D20S-7",
+        "D25S-7",
+        "D30S-7",
+        "D33S-7",
+        "D20SE-7",
+        "D25SE-7",
+        "D30SE-7",
+        "D33SE-7"
+      ],
+      "normalization_state": "existing_app_source_family"
+    },
+    {
+      "id": "MAN-002",
+      "name": "두산_지게차_정비지침서_page_366_260627_225902.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "partial_extract",
+      "size_bytes": 515719,
+      "review_state": "partial_source",
+      "search_text": "두산 지게차 정비지침서 page 366 260627 225902.pdf",
+      "duplicate_group": "DOOSAN_PAGE366",
+      "duplicate_count": 2,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-003",
+      "name": "정비_D25S(SE)-7~D33S(SE)(1).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 58268401,
+      "review_state": "indexed",
+      "search_text": "정비 D25S SE -7~D33S SE  1 .pdf",
+      "duplicate_group": "dup-90f9d30a",
+      "duplicate_count": 2,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-004",
+      "name": "정비메뉴얼_G2-D34엔진(3).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "engine_manual",
+      "size_bytes": 102717670,
+      "review_state": "indexed",
+      "search_text": "정비메뉴얼 G2-D34엔진 3 .pdf",
+      "duplicate_group": "D34_ENGINE",
+      "duplicate_count": 6,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-005",
+      "name": "정비메뉴얼_G2-D34엔진.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "engine_manual",
+      "size_bytes": 102717670,
+      "review_state": "indexed",
+      "search_text": "정비메뉴얼 G2-D34엔진.pdf",
+      "duplicate_group": "D34_ENGINE",
+      "duplicate_count": 6,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-006",
+      "name": "정비메뉴얼_G2-D34엔진(1).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "engine_manual",
+      "size_bytes": 102717670,
+      "review_state": "indexed",
+      "search_text": "정비메뉴얼 G2-D34엔진 1 .pdf",
+      "duplicate_group": "D34_ENGINE",
+      "duplicate_count": 6,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-007",
+      "name": "정비메뉴얼_G2-D34엔진(2).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "engine_manual",
+      "size_bytes": 102717670,
+      "review_state": "indexed",
+      "search_text": "정비메뉴얼 G2-D34엔진 2 .pdf",
+      "duplicate_group": "D34_ENGINE",
+      "duplicate_count": 6,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-008",
+      "name": "정비메뉴얼_G2-D34엔진(4).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "engine_manual",
+      "size_bytes": 102717670,
+      "review_state": "indexed",
+      "search_text": "정비메뉴얼 G2-D34엔진 4 .pdf",
+      "duplicate_group": "D34_ENGINE",
+      "duplicate_count": 6,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-009",
+      "name": "부품_D20S-7~33S-7.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 37174790,
+      "review_state": "indexed",
+      "search_text": "부품 D20S-7~33S-7.pdf",
+      "duplicate_group": "D20_33S7_PARTS",
+      "duplicate_count": 3,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-010",
+      "name": "부품_D20S-7~33S-7(1).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 37174790,
+      "review_state": "indexed",
+      "search_text": "부품 D20S-7~33S-7 1 .pdf",
+      "duplicate_group": "D20_33S7_PARTS",
+      "duplicate_count": 3,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-011",
+      "name": "Toyota 7FBMF Series Electric Forklift Manual p158-1.pdf",
+      "manufacturer": "Toyota",
+      "document_type": "service_manual",
+      "size_bytes": 18262948,
+      "review_state": "indexed",
+      "search_text": "Toyota 7FBMF Series Electric Forklift Manual p158-1.pdf",
+      "duplicate_group": "TOYOTA_7FBMF",
+      "duplicate_count": 3,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-012",
+      "name": "Toyota 7FB Electric Powered Forklift 제원표.pdf",
+      "manufacturer": "Toyota",
+      "document_type": "brochure_spec",
+      "size_bytes": 481393,
+      "review_state": "indexed",
+      "search_text": "Toyota 7FB Electric Powered Forklift 제원표.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-013",
+      "name": "Toyota TFB Series Electric Forklift.pdf",
+      "manufacturer": "Toyota",
+      "document_type": "reference",
+      "size_bytes": 2732401,
+      "review_state": "indexed",
+      "search_text": "Toyota TFB Series Electric Forklift.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-014",
+      "name": "Toyota 8FBR 전동 입승식 Brochure.pdf",
+      "manufacturer": "Toyota",
+      "document_type": "brochure_spec",
+      "size_bytes": 6033607,
+      "review_state": "indexed",
+      "search_text": "Toyota 8FBR 전동 입승식 Brochure.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-015",
+      "name": "Toyota 8FBN 15 16 18 20 25 30 Forklift Trucks Repair Manual PDF.pdf",
+      "manufacturer": "Toyota",
+      "document_type": "service_manual",
+      "size_bytes": 10835473,
+      "review_state": "indexed",
+      "search_text": "Toyota 8FBN 15 16 18 20 25 30 Forklift Trucks Repair Manual PDF.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-016",
+      "name": "Toyota BT 8FBR Electric Reach Series.pdf",
+      "manufacturer": "Toyota",
+      "document_type": "reference",
+      "size_bytes": 9303117,
+      "review_state": "indexed",
+      "search_text": "Toyota BT 8FBR Electric Reach Series.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-017",
+      "name": "Error code.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "reference",
+      "size_bytes": 820013,
+      "review_state": "indexed",
+      "search_text": "Error code.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-018",
+      "name": "HMC EXCION FUEL SYSTEM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "engine_manual",
+      "size_bytes": 2859938,
+      "review_state": "indexed",
+      "search_text": "HMC EXCION FUEL SYSTEM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-019",
+      "name": "5. Electrical parts.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "reference",
+      "size_bytes": 2010624,
+      "review_state": "indexed",
+      "search_text": "5. Electrical parts.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-020",
+      "name": "Toyota 7FBMF Series Electric Forklift Manual p158-1(1).pdf",
+      "manufacturer": "Toyota",
+      "document_type": "service_manual",
+      "size_bytes": 18262948,
+      "review_state": "indexed",
+      "search_text": "Toyota 7FBMF Series Electric Forklift Manual p158-1 1 .pdf",
+      "duplicate_group": "TOYOTA_7FBMF",
+      "duplicate_count": 3,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-021",
+      "name": "2. Seal kit.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "reference",
+      "size_bytes": 2172813,
+      "review_state": "indexed",
+      "search_text": "2. Seal kit.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-022",
+      "name": "HMC D4BB.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "engine_manual",
+      "size_bytes": 4867440,
+      "review_state": "indexed",
+      "search_text": "HMC D4BB.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-023",
+      "name": "YANMAR FUEL INJECTION.pdf",
+      "manufacturer": "Yanmar",
+      "document_type": "engine_manual",
+      "size_bytes": 1429141,
+      "review_state": "indexed",
+      "search_text": "YANMAR FUEL INJECTION.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-024",
+      "name": "HMC E-CONTROLS SM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "engine_manual",
+      "size_bytes": 8704120,
+      "review_state": "indexed",
+      "search_text": "HMC E-CONTROLS SM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-025",
+      "name": "4TNE 92 Operator manual.pdf",
+      "manufacturer": "Yanmar",
+      "document_type": "operator_manual",
+      "size_bytes": 2429580,
+      "review_state": "indexed",
+      "search_text": "4TNE 92 Operator manual.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-026",
+      "name": "Toyota 7FBMF Series Electric Forklift Manual p158.pdf",
+      "manufacturer": "Toyota",
+      "document_type": "service_manual",
+      "size_bytes": 18262948,
+      "review_state": "indexed",
+      "search_text": "Toyota 7FBMF Series Electric Forklift Manual p158.pdf",
+      "duplicate_group": "TOYOTA_7FBMF",
+      "duplicate_count": 3,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-027",
+      "name": "D45S-9 회로도.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "wiring_diagram",
+      "size_bytes": 405130,
+      "review_state": "indexed",
+      "search_text": "D45S-9 회로도.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-028",
+      "name": "YANMAR TNV ELEC T-SHOOTING.pdf",
+      "manufacturer": "Yanmar",
+      "document_type": "engine_manual",
+      "size_bytes": 10842469,
+      "review_state": "indexed",
+      "search_text": "YANMAR TNV ELEC T-SHOOTING.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-029",
+      "name": "YANMAR 4TNE94, 98, 106.pdf",
+      "manufacturer": "Yanmar",
+      "document_type": "engine_manual",
+      "size_bytes": 13582123,
+      "review_state": "indexed",
+      "search_text": "YANMAR 4TNE94  98  106.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-030",
+      "name": "HMC D4HB(STAGE V) ENGINE MECH. SYSTEM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "engine_manual",
+      "size_bytes": 18002201,
+      "review_state": "indexed",
+      "search_text": "HMC D4HB STAGE V  ENGINE MECH. SYSTEM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-031",
+      "name": "4TNE 92 Service manual.pdf",
+      "manufacturer": "Yanmar",
+      "document_type": "engine_manual",
+      "size_bytes": 16133070,
+      "review_state": "indexed",
+      "search_text": "4TNE 92 Service manual.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-032",
+      "name": "30D-9_ko_메뉴얼.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "brochure_spec",
+      "size_bytes": 4400920,
+      "review_state": "indexed",
+      "search_text": "30D-9 ko 메뉴얼.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-033",
+      "name": "11_BOP15S-9(SB5204C01).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 9534827,
+      "review_state": "indexed",
+      "search_text": "11 BOP15S-9 SB5204C01 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-034",
+      "name": "35404550D-9A.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 10751451,
+      "review_state": "indexed",
+      "search_text": "35404550D-9A.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-035",
+      "name": "250300D-9V SM ENG.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 28660116,
+      "review_state": "indexed",
+      "search_text": "250300D-9V SM ENG.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-036",
+      "name": "YANMAR 3TNV,4TNV(Tier2).pdf",
+      "manufacturer": "Yanmar",
+      "document_type": "engine_manual",
+      "size_bytes": 23434898,
+      "review_state": "indexed",
+      "search_text": "YANMAR 3TNV 4TNV Tier2 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-037",
+      "name": "HDF15-5.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 10910596,
+      "review_state": "indexed",
+      "search_text": "HDF15-5.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-038",
+      "name": "35D35DS-7-1.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 13833370,
+      "review_state": "indexed",
+      "search_text": "35D35DS-7-1.pdf",
+      "duplicate_group": "HYUNDAI_35D35DS7",
+      "duplicate_count": 2,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-039",
+      "name": "D20,25,30,33S-7_T4_New OPC, G20,25,30,33S-7 GCT_HMC_SB2401C12_BK.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 13449813,
+      "review_state": "indexed",
+      "search_text": "D20 25 30 33S-7 T4 New OPC  G20 25 30 33S-7 GCT HMC SB2401C12 BK.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-040",
+      "name": "22253033D-9S.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 11082952,
+      "review_state": "indexed",
+      "search_text": "22253033D-9S.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-041",
+      "name": "50DS-7E.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 28345287,
+      "review_state": "indexed",
+      "search_text": "50DS-7E.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-042",
+      "name": "575657737-D-G-20-25-30-33S-5.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 28468058,
+      "review_state": "indexed",
+      "search_text": "575657737-D-G-20-25-30-33S-5.pdf",
+      "duplicate_group": "DOOSAN_DG2033S5",
+      "duplicate_count": 3,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-043",
+      "name": "09_D140 160S-7(SB5105C05).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 23448025,
+      "review_state": "indexed",
+      "search_text": "09 D140 160S-7 SB5105C05 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-044",
+      "name": "50D-7E.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 31450898,
+      "review_state": "indexed",
+      "search_text": "50D-7E.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-045",
+      "name": "D25SE-9_Brochure.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "brochure_spec",
+      "size_bytes": 29068296,
+      "review_state": "indexed",
+      "search_text": "D25SE-9 Brochure.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-046",
+      "name": "80D-9.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 28329363,
+      "review_state": "indexed",
+      "search_text": "80D-9.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-047",
+      "name": "04_B20 25 30 32 35S-7(SB5179C03).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 29448501,
+      "review_state": "indexed",
+      "search_text": "04 B20 25 30 32 35S-7 SB5179C03 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-048",
+      "name": "3545D-9VB, 50DN-9VB (Tier3)_SM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 41305779,
+      "review_state": "indexed",
+      "search_text": "3545D-9VB  50DN-9VB  Tier3  SM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-049",
+      "name": "D50,60,70,80S-7 PLUS_D50,60,70EV-7 PLUS_G50,60,70S-7_SB2399C10_BK.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 13753181,
+      "review_state": "indexed",
+      "search_text": "D50 60 70 80S-7 PLUS D50 60 70EV-7 PLUS G50 60 70S-7 SB2399C10 BK.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-050",
+      "name": "부품_B15T-7~20T-7.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 24429594,
+      "review_state": "indexed",
+      "search_text": "부품 B15T-7~20T-7.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-051",
+      "name": "HMC D4DD.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "engine_manual",
+      "size_bytes": 50128888,
+      "review_state": "indexed",
+      "search_text": "HMC D4DD.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-052",
+      "name": "YANMAR TNV SERIES-ECM.pdf",
+      "manufacturer": "Yanmar",
+      "document_type": "engine_manual",
+      "size_bytes": 41179101,
+      "review_state": "indexed",
+      "search_text": "YANMAR TNV SERIES-ECM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-053",
+      "name": "06_BR13S-9(SM1035-00).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 20967705,
+      "review_state": "indexed",
+      "search_text": "06 BR13S-9 SM1035-00 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-054",
+      "name": "부품_D20SE-7~33SE-7.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 34640182,
+      "review_state": "indexed",
+      "search_text": "부품 D20SE-7~33SE-7.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-055",
+      "name": "180D-9.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 25953954,
+      "review_state": "indexed",
+      "search_text": "180D-9.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-056",
+      "name": "35404550D-9K.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 12068277,
+      "review_state": "indexed",
+      "search_text": "35404550D-9K.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-057",
+      "name": "253035DE-7 SM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 11677915,
+      "review_state": "indexed",
+      "search_text": "253035DE-7 SM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-058",
+      "name": "22253033D-9, 35DA-9.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 35212235,
+      "review_state": "indexed",
+      "search_text": "22253033D-9  35DA-9.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-059",
+      "name": "07_B15SU-9(SM1043-00).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 38683076,
+      "review_state": "indexed",
+      "search_text": "07 B15SU-9 SM1043-00 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-060",
+      "name": "110D-7A.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 39716791,
+      "review_state": "indexed",
+      "search_text": "110D-7A.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-061",
+      "name": "20D-7E.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 46101441,
+      "review_state": "indexed",
+      "search_text": "20D-7E.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-062",
+      "name": "D20,25,30,33S-9_D20,25,30,33SE-9(SB2503C04)_BK-1.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 9852633,
+      "review_state": "indexed",
+      "search_text": "D20 25 30 33S-9 D20 25 30 33SE-9 SB2503C04  BK-1.pdf",
+      "duplicate_group": "D20_33S9_PARTS",
+      "duplicate_count": 3,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-063",
+      "name": "22253033D-9E.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 36587791,
+      "review_state": "indexed",
+      "search_text": "22253033D-9E.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-064",
+      "name": "100D-9 SM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 47734363,
+      "review_state": "indexed",
+      "search_text": "100D-9 SM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-065",
+      "name": "07_G25S-7(SM1042-00).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 36479956,
+      "review_state": "identity_verified",
+      "search_text": "07 G25S-7 SM1042-00 .pdf",
+      "manual_code": "SM1042-00",
+      "page_count": 370,
+      "models": [
+        "G20S-7",
+        "G25S-7",
+        "G30S-7",
+        "G33S-7",
+        "G35SC-7"
+      ],
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-066",
+      "name": "12_DV250 300S-12(SB5125C05).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 22097130,
+      "review_state": "indexed",
+      "search_text": "12 DV250 300S-12 SB5125C05 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-067",
+      "name": "20DT-7.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 9621017,
+      "review_state": "indexed",
+      "search_text": "20DT-7.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-068",
+      "name": "483285434-SB2345E03-pdf.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 16145048,
+      "review_state": "indexed",
+      "search_text": "483285434-SB2345E03-pdf.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-069",
+      "name": "354045D-9VB, 50DN-9VB_SM (1).pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 57557697,
+      "review_state": "indexed",
+      "search_text": "354045D-9VB  50DN-9VB SM  1 .pdf",
+      "duplicate_group": "HYUNDAI_3540D9VB",
+      "duplicate_count": 2,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-070",
+      "name": "20DF.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 19915565,
+      "review_state": "indexed",
+      "search_text": "20DF.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-071",
+      "name": "100D-9V SM ENG.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 55133512,
+      "review_state": "indexed",
+      "search_text": "100D-9V SM ENG.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-072",
+      "name": "354045D-9VB, 50DN-9VB_SM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 57557697,
+      "review_state": "indexed",
+      "search_text": "354045D-9VB  50DN-9VB SM.pdf",
+      "duplicate_group": "HYUNDAI_3540D9VB",
+      "duplicate_count": 2,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-073",
+      "name": "D20-25-30-33SE-5.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 21196448,
+      "review_state": "indexed",
+      "search_text": "D20-25-30-33SE-5.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-074",
+      "name": "HDF15_18-3.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 19112278,
+      "review_state": "indexed",
+      "search_text": "HDF15 18-3.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-075",
+      "name": "120130160D-9V_SM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 51548278,
+      "review_state": "indexed",
+      "search_text": "120130160D-9V SM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-076",
+      "name": "2530D-9V, 35DN-9V (T4F)_SM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 60566852,
+      "review_state": "indexed",
+      "search_text": "2530D-9V  35DN-9V  T4F  SM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-077",
+      "name": "14_G20 25 30 33S-7(SB5201C01).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 28083281,
+      "review_state": "indexed",
+      "search_text": "14 G20 25 30 33S-7 SB5201C01 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-078",
+      "name": "506070D-9.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 70714831,
+      "review_state": "indexed",
+      "search_text": "506070D-9.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-079",
+      "name": "5070D-9B.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 49731770,
+      "review_state": "indexed",
+      "search_text": "5070D-9B.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-080",
+      "name": "10_B15 18 20SU-9(SB5192C01).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 7934229,
+      "review_state": "indexed",
+      "search_text": "10 B15 18 20SU-9 SB5192C01 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-081",
+      "name": "D20,25,30,33S-9_D20,25,30,33SE-9(SB2503C04)_BK.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 9852633,
+      "review_state": "indexed",
+      "search_text": "D20 25 30 33S-9 D20 25 30 33SE-9 SB2503C04  BK.pdf",
+      "duplicate_group": "D20_33S9_PARTS",
+      "duplicate_count": 3,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-082",
+      "name": "2530D-9V, 35DN-9V, VS_SM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 84986381,
+      "review_state": "indexed",
+      "search_text": "2530D-9V  35DN-9V  VS SM.pdf",
+      "duplicate_group": "HYUNDAI_2530D9V",
+      "duplicate_count": 2,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-083",
+      "name": "부품_B15~18S-7.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 16357106,
+      "review_state": "indexed",
+      "search_text": "부품 B15~18S-7.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-084",
+      "name": "22253033D-9T.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 10559489,
+      "review_state": "indexed",
+      "search_text": "22253033D-9T.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-085",
+      "name": "09_B15_18NS, B20NSC(SM1066-00).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 16512886,
+      "review_state": "indexed",
+      "search_text": "09 B15 18NS  B20NSC SM1066-00 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-086",
+      "name": "2530D-9V, 35DN-9V, VS_SM (1).pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 84986381,
+      "review_state": "indexed",
+      "search_text": "2530D-9V  35DN-9V  VS SM  1 .pdf",
+      "duplicate_group": "HYUNDAI_2530D9V",
+      "duplicate_count": 2,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-087",
+      "name": "110D-7E.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 75020020,
+      "review_state": "indexed",
+      "search_text": "110D-7E.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-088",
+      "name": "300D-9.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 25220052,
+      "review_state": "indexed",
+      "search_text": "300D-9.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-089",
+      "name": "100D120D135D160D-7.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 44192694,
+      "review_state": "indexed",
+      "search_text": "100D120D135D160D-7.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-090",
+      "name": "05_BC20 25 30S-7(SB5175C03).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 24411455,
+      "review_state": "indexed",
+      "search_text": "05 BC20 25 30S-7 SB5175C03 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-091",
+      "name": "05_D50 60 70S-7 PLUS(SB5148C04).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 34378776,
+      "review_state": "indexed",
+      "search_text": "05 D50 60 70S-7 PLUS SB5148C04 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-092",
+      "name": "07_D80S-7 PLUS(SB5150C04).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 32661656,
+      "review_state": "indexed",
+      "search_text": "07 D80S-7 PLUS SB5150C04 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-093",
+      "name": "두산지게차 D50 정비 매뉴얼.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 50902652,
+      "review_state": "indexed",
+      "search_text": "두산지게차 D50 정비 매뉴얼.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-094",
+      "name": "06_D50 60 70EV-7 PLUS(SB5149C04).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 36117724,
+      "review_state": "indexed",
+      "search_text": "06 D50 60 70EV-7 PLUS SB5149C04 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-095",
+      "name": "110D-9.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 52670945,
+      "review_state": "indexed",
+      "search_text": "110D-9.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-096",
+      "name": "151820D-9S.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 13269265,
+      "review_state": "indexed",
+      "search_text": "151820D-9S.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-097",
+      "name": "08_G45S-7(SM1039-01).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 44448941,
+      "review_state": "identity_verified",
+      "search_text": "08 G45S-7 SM1039-01 .pdf",
+      "manual_code": "SM1039-01",
+      "page_count": 383,
+      "models": [
+        "G35S-7",
+        "G40S-7",
+        "G45S-7",
+        "G50C-7",
+        "G55C-7",
+        "G40SC-7",
+        "G45SC-7",
+        "G50SC-7",
+        "G55SC-7"
+      ],
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-098",
+      "name": "10_B20_25NS(SM1067-00).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 46739510,
+      "review_state": "indexed",
+      "search_text": "10 B20 25NS SM1067-00 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-099",
+      "name": "180D-7E.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 74699971,
+      "review_state": "indexed",
+      "search_text": "180D-7E.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-100",
+      "name": "506070D-7A.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 21348129,
+      "review_state": "indexed",
+      "search_text": "506070D-7A.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-101",
+      "name": "80D-7.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 36796083,
+      "review_state": "indexed",
+      "search_text": "80D-7.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-102",
+      "name": "20D-7SA-SM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 4724834,
+      "review_state": "indexed",
+      "search_text": "20D-7SA-SM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-103",
+      "name": "05_BR18,20SP-7 Plus(SM1032-01).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 44627323,
+      "review_state": "identity_verified",
+      "search_text": "05 BR18 20SP-7 Plus SM1032-01 .pdf",
+      "manual_code": "SM1032-01",
+      "page_count": 377,
+      "models": [
+        "BR18SP-7",
+        "BR20SP-7",
+        "BR18SP-7 Plus",
+        "BR20SP-7 Plus"
+      ],
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-104",
+      "name": "180D-9V SM ENG.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 30296153,
+      "review_state": "indexed",
+      "search_text": "180D-9V SM ENG.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-105",
+      "name": "35404550D-9F.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 14601476,
+      "review_state": "indexed",
+      "search_text": "35404550D-9F.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-106",
+      "name": "35D-7E.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 32124359,
+      "review_state": "indexed",
+      "search_text": "35D-7E.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-107",
+      "name": "부품_D20S-7~33S-7(2).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 37174790,
+      "review_state": "indexed",
+      "search_text": "부품 D20S-7~33S-7 2 .pdf",
+      "duplicate_group": "D20_33S7_PARTS",
+      "duplicate_count": 3,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-108",
+      "name": "35D35DS-7.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 13833370,
+      "review_state": "indexed",
+      "search_text": "35D35DS-7.pdf",
+      "duplicate_group": "HYUNDAI_35D35DS7",
+      "duplicate_count": 2,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-109",
+      "name": "70D-9VB_SM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 67133639,
+      "review_state": "indexed",
+      "search_text": "70D-9VB SM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-110",
+      "name": "253035DE-7U SM.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 11412899,
+      "review_state": "indexed",
+      "search_text": "253035DE-7U SM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-111",
+      "name": "35DS-7E.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 22937155,
+      "review_state": "indexed",
+      "search_text": "35DS-7E.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-112",
+      "name": "35DF-7.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 20929821,
+      "review_state": "indexed",
+      "search_text": "35DF-7.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-113",
+      "name": "20D-7.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 45279932,
+      "review_state": "indexed",
+      "search_text": "20D-7.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-114",
+      "name": "02_D45S-7_T4 55kW 74kW(SM1014-02).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 81037418,
+      "review_state": "identity_verified",
+      "search_text": "02 D45S-7 T4 55kW 74kW SM1014-02 .pdf",
+      "manual_code": "SM1014-02",
+      "page_count": 406,
+      "models": [
+        "D35S-7",
+        "D40S-7",
+        "D45S-7",
+        "D50C-7",
+        "D35SE-7",
+        "D40SE-7",
+        "D45SE-7",
+        "D50SE-7"
+      ],
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-115",
+      "name": "D20se-33se-7.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "wiring_diagram",
+      "size_bytes": 550687,
+      "review_state": "indexed",
+      "search_text": "D20se-33se-7.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-116",
+      "name": "정비_B15T-7~B20T.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 54667551,
+      "review_state": "identity_verified",
+      "search_text": "정비 B15T-7~B20T.pdf",
+      "page_count": 415,
+      "models": [
+        "B15T-7",
+        "B18T-7",
+        "B20T-7",
+        "B16X-7",
+        "B18X-7",
+        "B20X-7"
+      ],
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-117",
+      "name": "D20se7-1.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "wiring_diagram",
+      "size_bytes": 255355,
+      "review_state": "indexed",
+      "search_text": "D20se7-1.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-118",
+      "name": "HDF20_25_30-5.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 11785309,
+      "review_state": "indexed",
+      "search_text": "HDF20 25 30-5.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-119",
+      "name": "HDF50-7S.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 38460432,
+      "review_state": "indexed",
+      "search_text": "HDF50-7S.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-120",
+      "name": "HDF50_70-3.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 131729534,
+      "review_state": "indexed",
+      "search_text": "HDF50 70-3.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-121",
+      "name": "993443640-Hyundai-Forklift-22d-9-25d-9-30d-9-33d-9-Service-Manual.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "invalid_or_stub",
+      "size_bytes": 35964,
+      "review_state": "rejected_nonmanual",
+      "search_text": "993443640-Hyundai-Forklift-22d-9-25d-9-30d-9-33d-9-Service-Manual.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-122",
+      "name": "CONTENTS-Hyundai-20-25-30-33-D-7-Service-332pages.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "partial_extract",
+      "size_bytes": 2174054,
+      "review_state": "partial_source",
+      "search_text": "CONTENTS-Hyundai-20-25-30-33-D-7-Service-332pages.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-123",
+      "name": "110DF-7.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 43771096,
+      "review_state": "indexed",
+      "search_text": "110DF-7.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-124",
+      "name": "HDF35_45-3.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 17914649,
+      "review_state": "indexed",
+      "search_text": "HDF35 45-3.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-125",
+      "name": "D25S-7_Chapter1_시동회로.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "wiring_diagram",
+      "size_bytes": 31533,
+      "review_state": "indexed",
+      "search_text": "D25S-7 Chapter1 시동회로.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-126",
+      "name": "두산_지게차_정비지침서_page_366_260627_225902(1).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "partial_extract",
+      "size_bytes": 515719,
+      "review_state": "partial_source",
+      "search_text": "두산 지게차 정비지침서 page 366 260627 225902 1 .pdf",
+      "duplicate_group": "DOOSAN_PAGE366",
+      "duplicate_count": 2,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-127",
+      "name": "354045D-9S, 50D-9SA.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 12662715,
+      "review_state": "indexed",
+      "search_text": "354045D-9S  50D-9SA.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-128",
+      "name": "Hyundai 25D-9V 30D-9V 35Dn-9V.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 3363055,
+      "review_state": "indexed",
+      "search_text": "Hyundai 25D-9V 30D-9V 35Dn-9V.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-129",
+      "name": "575657737-D-G-20-25-30-33S-5-2.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 28468058,
+      "review_state": "indexed",
+      "search_text": "575657737-D-G-20-25-30-33S-5-2.pdf",
+      "duplicate_group": "DOOSAN_DG2033S5",
+      "duplicate_count": 3,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-130",
+      "name": "479772080-D20S-5-SB1109E12-pdf.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 16609529,
+      "review_state": "indexed",
+      "search_text": "479772080-D20S-5-SB1109E12-pdf.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-131",
+      "name": "Doosan D20S-9 D25S-9 D30S-9 D33S-9 kr v2022.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "brochure_spec",
+      "size_bytes": 5307974,
+      "review_state": "indexed",
+      "search_text": "Doosan D20S-9 D25S-9 D30S-9 D33S-9 kr v2022.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-132",
+      "name": "666698977-3-D35S-5-D50S-7-G2-D34-SM1000-4-5장.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "partial_extract",
+      "size_bytes": 3743491,
+      "review_state": "partial_source",
+      "search_text": "666698977-3-D35S-5-D50S-7-G2-D34-SM1000-4-5장.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-133",
+      "name": "50DF-7.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 22284497,
+      "review_state": "indexed",
+      "search_text": "50DF-7.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-134",
+      "name": "20DA-7E.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 35296613,
+      "review_state": "indexed",
+      "search_text": "20DA-7E.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-135",
+      "name": "575657644-D-G-35-40-45S-5_251203_212740.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "partial_extract",
+      "size_bytes": 447875,
+      "review_state": "partial_source",
+      "search_text": "575657644-D-G-35-40-45S-5 251203 212740.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-136",
+      "name": "575657737-D-G-20-25-30-33S-5-1.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 28468058,
+      "review_state": "indexed",
+      "search_text": "575657737-D-G-20-25-30-33S-5-1.pdf",
+      "duplicate_group": "DOOSAN_DG2033S5",
+      "duplicate_count": 3,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-137",
+      "name": "KUBOTA V3307-WSM.pdf",
+      "manufacturer": "Kubota",
+      "document_type": "engine_manual",
+      "size_bytes": 20049369,
+      "review_state": "indexed",
+      "search_text": "KUBOTA V3307-WSM.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-138",
+      "name": "250D-7E.pdf",
+      "manufacturer": "Hyundai",
+      "document_type": "service_manual",
+      "size_bytes": 74578285,
+      "review_state": "indexed",
+      "search_text": "250D-7E.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-139",
+      "name": "D35,40,45S-7, D50C-7, D35,40,45,50SE-7, G35,40,45S-7, G50,55C-7SB2465C08_BK.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 11145508,
+      "review_state": "indexed",
+      "search_text": "D35 40 45S-7  D50C-7  D35 40 45 50SE-7  G35 40 45S-7  G50 55C-7SB2465C08 BK.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-140",
+      "name": "575639086-D20-25-30-33S-7.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 47503941,
+      "review_state": "identity_verified",
+      "search_text": "575639086-D20-25-30-33S-7.pdf",
+      "duplicate_group": "D20_33S7_SERVICE",
+      "duplicate_count": 2,
+      "page_count": 351,
+      "models": [
+        "D20S-7",
+        "D25S-7",
+        "D30S-7",
+        "D33S-7"
+      ],
+      "normalization_state": "existing_app_source_family"
+    },
+    {
+      "id": "MAN-141",
+      "name": "D20,25,30,33S-9_D20,25,30,33SE-9(SB2503C04)_BK-2.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 9852633,
+      "review_state": "indexed",
+      "search_text": "D20 25 30 33S-9 D20 25 30 33SE-9 SB2503C04  BK-2.pdf",
+      "duplicate_group": "D20_33S9_PARTS",
+      "duplicate_count": 3,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-142",
+      "name": "D30S-9 전기회로도.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "wiring_diagram",
+      "size_bytes": 1168900,
+      "review_state": "indexed",
+      "search_text": "D30S-9 전기회로도.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-143",
+      "name": "Doosan D35SE-9 D40SE-9 D45SE-9 D50SE-9 kr v2022.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "brochure_spec",
+      "size_bytes": 4552474,
+      "review_state": "indexed",
+      "search_text": "Doosan D35SE-9 D40SE-9 D45SE-9 D50SE-9 kr v2022.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-144",
+      "name": "575639044-D20-25-30-33SE-5.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 21251447,
+      "review_state": "indexed",
+      "search_text": "575639044-D20-25-30-33SE-5.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-145",
+      "name": "575657644-D-G-35-40-45S-5.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 25710997,
+      "review_state": "indexed",
+      "search_text": "575657644-D-G-35-40-45S-5.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-146",
+      "name": "12_B15 18NS, B20NSC(SB5226C00).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 3392518,
+      "review_state": "indexed",
+      "search_text": "12 B15 18NS  B20NSC SB5226C00 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-147",
+      "name": "575639086-D20-25-30-33S-7-1.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 47503941,
+      "review_state": "indexed",
+      "search_text": "575639086-D20-25-30-33S-7-1.pdf",
+      "duplicate_group": "D20_33S7_SERVICE",
+      "duplicate_count": 2,
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-148",
+      "name": "15_G35 40 45S-7, G50C-7SB5205C01).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 23866066,
+      "review_state": "indexed",
+      "search_text": "15 G35 40 45S-7  G50C-7SB5205C01 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-149",
+      "name": "16_G60 70S-7(SB5132C04).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 24179446,
+      "review_state": "indexed",
+      "search_text": "16 G60 70S-7 SB5132C04 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-150",
+      "name": "09_BR18 20SP-7(SB5145C04).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 10919393,
+      "review_state": "indexed",
+      "search_text": "09 BR18 20SP-7 SB5145C04 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-151",
+      "name": "13_G15 18S-5(SB5081C09).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 20357110,
+      "review_state": "indexed",
+      "search_text": "13 G15 18S-5 SB5081C09 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-152",
+      "name": "24057137-eef1-421c-a7f3-1d7b48a190f6.pdf",
+      "manufacturer": "Other",
+      "document_type": "reference",
+      "size_bytes": 43598677,
+      "review_state": "indexed",
+      "search_text": "24057137-eef1-421c-a7f3-1d7b48a190f6.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-153",
+      "name": "575638872-D70S-7.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 59353094,
+      "review_state": "identity_verified",
+      "search_text": "575638872-D70S-7.pdf",
+      "page_count": 386,
+      "models": [
+        "D50S-7",
+        "D60S-7",
+        "D70S-7"
+      ],
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-154",
+      "name": "08_BR20 25S-9(SB5181C02).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 8700856,
+      "review_state": "indexed",
+      "search_text": "08 BR20 25S-9 SB5181C02 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-155",
+      "name": "06_B40 45 50X-7(SB5182C02).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 17127139,
+      "review_state": "indexed",
+      "search_text": "06 B40 45 50X-7 SB5182C02 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-156",
+      "name": "06_G15S-5(SB6106-01).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 25481830,
+      "review_state": "indexed",
+      "search_text": "06 G15S-5 SB6106-01 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-157",
+      "name": "부품_D180S-7.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 20622777,
+      "review_state": "indexed",
+      "search_text": "부품 D180S-7.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-158",
+      "name": "부품_DV180S-12.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 20996982,
+      "review_state": "indexed",
+      "search_text": "부품 DV180S-12.pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-159",
+      "name": "11_B30_35NS(SM1068-00).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 33693321,
+      "review_state": "indexed",
+      "search_text": "11 B30 35NS SM1068-00 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-160",
+      "name": "08_D100 120S-7(SB5104C05).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 23900873,
+      "review_state": "indexed",
+      "search_text": "08 D100 120S-7 SB5104C05 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-161",
+      "name": "08_BOP15S-9_(SM1054-00).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 44571920,
+      "review_state": "indexed",
+      "search_text": "08 BOP15S-9  SM1054-00 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-162",
+      "name": "정비메뉴얼_G2-D34엔진(5).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "engine_manual",
+      "size_bytes": 102717670,
+      "review_state": "identity_verified",
+      "search_text": "정비메뉴얼 G2-D34엔진 5 .pdf",
+      "duplicate_group": "D34_ENGINE",
+      "duplicate_count": 6,
+      "page_count": 403,
+      "models": [
+        "G2-D34 engine"
+      ],
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-163",
+      "name": "07_BR13 15 18S-9(SB5180C02).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 8748922,
+      "review_state": "indexed",
+      "search_text": "07 BR13 15 18S-9 SB5180C02 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-164",
+      "name": "04_D35 40 45 50SE-7 (55KW)(SB5171C03).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 32666186,
+      "review_state": "indexed",
+      "search_text": "04 D35 40 45 50SE-7  55KW  SB5171C03 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-165",
+      "name": "09_G70S-7(SM1024-00).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 68375970,
+      "review_state": "identity_verified",
+      "search_text": "09 G70S-7 SM1024-00 .pdf",
+      "manual_code": "SM1024-00",
+      "page_count": 371,
+      "models": [
+        "G50S-7",
+        "G60S-7",
+        "G70S-7"
+      ],
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-166",
+      "name": "03_B16 18 20X-7(SB5114C05).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "parts_book",
+      "size_bytes": 21686012,
+      "review_state": "indexed",
+      "search_text": "03 B16 18 20X-7 SB5114C05 .pdf",
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-167",
+      "name": "03_BC25S-7(SM1022-00).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 54305136,
+      "review_state": "identity_verified",
+      "search_text": "03 BC25S-7 SM1022-00 .pdf",
+      "manual_code": "SM1022-00",
+      "page_count": 446,
+      "models": [
+        "BC20S-7",
+        "BC25S-7",
+        "BC30S-7",
+        "BC32S-7",
+        "BC25SE-7"
+      ],
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-168",
+      "name": "04_B45X-7(SM1036-00).pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 53802286,
+      "review_state": "identity_verified",
+      "search_text": "04 B45X-7 SM1036-00 .pdf",
+      "manual_code": "SM1036-00",
+      "page_count": 398,
+      "models": [
+        "B40X-7",
+        "B45X-7",
+        "B50X-7",
+        "B50XC-7"
+      ],
+      "normalization_state": "not_normalized"
+    },
+    {
+      "id": "MAN-169",
+      "name": "정비_B15S~B35S-7.pdf",
+      "manufacturer": "Doosan",
+      "document_type": "service_manual",
+      "size_bytes": 143554082,
+      "review_state": "identity_verified",
+      "search_text": "정비 B15S~B35S-7.pdf",
+      "manual_code": "SM1033-00",
+      "page_count": 610,
+      "models": [
+        "B15S-7",
+        "B18S-7",
+        "B20S-7",
+        "B25S-7",
+        "B30S-7",
+        "B32S-7",
+        "B35S-7",
+        "B20SE-7",
+        "B25SE-7"
+      ],
+      "sections": [
+        "일반사항",
+        "전장 시스템",
+        "드라이브/브레이크 시스템",
+        "유압 시스템",
+        "리프트/틸트/보조동작 시스템(B15~18S)",
+        "리프트/틸트/보조동작 시스템(B20~35S)",
+        "스티어링 시스템",
+        "차체",
+        "회로도"
+      ],
+      "normalization_state": "field_facts_started",
+      "verified_field_facts": [
+        {
+          "id": "SM1033-ELEC-BATTERY-SPEC",
+          "system": "전장",
+          "source_section": "2-2 배터리(납축전지)",
+          "fact": "48V 배터리 권장용량/중량은 모델별로 구분되며 B15S-7 450Ah/5h, B18S-7 500Ah/5h, B20S-7 715Ah/5h, B25S-7 740Ah/5h, B30/32/35S-7 800Ah/5h로 제시된다.",
+          "scope": [
+            "B15S-7",
+            "B18S-7",
+            "B20S-7",
+            "B25S-7",
+            "B30S-7",
+            "B32S-7",
+            "B35S-7"
+          ]
+        },
+        {
+          "id": "SM1033-ELEC-LINE-CONTACTOR-B1518",
+          "system": "전장",
+          "source_section": "2-4-1 컨트롤러 및 관련 기기",
+          "fact": "B15/18S-7 라인 콘택터는 48VDC, 코일 저항 141Ω(20°C), Pull-in 35VDC, Drop-out 12VDC, 라인 퓨즈 80VDC 500A로 제시된다.",
+          "scope": [
+            "B15S-7",
+            "B18S-7"
+          ]
+        },
+        {
+          "id": "SM1033-F1-LOAD-VOLTAGE-DROP",
+          "system": "전장",
+          "source_section": "2-152 오류 코드 F1 조치",
+          "fact": "Key ON 무부하 배터리 전압과 틸트/리프트 릴리프 부하 상태 전압을 비교하며 10V 이상 차이면 배터리 점검/교환, 10V 미만 차이면 해당 F1 상황에서 정상 범위로 판단하는 절차가 제시된다.",
+          "scope": [
+            "B15S-7",
+            "B18S-7",
+            "B20S-7",
+            "B25S-7",
+            "B30S-7",
+            "B32S-7",
+            "B35S-7",
+            "B20SE-7",
+            "B25SE-7"
+          ],
+          "note": "이 10V 기준은 SM1033-00 F1 절차에 한정하며 다른 모델에 일반화하지 않는다."
+        },
+        {
+          "id": "SM1033-F2-ACCEL-SIGNAL",
+          "system": "전장",
+          "source_section": "2-153~2-158 오류 코드 F2 조치",
+          "fact": "가속페달 A상은 0.40V(±0.1)~3.60V(±0.15), B상은 4.50V(±0.1)~1.39V(±0.15), A+B 합은 5.0V(±0.15) 기준으로 진단한다.",
+          "scope": [
+            "B15S-7",
+            "B18S-7",
+            "B20S-7",
+            "B25S-7",
+            "B30S-7",
+            "B32S-7",
+            "B35S-7",
+            "B20SE-7",
+            "B25SE-7"
+          ]
+        },
+        {
+          "id": "SM1033-BRAKE-BLEED",
+          "system": "브레이크",
+          "source_section": "3-6-3 브레이크 오일 내 공기 제거",
+          "fact": "스폰지 페달이면 공기 혼입 가능성을 먼저 보고, 리저버를 지정 높이까지 채운 뒤 페달을 누른 상태에서 배기나사를 열고 닫은 후 페달을 복귀시키는 과정을 공기가 완전히 제거될 때까지 반복한다.",
+          "scope": [
+            "B15S-7",
+            "B18S-7",
+            "B20S-7",
+            "B25S-7",
+            "B30S-7",
+            "B32S-7",
+            "B35S-7",
+            "B20SE-7",
+            "B25SE-7"
+          ]
+        },
+        {
+          "id": "SM1033-BRAKE-TROUBLESHOOT",
+          "system": "브레이크",
+          "source_section": "3-8-2 서비스 브레이크",
+          "fact": "약한 페달 압력은 누유/오일 부족·공기 혼입·마스터실린더 헐거움, 과다 작동압은 페달 기계불량·라인 저항·마스터실린더 불량·디스크 과다마모 등으로 원인을 분리한다.",
+          "scope": [
+            "B15S-7",
+            "B18S-7",
+            "B20S-7",
+            "B25S-7",
+            "B30S-7",
+            "B32S-7",
+            "B35S-7",
+            "B20SE-7",
+            "B25SE-7"
+          ]
+        },
+        {
+          "id": "SM1033-STEER-PRESSURE",
+          "system": "스티어링",
+          "source_section": "7-2-4 스티어링 시스템 압력 점검",
+          "fact": "작동유량과 누유를 먼저 확인한 뒤 포트(1)에 300bar 압력계를 연결하고 정상 작동온도에서 조향을 끝단까지 돌려 우선밸브 릴리프 압력 103~108bar(1,500~1,570psi)를 확인한다.",
+          "scope": [
+            "B15S-7",
+            "B18S-7",
+            "B20S-7",
+            "B25S-7",
+            "B30S-7",
+            "B32S-7",
+            "B35S-7",
+            "B20SE-7",
+            "B25SE-7"
+          ]
+        }
+      ]
+    }
+  ]
+}

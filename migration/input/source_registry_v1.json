@@ -1,0 +1,69 @@
+{
+  "version": "1.2-v8.4",
+  "sources": [
+    {
+      "name": "SM1018-01 D20/25/30/33S(SE)-7 정비지침서",
+      "type": "OEM service manual",
+      "status": "INGESTED",
+      "use": "64 symptoms / 268 causes / mechanical-hydraulic procedures"
+    },
+    {
+      "name": "600123-00120 D20/25/30/33S(SE)-7 TIER-4 (G2,D24) electrical schematic 1/4~4/4",
+      "type": "OEM wiring schematic",
+      "status": "INGESTED_PARTIAL_NORMALIZATION",
+      "use": "36 executable electrical symptom graphs + redrawn circuits; exact unverified pins/cavities remain UNKNOWN"
+    },
+    {
+      "name": "Doosan D20S-7 Operation & Maintenance Manual",
+      "type": "OEM/O&M external source",
+      "status": "EXTERNAL_CROSSCHECK",
+      "use": "fuse/relay/service procedure cross-check"
+    },
+    {
+      "name": "Doosan D24NAP Operation & Maintenance Manual 950106-01198",
+      "type": "OEM engine manual external source",
+      "status": "INGESTED_PARTIAL_ENGINE_EXPERT",
+      "use": "D24 sensor/ECU pin tables, Electric Parts callout map, outside/isometric drawings, cooling/lube/fuel/intake-exhaust failure diagnosis; engine symptom graph expansion target",
+      "reference": "950106-01198; public cross-check via ManualsLib/PDFCoffee/servicemanualdownload mirror"
+    },
+    {
+      "name": "D34 engine reference currently in app",
+      "type": "different engine reference",
+      "status": "REFERENCE_ONLY_NOT_TARGET",
+      "use": "must not be treated as D24 vehicle-specific diagnosis"
+    },
+    {
+      "name": "Fluke automotive voltage-drop diagnostic guidance",
+      "type": "external field method",
+      "status": "METHOD_CROSSCHECK",
+      "use": "loaded voltage-drop/ground-side diagnosis; generic limits are not OEM forklift thresholds"
+    },
+    {
+      "name": "MOTOR 5V reference diagnostic cases",
+      "type": "external field case",
+      "status": "METHOD_CROSSCHECK",
+      "use": "external sensor/wire isolation before controller condemnation; 5V/no-communication pattern"
+    },
+    {
+      "name": "Doosan D20/25/30/33S-7 D24NAP O&M SB2401C12",
+      "type": "OEM operation & maintenance manual",
+      "status": "INGESTED_FUSE_RELAY_TABLE",
+      "use": "D24 S-7 current fuse/relay identification: BAT1~7, ACC, ST, IGN1~3; relay #1~#10",
+      "reference": "SB2401C12 2022-11; official Doosan-iv manual, multilingual table cross-check"
+    },
+    {
+      "name": "SB1159E01 D20S-7/D25S-7/D30S-7/D33S-7 Parts Book",
+      "type": "OEM parts book",
+      "status": "PARTS_CROSSCHECK",
+      "use": "A/C condenser K1026568, fan/motor K1026569, evaporator/blower, compressor/harness/relay group; wiring group component IDs",
+      "reference": "SB1159E01"
+    },
+    {
+      "name": "SM1018-01 measurement/test-point normalization",
+      "type": "OEM service manual normalization",
+      "status": "INGESTED_TESTPOINT_LOCATOR",
+      "use": "T/M pressure taps 1~7 and exact pressures/conditions; brake bleed/master isolation; D500093 hydraulic relief/flow; steering priority/LS flow; technician locator UI",
+      "reference": "SM1018-01 §2-3-4, §6, §7-2-5, Chapter 9 D500093"
+    }
+  ]
+}

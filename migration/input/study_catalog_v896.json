@@ -1,0 +1,2268 @@
+{
+  "schema_version": "1.0",
+  "release": "V8.9.6-STUDY-2026-09-20",
+  "policy": {
+    "model_scope_first": true,
+    "no_cross_model_procedure": true,
+    "web_case_is_not_oem_spec": true,
+    "unknown_procedure_stop": "차종/세대/옵션 원문이 없으면 공통 원리까지만 표시하고 작업 절차는 중단"
+  },
+  "common_lessons": [
+    {
+      "id": "AZ_A",
+      "key": "A",
+      "title": "A · Architecture",
+      "subtitle": "전동지게차 전체 전력·제어 구조",
+      "scope": "COMMON_THEORY",
+      "diagram": "electric_architecture",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "배터리",
+        "메인퓨즈/E-stop",
+        "라인콘택터",
+        "컨트롤러",
+        "모터/펌프",
+        "기계 출력"
+      ],
+      "concept": [
+        "전동차는 배터리의 DC 전력을 퓨즈·E-stop·라인콘택터를 거쳐 주행/펌프 컨트롤러로 공급한다.",
+        "컨트롤러는 운전자 입력과 안전 인터록을 확인한 뒤 모터 토크 또는 펌프 출력을 만든다.",
+        "증상은 전원→승인조건→제어→출력→기계부 순서로 분리하면 빠르다."
+      ],
+      "field_sequence": [
+        "배터리/플러그 육안",
+        "계기판 코드 기록",
+        "E-stop·키·인터록",
+        "라인콘택터 전/후 전원",
+        "컨트롤러 입력·출력",
+        "모터/기계부"
+      ],
+      "common_faults": [
+        "배터리 플러그/케이블 저항",
+        "인터록 미승인",
+        "컨택터 접점 불량",
+        "센서 입력 이상"
+      ],
+      "mistakes": [
+        "코드만 보고 컨트롤러부터 교환",
+        "정지전압만 보고 배터리 정상 판정"
+      ],
+      "practice": "주행·유압·조향 중 어떤 기능이 살아있는지로 공통 전원과 개별 계통을 먼저 나눠보라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_B",
+      "key": "B",
+      "title": "B · Battery",
+      "subtitle": "납산/리튬, 전압·Ah·SOC, 셀, 비중, 부하",
+      "scope": "COMMON_THEORY",
+      "diagram": "battery",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "정지전압만으로 결론 금지",
+        "셀 상태",
+        "부하시 전압강하",
+        "케이블/커넥터 저항",
+        "충전기 상태"
+      ],
+      "concept": [
+        "납산 배터리는 셀 직렬 연결이므로 약한 셀 하나가 전체 부하 성능을 떨어뜨릴 수 있다.",
+        "Ah는 저장용량, 전압은 상태/부하 반응을 보여주며 둘은 같은 의미가 아니다.",
+        "리튬은 BMS·접촉기·통신·온도 보호까지 함께 봐야 한다."
+      ],
+      "field_sequence": [
+        "배터리 외관/누액/수분",
+        "전체 전압",
+        "셀별 전압·비중(납산)",
+        "부하시 전압강하",
+        "플러그/케이블 발열",
+        "충전기/충전로그"
+      ],
+      "common_faults": [
+        "황산염/셀 열화",
+        "단자 발열",
+        "충전 불량",
+        "BMS 차단",
+        "용량 부족"
+      ],
+      "mistakes": [
+        "완충 표시=정상 용량으로 단정",
+        "증류수 보충 직후 비중으로 판정"
+      ],
+      "practice": "무부하 전압은 정상인데 리프트 릴리프에서 급락한다면 다음 측정 위치를 정해보라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_C",
+      "key": "C",
+      "title": "C · Contactor & Charger",
+      "subtitle": "메인/펌프 콘택터와 충전계통",
+      "scope": "COMMON_THEORY",
+      "diagram": "contactor",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "코일 승인조건",
+        "코일 전압",
+        "접점 전압강하",
+        "용착/소손",
+        "컨트롤러 출력"
+      ],
+      "concept": [
+        "콘택터 코일이 붙는 것과 주접점이 전력을 정상 전달하는 것은 별개다.",
+        "충전기는 배터리 화학계·전압·용량과 맞아야 하며 충전 종료만으로 배터리 건전성을 보장하지 않는다."
+      ],
+      "field_sequence": [
+        "코일 승인조건",
+        "코일전압",
+        "주접점 전압강하",
+        "접점 소손/용착",
+        "충전기 출력/오류",
+        "충전 후 휴지/냉각"
+      ],
+      "common_faults": [
+        "코일 단선",
+        "접점 소손",
+        "프리차지 실패",
+        "충전기 출력 부족"
+      ],
+      "mistakes": [
+        "딸깍 소리만 듣고 콘택터 정상 판정",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "방향 콘택터 소리는 나는데 무주행일 때 코일측과 주접점측을 어떻게 나눌지 설명하라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_D",
+      "key": "D",
+      "title": "D · Display & DTC",
+      "subtitle": "계기판·BDI·고장코드 읽기",
+      "scope": "COMMON_THEORY",
+      "diagram": "display",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "코드 발생조건",
+        "현재/과거 코드 구분",
+        "코드 지우기 전 재현조건 기록",
+        "OEM 코드표 확인"
+      ],
+      "concept": [
+        "DTC는 원인 그 자체가 아니라 컨트롤러가 감지한 조건이다.",
+        "현재 코드·이력 코드·재현 조건을 구분해야 한다."
+      ],
+      "field_sequence": [
+        "코드 사진/기록",
+        "현재/과거 구분",
+        "발생 조건 기록",
+        "OEM 코드표 확인",
+        "입력/출력 실제값 비교",
+        "수리 후 재현시험"
+      ],
+      "common_faults": [
+        "센서 범위이탈",
+        "통신",
+        "저전압",
+        "인터록",
+        "과열"
+      ],
+      "mistakes": [
+        "코드 삭제 후 증거 소실",
+        "타모델 코드표 사용"
+      ],
+      "practice": "같은 코드가 키 재시동 후 사라지는 경우 기록할 항목을 3개 정하라.",
+      "level": 2
+    },
+    {
+      "id": "AZ_E",
+      "key": "E",
+      "title": "E · Emergency & Enable",
+      "subtitle": "E-stop, enable, 안전 인터록",
+      "scope": "COMMON_THEORY",
+      "diagram": "interlock",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "키",
+        "E-stop",
+        "좌석/데드맨",
+        "주차브레이크",
+        "F/R 중립",
+        "컨트롤러 enable"
+      ],
+      "concept": [
+        "E-stop과 enable 회로는 고전력계와 제어전원을 동시에 또는 단계적으로 차단할 수 있다.",
+        "차종마다 안전회로 연결방식이 다르므로 회로도 확인이 필수다."
+      ],
+      "field_sequence": [
+        "E-stop 물리상태",
+        "입·출력 전압",
+        "키/enable 입력",
+        "안전릴레이/콘택터",
+        "컨트롤러 enable 상태"
+      ],
+      "common_faults": [
+        "접점 산화",
+        "배선 단선",
+        "커넥터 느슨함"
+      ],
+      "mistakes": [
+        "비상스위치 외관만 보고 통과",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "경적은 되는데 나머지 기능이 전부 죽는 차종에서 공통 차단점을 추정해보라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_F",
+      "key": "F",
+      "title": "F · Fuse & Feed",
+      "subtitle": "메인퓨즈와 제어전원 분리",
+      "scope": "COMMON_THEORY",
+      "diagram": "power_feed",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "배터리 플러그",
+        "메인퓨즈",
+        "E-stop",
+        "라인콘택터 전/후",
+        "컨트롤러 B+/B-"
+      ],
+      "concept": [
+        "퓨즈는 단선 여부뿐 아니라 홀더 접촉저항과 부하 시 전압강하도 본다.",
+        "메인전원과 제어전원 퓨즈를 구분해야 한다."
+      ],
+      "field_sequence": [
+        "양단 전압",
+        "부하 시 전압강하",
+        "홀더 발열",
+        "정격 확인",
+        "단락 원인 확인"
+      ],
+      "common_faults": [
+        "헤어라인 단선",
+        "홀더 탄화",
+        "잘못된 정격"
+      ],
+      "mistakes": [
+        "연속성만 보고 부하능력 미확인",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "퓨즈 양단에 부하 중 전압이 생기면 무엇을 의미하는지 설명하라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_G",
+      "key": "G",
+      "title": "G · Gear / Drive Unit",
+      "subtitle": "감속기·드라이브 유닛·베어링",
+      "scope": "COMMON_THEORY",
+      "diagram": "drive_unit",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "모터 출력축",
+        "감속기",
+        "드라이브 휠",
+        "베어링",
+        "기계적 구속"
+      ],
+      "concept": [
+        "전기계통이 정상이어도 감속기·베어링·휠 구속은 과전류와 저속을 만든다.",
+        "소음은 부하·회전방향·속도에 따라 재현조건을 기록한다."
+      ],
+      "field_sequence": [
+        "휠 회전저항",
+        "오일/누유",
+        "베어링 유격",
+        "기어 소음",
+        "모터 전류와 비교"
+      ],
+      "common_faults": [
+        "베어링 손상",
+        "기어 치면 손상",
+        "브레이크 드래그"
+      ],
+      "mistakes": [
+        "전류 높다고 모터만 의심",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "무부하에서도 전류가 높고 휠 회전이 무거울 때 전기/기계 분기점을 정하라.",
+      "level": 2
+    },
+    {
+      "id": "AZ_H",
+      "key": "H",
+      "title": "H · Hydraulic",
+      "subtitle": "펌프모터→펌프→밸브→실린더",
+      "scope": "COMMON_THEORY",
+      "diagram": "hydraulic",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "배터리/전원",
+        "펌프모터",
+        "펌프",
+        "릴리프/밸브",
+        "실린더/기계 저항"
+      ],
+      "concept": [
+        "유압은 펌프모터 전기입력→펌프 유량→밸브 제어→실린더→기계저항으로 본다.",
+        "압력과 유량은 서로 다른 정보를 준다."
+      ],
+      "field_sequence": [
+        "펌프모터 작동",
+        "흡입/오일량",
+        "릴리프압",
+        "밸브 입력",
+        "실린더 누설",
+        "마스트 저항"
+      ],
+      "common_faults": [
+        "흡입 공기",
+        "펌프 마모",
+        "릴리프 설정",
+        "밸브 스풀 고착"
+      ],
+      "mistakes": [
+        "압력만 보고 펌프 정상 판정",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "압력은 나오는데 리프트가 느릴 때 유량·기계저항을 어떻게 확인할지 정하라.",
+      "level": 2
+    },
+    {
+      "id": "AZ_I",
+      "key": "I",
+      "title": "I · Interlock",
+      "subtitle": "좌석·데드맨·브레이크·도어 스위치",
+      "scope": "COMMON_THEORY",
+      "diagram": "interlock",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "키",
+        "E-stop",
+        "좌석/데드맨",
+        "주차브레이크",
+        "F/R 중립",
+        "컨트롤러 enable"
+      ],
+      "concept": [
+        "인터록은 seat/deadman/brake/F-R neutral/steer reference 등 여러 입력의 AND 조건일 수 있다.",
+        "한 입력이 빠지면 주행만 또는 주행+유압이 차단될 수 있다."
+      ],
+      "field_sequence": [
+        "계기판 인터록 표시",
+        "스위치 실제상태",
+        "컨트롤러 입력값",
+        "배선 흔들림",
+        "조정/에어갭"
+      ],
+      "common_faults": [
+        "seat switch",
+        "deadman",
+        "brake switch",
+        "neutral input"
+      ],
+      "mistakes": [
+        "스위치 클릭음만 보고 정상 판정",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "리프트는 되는데 주행만 안 될 때 공통 인터록과 주행전용 인터록을 나눠보라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_J",
+      "key": "J",
+      "title": "J · Joystick",
+      "subtitle": "주행/유압 레버와 입력신호",
+      "scope": "COMMON_THEORY",
+      "diagram": "controls",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "레버 중립",
+        "센서 공급전원",
+        "신호 A/B",
+        "컨트롤러 입력",
+        "기계적 걸림"
+      ],
+      "concept": [
+        "조이스틱은 단순 스위치형, 홀센서/포텐셔미터형, CAN형이 있다.",
+        "중립값과 방향별 신호가 모두 정상 범위인지 본다."
+      ],
+      "field_sequence": [
+        "중립 복귀",
+        "공급전원",
+        "신호 변화",
+        "A/B 상관관계",
+        "컨트롤러 입력"
+      ],
+      "common_faults": [
+        "기계적 걸림",
+        "센서 드리프트",
+        "하네스 단선"
+      ],
+      "mistakes": [
+        "한 방향 신호만 확인",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "중립인데 컨트롤러가 미세 입력을 읽으면 어떤 증상이 생길 수 있는지 생각하라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_K",
+      "key": "K",
+      "title": "K · Key-on Sequence",
+      "subtitle": "키 ON부터 라인콘택터까지 승인 흐름",
+      "scope": "COMMON_THEORY",
+      "diagram": "key_on",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "배터리 전압",
+        "E-stop",
+        "키 입력",
+        "인터록",
+        "프리차지/라인콘택터",
+        "고장코드"
+      ],
+      "concept": [
+        "Key-on 시퀀스는 배터리→제어전원→자기진단→프리차지/콘택터→enable 순서로 진행될 수 있다.",
+        "어느 단계에서 멈췄는지 찾는 것이 핵심이다."
+      ],
+      "field_sequence": [
+        "키 전원",
+        "display boot",
+        "DTC",
+        "프리차지/라인콘택터",
+        "controller ready",
+        "기능 enable"
+      ],
+      "common_faults": [
+        "저전압",
+        "프리차지 실패",
+        "CAN timeout",
+        "인터록"
+      ],
+      "mistakes": [
+        "전원 들어왔다고 시퀀스 완료로 판단",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "계기판은 켜지지만 라인콘택터가 안 붙을 때 앞 단계 4개를 나열하라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_L",
+      "key": "L",
+      "title": "L · Lift / Lower",
+      "subtitle": "리프트·하강 및 리프트 인터럽트",
+      "scope": "COMMON_THEORY",
+      "diagram": "lift",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "펌프 구동",
+        "밸브 입력",
+        "압력/유량",
+        "리프트 인터럽트",
+        "마스트 기계부"
+      ],
+      "concept": [
+        "Lift/Lower는 상승과 하강의 에너지원이 다를 수 있다.",
+        "하강은 중력+밸브 제어, 상승은 펌프출력이 필요하다."
+      ],
+      "field_sequence": [
+        "상승/하강 각각 확인",
+        "펌프 명령",
+        "솔레노이드/밸브",
+        "압력",
+        "실린더/체인/롤러"
+      ],
+      "common_faults": [
+        "lift lock",
+        "lower solenoid",
+        "펌프 출력",
+        "마스트 마찰"
+      ],
+      "mistakes": [
+        "상승불량과 하강불량을 같은 원인으로 묶음",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "하강은 정상인데 상승만 불량일 때 제외할 수 있는 계통을 정하라.",
+      "level": 2
+    },
+    {
+      "id": "AZ_M",
+      "key": "M",
+      "title": "M · Motor",
+      "subtitle": "AC/DC 주행모터·펌프모터·엔코더",
+      "scope": "COMMON_THEORY",
+      "diagram": "motor",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "전원",
+        "상선/브러시",
+        "엔코더/속도센서",
+        "절연/단락",
+        "베어링/기계부"
+      ],
+      "concept": [
+        "AC 모터는 상선 U/V/W와 엔코더/리졸버 피드백이 함께 필요하다.",
+        "DC 모터는 브러시·정류자 상태가 중요하다."
+      ],
+      "field_sequence": [
+        "절연/단락",
+        "상선/케이블",
+        "센서/엔코더",
+        "베어링",
+        "컨트롤러 전류값"
+      ],
+      "common_faults": [
+        "엔코더",
+        "베어링",
+        "케이블 절연",
+        "과열"
+      ],
+      "mistakes": [
+        "센서 고장을 모터 권선 고장으로 단정",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "모터는 돌지만 속도 피드백 코드가 뜰 때 전력부와 피드백부를 나눠보라.",
+      "level": 2
+    },
+    {
+      "id": "AZ_N",
+      "key": "N",
+      "title": "N · Neutral / Parking",
+      "subtitle": "중립·주차·시동/주행 허가조건",
+      "scope": "COMMON_THEORY",
+      "diagram": "interlock",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "키",
+        "E-stop",
+        "좌석/데드맨",
+        "주차브레이크",
+        "F/R 중립",
+        "컨트롤러 enable"
+      ],
+      "concept": [
+        "중립·주차 조건은 키 ON 또는 방향전환 시 안전 승인조건으로 사용된다.",
+        "브레이크 스위치 조정 불량도 간헐 무주행을 만들 수 있다."
+      ],
+      "field_sequence": [
+        "F/R neutral",
+        "parking/deadman",
+        "switch adjustment",
+        "controller input"
+      ],
+      "common_faults": [
+        "중립 미인식",
+        "브레이크 스위치 조정",
+        "방향스위치 접점"
+      ],
+      "mistakes": [
+        "레버 위치만 보고 전기적 중립 확인 생략",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "레버는 N인데 입력값이 F/R 중 하나로 남는 경우 다음 조치를 정하라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_O",
+      "key": "O",
+      "title": "O · Operator Presence",
+      "subtitle": "OPS/OSS/좌석·데드맨 논리",
+      "scope": "COMMON_THEORY",
+      "diagram": "interlock",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "키",
+        "E-stop",
+        "좌석/데드맨",
+        "주차브레이크",
+        "F/R 중립",
+        "컨트롤러 enable"
+      ],
+      "concept": [
+        "Operator Presence System은 사람이 정상 운전위치에 있는지 판단해 기능을 허가한다.",
+        "좌석식과 입승식의 감지방식이 다르다."
+      ],
+      "field_sequence": [
+        "감지장치 위치",
+        "물리 작동",
+        "입력값",
+        "지연시간/조건",
+        "관련 경고"
+      ],
+      "common_faults": [
+        "seat/deadman sensor",
+        "배선",
+        "조정"
+      ],
+      "mistakes": [
+        "다른 모델 OPS 논리를 그대로 적용",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "입승식 리치에서 데드맨 입력이 끊기면 어떤 기능들이 차단되는지 OEM으로 확인할 항목을 정하라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_P",
+      "key": "P",
+      "title": "P · Plug / Power Cable",
+      "subtitle": "배터리 플러그·케이블·단자 발열",
+      "scope": "COMMON_THEORY",
+      "diagram": "power_feed",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "배터리 플러그",
+        "메인퓨즈",
+        "E-stop",
+        "라인콘택터 전/후",
+        "컨트롤러 B+/B-"
+      ],
+      "concept": [
+        "배터리 플러그와 케이블은 고전류 통로라 작은 저항도 큰 발열과 전압강하를 만든다.",
+        "외관이 멀쩡해도 크림프 내부가 손상될 수 있다."
+      ],
+      "field_sequence": [
+        "변색/용융",
+        "체결력",
+        "부하 전압강하",
+        "온도",
+        "케이블 굴곡부"
+      ],
+      "common_faults": [
+        "단자 탄화",
+        "크림프 저항",
+        "케이블 내부 단선"
+      ],
+      "mistakes": [
+        "무부하 연속성만 확인",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "리프트 부하 때 플러그 한쪽만 뜨거워지는 경우 측정법을 정하라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_Q",
+      "key": "Q",
+      "title": "Q · Quick Check",
+      "subtitle": "5분 현장 점검 루틴",
+      "scope": "COMMON_THEORY",
+      "diagram": "quick_check",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "육안/냄새/발열",
+        "계기판 코드",
+        "배터리/플러그",
+        "인터록",
+        "주행/조향/유압 기능 분리"
+      ],
+      "concept": [
+        "Quick Check는 부품교환이 아니라 5분 안에 계통 범위를 줄이는 절차다.",
+        "냄새·열·소리·코드·기능 분리를 함께 쓴다."
+      ],
+      "field_sequence": [
+        "육안/냄새",
+        "코드",
+        "배터리/플러그",
+        "주행/조향/유압 기능표",
+        "인터록",
+        "다음 측정 결정"
+      ],
+      "common_faults": [
+        "전원공통",
+        "인터록",
+        "단자 발열"
+      ],
+      "mistakes": [
+        "처음부터 분해",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "무주행+무유압, 조향만 정상인 차량의 5분 점검표를 만들어보라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_R",
+      "key": "R",
+      "title": "R · Reach",
+      "subtitle": "리치 인/아웃, 레일·롤러·실린더",
+      "scope": "COMMON_THEORY",
+      "diagram": "reach",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "리치 레버 입력",
+        "밸브/솔레노이드",
+        "실린더",
+        "레일·롤러",
+        "체인/케이블/호스 간섭"
+      ],
+      "concept": [
+        "Reach 기구는 유압 작동과 레일/롤러/호스·케이블 가이드의 기계 상태가 함께 작동한다.",
+        "배터리 인출을 reach 기능으로 하는 모델도 있다."
+      ],
+      "field_sequence": [
+        "레버입력",
+        "밸브/솔레노이드",
+        "실린더",
+        "레일/롤러",
+        "호스/케이블 간섭",
+        "위치센서"
+      ],
+      "common_faults": [
+        "롤러 마모",
+        "실린더 누설",
+        "센서/스위치",
+        "호스 간섭"
+      ],
+      "mistakes": [
+        "리치 느림을 펌프만 의심",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "리치 아웃만 느리고 lift는 정상일 때 공통 펌프와 개별 회로를 분리하라.",
+      "level": 2
+    },
+    {
+      "id": "AZ_S",
+      "key": "S",
+      "title": "S · Steering / EPS",
+      "subtitle": "조향모터·EPS·조향각/엔코더",
+      "scope": "COMMON_THEORY",
+      "diagram": "steering",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "EPS 전원",
+        "조향입력",
+        "각도/엔코더",
+        "조향모터",
+        "감속기/체인/구동륜"
+      ],
+      "concept": [
+        "EPS는 운전자 조향입력, 조향각/엔코더, 컨트롤러, 모터/기계부의 폐루프다.",
+        "일부 리치트럭은 조향 기준 오류 시 주행도 차단한다."
+      ],
+      "field_sequence": [
+        "EPS 전원",
+        "조향입력",
+        "각도/엔코더",
+        "모터명령",
+        "기계 구속",
+        "캘리브레이션"
+      ],
+      "common_faults": [
+        "encoder",
+        "sensor air gap",
+        "CAN",
+        "steer motor"
+      ],
+      "mistakes": [
+        "traction fault 표시만 보고 주행계만 수리",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "리프트는 되는데 steering encoder 코드와 함께 무주행이면 어떤 계통부터 볼지 정하라.",
+      "level": 2
+    },
+    {
+      "id": "AZ_T",
+      "key": "T",
+      "title": "T · Travel",
+      "subtitle": "F/R, 가속입력, 주행컨트롤러, 구동부",
+      "scope": "COMMON_THEORY",
+      "diagram": "travel",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "F/R 입력",
+        "가속입력",
+        "인터록",
+        "라인콘택터",
+        "주행컨트롤러",
+        "모터/감속기"
+      ],
+      "concept": [
+        "Travel은 방향입력·가속입력·인터록·컨트롤러·모터·감속기가 연결된 체인이다.",
+        "한 방향만 불량이면 공통부와 방향별 입력/접점을 분리한다."
+      ],
+      "field_sequence": [
+        "F/R 입력",
+        "가속 중립/변화",
+        "seat/deadman",
+        "라인/방향콘택터",
+        "컨트롤러 출력",
+        "모터/감속기"
+      ],
+      "common_faults": [
+        "F/R switch",
+        "accelerator sensor",
+        "contactor",
+        "encoder"
+      ],
+      "mistakes": [
+        "모터 무회전=모터불량 단정",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "전진만 안 되고 후진은 정상일 때 공통부를 제외한 뒤 볼 항목을 나열하라.",
+      "level": 2
+    },
+    {
+      "id": "AZ_U",
+      "key": "U",
+      "title": "U · Under-voltage",
+      "subtitle": "저전압·전압강하·BDI·셀 불량",
+      "scope": "COMMON_THEORY",
+      "diagram": "battery",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "정지전압만으로 결론 금지",
+        "셀 상태",
+        "부하시 전압강하",
+        "케이블/커넥터 저항",
+        "충전기 상태"
+      ],
+      "concept": [
+        "Under-voltage는 실제 방전, 약한 셀, 케이블 저항, 과부하 중 순간강하 모두 가능하다.",
+        "차종별 컷오프 기준은 OEM값만 사용한다."
+      ],
+      "field_sequence": [
+        "정지전압",
+        "부하전압",
+        "셀 편차",
+        "케이블 전압강하",
+        "부하 과다 여부"
+      ],
+      "common_faults": [
+        "셀 열화",
+        "단자저항",
+        "과도한 유압부하"
+      ],
+      "mistakes": [
+        "다른 48V 차종의 컷오프 수치 재사용",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "48V라는 이유만으로 타모델 F1 임계값을 적용하면 안 되는 이유를 설명하라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_V",
+      "key": "V",
+      "title": "V · VCM / Inverter",
+      "subtitle": "컨트롤러·인버터·DC link·보호로직",
+      "scope": "COMMON_THEORY",
+      "diagram": "controller",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "배터리 B+/B-",
+        "키/enable",
+        "입력센서",
+        "출력",
+        "온도/과전류/저전압 보호"
+      ],
+      "concept": [
+        "VCM/인버터는 입력신호를 해석하고 전류·전압·온도 제한을 걸어 모터를 제어한다.",
+        "교환 전 전원·접지·enable·센서·부하를 검증해야 한다."
+      ],
+      "field_sequence": [
+        "B+/B-",
+        "키/enable",
+        "CAN",
+        "입력값",
+        "출력명령",
+        "온도/전류 제한"
+      ],
+      "common_faults": [
+        "저전압",
+        "overtemp",
+        "sensor plausibility",
+        "CAN"
+      ],
+      "mistakes": [
+        "통신 불가를 컨트롤러 고장으로 단정",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "컨트롤러 교환 승인 전에 반드시 확인할 5항목을 작성하라.",
+      "level": 2
+    },
+    {
+      "id": "AZ_W",
+      "key": "W",
+      "title": "W · Wiring / Watering",
+      "subtitle": "하네스 점검과 납산 수분관리",
+      "scope": "COMMON_THEORY",
+      "diagram": "wiring",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "전원 존재",
+        "접지 전압강하",
+        "부하 연결상태",
+        "커넥터 핀 장력",
+        "진동/굴곡부 하네스"
+      ],
+      "concept": [
+        "Wiring 진단은 전압 존재보다 부하 상태 전압강하와 접지 품질이 중요하다.",
+        "납산 Watering은 충전상태와 액면 기준을 지켜야 한다."
+      ],
+      "field_sequence": [
+        "전원",
+        "접지강하",
+        "커넥터 핀장력",
+        "굴곡부",
+        "수분/전해액 OEM 절차"
+      ],
+      "common_faults": [
+        "핀 벌어짐",
+        "굽힘부 내부단선",
+        "접지 부식"
+      ],
+      "mistakes": [
+        "백프로빙 시 핀 손상",
+        "충전 전 과도한 물보충"
+      ],
+      "practice": "정상전압이 나오지만 부하를 연결하면 사라지는 회로를 어떻게 확인할지 설명하라.",
+      "level": 1
+    },
+    {
+      "id": "AZ_X",
+      "key": "X",
+      "title": "X · eXception Faults",
+      "subtitle": "간헐·열간·진동·접촉불량 재현",
+      "scope": "COMMON_THEORY",
+      "diagram": "intermittent",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "냉간/열간",
+        "주행진동",
+        "조향각",
+        "마스트 높이",
+        "하네스 흔들기",
+        "로그/코드"
+      ],
+      "concept": [
+        "간헐고장은 재현조건을 만드는 것이 진단의 절반이다.",
+        "열·진동·조향각·마스트높이·주행방향을 기록한다."
+      ],
+      "field_sequence": [
+        "발생시간/온도",
+        "기능상태 기록",
+        "하네스 wiggle",
+        "열간/냉간 비교",
+        "로그/이력코드"
+      ],
+      "common_faults": [
+        "하네스 단선",
+        "센서 열화",
+        "커넥터 접촉",
+        "열보호"
+      ],
+      "mistakes": [
+        "재현 못했다고 무작정 부품 교환",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "30분 후만 발생하는 무유압 증상에서 열과 전기부하를 분리할 시험을 설계하라.",
+      "level": 2
+    },
+    {
+      "id": "AZ_Y",
+      "key": "Y",
+      "title": "Y · Yield / Runtime",
+      "subtitle": "가동시간 저하와 에너지 손실 추적",
+      "scope": "COMMON_THEORY",
+      "diagram": "runtime",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "셀 편차",
+        "충전완료",
+        "부하시 전압강하",
+        "기계/유압 저항",
+        "브레이크 드래그",
+        "BDI 설정"
+      ],
+      "concept": [
+        "가동시간 감소는 배터리 용량만의 문제가 아니라 브레이크드래그·유압저항·과열도 원인이다.",
+        "충전 후 냉각시간과 작업패턴도 기록한다."
+      ],
+      "field_sequence": [
+        "충전로그",
+        "셀상태",
+        "부하시전압",
+        "주행/유압 전류",
+        "브레이크/휠저항",
+        "마스트저항"
+      ],
+      "common_faults": [
+        "약한 셀",
+        "릴리프 과설정",
+        "브레이크 드래그",
+        "마스트 마찰"
+      ],
+      "mistakes": [
+        "배터리만 교체하고 기계저항 미확인",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "새 배터리인데도 runtime이 짧다면 다음 4개 계통을 정하라.",
+      "level": 2
+    },
+    {
+      "id": "AZ_Z",
+      "key": "Z",
+      "title": "Z · Zero Function",
+      "subtitle": "완전 무동작/무주행/무유압 진단 시작점",
+      "scope": "COMMON_THEORY",
+      "diagram": "zero_function",
+      "source_class": "COMMON_THEORY",
+      "rule": "수치·핀맵·탈거순서는 차종 선택 후 해당 OEM 자료가 있을 때만 표시",
+      "checkpoints": [
+        "메인전원",
+        "E-stop",
+        "키",
+        "퓨즈",
+        "라인콘택터",
+        "컨트롤러 enable/통신"
+      ],
+      "concept": [
+        "Zero Function은 전 기능 무동작, 무주행, 무유압을 각각 분리해 시작한다.",
+        "살아있는 기능이 가장 좋은 단서다."
+      ],
+      "field_sequence": [
+        "계기판/경적/조명",
+        "조향",
+        "주행",
+        "유압",
+        "메인전원",
+        "인터록/enable"
+      ],
+      "common_faults": [
+        "E-stop",
+        "메인퓨즈",
+        "키전원",
+        "라인콘택터",
+        "CAN/enable"
+      ],
+      "mistakes": [
+        "모든 무동작을 같은 진단순서로 처리",
+        "해당 차종 OEM 원문 확인 전에 다른 모델 수치·핀·절차를 재사용"
+      ],
+      "practice": "경적·조명 정상, 계기판 정상, 주행/유압만 불량이면 어떤 공통 전력경로를 우선 확인할지 정하라.",
+      "level": 1
+    }
+  ],
+  "model_profiles": [
+    {
+      "id": "DOOSAN_B7_ELECTRIC",
+      "manufacturer": "Doosan",
+      "brand_ko": "두산",
+      "vehicle_type": "전동 카운터밸런스",
+      "display": "B15/18S-7 · B20/25/30/32/35S-7 · B20/25SE-7",
+      "models": [
+        "B15S-7",
+        "B18S-7",
+        "B20S-7",
+        "B25S-7",
+        "B30S-7",
+        "B32S-7",
+        "B35S-7",
+        "B20SE-7",
+        "B25SE-7"
+      ],
+      "manual": "정비_B15S~B35S-7.pdf",
+      "manual_code": "SM1033-00",
+      "source_class": "OEM_MANUAL",
+      "battery": "48V 납축전지 계열 · 모델별 Ah 상이",
+      "status": "MODEL_SPECIFIC_ACTIVE",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_C",
+        "AZ_F",
+        "AZ_H",
+        "AZ_I",
+        "AZ_K",
+        "AZ_M",
+        "AZ_P",
+        "AZ_Q",
+        "AZ_S",
+        "AZ_T",
+        "AZ_U",
+        "AZ_V",
+        "AZ_W",
+        "AZ_Y",
+        "AZ_Z"
+      ],
+      "guide_ids": [
+        "B7_BATTERY_REMOVE",
+        "B7_F1_LOAD_CHECK"
+      ],
+      "case_ids": [
+        "B7_F1_LOW_VOLTAGE"
+      ],
+      "variant_specs": {
+        "B15S-7": "48V · 450Ah/5h",
+        "B18S-7": "48V · 500Ah/5h",
+        "B20S-7": "48V · 715Ah/5h",
+        "B25S-7": "48V · 740Ah/5h",
+        "B30S-7": "48V · 800Ah/5h",
+        "B32S-7": "48V · 800Ah/5h",
+        "B35S-7": "48V · 800Ah/5h",
+        "B20SE-7": "48V · 세부 Ah는 선택 차량 원문 표 추가확인",
+        "B25SE-7": "48V · 세부 Ah는 선택 차량 원문 표 추가확인"
+      },
+      "options_gate": "배터리 용량·커넥터·옵션이 다르면 선택 모델/차대번호 기준 원문 재확인"
+    },
+    {
+      "id": "DOOSAN_BR9_REACH",
+      "manufacturer": "Doosan",
+      "brand_ko": "두산",
+      "vehicle_type": "리치",
+      "display": "BR13/15/18S-9 · BR20/25S-9",
+      "models": [
+        "BR13S-9",
+        "BR15S-9",
+        "BR18S-9",
+        "BR20S-9",
+        "BR25S-9"
+      ],
+      "manual": "06_BR13S-9(SM1035-00).pdf",
+      "manual_code": "SM1035-00",
+      "source_class": "OEM_MANUAL",
+      "battery": "48V · BR13 230Ah/5h · BR15/18 280Ah/5h · BR20/25 335Ah/5h",
+      "status": "MODEL_SPECIFIC_ACTIVE",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_C",
+        "AZ_F",
+        "AZ_H",
+        "AZ_I",
+        "AZ_K",
+        "AZ_M",
+        "AZ_P",
+        "AZ_Q",
+        "AZ_R",
+        "AZ_S",
+        "AZ_T",
+        "AZ_U",
+        "AZ_V",
+        "AZ_W",
+        "AZ_Y",
+        "AZ_Z"
+      ],
+      "guide_ids": [
+        "BR9_BATTERY_DRAW_LOCK",
+        "BR9_PUMP_NO_RUN_FLOW"
+      ],
+      "case_ids": [
+        "BR9_PUMP_NO_RUN",
+        "BR9_LOW_RUNTIME"
+      ],
+      "variant_specs": {
+        "BR13S-9": "48V · 230Ah/5h",
+        "BR15S-9": "48V · 280Ah/5h",
+        "BR18S-9": "48V · 280Ah/5h",
+        "BR20S-9": "48V · 335Ah/5h",
+        "BR25S-9": "48V · 335Ah/5h"
+      },
+      "options_gate": "배터리 커넥터 SB175/SBE160 등 실제 차량 사양 확인"
+    },
+    {
+      "id": "TOYOTA_7FBMF",
+      "manufacturer": "Toyota",
+      "brand_ko": "도요타",
+      "vehicle_type": "전동 카운터밸런스",
+      "display": "7FBMF 16/18/20/25/30/35/40/45/50",
+      "models": [
+        "7FBMF16",
+        "7FBMF18",
+        "7FBMF20",
+        "7FBMF25",
+        "7FBMF30",
+        "7FBMF35",
+        "7FBMF40",
+        "7FBMF45",
+        "7FBMF50"
+      ],
+      "manual": "Toyota 7FBMF Series Electric Forklift Manual p158-1.pdf",
+      "manual_code": "PE313",
+      "source_class": "OEM_MANUAL_INDEXED",
+      "battery": "차종별 원문 확인 후 표시",
+      "status": "MANUAL_AVAILABLE_NOT_NORMALIZED",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_C",
+        "AZ_F",
+        "AZ_H",
+        "AZ_I",
+        "AZ_K",
+        "AZ_M",
+        "AZ_P",
+        "AZ_Q",
+        "AZ_S",
+        "AZ_T",
+        "AZ_U",
+        "AZ_V",
+        "AZ_W",
+        "AZ_Y",
+        "AZ_Z"
+      ],
+      "guide_ids": [],
+      "case_ids": [],
+      "options_gate": "7FBMF 세부 용량/옵션/연식은 PE313 원문 범위를 확인한 뒤 절차 활성화"
+    },
+    {
+      "id": "TOYOTA_8FBN",
+      "manufacturer": "Toyota",
+      "brand_ko": "도요타",
+      "vehicle_type": "전동 카운터밸런스",
+      "display": "8FBN 15/16/18/20/25/30",
+      "models": [
+        "8FBN15",
+        "8FBN16",
+        "8FBN18",
+        "8FBN20",
+        "8FBN25",
+        "8FBN30"
+      ],
+      "manual": "Toyota 8FBN 15 16 18 20 25 30 Forklift Trucks Repair Manual PDF.pdf",
+      "manual_code": "",
+      "source_class": "OEM_MANUAL_INDEXED",
+      "battery": "차종별 원문 확인 후 표시",
+      "status": "MANUAL_AVAILABLE_NOT_NORMALIZED",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_C",
+        "AZ_F",
+        "AZ_H",
+        "AZ_I",
+        "AZ_K",
+        "AZ_M",
+        "AZ_P",
+        "AZ_Q",
+        "AZ_S",
+        "AZ_T",
+        "AZ_U",
+        "AZ_V",
+        "AZ_W",
+        "AZ_Y",
+        "AZ_Z"
+      ],
+      "guide_ids": [],
+      "case_ids": [],
+      "options_gate": "8FBN 정확 모델·배터리·옵션별 서비스매뉴얼 정규화 후 절차 활성화"
+    },
+    {
+      "id": "TOYOTA_8FBR",
+      "manufacturer": "Toyota",
+      "brand_ko": "도요타",
+      "vehicle_type": "리치",
+      "display": "8FBR 10/13/15/18/20/25/30 · 8FBRS20/25",
+      "models": [
+        "8FBR10",
+        "8FBR13",
+        "8FBR15",
+        "8FBR18",
+        "8FBR20",
+        "8FBR25",
+        "8FBR30",
+        "8FBRS20",
+        "8FBRS25"
+      ],
+      "manual": "Toyota BT 8FBR Electric Reach Series.pdf",
+      "manual_code": "CAT.8FBR10-30(E)/1709",
+      "source_class": "OEM_SPEC_REFERENCE",
+      "battery": "48V · 브로슈어 제원만 확인됨(정비절차로 사용 금지)",
+      "status": "SPEC_ONLY_STUDY",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_H",
+        "AZ_I",
+        "AZ_M",
+        "AZ_Q",
+        "AZ_R",
+        "AZ_S",
+        "AZ_T",
+        "AZ_U",
+        "AZ_Y"
+      ],
+      "guide_ids": [],
+      "case_ids": [],
+      "variant_specs": {
+        "8FBR10": "48V · 201–240Ah/5h (브로슈어)",
+        "8FBR13": "48V · 201–240Ah/5h (브로슈어)",
+        "8FBR15": "48V · 280–370Ah/5h (브로슈어)",
+        "8FBR18": "48V · 280–370Ah/5h (브로슈어)",
+        "8FBR20": "48V · 320–445Ah/5h (브로슈어)",
+        "8FBR25": "48V · 320–445Ah/5h (브로슈어)",
+        "8FBR30": "48V · 445Ah/5h (브로슈어)",
+        "8FBRS20": "48V · 320–445Ah/5h (브로슈어)",
+        "8FBRS25": "48V · 390–445Ah/5h (브로슈어)"
+      },
+      "options_gate": "브로슈어 제원은 학습용. 탈거·진단 임계값은 서비스매뉴얼 확보 후 활성화"
+    },
+    {
+      "id": "DOOSAN_B15SU9",
+      "manufacturer": "Doosan",
+      "brand_ko": "두산",
+      "vehicle_type": "전동 SU 시리즈",
+      "display": "B15/18/20SU-9",
+      "models": [
+        "B15SU-9",
+        "B18SU-9",
+        "B20SU-9"
+      ],
+      "manual": "07_B15SU-9(SM1043-00).pdf",
+      "manual_code": "SM1043-00",
+      "source_class": "OEM_MANUAL_INDEXED",
+      "battery": "36V · 서비스매뉴얼 배터리 표 보유",
+      "status": "MANUAL_AVAILABLE_NOT_NORMALIZED",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_C",
+        "AZ_F",
+        "AZ_H",
+        "AZ_I",
+        "AZ_M",
+        "AZ_S",
+        "AZ_T",
+        "AZ_V",
+        "AZ_Z"
+      ],
+      "guide_ids": [],
+      "case_ids": [],
+      "options_gate": "세부 용량/옵션은 정확 모델 선택 후 원문 확인"
+    },
+    {
+      "id": "DOOSAN_BR7_PLUS",
+      "manufacturer": "Doosan",
+      "brand_ko": "두산",
+      "vehicle_type": "리치",
+      "display": "BR18/20SP-7 · Plus",
+      "models": [
+        "BR18SP-7",
+        "BR20SP-7",
+        "BR18SP-7 Plus",
+        "BR20SP-7 Plus"
+      ],
+      "manual": "05_BR18,20SP-7 Plus(SM1032-01).pdf",
+      "manual_code": "SM1032-01",
+      "source_class": "OEM_MANUAL_INDEXED",
+      "battery": "세부 사양 원문 확인",
+      "status": "MANUAL_AVAILABLE_NOT_NORMALIZED",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_H",
+        "AZ_I",
+        "AZ_R",
+        "AZ_S",
+        "AZ_T",
+        "AZ_V",
+        "AZ_Z"
+      ],
+      "guide_ids": [],
+      "case_ids": [],
+      "options_gate": "Plus/비Plus 및 옵션 구분"
+    },
+    {
+      "id": "DOOSAN_BOP15S9",
+      "manufacturer": "Doosan",
+      "brand_ko": "두산",
+      "vehicle_type": "오더피커",
+      "display": "BOP15S-9",
+      "models": [
+        "BOP15S-9"
+      ],
+      "manual": "08_BOP15S-9_(SM1054-00).pdf",
+      "manual_code": "SM1054-00",
+      "source_class": "OEM_MANUAL_INDEXED",
+      "battery": "배터리/EasyView Test Menu 자료 보유",
+      "status": "MANUAL_AVAILABLE_NOT_NORMALIZED",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_D",
+        "AZ_H",
+        "AZ_I",
+        "AZ_K",
+        "AZ_L",
+        "AZ_M",
+        "AZ_V",
+        "AZ_Z"
+      ],
+      "guide_ids": [],
+      "case_ids": [],
+      "options_gate": "플랫폼/리프트 인터록 포함 모델전용 절차만 사용"
+    },
+    {
+      "id": "DOOSAN_NS_LITHIUM",
+      "manufacturer": "Doosan",
+      "brand_ko": "두산",
+      "vehicle_type": "전동 NS 시리즈 · 리튬",
+      "display": "B15/18NS · B20NSC",
+      "models": [
+        "B15NS",
+        "B18NS",
+        "B20NSC"
+      ],
+      "manual": "09_B15_18NS, B20NSC(SM1066-00).pdf",
+      "manual_code": "SM1066-00",
+      "source_class": "OEM_MANUAL_INDEXED",
+      "battery": "리튬 배터리/BMS 자료 보유",
+      "status": "MANUAL_AVAILABLE_NOT_NORMALIZED",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_C",
+        "AZ_D",
+        "AZ_F",
+        "AZ_I",
+        "AZ_K",
+        "AZ_V",
+        "AZ_Z"
+      ],
+      "guide_ids": [],
+      "case_ids": [],
+      "options_gate": "납산 절차 적용 금지 · BMS/CAN 절차 우선"
+    },
+    {
+      "id": "DOOSAN_NS2025",
+      "manufacturer": "Doosan",
+      "brand_ko": "두산",
+      "vehicle_type": "전동 NS 시리즈",
+      "display": "B20/25NS",
+      "models": [
+        "B20NS",
+        "B25NS"
+      ],
+      "manual": "10_B20_25NS(SM1067-00).pdf",
+      "manual_code": "SM1067-00",
+      "source_class": "OEM_MANUAL_INDEXED",
+      "battery": "세부 배터리 사양 원문 확인",
+      "status": "MANUAL_AVAILABLE_NOT_NORMALIZED",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_C",
+        "AZ_D",
+        "AZ_F",
+        "AZ_I",
+        "AZ_K",
+        "AZ_V",
+        "AZ_Z"
+      ],
+      "guide_ids": [],
+      "case_ids": [],
+      "options_gate": "배터리 화학계/옵션을 차량 명판과 원문으로 확인"
+    },
+    {
+      "id": "DOOSAN_NS3035",
+      "manufacturer": "Doosan",
+      "brand_ko": "두산",
+      "vehicle_type": "전동 NS 시리즈",
+      "display": "B30/35NS",
+      "models": [
+        "B30NS",
+        "B35NS"
+      ],
+      "manual": "11_B30_35NS(SM1068-00).pdf",
+      "manual_code": "SM1068-00",
+      "source_class": "OEM_MANUAL_INDEXED",
+      "battery": "세부 배터리 사양 원문 확인",
+      "status": "MANUAL_AVAILABLE_NOT_NORMALIZED",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_C",
+        "AZ_D",
+        "AZ_F",
+        "AZ_I",
+        "AZ_K",
+        "AZ_V",
+        "AZ_Z"
+      ],
+      "guide_ids": [],
+      "case_ids": [],
+      "options_gate": "동일 NS 명칭이라도 용량/컨트롤러 옵션 구분"
+    },
+    {
+      "id": "DOOSAN_BTX7",
+      "manufacturer": "Doosan",
+      "brand_ko": "두산",
+      "vehicle_type": "전동 카운터밸런스",
+      "display": "B15/18/20T-7 · B16/18/20X-7",
+      "models": [
+        "B15T-7",
+        "B18T-7",
+        "B20T-7",
+        "B16X-7",
+        "B18X-7",
+        "B20X-7"
+      ],
+      "manual": "정비_B15T-7~B20T.pdf",
+      "manual_code": "",
+      "source_class": "OEM_MANUAL_INDEXED",
+      "battery": "세부 사양 원문 확인",
+      "status": "MANUAL_AVAILABLE_NOT_NORMALIZED",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_C",
+        "AZ_F",
+        "AZ_H",
+        "AZ_I",
+        "AZ_M",
+        "AZ_S",
+        "AZ_T",
+        "AZ_V",
+        "AZ_Z"
+      ],
+      "guide_ids": [],
+      "case_ids": [],
+      "options_gate": "T/X 시리즈 구분"
+    },
+    {
+      "id": "DOOSAN_BC7",
+      "manufacturer": "Doosan",
+      "brand_ko": "두산",
+      "vehicle_type": "전동 카운터밸런스",
+      "display": "BC20/25/30/32S-7 · BC25SE-7",
+      "models": [
+        "BC20S-7",
+        "BC25S-7",
+        "BC30S-7",
+        "BC32S-7",
+        "BC25SE-7"
+      ],
+      "manual": "03_BC25S-7(SM1022-00).pdf",
+      "manual_code": "SM1022-00",
+      "source_class": "OEM_MANUAL_INDEXED",
+      "battery": "전장/배터리/컨트롤러 자료 보유",
+      "status": "MANUAL_AVAILABLE_NOT_NORMALIZED",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_C",
+        "AZ_D",
+        "AZ_F",
+        "AZ_H",
+        "AZ_I",
+        "AZ_M",
+        "AZ_S",
+        "AZ_T",
+        "AZ_V",
+        "AZ_Z"
+      ],
+      "guide_ids": [],
+      "case_ids": [],
+      "options_gate": "BC와 B 시리즈 절차 혼용 금지"
+    },
+    {
+      "id": "DOOSAN_B40X7",
+      "manufacturer": "Doosan",
+      "brand_ko": "두산",
+      "vehicle_type": "전동 카운터밸런스",
+      "display": "B40/45/50X-7 · B50XC-7",
+      "models": [
+        "B40X-7",
+        "B45X-7",
+        "B50X-7",
+        "B50XC-7"
+      ],
+      "manual": "04_B45X-7(SM1036-00).pdf",
+      "manual_code": "SM1036-00",
+      "source_class": "OEM_MANUAL_INDEXED",
+      "battery": "고용량 전동 · 세부 사양 원문 확인",
+      "status": "MANUAL_AVAILABLE_NOT_NORMALIZED",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_B",
+        "AZ_C",
+        "AZ_D",
+        "AZ_F",
+        "AZ_H",
+        "AZ_I",
+        "AZ_M",
+        "AZ_S",
+        "AZ_T",
+        "AZ_V",
+        "AZ_Z"
+      ],
+      "guide_ids": [],
+      "case_ids": [],
+      "options_gate": "대형 X/XC 차종 전용 절차 사용"
+    }
+  ],
+  "guides": [
+    {
+      "id": "B7_BATTERY_REMOVE",
+      "title": "두산 B-7 전동 · 배터리 탈거/장착 한눈에 가이드",
+      "model_profile": "DOOSAN_B7_ELECTRIC",
+      "source_class": "OEM_MANUAL",
+      "diagram": "b7_battery_remove",
+      "source": {
+        "file": "정비_B15S~B35S-7.pdf",
+        "section": "2-2-6 탈거 및 장착",
+        "pages": [
+          64
+        ]
+      },
+      "safety": [
+        "배터리 셀 상단 금속물 접촉 금지",
+        "분리/운반/설치 중 단락 방지",
+        "OEM 안전지침/PPE 준수"
+      ],
+      "steps": [
+        "주차",
+        "포크 하강 + 마스트 전경사(포크 끝이 바닥에 닿을 정도)",
+        "KEY OFF",
+        "배터리 커넥터 분리",
+        "스티어링 컬럼 직립 + 시트 완전 후방",
+        "후드 래치 해제",
+        "시트/배터리 커버 개방",
+        "KEY ON 약 30초 유지 × 2회 → 전원모듈 방전",
+        "호이스트로 배터리 탈거",
+        "장착은 역순"
+      ],
+      "critical": "전원모듈 방전 절차를 생략하지 않음",
+      "applies_models": [
+        "B15S-7",
+        "B18S-7",
+        "B20S-7",
+        "B25S-7",
+        "B30S-7",
+        "B32S-7",
+        "B35S-7",
+        "B20SE-7",
+        "B25SE-7"
+      ]
+    },
+    {
+      "id": "BR9_BATTERY_DRAW_LOCK",
+      "title": "두산 BR-9 리치 · 배터리 케이스 인출/점검/재잠금",
+      "model_profile": "DOOSAN_BR9_REACH",
+      "source_class": "OEM_MANUAL",
+      "diagram": "br9_battery_draw",
+      "source": {
+        "file": "06_BR13S-9(SM1035-00).pdf",
+        "section": "2-2-6 탈거 및 장착",
+        "pages": [
+          63,
+          64
+        ]
+      },
+      "safety": [
+        "셀 상단을 절연재로 보호",
+        "금속물 접촉/단락 방지",
+        "평탄한 지면"
+      ],
+      "steps": [
+        "평지 주차",
+        "마스트 REACH IN",
+        "우측 배터리 LOCKING PEDAL 밟기",
+        "페달 유지 + 마스트 REACH OUT → 배터리 케이스 함께 인출",
+        "KEY OFF + 배터리 커넥터 분리",
+        "전해액 레벨/배터리 상태 확인",
+        "커넥터 연결 + KEY ON",
+        "록킹 페달 없이 REACH IN → 록킹 핀 자동 체결"
+      ],
+      "critical": "이 원문 범위는 케이스 인출·점검·잠금 절차. 실제 배터리 리프트/교환 장비 절차는 해당 현장/OEM 추가 절차 확인 후 수행",
+      "applies_models": [
+        "BR13S-9",
+        "BR15S-9",
+        "BR18S-9",
+        "BR20S-9",
+        "BR25S-9"
+      ]
+    },
+    {
+      "id": "B7_F1_LOAD_CHECK",
+      "title": "두산 B-7 · F1 저전압 부하 비교",
+      "model_profile": "DOOSAN_B7_ELECTRIC",
+      "source_class": "OEM_MANUAL",
+      "diagram": "battery_load",
+      "source": {
+        "file": "정비_B15S~B35S-7.pdf",
+        "section": "오류 코드 F1 조치",
+        "pages": [
+          199,
+          200
+        ]
+      },
+      "steps": [
+        "F1 현재 발생 여부 확인",
+        "KEY OFF→ON 후 재확인",
+        "배터리 전압 확인",
+        "라인콘택터 배터리측 ↔ 컨트롤러 - 단자 전압 비교",
+        "KEY ON 무부하 배터리 전압 기록",
+        "틸트/리프트 릴리프 부하 상태 전압 기록",
+        "이 매뉴얼의 F1 절차에서 두 값 차이 ≥10V이면 배터리 점검/교환 판단"
+      ],
+      "critical": "10V 기준은 SM1033-00의 F1 진단 절차 전용. 타 차종 일반화 금지",
+      "applies_models": [
+        "B15S-7",
+        "B18S-7",
+        "B20S-7",
+        "B25S-7",
+        "B30S-7",
+        "B32S-7",
+        "B35S-7",
+        "B20SE-7",
+        "B25SE-7"
+      ]
+    },
+    {
+      "id": "BR9_PUMP_NO_RUN_FLOW",
+      "title": "두산 BR-9 · 펌프모터 무작동 빠른 분리",
+      "model_profile": "DOOSAN_BR9_REACH",
+      "source_class": "OEM_MANUAL",
+      "diagram": "pump_no_run",
+      "source": {
+        "file": "06_BR13S-9(SM1035-00).pdf",
+        "section": "4-6-1 펌프 모터 고장 진단",
+        "pages": [
+          300
+        ]
+      },
+      "steps": [
+        "배터리 케이블/연결 상태",
+        "KEY·LINE·PUMP 퓨즈",
+        "키/시트/라인콘택터 도통",
+        "배터리·케이블 과저항/저전압",
+        "각 셀·비중 편차",
+        "인코더/EasyView 오류"
+      ],
+      "critical": "부품교환보다 전원·인터록·전압을 먼저 분리",
+      "applies_models": [
+        "BR13S-9",
+        "BR15S-9",
+        "BR18S-9",
+        "BR20S-9",
+        "BR25S-9"
+      ]
+    },
+    {
+      "id": "COMMON_LEAD_ACID_SAFETY",
+      "title": "납산 배터리 교환·충전 공통 안전 프레임",
+      "model_profile": "COMMON",
+      "source_class": "SAFETY_REFERENCE",
+      "diagram": "battery_safety",
+      "source": {
+        "url": "https://www.osha.gov/etools/powered-industrial-trucks/types-fundamentals/power-sources/electrical",
+        "title": "OSHA Powered Industrial Trucks - Electric"
+      },
+      "steps": [
+        "지정 작업구역/환기/금연",
+        "차량 고정·브레이크",
+        "PPE·세안설비",
+        "충전기 OFF 후 연결/분리",
+        "금속 공구/장신구 단락 주의",
+        "배터리 인양은 적합한 handling 장비 사용"
+      ],
+      "critical": "이 카드는 공통 안전만 제공. 실제 잠금해제·인출·인양은 모델별 OEM 가이드 선택 필수"
+    },
+    {
+      "id": "COMMON_HYUNDAI_DIAG_METHOD",
+      "title": "현대 서비스매뉴얼식 · 작동점검부터 분해까지 5단 진단법",
+      "model_profile": "COMMON",
+      "source_class": "OEM_MANUAL_METHOD",
+      "diagram": "hyundai_diag_method",
+      "source": {
+        "file": "180D-9.pdf",
+        "section": "Operational checks / Troubleshooting / Tests and adjustments / Disassembly and assembly",
+        "pages": []
+      },
+      "steps": [
+        "작동점검으로 증상 재현",
+        "결과를 OK / NOT OK로 분기",
+        "Troubleshooting에서 원인 범위 축소",
+        "Tests / Adjustments로 측정·조정",
+        "확정된 경우에만 Disassembly / Assembly"
+      ],
+      "critical": "현대 매뉴얼의 진단 구성법을 학습하는 공통 프레임. 180D-9의 수치·부품·절차를 전동/리치에 적용하지 않음"
+    }
+  ],
+  "cases": [
+    {
+      "id": "B7_F1_LOW_VOLTAGE",
+      "title": "두산 B-7 · F1 저전압/순간 전압강하",
+      "scope": "DOOSAN_B7_ELECTRIC",
+      "source_class": "OEM_MANUAL",
+      "symptom": "F1 표시 또는 부하 시 순간적인 저전압",
+      "checks": [
+        "현재 F1 여부",
+        "KEY cycle 후 지속 여부",
+        "배터리 전압",
+        "라인콘택터-컨트롤러 전원경로",
+        "무부하 vs 릴리프 부하 전압"
+      ],
+      "learning": "정지전압만 보고 배터리 정상 판정하지 않는다.",
+      "source": {
+        "file": "정비_B15S~B35S-7.pdf",
+        "pages": [
+          199,
+          200
+        ]
+      }
+    },
+    {
+      "id": "BR9_PUMP_NO_RUN",
+      "title": "두산 BR-9 · 펌프모터가 작동하지 않음",
+      "scope": "DOOSAN_BR9_REACH",
+      "source_class": "OEM_MANUAL",
+      "symptom": "유압 요구 시 펌프모터 무작동",
+      "checks": [
+        "배터리 케이블",
+        "KEY/LINE/PUMP 퓨즈",
+        "키/시트/라인콘택터 도통",
+        "배터리/케이블 과저항",
+        "셀·비중",
+        "인코더/오류"
+      ],
+      "learning": "모터/컨트롤러를 바로 교환하지 말고 enable 전원과 부하 전압부터 분리.",
+      "source": {
+        "file": "06_BR13S-9(SM1035-00).pdf",
+        "page": 300
+      }
+    },
+    {
+      "id": "BR9_LOW_RUNTIME",
+      "title": "두산 BR-9 · 가동시간이 비정상적으로 짧음",
+      "scope": "DOOSAN_BR9_REACH",
+      "source_class": "OEM_MANUAL",
+      "symptom": "충전 후 사용시간이 짧거나 BDI가 자주 차단",
+      "checks": [
+        "배터리 용량 적합성",
+        "셀별 상태",
+        "충전기",
+        "충전 후 냉각시간",
+        "손상 셀",
+        "릴리프 과설정/유압 저항",
+        "마스트 기계 저항"
+      ],
+      "learning": "배터리만 보지 않고 유압/기계 저항에 의한 전력소모까지 본다.",
+      "source": {
+        "file": "06_BR13S-9(SM1035-00).pdf",
+        "page": 301
+      }
+    },
+    {
+      "id": "WEB_CLARK_NO_TRAVEL",
+      "title": "웹 사례 · 유압/조향 정상인데 전후진 무주행",
+      "scope": "WEB_CROSS_MODEL",
+      "source_class": "WEB_CASE",
+      "symptom": "Clark ECG25: 전원·유압·조향 정상, 방향 선택 시 콘택터 소리 있으나 무주행",
+      "checks": [
+        "좌석/데드맨 입력",
+        "방향콘택터 실제 접점",
+        "가속입력",
+        "해당 모델 회로 확인"
+      ],
+      "learning": "콘택터가 '딸깍' 붙는 것과 전력 접점이 실제로 전달되는 것은 다르다. 인터록 입력도 함께 확인.",
+      "source": {
+        "url": "https://www.forkliftaction.com/forum/thread.aspx?qid=118691",
+        "note": "포럼 사례. OEM 기준값으로 사용 금지"
+      }
+    },
+    {
+      "id": "WEB_HYSTER_STEER_ENCODER",
+      "title": "웹 사례 · 조향 엔코더 코드 + 무주행, 리프트는 정상",
+      "scope": "WEB_CROSS_MODEL",
+      "source_class": "WEB_CASE",
+      "symptom": "Hyster R30XMS3: steering encoder 상태코드, F/R 불가, 리프트는 작동",
+      "checks": [
+        "CAN 통신",
+        "엔코더 전원/배선",
+        "조향 컨트롤러",
+        "엔코더 신호/캘리브레이션"
+      ],
+      "learning": "리치트럭은 조향 오류가 주행 enable을 막을 수 있다.",
+      "source": {
+        "url": "https://www.forkliftaction.com/forum/steering-encoder-code.aspx?q=125743",
+        "note": "포럼 사례. 모델별 매뉴얼로 재검증"
+      }
+    },
+    {
+      "id": "WEB_ETV16_STEER_INTERLOCK",
+      "title": "웹 사례 · traction/pump 알람의 원인이 조향계",
+      "scope": "WEB_CROSS_MODEL",
+      "source_class": "WEB_CASE",
+      "symptom": "Jungheinrich ETV16: 시작 시 traction/pump 알람, 기능 비활성",
+      "checks": [
+        "조향센서",
+        "조향모터 구속",
+        "센서 추종성",
+        "조향 오류가 주행 enable에 미치는 영향"
+      ],
+      "learning": "표시된 traction/pump 알람만 보고 해당 계통 부품부터 교환하지 않는다.",
+      "source": {
+        "url": "https://www.forkliftaction.com/forum/thread.aspx?qid=84783",
+        "note": "포럼 사례"
+      }
+    },
+    {
+      "id": "WEB_CAT_NR16N_STEER",
+      "title": "웹 사례 · 간헐 조향 오류/주행 차단",
+      "scope": "WEB_CROSS_MODEL",
+      "source_class": "WEB_CASE",
+      "symptom": "CAT NR16N: 반나절 정도 정상 후 steering software fault와 cut-out",
+      "checks": [
+        "조향센서 오염/에어갭",
+        "센서 신호",
+        "열/시간 경과 재현",
+        "소프트웨어/컨트롤러 버전"
+      ],
+      "learning": "간헐고장은 교환 전 재현조건(시간·열·조향각)을 기록.",
+      "source": {
+        "url": "https://www.forkliftaction.com/forum/steering-fault-cutting-out-cat-nr16n-reach-truck.aspx?t=15158",
+        "note": "포럼 사례"
+      }
+    },
+    {
+      "id": "WEB_RAYMOND_2H",
+      "title": "웹 사례 · 주행 중 간헐 2H / 엔코더 하네스",
+      "scope": "WEB_CROSS_MODEL",
+      "source_class": "WEB_CASE",
+      "symptom": "Raymond 560: 주행/조향 중 간헐 코드, drive motor encoder 계통 의심",
+      "checks": [
+        "엔코더 count 변화",
+        "주행하면서 재현",
+        "모터 케이블과 함께 과도하게 묶인 하네스",
+        "센서/하네스"
+      ],
+      "learning": "고정된 상태의 도통검사만으로는 굴곡·진동 간헐단선을 못 잡을 수 있다.",
+      "source": {
+        "url": "https://www.forkliftaction.com/forum/thread.aspx?qid=117841",
+        "note": "포럼 사례"
+      }
+    },
+    {
+      "id": "WEB_YALE_LOW_RUNTIME",
+      "title": "웹 사례 · 완충 표시인데 짧은 시간 후 출력 급락",
+      "scope": "WEB_CROSS_MODEL",
+      "source_class": "WEB_CASE",
+      "symptom": "Yale 36V: 완충 후 짧은 작업시간, 표시 급락, 재시동하면 잠깐 움직임",
+      "checks": [
+        "셀 수분",
+        "셀 편차",
+        "부하시 전압",
+        "장기방치/황산염 가능성",
+        "충전기"
+      ],
+      "learning": "표면전압/BDI 만충 표시는 실제 용량을 보장하지 않는다.",
+      "source": {
+        "url": "https://www.forkliftaction.com/forum/shuts-down-after-short-working-time.aspx?q=128995",
+        "note": "포럼 사례"
+      }
+    },
+    {
+      "id": "WEB_CAT_SEAT_INTERLOCK",
+      "title": "웹 사례 · Seat Alarm + 주행/유압 동시 차단",
+      "scope": "WEB_CROSS_MODEL",
+      "source_class": "WEB_CASE",
+      "symptom": "CAT EC25N2: 키 ON 후 seat alarm, neutral/lift interlock 표시, 주행·유압 비활성",
+      "checks": [
+        "seat switch 실제상태",
+        "컨트롤러 seat 입력",
+        "배선/커넥터",
+        "인터록 표시"
+      ],
+      "learning": "주행과 유압이 동시에 막히면 공통 operator-presence 입력을 우선 분리할 수 있다.",
+      "source": {
+        "url": "https://www.forkliftaction.com/forum/no-travel-or-hydraulic-functions-need-some-help.aspx?q=127759",
+        "note": "포럼 사례. OEM 기준값으로 사용 금지"
+      }
+    },
+    {
+      "id": "WEB_JUNG_LIFT_POT",
+      "title": "웹 사례 · 간헐 LIFT POTI / 굴곡부 하네스",
+      "scope": "WEB_CROSS_MODEL",
+      "source_class": "WEB_CASE",
+      "symptom": "Jungheinrich ETV C16: 간헐 LIFT POTI alarm 26",
+      "checks": [
+        "lift pot/multipilot 배선",
+        "굴곡·꺾임부",
+        "커넥터",
+        "조정값/입력값"
+      ],
+      "learning": "간헐 센서 코드는 센서 자체뿐 아니라 움직이는 하네스 구간을 같이 본다.",
+      "source": {
+        "url": "https://www.forkliftaction.com/forum/jungheinrich.aspx?q=107873",
+        "note": "포럼 사례. OEM 매뉴얼로 모델별 재검증"
+      }
+    },
+    {
+      "id": "WEB_YALE_HYD_HEAT",
+      "title": "웹 사례 · 열간에서 유압만 사라졌다 복귀",
+      "scope": "WEB_CROSS_MODEL",
+      "source_class": "WEB_CASE",
+      "symptom": "Yale ERC050: 30~45분 후 유압 상실, 냉각 후 복귀, 오류코드 없음",
+      "checks": [
+        "열간 접촉기/전압강하",
+        "펌프모터/컨트롤러 온도",
+        "배선/접점",
+        "기계/유압 과부하"
+      ],
+      "learning": "시간 경과형 고장은 냉각 후 복귀 여부를 이용해 열·접촉저항·보호로직을 분리한다.",
+      "source": {
+        "url": "https://www.forkliftaction.com/forum/thread.aspx?qid=85696",
+        "note": "포럼 사례. 부품교환 결론이 아니라 재현 조건 학습용"
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "Q1",
+      "scope": "COMMON",
+      "question": "전동차가 무주행일 때 가장 먼저 피해야 할 접근은?",
+      "choices": [
+        "메인전원/인터록 확인",
+        "고장코드 기록",
+        "바로 주행컨트롤러 교환",
+        "배터리 플러그 확인"
+      ],
+      "answer": 2,
+      "explain": "전원·enable·입력·출력을 분리하기 전에 컨트롤러를 교환하면 오진 가능성이 높다."
+    },
+    {
+      "id": "Q2",
+      "scope": "DOOSAN_B7_ELECTRIC",
+      "question": "B-7 배터리 탈거 전 원문 절차에 포함된 것은?",
+      "choices": [
+        "전원모듈 방전 절차",
+        "리치 록킹 페달",
+        "마스트 REACH OUT",
+        "48V 설정 변경"
+      ],
+      "answer": 0,
+      "explain": "SM1033-00은 KEY ON 약 30초 유지×2회로 전원모듈 방전을 지시한다."
+    },
+    {
+      "id": "Q3",
+      "scope": "DOOSAN_BR9_REACH",
+      "question": "BR-9 배터리 케이스를 인출할 때 사용하는 차량 기능은?",
+      "choices": [
+        "마스트 틸트",
+        "리치 기능",
+        "사이드시프트",
+        "조향모터"
+      ],
+      "answer": 1,
+      "explain": "록킹 페달을 밟고 마스트 REACH OUT 시 배터리 케이스가 함께 인출된다."
+    },
+    {
+      "id": "Q4",
+      "scope": "COMMON",
+      "question": "콘택터 소리가 났다는 사실만으로 확인되지 않는 것은?",
+      "choices": [
+        "코일이 동작했을 가능성",
+        "접점에서 실제 전력이 전달되는지",
+        "기계음이 발생했다는 것",
+        "제어신호가 일부 도달했을 가능성"
+      ],
+      "answer": 1,
+      "explain": "주접점 소손/저항으로 코일은 붙어도 부하 전력이 전달되지 않을 수 있다."
+    },
+    {
+      "id": "Q5",
+      "scope": "COMMON",
+      "question": "리치트럭 조향 오류가 있을 때 주행도 차단될 수 있는 이유는?",
+      "choices": [
+        "항상 배터리가 방전돼서",
+        "안전 enable/interlock 논리 때문",
+        "유압유가 없어서",
+        "포크 길이 때문"
+      ],
+      "answer": 1,
+      "explain": "일부 리치트럭은 조향 기준/센서 오류 시 안전상 주행 enable을 차단한다."
+    },
+    {
+      "id": "Q6",
+      "scope": "DOOSAN_BR9_REACH",
+      "question": "BR-9 가동시간 저하 진단에서 배터리 외에 함께 보는 것은?",
+      "choices": [
+        "유압/기계 저항",
+        "번호판등",
+        "시트 쿠션",
+        "포크 색상"
+      ],
+      "answer": 0,
+      "explain": "SM1035-00은 과도한 유압압력·마스트/밸브/기계 저항에 의한 전력소모도 원인으로 본다."
+    },
+    {
+      "id": "Q7",
+      "scope": "COMMON",
+      "question": "콘택터가 딸깍 붙지만 주행이 안 될 때 다음으로 가장 필요한 확인은?",
+      "choices": [
+        "주접점 전압강하/전력 전달",
+        "경적 교환",
+        "마스트 체인 장력",
+        "타이어 공기압"
+      ],
+      "answer": 0,
+      "explain": "코일 동작과 주접점의 실제 전력 전달은 별개다."
+    },
+    {
+      "id": "Q8",
+      "scope": "DOOSAN_BR9_REACH",
+      "question": "BR-9 배터리 케이스 인출 절차를 B-7 카운터 전동에 그대로 적용해도 되는가?",
+      "choices": [
+        "된다, 둘 다 48V이므로",
+        "안 된다, 차종별 기구와 OEM 절차가 다르다",
+        "배터리 용량만 같으면 된다",
+        "커넥터만 같으면 된다"
+      ],
+      "answer": 1,
+      "explain": "전압이 같아도 잠금·인출·전원방전·취급 구조가 다르다."
+    },
+    {
+      "id": "Q9",
+      "scope": "COMMON",
+      "question": "웹 포럼 실고장 사례의 올바른 사용법은?",
+      "choices": [
+        "OEM 임계값으로 그대로 저장",
+        "원인 후보/재현 아이디어 학습 후 해당 모델 OEM으로 검증",
+        "같은 전압이면 다른 모델에도 수치 적용",
+        "부품교환 결론만 저장"
+      ],
+      "answer": 1,
+      "explain": "웹 사례는 경험 데이터이며 OEM 기준값·핀맵을 대체하지 않는다."
+    },
+    {
+      "id": "Q10",
+      "scope": "TOYOTA_8FBR",
+      "question": "현재 8FBR 자료에서 바로 활성화하면 안 되는 것은?",
+      "choices": [
+        "브로슈어의 48V 배터리 제원 학습",
+        "모델명/용량 비교",
+        "서비스 탈거 절차와 고장 임계값",
+        "리치트럭 구조 이해"
+      ],
+      "answer": 2,
+      "explain": "현재 확보 자료는 제원/브로슈어 중심이므로 서비스 절차로 승격하지 않는다."
+    },
+    {
+      "id": "Q11",
+      "scope": "DOOSAN_NS_LITHIUM",
+      "question": "리튬 NS 시리즈에서 납산 배터리 절차를 그대로 쓰면 안 되는 핵심 이유는?",
+      "choices": [
+        "타이어가 달라서",
+        "BMS/CAN/보호로직과 충전방식이 다를 수 있어서",
+        "마스트 색상이 달라서",
+        "포크 길이가 달라서"
+      ],
+      "answer": 1,
+      "explain": "리튬은 BMS, 접촉기, 통신, 온도/충전 보호가 핵심이므로 납산 절차와 분리한다."
+    },
+    {
+      "id": "Q12",
+      "scope": "COMMON",
+      "question": "간헐 고장을 재현하지 못했을 때 가장 먼저 할 일은?",
+      "choices": [
+        "컨트롤러 교환",
+        "센서 전부 교환",
+        "열·시간·진동·조향각·마스트 위치 등 발생조건 기록",
+        "퓨즈 용량 올리기"
+      ],
+      "answer": 2,
+      "explain": "간헐고장은 재현조건을 기록하고 그 조건에서 입력/전원/하네스를 추적해야 한다."
+    }
+  ],
+  "recommended_course": [
+    {
+      "stage": 1,
+      "title": "전체 구조 잡기",
+      "lesson_ids": [
+        "AZ_A",
+        "AZ_Q"
+      ]
+    },
+    {
+      "stage": 2,
+      "title": "배터리와 메인전원",
+      "lesson_ids": [
+        "AZ_B",
+        "AZ_F",
+        "AZ_P",
+        "AZ_U",
+        "AZ_W"
+      ]
+    },
+    {
+      "stage": 3,
+      "title": "안전 인터록과 Key-on",
+      "lesson_ids": [
+        "AZ_E",
+        "AZ_I",
+        "AZ_K",
+        "AZ_N",
+        "AZ_O"
+      ]
+    },
+    {
+      "stage": 4,
+      "title": "콘택터·컨트롤러·고장코드",
+      "lesson_ids": [
+        "AZ_C",
+        "AZ_D",
+        "AZ_V"
+      ]
+    },
+    {
+      "stage": 5,
+      "title": "주행모터·감속기",
+      "lesson_ids": [
+        "AZ_M",
+        "AZ_G",
+        "AZ_T"
+      ]
+    },
+    {
+      "stage": 6,
+      "title": "유압·리프트",
+      "lesson_ids": [
+        "AZ_H",
+        "AZ_J",
+        "AZ_L"
+      ]
+    },
+    {
+      "stage": 7,
+      "title": "조향·리치",
+      "lesson_ids": [
+        "AZ_S",
+        "AZ_R"
+      ]
+    },
+    {
+      "stage": 8,
+      "title": "간헐고장·가동시간·무동작",
+      "lesson_ids": [
+        "AZ_X",
+        "AZ_Y",
+        "AZ_Z"
+      ]
+    }
+  ],
+  "web_case_reviewed_utc": "2026-09-20"
+}

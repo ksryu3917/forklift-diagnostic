@@ -1,0 +1,5973 @@
+{
+  "version": "2.0-d24-field-expert",
+  "engine": "D24NAP",
+  "manual": "950106-01198",
+  "source_rule": "OEM 확인값 우선. OEM 미확인 숫자는 임의 판정 금지. command/actual·정상측 비교·격리·부하/파형시험으로 대체.",
+  "external_crosscheck": [
+    "Doosan D24NAP O&M 950106-01198 chapters 7 cooling, 8 lubrication, 9 fuel, 10 intake/exhaust, 12 electric",
+    "D20/25/30/33S(SE)-7 vehicle service manual SM1018-01 for installed vehicle context"
+  ],
+  "catalog": [
+    {
+      "id": "E_D24_CRANK_NO_START",
+      "title": "크랭킹은 하나 시동 안 됨",
+      "group": "ECU/센서",
+      "circuit": "D24_CRANK_NO_START",
+      "readiness": "OEM_PIN_EXECUTABLE"
+    },
+    {
+      "id": "E_D24_ECU_NO_COMM",
+      "title": "D24 ECU 진단기 통신 안 됨",
+      "group": "ECU/센서",
+      "circuit": "D24_ECU_HEALTH",
+      "readiness": "OEM_PIN_EXECUTABLE"
+    },
+    {
+      "id": "E_D24_5V_REF",
+      "title": "5V 기준전압 붕괴/여러 센서 동시 이상",
+      "group": "ECU/센서",
+      "circuit": "D24_VREF",
+      "readiness": "OEM_PIN_EXECUTABLE"
+    },
+    {
+      "id": "E_D24_RAIL_PRESSURE",
+      "title": "레일압력센서 값/회로 이상",
+      "group": "ECU/센서",
+      "circuit": "D24_RPS",
+      "readiness": "OEM_PIN_EXECUTABLE"
+    },
+    {
+      "id": "E_D24_BOOST_PRESSURE",
+      "title": "부스트압력센서 값/회로 이상",
+      "group": "ECU/센서",
+      "circuit": "D24_BPS",
+      "readiness": "OEM_PIN_EXECUTABLE"
+    },
+    {
+      "id": "E_D24_WATER_TEMP",
+      "title": "냉각수온센서 값 비정상",
+      "group": "ECU/센서",
+      "circuit": "D24_WTS",
+      "readiness": "OEM_PIN_EXECUTABLE"
+    },
+    {
+      "id": "E_D24_MAF",
+      "title": "MAF/흡기온도 값 비정상",
+      "group": "ECU/센서",
+      "circuit": "D24_MAF",
+      "readiness": "OEM_PIN_EXECUTABLE"
+    },
+    {
+      "id": "EN_HARD_START",
+      "title": "냉간/열간 시동이 어려움",
+      "group": "시동/연료",
+      "circuit": "D24_HARD_START",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_STALL",
+      "title": "작업/주행 중 엔진 꺼짐",
+      "group": "시동/연료",
+      "circuit": "D24_STALL",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_LOW_POWER",
+      "title": "부하에서 힘이 없음/출력저하",
+      "group": "출력/연소",
+      "circuit": "D24_LOW_POWER",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_ROUGH_IDLE",
+      "title": "아이들 불안정/부조",
+      "group": "출력/연소",
+      "circuit": "D24_ROUGH_IDLE",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_BLACK_SMOKE",
+      "title": "검은연기",
+      "group": "연기/연소",
+      "circuit": "D24_BLACK_SMOKE",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_WHITE_SMOKE",
+      "title": "흰연기",
+      "group": "연기/연소",
+      "circuit": "D24_WHITE_SMOKE",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_BLUE_SMOKE",
+      "title": "청색연기/오일소모",
+      "group": "연기/연소",
+      "circuit": "D24_BLUE_SMOKE",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_OVERHEAT",
+      "title": "엔진 과열",
+      "group": "냉각/윤활",
+      "circuit": "D24_OVERHEAT",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_LOW_OIL_PRESS",
+      "title": "엔진오일 압력 낮음/경고",
+      "group": "냉각/윤활",
+      "circuit": "D24_LOW_OIL_PRESS",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_LOW_BOOST",
+      "title": "부스트 부족/터보 힘없음",
+      "group": "흡배기/과급",
+      "circuit": "D24_LOW_BOOST",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_PREHEAT",
+      "title": "예열/에어히터 작동 안 됨",
+      "group": "시동/연료",
+      "circuit": "D24_PREHEAT",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_FUEL_PRESSURE",
+      "title": "rail 압력 부족/형성 안 됨",
+      "group": "시동/연료",
+      "circuit": "D24_FUEL_PRESS",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_CRK_CAM_SYNC",
+      "title": "CRK/CAM 동기/RPM 신호 이상",
+      "group": "ECU/센서",
+      "circuit": "D24_SYNC",
+      "readiness": "FIELD_EXECUTABLE"
+    },
+    {
+      "id": "EN_INJECTOR_SEPARATE",
+      "title": "특정 인젝터/실린더 이상 분리",
+      "group": "시동/연료",
+      "circuit": "D24_INJECTOR",
+      "readiness": "FIELD_EXECUTABLE"
+    }
+  ],
+  "circuits": {
+    "D24_CRANK_NO_START": {
+      "schematic_id": "D24NAP 950106-01198 §12",
+      "sheet": "D24 fuel §9 + electric §12",
+      "oem_pages": [],
+      "grid": "ECU/RPS/CRK/CAM/IMV/INJ",
+      "components": [
+        {
+          "name": "CRK",
+          "grid": "§12-14"
+        },
+        {
+          "name": "CAM",
+          "grid": "§12-14"
+        },
+        {
+          "name": "RPS",
+          "grid": "§12-12"
+        },
+        {
+          "name": "IMV",
+          "grid": "§12-15"
+        },
+        {
+          "name": "INJ #1~4",
+          "grid": "§12-13"
+        }
+      ],
+      "images": [],
+      "simplified_diagram": {
+        "title": "D24 크랭킹 무시동 · 필요한 제어경로",
+        "nodes": [
+          {
+            "id": "crk",
+            "label": "CRK/CAM speed-sync",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "ecu",
+            "label": "ECU",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "imv",
+            "label": "IMV / high-pressure pump",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "rail",
+            "label": "RPS / common rail",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "inj",
+            "label": "Injectors",
+            "kind": "load",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "crk",
+            "to": "ecu"
+          },
+          {
+            "from": "ecu",
+            "to": "imv"
+          },
+          {
+            "from": "imv",
+            "to": "rail"
+          },
+          {
+            "from": "rail",
+            "to": "inj"
+          },
+          {
+            "from": "ecu",
+            "to": "inj"
+          }
+        ],
+        "measure_points": [
+          "scan RPM/sync",
+          "RPS actual/commanded",
+          "IMV command",
+          "injector drive"
+        ],
+        "note": "무시동은 센서교환부터 하지 않고 ECU 생존→CRK/CAM→레일압 형성→IMV/연료공급→인젝터 구동 순으로 좁힌다."
+      },
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json"
+    },
+    "D24_ECU_HEALTH": {
+      "schematic_id": "600123-00120 + D24NAP 950106-01198",
+      "sheet": "600123-00120 2/4 + D24 §12-18~20",
+      "oem_pages": [
+        368
+      ],
+      "grid": "ECU DCM 3.7",
+      "components": [
+        {
+          "name": "ECU DCM 3.7",
+          "grid": "600123-00120 2/4 H1~H4"
+        },
+        {
+          "name": "Engine diagnosis CAN",
+          "grid": "D24 §12-19~20"
+        },
+        {
+          "name": "SENSOR 15A FUSE",
+          "grid": "D24 §12-7"
+        }
+      ],
+      "images": [
+        "oem_pages/p368.jpg"
+      ],
+      "simplified_diagram": {
+        "title": "D24 ECU 생존성 · 전원/GND/CAN/VREF만",
+        "nodes": [
+          {
+            "id": "battery",
+            "label": "B+/IGN",
+            "kind": "source",
+            "verified": true
+          },
+          {
+            "id": "fuse",
+            "label": "SENSOR 15A FUSE / ECU supply",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "ecu",
+            "label": "ECU DCM 3.7",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "can",
+            "label": "Diagnosis/CAN",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "vref",
+            "label": "5V VREF outputs",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "gnd",
+            "label": "ECU POWER GND",
+            "kind": "ground",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "battery",
+            "to": "fuse"
+          },
+          {
+            "from": "fuse",
+            "to": "ecu"
+          },
+          {
+            "from": "gnd",
+            "to": "ecu"
+          },
+          {
+            "from": "ecu",
+            "to": "can"
+          },
+          {
+            "from": "ecu",
+            "to": "vref"
+          }
+        ],
+        "measure_points": [
+          "ECU B+/IGN",
+          "ECU GND voltage-drop",
+          "SENSOR 15A FUSE",
+          "CAN response",
+          "5V VREF"
+        ],
+        "note": "진단기 무응답은 ECU교환 결론이 아니다. 전원/GND→CAN 물리선→5V 외부부하를 배제한 뒤 ECU를 판단."
+      },
+      "known_standard": "D24 §12-7 explicitly lists SENSOR 15A FUSE; §12-18~20 identifies ECU diagnosis/CAN.",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json"
+    },
+    "D24_VREF": {
+      "schematic_id": "D24NAP 950106-01198 §12",
+      "sheet": "D24 §12-6~12-15",
+      "oem_pages": [],
+      "grid": "VREF1/2/3",
+      "components": [
+        {
+          "name": "RPS 5V",
+          "grid": "ECU138 → sensor pin3"
+        },
+        {
+          "name": "BPS 5V",
+          "grid": "ECU161 → sensor pin1"
+        },
+        {
+          "name": "OPTS 5V",
+          "grid": "ECU165 → sensor pin3"
+        },
+        {
+          "name": "EGR VREF",
+          "grid": "ECU164"
+        }
+      ],
+      "images": [],
+      "simplified_diagram": {
+        "title": "D24 5V VREF · 공유분기만",
+        "nodes": [
+          {
+            "id": "ecu",
+            "label": "ECU DCM 3.7",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "rps",
+            "label": "VREF1 ECU138\nRPS pin3",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "bps",
+            "label": "VREF2 ECU161\nBPS pin1",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "opts",
+            "label": "VREF3 ECU165\nOPTS pin3",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "egr",
+            "label": "VREF3 ECU164\nEGR",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "loads",
+            "label": "5V 센서/하네스",
+            "kind": "load",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "ecu",
+            "to": "rps"
+          },
+          {
+            "from": "ecu",
+            "to": "bps"
+          },
+          {
+            "from": "ecu",
+            "to": "opts"
+          },
+          {
+            "from": "ecu",
+            "to": "egr"
+          },
+          {
+            "from": "rps",
+            "to": "loads"
+          },
+          {
+            "from": "bps",
+            "to": "loads"
+          },
+          {
+            "from": "opts",
+            "to": "loads"
+          },
+          {
+            "from": "egr",
+            "to": "loads"
+          }
+        ],
+        "measure_points": [
+          "ECU138",
+          "ECU161",
+          "ECU165",
+          "ECU164",
+          "센서 분리 전/후 5V"
+        ],
+        "note": "공통 5V 고장은 센서를 하나씩 분리해 외부 단락과 ECU 내부 VREF를 분리한다. OEM이 5V라고 명시한 branch만 표시."
+      },
+      "known_standard": "RPS ECU138=5V, BPS ECU161=5V, OPTS ECU165=5V, EGR ECU164=VREF3 according to D24 §12.",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json"
+    },
+    "D24_RPS": {
+      "schematic_id": "D24NAP 950106-01198 §12",
+      "sheet": "D24 §12-12",
+      "oem_pages": [],
+      "grid": "RPS",
+      "components": [
+        {
+          "name": "RPS pin1 → ECU135",
+          "role": "pressure signal"
+        },
+        {
+          "name": "RPS pin2 → ECU119",
+          "role": "ground"
+        },
+        {
+          "name": "RPS pin3 → ECU138",
+          "role": "5V"
+        }
+      ],
+      "images": [],
+      "simplified_diagram": {
+        "title": "D24 RPS · 3선만",
+        "nodes": [
+          {
+            "id": "vref",
+            "label": "ECU138 → RPS pin3\n5V",
+            "kind": "source",
+            "verified": true
+          },
+          {
+            "id": "sensor",
+            "label": "RAIL PRESSURE SENSOR",
+            "kind": "sensor",
+            "verified": true
+          },
+          {
+            "id": "sig",
+            "label": "RPS pin1 → ECU135\npressure signal",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "gnd",
+            "label": "RPS pin2 → ECU119\nGND",
+            "kind": "ground",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "vref",
+            "to": "sensor"
+          },
+          {
+            "from": "sensor",
+            "to": "sig"
+          },
+          {
+            "from": "sensor",
+            "to": "gnd"
+          }
+        ],
+        "measure_points": [
+          "ECU138/RPS3 5V",
+          "ECU119/RPS2 GND",
+          "RPS1/ECU135 signal"
+        ],
+        "note": "D24NAP OEM §12의 센서 핀/ECU pin을 재작성. 전체 원본페이지 대신 해당 3~4선만 표시."
+      },
+      "known_standard": "Supply voltage explicitly 5V at RPS sensor pin3 / ECU138.",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json"
+    },
+    "D24_BPS": {
+      "schematic_id": "D24NAP 950106-01198 §12",
+      "sheet": "D24 §12-11",
+      "oem_pages": [],
+      "grid": "BPS",
+      "components": [
+        {
+          "name": "BPS pin1 → ECU161",
+          "role": "5V"
+        },
+        {
+          "name": "BPS pin2 → ECU167",
+          "role": "ground"
+        },
+        {
+          "name": "BPS pin3 → ECU112",
+          "role": "pressure signal"
+        }
+      ],
+      "images": [],
+      "simplified_diagram": {
+        "title": "D24 BPS · 3선만",
+        "nodes": [
+          {
+            "id": "vref",
+            "label": "ECU161 → BPS pin1\n5V",
+            "kind": "source",
+            "verified": true
+          },
+          {
+            "id": "sensor",
+            "label": "BOOST PRESSURE SENSOR",
+            "kind": "sensor",
+            "verified": true
+          },
+          {
+            "id": "sig",
+            "label": "BPS pin3 → ECU112\npressure signal",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "gnd",
+            "label": "BPS pin2 → ECU167\nGND",
+            "kind": "ground",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "vref",
+            "to": "sensor"
+          },
+          {
+            "from": "sensor",
+            "to": "sig"
+          },
+          {
+            "from": "sensor",
+            "to": "gnd"
+          }
+        ],
+        "measure_points": [
+          "ECU161/BPS1 5V",
+          "ECU167/BPS2 GND",
+          "BPS3/ECU112 signal"
+        ],
+        "note": "D24NAP OEM §12의 센서 핀/ECU pin을 재작성. 전체 원본페이지 대신 해당 3~4선만 표시."
+      },
+      "known_standard": "Supply voltage explicitly 5V at BPS sensor pin1 / ECU161.",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json"
+    },
+    "D24_WTS": {
+      "schematic_id": "D24NAP 950106-01198 §12",
+      "sheet": "D24 §12-12",
+      "oem_pages": [],
+      "grid": "WTS",
+      "components": [
+        {
+          "name": "WTS pin1 → ECU145",
+          "role": "ground"
+        },
+        {
+          "name": "WTS pin2 → ECU109",
+          "role": "temperature signal"
+        }
+      ],
+      "images": [],
+      "simplified_diagram": {
+        "title": "D24 WTS · 2선만",
+        "nodes": [
+          {
+            "id": "sensor",
+            "label": "WATER TEMP SENSOR",
+            "kind": "sensor",
+            "verified": true
+          },
+          {
+            "id": "sig",
+            "label": "WTS pin2 → ECU109\ntemp signal",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "gnd",
+            "label": "WTS pin1 → ECU145\nGND",
+            "kind": "ground",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "sensor",
+            "to": "sig"
+          },
+          {
+            "from": "sensor",
+            "to": "gnd"
+          }
+        ],
+        "measure_points": [
+          "WTS2/ECU109 signal",
+          "WTS1/ECU145 GND"
+        ],
+        "note": "D24NAP OEM §12의 센서 핀/ECU pin을 재작성. 전체 원본페이지 대신 해당 3~4선만 표시."
+      },
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json"
+    },
+    "D24_MAF": {
+      "schematic_id": "D24NAP 950106-01198 §12",
+      "sheet": "D24 §12-11",
+      "oem_pages": [],
+      "grid": "MAF",
+      "components": [
+        {
+          "name": "MAF pin1 → ECU228",
+          "role": "air flow frequency"
+        },
+        {
+          "name": "MAF pin2 → ECU235",
+          "role": "intake temp"
+        },
+        {
+          "name": "MAF pin3 → ECU120",
+          "role": "ground"
+        },
+        {
+          "name": "MAF pin4 → ECU137",
+          "role": "12V supply"
+        }
+      ],
+      "images": [],
+      "simplified_diagram": {
+        "title": "D24 MAF · 4선만",
+        "nodes": [
+          {
+            "id": "supply",
+            "label": "ECU137 → MAF4\n12V",
+            "kind": "source",
+            "verified": true
+          },
+          {
+            "id": "sensor",
+            "label": "MAF",
+            "kind": "sensor",
+            "verified": true
+          },
+          {
+            "id": "flow",
+            "label": "MAF1 → ECU228\nflow frequency",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "temp",
+            "label": "MAF2 → ECU235\nintake temp",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "gnd",
+            "label": "MAF3 → ECU120\nGND",
+            "kind": "ground",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "supply",
+            "to": "sensor"
+          },
+          {
+            "from": "sensor",
+            "to": "flow"
+          },
+          {
+            "from": "sensor",
+            "to": "temp"
+          },
+          {
+            "from": "sensor",
+            "to": "gnd"
+          }
+        ],
+        "measure_points": [
+          "MAF4/ECU137 12V",
+          "MAF3/ECU120 GND",
+          "MAF1/ECU228 flow",
+          "MAF2/ECU235 temp"
+        ],
+        "note": "D24NAP OEM §12의 센서 핀/ECU pin을 재작성. 전체 원본페이지 대신 해당 3~4선만 표시."
+      },
+      "known_standard": "MAF supply explicitly 12V on sensor pin4 / ECU137.",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json"
+    },
+    "D24_HARD_START": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §2 winter/cold start, §9 fuel, §12 electrical",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "D24 냉간/열간 시동불량 · 필요한 계통만",
+        "nodes": [
+          {
+            "id": "batt",
+            "label": "Cranking speed / ECU alive",
+            "kind": "source",
+            "verified": true
+          },
+          {
+            "id": "pre",
+            "label": "Air heater / preheat",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "sync",
+            "label": "CRK/CAM sync",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "rail",
+            "label": "RPS actual vs command",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "fuel",
+            "label": "Low fuel → IMV → HP pump",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "inj",
+            "label": "Injector drive / return",
+            "kind": "load",
+            "verified": true
+          },
+          {
+            "id": "comp",
+            "label": "Compression / mechanical",
+            "kind": "load",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "batt",
+            "to": "pre"
+          },
+          {
+            "from": "batt",
+            "to": "sync"
+          },
+          {
+            "from": "sync",
+            "to": "rail"
+          },
+          {
+            "from": "rail",
+            "to": "fuel"
+          },
+          {
+            "from": "fuel",
+            "to": "inj"
+          },
+          {
+            "from": "inj",
+            "to": "comp"
+          }
+        ],
+        "measure_points": [
+          "크랭킹 중 ECU 통신/RPM",
+          "예열 명령·출력",
+          "CRK/CAM sync",
+          "rail actual/command",
+          "IMV command",
+          "injector drive/return"
+        ],
+        "note": "냉간/열간을 분리하고 전기 생존→동기→레일압→분사→압축 순으로 좁힌다."
+      },
+      "unverified": [
+        "OEM이 명시하지 않은 시동허용 rail pressure 임계값은 임의 생성하지 않음"
+      ]
+    },
+    "D24_STALL": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §9 fuel + §12 electric",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "D24 작업/주행 중 꺼짐 · 생존신호 추적",
+        "nodes": [
+          {
+            "id": "ecu",
+            "label": "ECU B+/IGN/GND/CAN",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "vref",
+            "label": "5V VREF",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "sync",
+            "label": "CRK/CAM",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "rail",
+            "label": "RPS actual/command",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "imv",
+            "label": "IMV / fuel supply",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "inj",
+            "label": "Injector drive",
+            "kind": "load",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "ecu",
+            "to": "vref"
+          },
+          {
+            "from": "ecu",
+            "to": "sync"
+          },
+          {
+            "from": "sync",
+            "to": "rail"
+          },
+          {
+            "from": "rail",
+            "to": "imv"
+          },
+          {
+            "from": "imv",
+            "to": "inj"
+          }
+        ],
+        "measure_points": [
+          "stall 직전/직후 ECU comm",
+          "5V VREF",
+          "RPM/sync",
+          "rail actual/command",
+          "IMV",
+          "injector drive"
+        ],
+        "note": "꺼지는 순간 사라지는 신호를 잡아 전기/연료/기계를 분리한다."
+      }
+    },
+    "D24_LOW_POWER": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §9 fuel + §10 intake/exhaust",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "D24 부하 힘없음 · 공기/부스트/연료/배기",
+        "nodes": [
+          {
+            "id": "air",
+            "label": "Air filter / MAF",
+            "kind": "source",
+            "verified": true
+          },
+          {
+            "id": "boost",
+            "label": "BPS / hoses / intercooler",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "turbo",
+            "label": "Turbo / actuator",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "egr",
+            "label": "EGR",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "fuel",
+            "label": "Rail actual / IMV",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "inj",
+            "label": "Injector balance",
+            "kind": "load",
+            "verified": true
+          },
+          {
+            "id": "exh",
+            "label": "Exhaust restriction",
+            "kind": "load",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "air",
+            "to": "boost"
+          },
+          {
+            "from": "boost",
+            "to": "turbo"
+          },
+          {
+            "from": "turbo",
+            "to": "egr"
+          },
+          {
+            "from": "egr",
+            "to": "fuel"
+          },
+          {
+            "from": "fuel",
+            "to": "inj"
+          },
+          {
+            "from": "inj",
+            "to": "exh"
+          }
+        ],
+        "measure_points": [
+          "MAF",
+          "BPS command/actual trend",
+          "charge hose leak",
+          "rail actual/command",
+          "injector balance",
+          "exhaust restriction"
+        ],
+        "note": "부하에서 공기량·부스트·연료압이 무엇부터 부족해지는지 비교한다."
+      }
+    },
+    "D24_ROUGH_IDLE": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §9 fuel + §10 intake/exhaust + §11 mechanical",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "D24 아이들 부조 · 실린더/rail/공기 분리",
+        "nodes": [
+          {
+            "id": "ecu",
+            "label": "ECU / DTC",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "rail",
+            "label": "Rail actual/command",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "inj",
+            "label": "Cylinder contribution",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "return",
+            "label": "Injector return",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "air",
+            "label": "MAF/EGR",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "mech",
+            "label": "Compression / mount",
+            "kind": "load",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "ecu",
+            "to": "rail"
+          },
+          {
+            "from": "rail",
+            "to": "inj"
+          },
+          {
+            "from": "inj",
+            "to": "return"
+          },
+          {
+            "from": "return",
+            "to": "air"
+          },
+          {
+            "from": "air",
+            "to": "mech"
+          }
+        ],
+        "measure_points": [
+          "rail actual/command",
+          "injector correction/cut-out",
+          "return comparison",
+          "MAF/EGR",
+          "compression comparison"
+        ],
+        "note": "공통 rail 불안정과 한 실린더 문제를 먼저 분리한다."
+      }
+    },
+    "D24_BLACK_SMOKE": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §2 operation + §9 fuel + §10 intake/exhaust + §11 mechanical",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "검은연기 · 원인 분리",
+        "nodes": [
+          {
+            "id": "obs",
+            "label": "Smoke condition",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "air",
+            "label": "Air / boost",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "fuel",
+            "label": "Rail / injector",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "temp",
+            "label": "Temperature / preheat",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "oil",
+            "label": "Oil / turbo / breather",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "mech",
+            "label": "Compression / timing",
+            "kind": "measure",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "obs",
+            "to": "air"
+          },
+          {
+            "from": "obs",
+            "to": "fuel"
+          },
+          {
+            "from": "obs",
+            "to": "temp"
+          },
+          {
+            "from": "obs",
+            "to": "oil"
+          },
+          {
+            "from": "obs",
+            "to": "mech"
+          }
+        ],
+        "measure_points": [
+          "냉간/열간/부하/감속 조건",
+          "MAF/BPS",
+          "rail actual/command",
+          "injector balance/return",
+          "oil consumption/turbo",
+          "compression"
+        ],
+        "note": "연기색만으로 부품을 확정하지 않고 조건과 공기·연료·오일·압축을 교차한다."
+      }
+    },
+    "D24_WHITE_SMOKE": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §2 operation + §9 fuel + §10 intake/exhaust + §11 mechanical",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "흰연기 · 원인 분리",
+        "nodes": [
+          {
+            "id": "obs",
+            "label": "Smoke condition",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "air",
+            "label": "Air / boost",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "fuel",
+            "label": "Rail / injector",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "temp",
+            "label": "Temperature / preheat",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "oil",
+            "label": "Oil / turbo / breather",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "mech",
+            "label": "Compression / timing",
+            "kind": "measure",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "obs",
+            "to": "air"
+          },
+          {
+            "from": "obs",
+            "to": "fuel"
+          },
+          {
+            "from": "obs",
+            "to": "temp"
+          },
+          {
+            "from": "obs",
+            "to": "oil"
+          },
+          {
+            "from": "obs",
+            "to": "mech"
+          }
+        ],
+        "measure_points": [
+          "냉간/열간/부하/감속 조건",
+          "MAF/BPS",
+          "rail actual/command",
+          "injector balance/return",
+          "oil consumption/turbo",
+          "compression"
+        ],
+        "note": "연기색만으로 부품을 확정하지 않고 조건과 공기·연료·오일·압축을 교차한다."
+      }
+    },
+    "D24_BLUE_SMOKE": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §2 operation + §9 fuel + §10 intake/exhaust + §11 mechanical",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "청색연기/오일소모 · 원인 분리",
+        "nodes": [
+          {
+            "id": "obs",
+            "label": "Smoke condition",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "air",
+            "label": "Air / boost",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "fuel",
+            "label": "Rail / injector",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "temp",
+            "label": "Temperature / preheat",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "oil",
+            "label": "Oil / turbo / breather",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "mech",
+            "label": "Compression / timing",
+            "kind": "measure",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "obs",
+            "to": "air"
+          },
+          {
+            "from": "obs",
+            "to": "fuel"
+          },
+          {
+            "from": "obs",
+            "to": "temp"
+          },
+          {
+            "from": "obs",
+            "to": "oil"
+          },
+          {
+            "from": "obs",
+            "to": "mech"
+          }
+        ],
+        "measure_points": [
+          "냉간/열간/부하/감속 조건",
+          "MAF/BPS",
+          "rail actual/command",
+          "injector balance/return",
+          "oil consumption/turbo",
+          "compression"
+        ],
+        "note": "연기색만으로 부품을 확정하지 않고 조건과 공기·연료·오일·압축을 교차한다."
+      }
+    },
+    "D24_OVERHEAT": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §7 cooling + §12 WTS",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "D24 과열 · 센서오류 vs 실제 열원",
+        "nodes": [
+          {
+            "id": "wts",
+            "label": "WTS / actual temp",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "cool",
+            "label": "Coolant level / cap",
+            "kind": "source",
+            "verified": true
+          },
+          {
+            "id": "air",
+            "label": "Radiator airflow / fan-belt",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "pump",
+            "label": "Water pump / circulation",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "therm",
+            "label": "Thermostat",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "load",
+            "label": "Combustion / head leak",
+            "kind": "load",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "wts",
+            "to": "cool"
+          },
+          {
+            "from": "cool",
+            "to": "air"
+          },
+          {
+            "from": "air",
+            "to": "pump"
+          },
+          {
+            "from": "pump",
+            "to": "therm"
+          },
+          {
+            "from": "therm",
+            "to": "load"
+          }
+        ],
+        "measure_points": [
+          "WTS live vs contact thermometer",
+          "coolant level/cap",
+          "radiator inlet/outlet pattern",
+          "belt/pump flow",
+          "thermostat opening behavior",
+          "combustion gas/internal leak"
+        ],
+        "note": "실제 과열인지 센서표시인지 먼저 분리한 뒤 순환/방열/열발생으로 좁힌다."
+      }
+    },
+    "D24_LOW_OIL_PRESS": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §8 lubrication + §12 OPTS",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "D24 저오일압 · 센서/실압/공급/누설",
+        "nodes": [
+          {
+            "id": "opts",
+            "label": "OPTS pressure signal",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "gauge",
+            "label": "Mechanical oil gauge",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "level",
+            "label": "Oil level/viscosity/filter",
+            "kind": "source",
+            "verified": true
+          },
+          {
+            "id": "pump",
+            "label": "Oil pump/relief",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "leak",
+            "label": "Turbo/gallery/internal leak",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "bearing",
+            "label": "Bearing clearance",
+            "kind": "load",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "opts",
+            "to": "gauge"
+          },
+          {
+            "from": "gauge",
+            "to": "level"
+          },
+          {
+            "from": "level",
+            "to": "pump"
+          },
+          {
+            "from": "pump",
+            "to": "leak"
+          },
+          {
+            "from": "leak",
+            "to": "bearing"
+          }
+        ],
+        "measure_points": [
+          "OPTS 5V/GND/signal",
+          "mechanical oil pressure port",
+          "oil/filter",
+          "pump/relief",
+          "external/internal leak"
+        ],
+        "note": "센서 표시와 실제 압력을 기계 게이지로 먼저 분리한다."
+      },
+      "unverified": [
+        "정확한 압력 포트/규격은 해당 엔진 사양 OEM 절차에 맞춰 연결"
+      ]
+    },
+    "D24_LOW_BOOST": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §10 intake/exhaust + §12 BPS/MAF",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "D24 부스트 부족 · 센서/누설/터보/EGR/배기",
+        "nodes": [
+          {
+            "id": "bps",
+            "label": "BPS 5V/GND/signal",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "air",
+            "label": "Air filter / MAF",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "hose",
+            "label": "Charge hose/intercooler",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "turbo",
+            "label": "Turbo wheel/shaft/actuator",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "egr",
+            "label": "EGR",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "exh",
+            "label": "Exhaust leak/restriction",
+            "kind": "measure",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "bps",
+            "to": "air"
+          },
+          {
+            "from": "air",
+            "to": "hose"
+          },
+          {
+            "from": "hose",
+            "to": "turbo"
+          },
+          {
+            "from": "turbo",
+            "to": "egr"
+          },
+          {
+            "from": "egr",
+            "to": "exh"
+          }
+        ],
+        "measure_points": [
+          "BPS circuit",
+          "MAF",
+          "charge leak test",
+          "turbo shaft/actuator",
+          "EGR command/actual",
+          "exhaust leak/restriction"
+        ],
+        "note": "센서가 틀린지 실제 부스트가 부족한지를 먼저 분리한다."
+      }
+    },
+    "D24_PREHEAT": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §12-8 Air Heater",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "D24 예열/에어히터 · 명령→릴레이→부하",
+        "nodes": [
+          {
+            "id": "ecu",
+            "label": "ECU preheat request",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "fuse",
+            "label": "Heater supply/fuse",
+            "kind": "source",
+            "verified": true
+          },
+          {
+            "id": "relay",
+            "label": "Air heater relay",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "heater",
+            "label": "Air heater",
+            "kind": "load",
+            "verified": true
+          },
+          {
+            "id": "gnd",
+            "label": "Engine GND",
+            "kind": "ground",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "ecu",
+            "to": "relay"
+          },
+          {
+            "from": "fuse",
+            "to": "relay"
+          },
+          {
+            "from": "relay",
+            "to": "heater"
+          },
+          {
+            "from": "heater",
+            "to": "gnd"
+          }
+        ],
+        "measure_points": [
+          "ECU request/indicator",
+          "relay coil command",
+          "relay input/output loaded voltage",
+          "heater current",
+          "heater GND"
+        ],
+        "note": "표시등이 아니라 히터 실제 부하전류를 본다."
+      },
+      "unverified": [
+        "차량 사양별 에어히터 퓨즈/릴레이 cavity는 차량 회로와 매칭 필요"
+      ]
+    },
+    "D24_FUEL_PRESS": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §9 fuel + §12 RPS/IMV",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "D24 rail 압력 부족 · 저압→IMV→HP→return",
+        "nodes": [
+          {
+            "id": "tank",
+            "label": "Tank / filter / air",
+            "kind": "source",
+            "verified": true
+          },
+          {
+            "id": "imv",
+            "label": "IMV ECU177 PWM",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "pump",
+            "label": "High pressure pump",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "rail",
+            "label": "Common rail / RPS",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "return",
+            "label": "Injector return/leak",
+            "kind": "load",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "tank",
+            "to": "imv"
+          },
+          {
+            "from": "imv",
+            "to": "pump"
+          },
+          {
+            "from": "pump",
+            "to": "rail"
+          },
+          {
+            "from": "rail",
+            "to": "return"
+          }
+        ],
+        "measure_points": [
+          "fuel inlet condition/air",
+          "IMV command",
+          "RPS actual/command",
+          "injector return comparison"
+        ],
+        "note": "고압펌프를 마지막에 판단한다."
+      },
+      "unverified": [
+        "D24 OEM에 확인되지 않은 크랭킹 rail MPa/리턴량 숫자는 임의 생성 금지"
+      ]
+    },
+    "D24_SYNC": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §12-3/#2/#3 + §12-14",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "D24 CRK/CAM · 전원/파형/동기/기계타이밍",
+        "nodes": [
+          {
+            "id": "ecu",
+            "label": "ECU supply",
+            "kind": "source",
+            "verified": true
+          },
+          {
+            "id": "crk",
+            "label": "CRK pair ECU136/160 + shield187",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "cam",
+            "label": "CAM signal/GND",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "scope",
+            "label": "Scope phase/sync",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "mech",
+            "label": "Trigger wheel / timing",
+            "kind": "load",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "ecu",
+            "to": "crk"
+          },
+          {
+            "from": "ecu",
+            "to": "cam"
+          },
+          {
+            "from": "crk",
+            "to": "scope"
+          },
+          {
+            "from": "cam",
+            "to": "scope"
+          },
+          {
+            "from": "scope",
+            "to": "mech"
+          }
+        ],
+        "measure_points": [
+          "CRK waveform",
+          "CAM waveform",
+          "ECU RPM/sync",
+          "shield/ground",
+          "mechanical timing"
+        ],
+        "note": "센서교환 전 파형이 센서쪽에서 깨지는지 ECU쪽에서 깨지는지 비교한다."
+      },
+      "unverified": [
+        "CAM connector-face numeric orientation is kept non-graphical until OEM face orientation is rechecked"
+      ]
+    },
+    "D24_INJECTOR": {
+      "schematic_id": "D24NAP 950106-01198",
+      "sheet": "D24 §9 injector + §12-13",
+      "grid": "field-redrawn",
+      "oem_pages": [],
+      "images": [],
+      "components": [],
+      "simplified_diagram": {
+        "title": "D24 인젝터 · 전기구동/리턴/압축 분리",
+        "nodes": [
+          {
+            "id": "ecu",
+            "label": "ECU injector drive",
+            "kind": "control",
+            "verified": true
+          },
+          {
+            "id": "inj",
+            "label": "INJ #1~4 connector",
+            "kind": "load",
+            "verified": true
+          },
+          {
+            "id": "current",
+            "label": "Current waveform",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "return",
+            "label": "Return/leak comparison",
+            "kind": "measure",
+            "verified": true
+          },
+          {
+            "id": "comp",
+            "label": "Compression / cylinder mech",
+            "kind": "load",
+            "verified": true
+          }
+        ],
+        "edges": [
+          {
+            "from": "ecu",
+            "to": "inj"
+          },
+          {
+            "from": "inj",
+            "to": "current"
+          },
+          {
+            "from": "inj",
+            "to": "return"
+          },
+          {
+            "from": "return",
+            "to": "comp"
+          }
+        ],
+        "measure_points": [
+          "INJ1 ECU126/127",
+          "INJ2 174/150",
+          "INJ3 175/151",
+          "INJ4 125/103",
+          "current waveform",
+          "return compare",
+          "compression"
+        ],
+        "note": "인젝터 교환 전 전기구동·리턴·실린더기계를 분리한다."
+      }
+    }
+  },
+  "graphs": {
+    "E_D24_CRANK_NO_START": {
+      "title": "D24 크랭킹 무시동 · ECU/동기/레일압/분사 분리",
+      "circuit": "D24_CRANK_NO_START",
+      "start": "comm",
+      "nodes": {
+        "comm": {
+          "type": "question",
+          "title": "1. ECU 생존/통신",
+          "question": "크랭킹 중 D24 ECU 진단통신과 live data가 유지됩니까?",
+          "field_method": [
+            "통신 자체가 끊기면 연료부품보다 ECU 전원/GND/CAN부터 본다."
+          ],
+          "choices": [
+            {
+              "label": "통신 정상",
+              "next": "rpm"
+            },
+            {
+              "label": "통신 불가/크랭킹 중 끊김",
+              "next": "comm_bad"
+            }
+          ]
+        },
+        "comm_bad": {
+          "type": "result",
+          "title": "ECU 생존성 문제 우선",
+          "result": "무시동보다 먼저 ECU가 크랭킹 중 살아있는지 해결해야 합니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "E_D24_ECU_NO_COMM 그래프로 이동해 B+/IGN/GND/CAN/5V를 분리한다."
+          ],
+          "rule_out": [
+            "인젝터/고압펌프 단독고장"
+          ],
+          "confirm_if": [
+            "ECU 통신이 크랭킹 중 안정화"
+          ],
+          "disassembly_gate": "ECU 생존성 복구 후 무시동 진단을 재개한다."
+        },
+        "rpm": {
+          "type": "question",
+          "title": "2. 크랭크/캠 동기",
+          "question": "크랭킹 중 진단기에 엔진 RPM이 들어오고 CRK/CAM 동기 관련 이상이 없습니까?",
+          "field_method": [
+            "CRK는 ECU159 signal/147 GND, crank pair 136/160 및 shield 187 관련 OEM표를 참고한다.",
+            "캠 관련 ECU pin은 OEM §12 회로표와 센서표를 사용한다."
+          ],
+          "choices": [
+            {
+              "label": "RPM/동기 이상",
+              "next": "speed_bad"
+            },
+            {
+              "label": "RPM/동기 정상",
+              "next": "rail"
+            }
+          ]
+        },
+        "speed_bad": {
+          "type": "result",
+          "title": "CRK/CAM 신호계통 우선",
+          "result": "ECU가 엔진 회전을 제대로 인식하지 못합니다.",
+          "field_tools": [
+            "진단기",
+            "오실로스코프",
+            "DMM"
+          ],
+          "field_test": [
+            "센서 전원/GND/신호를 오실로스코프로 비교하고 센서 갭/기계 타이밍을 확인한다.",
+            "하네스 shield/커넥터를 함께 본다."
+          ],
+          "rule_out": [
+            "레일압 센서",
+            "인젝터"
+          ],
+          "confirm_if": [
+            "정상 CRK/CAM 신호와 진단 RPM/동기 회복"
+          ],
+          "disassembly_gate": "동기 신호 원인을 해결 후 재시동한다."
+        },
+        "rail": {
+          "type": "question",
+          "title": "3. 레일압 형성",
+          "question": "크랭킹 중 실제 레일압이 명령을 따라 상승합니까?",
+          "field_method": [
+            "RPS pin1/ECU135 signal, pin2/ECU119 GND, pin3/ECU138 5V를 먼저 검증한다.",
+            "D24 OEM에 없는 시동허용 MPa 숫자를 임의 생성하지 않고 진단기 command/actual과 정상차·OEM 고장코드를 비교한다."
+          ],
+          "choices": [
+            {
+              "label": "실제압 형성 실패/명령과 크게 불일치",
+              "next": "fuel_control"
+            },
+            {
+              "label": "레일압 형성/센서 정상",
+              "next": "inject"
+            }
+          ]
+        },
+        "fuel_control": {
+          "type": "question",
+          "title": "4. 고압연료 제어 분리",
+          "question": "저압 연료공급이 정상이고 IMV ECU177 PWM 명령/배선도 정상입니까?",
+          "field_method": [
+            "IMV는 고압펌프 유입량을 제어한다.",
+            "연료필터/공기혼입/저압공급을 먼저 배제하고 IMV 명령→실제 레일압 반응을 본다."
+          ],
+          "choices": [
+            {
+              "label": "저압공급/IMV 회로 이상",
+              "next": "fuel_bad"
+            },
+            {
+              "label": "공급/IMV 정상인데 압력 형성 실패",
+              "next": "hp_bad"
+            }
+          ]
+        },
+        "fuel_bad": {
+          "type": "result",
+          "title": "저압공급/IMV 제어 문제",
+          "result": "고압펌프 자체를 분해하기 전에 공급 또는 IMV 제어에서 이상이 확인됩니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "확인된 저압공급·공기혼입·IMV PWM/하네스를 복구하고 rail actual을 재시험한다."
+          ],
+          "rule_out": [
+            "인젝터 전기구동"
+          ],
+          "confirm_if": [
+            "수리 후 rail actual이 command를 따라 회복"
+          ],
+          "disassembly_gate": "확인된 공급/IMV 부분만 먼저 수리한다."
+        },
+        "hp_bad": {
+          "type": "result",
+          "title": "고압계통 기계/누설 추가검사",
+          "result": "RPS와 IMV 명령/저압공급이 정상인데 레일압이 형성되지 않습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "고압펌프, rail pressure leakage, injector return/내부누설을 OEM 연료계통 절차로 분리한다.",
+            "고압연료 안전절차를 준수한다."
+          ],
+          "rule_out": [
+            "RPS 전기회로",
+            "IMV 전기명령"
+          ],
+          "confirm_if": [
+            "기계적 누설/고압펌프 원인이 별도 시험에서 특정됨"
+          ],
+          "disassembly_gate": "고압계통 원인 특정 후에만 분해한다."
+        },
+        "inject": {
+          "type": "question",
+          "title": "5. 분사구동",
+          "question": "레일압/동기 정상인데 ECU가 인젝터를 구동하고 있습니까?",
+          "field_method": [
+            "OEM injector pair: #1 ECU126/127, #2 174/150, #3 175/151, #4 125/103.",
+            "전류파형/진단기 cylinder test가 가능하면 구동을 확인하고 무작정 시험등을 연결하지 않는다."
+          ],
+          "choices": [
+            {
+              "label": "인젝터 구동 없음",
+              "next": "inj_control"
+            },
+            {
+              "label": "구동 있음·여전히 무시동",
+              "next": "mechanical"
+            }
+          ],
+          "tools": [
+            "진단기",
+            "전류클램프/오실로스코프(권장)",
+            "OEM 회로"
+          ]
+        },
+        "inj_control": {
+          "type": "result",
+          "title": "ECU 분사허가/인젝터 구동회로 문제",
+          "result": "동기와 레일압은 정상이나 분사구동이 없습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "DTC/인터록/ECU 출력과 인젝터 하네스를 확인한다.",
+            "모든 인젝터 공통이면 ECU 공급/허가, 한 실린더면 해당 pair를 우선한다."
+          ],
+          "rule_out": [
+            "RPS",
+            "고압펌프 기계"
+          ],
+          "confirm_if": [
+            "구동안됨 원인이 ECU허가/하네스/출력으로 특정"
+          ],
+          "disassembly_gate": "고압펌프를 분해하지 말고 전기구동 원인을 먼저 수리한다."
+        },
+        "mechanical": {
+          "type": "result",
+          "title": "연료분사 이후 기계/연소 조건으로 이동",
+          "result": "ECU 생존, 동기, 레일압, 인젝터 구동까지 확인됐습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "압축, EGR stuck-open/흡기막힘, 분사품질/인젝터 리턴, 기계타이밍을 확인한다."
+          ],
+          "rule_out": [
+            "ECU 통신",
+            "CRK/CAM 전기",
+            "RPS 기본회로"
+          ],
+          "confirm_if": [
+            "기계/연소 원인이 별도 시험에서 특정됨"
+          ],
+          "disassembly_gate": "기계원인 특정 후 해당 계통을 분해한다."
+        }
+      },
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "sensor_ids": [
+        "CRK",
+        "CAM",
+        "RPS",
+        "IMV",
+        "INJ1",
+        "INJ2",
+        "INJ3",
+        "INJ4"
+      ]
+    },
+    "E_D24_ECU_NO_COMM": {
+      "title": "D24 ECU 무통신 · 전원/GND/CAN/5V 분리",
+      "circuit": "D24_ECU_HEALTH",
+      "start": "other",
+      "nodes": {
+        "other": {
+          "type": "question",
+          "title": "1. 다른 모듈 통신 비교",
+          "question": "차량의 다른 CAN 모듈은 진단기에 정상 응답합니까?",
+          "field_method": [
+            "다른 모듈이 응답하면 진단커넥터/진단기 전체고장 가능성을 크게 낮춘다."
+          ],
+          "choices": [
+            {
+              "label": "다른 모듈 정상·D24 ECU만 무응답",
+              "next": "power"
+            },
+            {
+              "label": "여러 모듈 모두 무응답",
+              "next": "global"
+            }
+          ]
+        },
+        "global": {
+          "type": "result",
+          "title": "공통 진단/CAN 회로 우선",
+          "result": "여러 모듈이 모두 무응답이면 D24 ECU 단독고장으로 볼 수 없습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "진단커넥터 전원/GND와 공통 CAN 회로를 먼저 확인한다."
+          ],
+          "rule_out": [
+            "D24 ECU 단독고장"
+          ],
+          "confirm_if": [
+            "공통회로 복구 후 여러 모듈 동시 통신회복"
+          ],
+          "disassembly_gate": "공통 통신회로부터 수리한다."
+        },
+        "power": {
+          "type": "question",
+          "title": "2. D24 ECU 전원/GND",
+          "question": "ECU B+/IGN과 POWER GND가 부하상태에서 안정적입니까?",
+          "field_method": [
+            "무부하 12V만 보지 말고 KEY ON/크랭킹 중 MIN/MAX와 GND 전압강하를 본다.",
+            "D24 §12-7 SENSOR 15A FUSE 공급도 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "전원/GND 이상",
+              "next": "power_bad"
+            },
+            {
+              "label": "정상",
+              "next": "local_can"
+            }
+          ]
+        },
+        "power_bad": {
+          "type": "result",
+          "title": "D24 ECU 전원/GND 공급불량",
+          "result": "ECU가 통신할 생존전원이 확보되지 않았습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "SENSOR 15A FUSE/ECU 공급/접지를 전단후단으로 추적한다."
+          ],
+          "rule_out": [
+            "ECU CAN 트랜시버"
+          ],
+          "confirm_if": [
+            "공급복구 후 ECU 통신과 5V VREF 동시 회복"
+          ],
+          "disassembly_gate": "전원/GND 고장구간을 수리한다."
+        },
+        "local_can": {
+          "type": "question",
+          "title": "3. ECU 커넥터 CAN",
+          "question": "D24 ECU 로컬 CAN선에 정상 통신활동이 도달합니까?",
+          "field_method": [
+            "오실로스코프로 정상 통신노드와 비교하는 것이 가장 좋다.",
+            "모델 종단구성 확인 전 60Ω을 하드코딩하지 않는다."
+          ],
+          "choices": [
+            {
+              "label": "ECU 입구에서 CAN 끊김",
+              "next": "can_harness"
+            },
+            {
+              "label": "CAN 도달·ECU만 무응답",
+              "next": "vref"
+            }
+          ],
+          "tools": [
+            "오실로스코프",
+            "DMM",
+            "백프로브"
+          ]
+        },
+        "can_harness": {
+          "type": "result",
+          "title": "D24 ECU 로컬 CAN 분기불량",
+          "result": "공통 네트워크는 살아있지만 ECU 입구까지 CAN이 도달하지 않습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "분기 커넥터/핀장력/단선·단락을 구간별 비교한다."
+          ],
+          "rule_out": [
+            "ECU 내부"
+          ],
+          "confirm_if": [
+            "로컬 분기 수리 후 통신 회복"
+          ],
+          "disassembly_gate": "로컬 CAN 구간만 수리한다."
+        },
+        "vref": {
+          "type": "question",
+          "title": "4. ECU 5V 기준전압 생존",
+          "question": "RPS/BPS/OPTS 등 OEM 5V VREF 출력도 비정상입니까?",
+          "field_method": [
+            "무통신 + 5V 붕괴는 ECU 자체 가능성을 높이지만, 외부 5V 센서단락을 먼저 배제한다."
+          ],
+          "choices": [
+            {
+              "label": "5V도 비정상",
+              "next": "isolate5"
+            },
+            {
+              "label": "5V 정상",
+              "next": "ecu_internal"
+            }
+          ]
+        },
+        "isolate5": {
+          "type": "question",
+          "title": "5. 외부 5V 부하 분리",
+          "question": "5V 센서들을 분리하면 VREF 또는 ECU 통신이 회복됩니까?",
+          "field_method": [
+            "RPS/BPS/OPTS/EGR branch를 순차 분리한다."
+          ],
+          "choices": [
+            {
+              "label": "특정 branch 분리 시 회복",
+              "next": "external5"
+            },
+            {
+              "label": "모두 분리해도 회복 안 됨",
+              "next": "ecu_internal"
+            }
+          ]
+        },
+        "external5": {
+          "type": "result",
+          "title": "외부 5V 단락이 ECU를 다운시킴",
+          "result": "외부 센서/하네스 단락 때문에 VREF/통신이 무너집니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "회복을 유발한 branch의 5V-신호-GND 단락을 확인한다."
+          ],
+          "rule_out": [
+            "ECU 내부고장"
+          ],
+          "confirm_if": [
+            "특정 branch 분리 시 통신/VREF 반복회복"
+          ],
+          "disassembly_gate": "외부 branch만 수리한다."
+        },
+        "ecu_internal": {
+          "type": "result",
+          "title": "D24 ECU 자체고장 가능성 높음",
+          "result": "다른 모듈 통신 정상, ECU B+/IGN/GND 정상, 로컬 CAN 도달, 외부 5V 부하까지 배제했는데 ECU가 응답하지 않습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "ECU 커넥터 핀장력/수분을 마지막 확인하고 동일사양 정상 ECU/전문 bench test로 교차검증한다."
+          ],
+          "rule_out": [
+            "전원/GND",
+            "로컬 CAN 하네스",
+            "외부 5V 단락"
+          ],
+          "confirm_if": [
+            "외부회로 전부 정상 + ECU만 지속 무응답"
+          ],
+          "disassembly_gate": "이 조건에서만 ECU 수리/교환을 확정한다."
+        }
+      },
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "sensor_ids": [
+        "RPS",
+        "BPS",
+        "OPTS",
+        "EGR"
+      ]
+    },
+    "E_D24_5V_REF": {
+      "title": "D24 5V 기준전압 붕괴 · 외부단락/ECU 분리",
+      "circuit": "D24_VREF",
+      "start": "scope",
+      "nodes": {
+        "scope": {
+          "type": "question",
+          "title": "1. 영향범위",
+          "question": "RPS/BPS/OPTS/EGR 등 여러 센서가 동시에 비현실값이고 해당 VREF가 낮습니까?",
+          "field_method": [
+            "여러 센서 동시고장은 공통 5V branch를 우선한다.",
+            "ECU138/161/165/164 중 실제 영향 branch를 측정한다."
+          ],
+          "choices": [
+            {
+              "label": "여러 branch/센서 동시 이상",
+              "next": "isolate"
+            },
+            {
+              "label": "한 센서만 이상",
+              "next": "single"
+            }
+          ]
+        },
+        "single": {
+          "type": "result",
+          "title": "개별 센서 그래프로 이동",
+          "result": "공통 VREF 붕괴보다 한 센서/한 branch 문제입니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "해당 RPS/BPS/OPTS/EGR 전용 핀 그래프로 이동한다."
+          ],
+          "rule_out": [
+            "ECU 전체 5V 고장"
+          ],
+          "confirm_if": [
+            "다른 5V branch 정상"
+          ],
+          "disassembly_gate": "공통 ECU를 교환하지 않는다."
+        },
+        "isolate": {
+          "type": "question",
+          "title": "2. 외부 5V 부하 순차분리",
+          "question": "5V 센서/branch를 하나씩 분리할 때 VREF가 정상 5V로 회복됩니까?",
+          "field_method": [
+            "RPS ECU138, BPS ECU161, OPTS ECU165, EGR ECU164 branch를 회로자료에 맞춰 순차 분리한다.",
+            "분리마다 다른 센서 live data와 ECU 통신상태를 같이 기록한다."
+          ],
+          "choices": [
+            {
+              "label": "특정 branch 분리 시 회복",
+              "next": "external"
+            },
+            {
+              "label": "모두 분리해도 회복 안 됨",
+              "next": "ecu_power"
+            }
+          ]
+        },
+        "external": {
+          "type": "result",
+          "title": "외부 5V 센서/배선 단락",
+          "result": "특정 외부 branch가 VREF를 끌어내립니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "해당 branch의 5V↔GND/신호 단락, 커넥터 수분, 눌림을 추적한다."
+          ],
+          "rule_out": [
+            "ECU 내부 VREF"
+          ],
+          "confirm_if": [
+            "특정 branch 분리 시 5V/다른 센서/통신이 반복 회복"
+          ],
+          "disassembly_gate": "해당 branch만 수리한다."
+        },
+        "ecu_power": {
+          "type": "question",
+          "title": "3. ECU 전원/GND/통신 생존성",
+          "question": "외부 5V 부하 분리 후 ECU B+/IGN/GND와 진단통신은 정상입니까?",
+          "field_method": [
+            "ECU 내부 VREF를 확정하기 전에 ECU 전원/GND를 부하상태로 본다.",
+            "통신불가가 동반되면 CAN/ECU power 문제를 함께 분리한다."
+          ],
+          "choices": [
+            {
+              "label": "전원/GND 또는 통신도 이상",
+              "next": "ecu_supply"
+            },
+            {
+              "label": "전원/GND·통신 정상인데 VREF 없음",
+              "next": "ecu_internal"
+            }
+          ]
+        },
+        "ecu_supply": {
+          "type": "result",
+          "title": "ECU 공통 전원/GND/CAN 문제 우선",
+          "result": "5V 이전에 ECU 자체 생존 조건이 깨져 있습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "ECU B+/IGN/GND와 로컬 CAN을 먼저 복구한다."
+          ],
+          "rule_out": [
+            "개별 5V센서"
+          ],
+          "confirm_if": [
+            "공통회로 복구 후 VREF와 통신 동시 회복"
+          ],
+          "disassembly_gate": "ECU 교환 전에 공통회로를 수리한다."
+        },
+        "ecu_internal": {
+          "type": "result",
+          "title": "ECU 내부 VREF 회로 고장 가능성 높음",
+          "result": "외부부하 제거, ECU 전원/GND/통신 정상인데 OEM 5V VREF가 나오지 않습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "각 VREF pin을 재측정하고 커넥터 핀장력/단락을 마지막으로 확인한다."
+          ],
+          "rule_out": [
+            "외부 5V 단락",
+            "ECU 전원/GND",
+            "CAN"
+          ],
+          "confirm_if": [
+            "외부부하 배제 후에도 VREF 미출력 반복"
+          ],
+          "disassembly_gate": "이 조건을 만족한 뒤 ECU 수리/교환을 판단한다."
+        }
+      },
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "sensor_ids": [
+        "RPS",
+        "BPS",
+        "OPTS",
+        "EGR"
+      ]
+    },
+    "E_D24_RAIL_PRESSURE": {
+      "title": "D24 RPS 값 비정상 · 핀단위",
+      "circuit": "D24_RPS",
+      "start": "scan",
+      "nodes": {
+        "scan": {
+          "type": "question",
+          "title": "1. 진단값/고장범위",
+          "question": "이 센서 하나만 이상합니까, 같은 5V 계통의 여러 센서가 동시에 이상합니까?",
+          "field_method": [
+            "여러 센서가 동시에 비현실값이면 개별 센서 교환보다 공통 5V 기준전압을 먼저 본다.",
+            "진단기 live data와 실제 기계상태를 함께 기록한다."
+          ],
+          "choices": [
+            {
+              "label": "이 센서만 이상",
+              "next": "ref"
+            },
+            {
+              "label": "여러 5V 센서 함께 이상",
+              "next": "shared5v"
+            }
+          ]
+        },
+        "ref": {
+          "type": "question",
+          "title": "2. 센서 5V/GND 확인",
+          "question": "RPS sensor pin3 / ECU138에 5V 공급이 있고 sensor pin2 / ECU119 GND가 안정적입니까?",
+          "field_method": [
+            "OEM D24NAP 핀: sensor pin3 / ECU138; sensor pin2 / ECU119; sensor pin1 / ECU135.",
+            "5V는 커넥터 연결 상태 백프로브로 보고, GND는 ECU 센서리턴 기준과 배터리(-) 양쪽을 비교한다."
+          ],
+          "choices": [
+            {
+              "label": "5V/GND 정상",
+              "next": "signal"
+            },
+            {
+              "label": "5V 없음/낮음",
+              "next": "shared5v"
+            },
+            {
+              "label": "GND 이상",
+              "next": "ground_bad"
+            }
+          ]
+        },
+        "signal": {
+          "type": "question",
+          "title": "3. 신호선 반응",
+          "question": "sensor pin1 / ECU135 pressure signal가 실제 상태 변화에 따라 연속적으로 변하고 진단값과 일치합니까?",
+          "field_method": [
+            "OEM 전압-물리량 곡선이 확보되지 않은 경우 임의 V 기준은 사용하지 않는다.",
+            "센서 바로 핀과 ECU 입력측을 동시에/순차 비교한다."
+          ],
+          "choices": [
+            {
+              "label": "센서 핀부터 신호 이상",
+              "next": "sensor_bad"
+            },
+            {
+              "label": "센서 신호 정상·ECU 입력에서 이상",
+              "next": "harness_bad"
+            },
+            {
+              "label": "ECU 입력까지 정상·진단값 이상",
+              "next": "ecu_input"
+            }
+          ]
+        },
+        "shared5v": {
+          "type": "question",
+          "title": "4. 공통 5V 부하 격리",
+          "question": "같은 5V 레퍼런스 계통 센서를 하나씩 분리할 때 5V가 회복됩니까?",
+          "field_method": [
+            "RPS/BPS/OPTS/EGR 등 D24의 5V branch를 회로자료에 따라 순차 분리한다.",
+            "센서를 뽑을 때마다 5V 회복과 진단통신/다른 센서값 회복을 같이 본다.",
+            "모든 외부부하를 분리해도 5V가 회복되지 않으면 ECU 5V 내부회로/전원·접지 쪽으로 넘어간다."
+          ],
+          "choices": [
+            {
+              "label": "특정 센서/분기 분리 시 5V 회복",
+              "next": "external_short"
+            },
+            {
+              "label": "외부부하 분리해도 회복 안 됨",
+              "next": "ecu5v"
+            }
+          ]
+        },
+        "external_short": {
+          "type": "result",
+          "title": "외부 5V 센서/배선 단락",
+          "result": "RPS 자체 또는 같은 VREF 분기 외부부하가 5V를 끌어내립니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "회복을 유발한 센서 커넥터에서 5V-신호-GND 단락/수분/배선눌림을 확인한다."
+          ],
+          "rule_out": [
+            "ECU 내부 5V 레귤레이터"
+          ],
+          "confirm_if": [
+            "특정 외부부하 분리 시 5V와 다른 센서/통신이 반복 회복"
+          ],
+          "disassembly_gate": "해당 외부센서/분기만 수리한다."
+        },
+        "ground_bad": {
+          "type": "result",
+          "title": "센서 리턴/GND 회로 이상",
+          "result": "RPS 공급은 있으나 sensor pin2 / ECU119 센서리턴이 불안정합니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "센서 GND와 ECU 리턴 핀 사이를 부하상태로 비교하고 커넥터 접촉을 확인한다."
+          ],
+          "rule_out": [
+            "5V 공급회로",
+            "센서 신호소자"
+          ],
+          "confirm_if": [
+            "GND 우회/수리 시 신호 정상화"
+          ],
+          "disassembly_gate": "센서리턴 고장구간을 특정한 뒤 수리한다."
+        },
+        "sensor_bad": {
+          "type": "result",
+          "title": "RPS 자체 신호 불량",
+          "result": "5V/GND는 정상이나 RPS 자체 출력이 실제 상태와 맞지 않습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "센서 측 신호를 직접 측정하고 정상부품/실제 물리값과 비교한다."
+          ],
+          "rule_out": [
+            "5V 공급",
+            "GND",
+            "ECU 입력 하네스"
+          ],
+          "confirm_if": [
+            "센서 교체/정상 센서 연결 시 신호 및 진단값 정상화"
+          ],
+          "disassembly_gate": "전원/GND 확인 후 센서를 교환한다."
+        },
+        "harness_bad": {
+          "type": "result",
+          "title": "RPS 신호선/커넥터 불량",
+          "result": "센서측은 정상이나 ECU 입력까지 신호가 전달되지 않습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "센서 신호핀→ECU 입력핀 전단/후단 비교, 핀장력, 크림프, 단락/개방을 동적시험한다."
+          ],
+          "rule_out": [
+            "센서 자체",
+            "ECU 내부 입력처리"
+          ],
+          "confirm_if": [
+            "특정 구간 전단 정상·후단 이상 반복"
+          ],
+          "disassembly_gate": "신호선 구간을 특정한 뒤 수리한다."
+        },
+        "ecu_input": {
+          "type": "result",
+          "title": "ECU 입력처리 이상 가능성 높음",
+          "result": "센서와 ECU 커넥터 입력까지 정상인데 진단값이 비정상입니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "ECU B+/IGN/GND 및 CAN 통신을 함께 확인한다.",
+            "다른 정상 입력과 비교하고 ECU 커넥터 핀장력을 확인한다."
+          ],
+          "rule_out": [
+            "센서",
+            "신호하네스",
+            "5V/GND"
+          ],
+          "confirm_if": [
+            "외부 입력회로 정상 + ECU 해석만 비정상 반복"
+          ],
+          "disassembly_gate": "외부회로를 모두 배제한 뒤 ECU를 판단한다."
+        },
+        "ecu5v": {
+          "type": "result",
+          "title": "ECU 5V 기준회로/ECU 전원계통 이상 가능성 높음",
+          "result": "외부 5V 부하를 분리해도 5V가 회복되지 않습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "ECU B+/IGN/GND 부하전압을 먼저 확인한다.",
+            "ECU 통신 여부와 다른 VREF 출력도 함께 확인한다."
+          ],
+          "rule_out": [
+            "외부 5V 센서단락",
+            "로컬 5V 배선단락"
+          ],
+          "confirm_if": [
+            "외부부하 배제 + ECU 전원/GND 정상 + 5V 미출력 반복"
+          ],
+          "disassembly_gate": "이 조건을 모두 만족한 뒤 ECU 수리/교환을 판단한다."
+        }
+      },
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "sensor_ids": [
+        "RPS"
+      ]
+    },
+    "E_D24_BOOST_PRESSURE": {
+      "title": "D24 BPS 값 비정상 · 핀단위",
+      "circuit": "D24_BPS",
+      "start": "scan",
+      "nodes": {
+        "scan": {
+          "type": "question",
+          "title": "1. 진단값/고장범위",
+          "question": "이 센서 하나만 이상합니까, 같은 5V 계통의 여러 센서가 동시에 이상합니까?",
+          "field_method": [
+            "여러 센서가 동시에 비현실값이면 개별 센서 교환보다 공통 5V 기준전압을 먼저 본다.",
+            "진단기 live data와 실제 기계상태를 함께 기록한다."
+          ],
+          "choices": [
+            {
+              "label": "이 센서만 이상",
+              "next": "ref"
+            },
+            {
+              "label": "여러 5V 센서 함께 이상",
+              "next": "shared5v"
+            }
+          ]
+        },
+        "ref": {
+          "type": "question",
+          "title": "2. 센서 5V/GND 확인",
+          "question": "BPS sensor pin1 / ECU161에 5V 공급이 있고 sensor pin2 / ECU167 GND가 안정적입니까?",
+          "field_method": [
+            "OEM D24NAP 핀: sensor pin1 / ECU161; sensor pin2 / ECU167; sensor pin3 / ECU112.",
+            "5V는 커넥터 연결 상태 백프로브로 보고, GND는 ECU 센서리턴 기준과 배터리(-) 양쪽을 비교한다."
+          ],
+          "choices": [
+            {
+              "label": "5V/GND 정상",
+              "next": "signal"
+            },
+            {
+              "label": "5V 없음/낮음",
+              "next": "shared5v"
+            },
+            {
+              "label": "GND 이상",
+              "next": "ground_bad"
+            }
+          ]
+        },
+        "signal": {
+          "type": "question",
+          "title": "3. 신호선 반응",
+          "question": "sensor pin3 / ECU112 pressure signal가 실제 상태 변화에 따라 연속적으로 변하고 진단값과 일치합니까?",
+          "field_method": [
+            "OEM 전압-물리량 곡선이 확보되지 않은 경우 임의 V 기준은 사용하지 않는다.",
+            "센서 바로 핀과 ECU 입력측을 동시에/순차 비교한다."
+          ],
+          "choices": [
+            {
+              "label": "센서 핀부터 신호 이상",
+              "next": "sensor_bad"
+            },
+            {
+              "label": "센서 신호 정상·ECU 입력에서 이상",
+              "next": "harness_bad"
+            },
+            {
+              "label": "ECU 입력까지 정상·진단값 이상",
+              "next": "ecu_input"
+            }
+          ]
+        },
+        "shared5v": {
+          "type": "question",
+          "title": "4. 공통 5V 부하 격리",
+          "question": "같은 5V 레퍼런스 계통 센서를 하나씩 분리할 때 5V가 회복됩니까?",
+          "field_method": [
+            "RPS/BPS/OPTS/EGR 등 D24의 5V branch를 회로자료에 따라 순차 분리한다.",
+            "센서를 뽑을 때마다 5V 회복과 진단통신/다른 센서값 회복을 같이 본다.",
+            "모든 외부부하를 분리해도 5V가 회복되지 않으면 ECU 5V 내부회로/전원·접지 쪽으로 넘어간다."
+          ],
+          "choices": [
+            {
+              "label": "특정 센서/분기 분리 시 5V 회복",
+              "next": "external_short"
+            },
+            {
+              "label": "외부부하 분리해도 회복 안 됨",
+              "next": "ecu5v"
+            }
+          ]
+        },
+        "external_short": {
+          "type": "result",
+          "title": "외부 5V 센서/배선 단락",
+          "result": "BPS 자체 또는 같은 VREF 분기 외부부하가 5V를 끌어내립니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "회복을 유발한 센서 커넥터에서 5V-신호-GND 단락/수분/배선눌림을 확인한다."
+          ],
+          "rule_out": [
+            "ECU 내부 5V 레귤레이터"
+          ],
+          "confirm_if": [
+            "특정 외부부하 분리 시 5V와 다른 센서/통신이 반복 회복"
+          ],
+          "disassembly_gate": "해당 외부센서/분기만 수리한다."
+        },
+        "ground_bad": {
+          "type": "result",
+          "title": "센서 리턴/GND 회로 이상",
+          "result": "BPS 공급은 있으나 sensor pin2 / ECU167 센서리턴이 불안정합니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "센서 GND와 ECU 리턴 핀 사이를 부하상태로 비교하고 커넥터 접촉을 확인한다."
+          ],
+          "rule_out": [
+            "5V 공급회로",
+            "센서 신호소자"
+          ],
+          "confirm_if": [
+            "GND 우회/수리 시 신호 정상화"
+          ],
+          "disassembly_gate": "센서리턴 고장구간을 특정한 뒤 수리한다."
+        },
+        "sensor_bad": {
+          "type": "result",
+          "title": "BPS 자체 신호 불량",
+          "result": "5V/GND는 정상이나 BPS 자체 출력이 실제 상태와 맞지 않습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "센서 측 신호를 직접 측정하고 정상부품/실제 물리값과 비교한다."
+          ],
+          "rule_out": [
+            "5V 공급",
+            "GND",
+            "ECU 입력 하네스"
+          ],
+          "confirm_if": [
+            "센서 교체/정상 센서 연결 시 신호 및 진단값 정상화"
+          ],
+          "disassembly_gate": "전원/GND 확인 후 센서를 교환한다."
+        },
+        "harness_bad": {
+          "type": "result",
+          "title": "BPS 신호선/커넥터 불량",
+          "result": "센서측은 정상이나 ECU 입력까지 신호가 전달되지 않습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "센서 신호핀→ECU 입력핀 전단/후단 비교, 핀장력, 크림프, 단락/개방을 동적시험한다."
+          ],
+          "rule_out": [
+            "센서 자체",
+            "ECU 내부 입력처리"
+          ],
+          "confirm_if": [
+            "특정 구간 전단 정상·후단 이상 반복"
+          ],
+          "disassembly_gate": "신호선 구간을 특정한 뒤 수리한다."
+        },
+        "ecu_input": {
+          "type": "result",
+          "title": "ECU 입력처리 이상 가능성 높음",
+          "result": "센서와 ECU 커넥터 입력까지 정상인데 진단값이 비정상입니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "ECU B+/IGN/GND 및 CAN 통신을 함께 확인한다.",
+            "다른 정상 입력과 비교하고 ECU 커넥터 핀장력을 확인한다."
+          ],
+          "rule_out": [
+            "센서",
+            "신호하네스",
+            "5V/GND"
+          ],
+          "confirm_if": [
+            "외부 입력회로 정상 + ECU 해석만 비정상 반복"
+          ],
+          "disassembly_gate": "외부회로를 모두 배제한 뒤 ECU를 판단한다."
+        },
+        "ecu5v": {
+          "type": "result",
+          "title": "ECU 5V 기준회로/ECU 전원계통 이상 가능성 높음",
+          "result": "외부 5V 부하를 분리해도 5V가 회복되지 않습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "ECU B+/IGN/GND 부하전압을 먼저 확인한다.",
+            "ECU 통신 여부와 다른 VREF 출력도 함께 확인한다."
+          ],
+          "rule_out": [
+            "외부 5V 센서단락",
+            "로컬 5V 배선단락"
+          ],
+          "confirm_if": [
+            "외부부하 배제 + ECU 전원/GND 정상 + 5V 미출력 반복"
+          ],
+          "disassembly_gate": "이 조건을 모두 만족한 뒤 ECU 수리/교환을 판단한다."
+        }
+      },
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "sensor_ids": [
+        "BPS"
+      ]
+    },
+    "E_D24_WATER_TEMP": {
+      "title": "D24 WTS 값 비정상 · 핀단위",
+      "circuit": "D24_WTS",
+      "start": "live",
+      "nodes": {
+        "live": {
+          "type": "question",
+          "title": "1. 실제온도와 진단값 비교",
+          "question": "WTS 진단값이 냉간/열간 실제온도 변화와 합리적으로 따라갑니까?",
+          "field_method": [
+            "OEM D24NAP 핀: pin1 ECU145 GND / pin2 ECU109 temperature signal.",
+            "냉간 시 주변/냉각수 실제온도와 비교하고 워밍업 중 값 변화의 연속성을 본다."
+          ],
+          "choices": [
+            {
+              "label": "고정값/급변/비현실값",
+              "next": "pins"
+            },
+            {
+              "label": "정상 추종",
+              "next": "intermittent"
+            }
+          ]
+        },
+        "pins": {
+          "type": "question",
+          "title": "2. 센서핀과 ECU입력 분리",
+          "question": "WTS 센서측 신호/리턴과 ECU 입력측이 같은 변화로 따라갑니까?",
+          "field_method": [
+            "커넥터 연결 상태 백프로브를 우선한다.",
+            "OEM 저항-온도표가 없는 경우 임의 Ω 기준을 만들지 않는다."
+          ],
+          "choices": [
+            {
+              "label": "센서 출력부터 이상",
+              "next": "sensor_bad"
+            },
+            {
+              "label": "센서 정상·ECU측에서 이상",
+              "next": "harness_bad"
+            },
+            {
+              "label": "ECU 입력까지 정상·진단값만 이상",
+              "next": "ecu_bad"
+            }
+          ]
+        },
+        "sensor_bad": {
+          "type": "result",
+          "title": "WTS 자체 이상",
+          "result": "센서 바로 출력이 실제 온도와 일치하지 않습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "실제온도와 정상센서/냉간 기준을 비교한다."
+          ],
+          "rule_out": [
+            "하네스",
+            "ECU 입력"
+          ],
+          "confirm_if": [
+            "센서대체 시 진단값 정상화"
+          ],
+          "disassembly_gate": "센서회로 확인 후 교환한다."
+        },
+        "harness_bad": {
+          "type": "result",
+          "title": "WTS 하네스/커넥터 이상",
+          "result": "센서측 변화가 ECU까지 전달되지 않습니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "핀장력·크림프·단선/단락·흔들림을 전단후단 비교한다."
+          ],
+          "rule_out": [
+            "센서",
+            "ECU 내부"
+          ],
+          "confirm_if": [
+            "전단 정상·후단 이상 특정"
+          ],
+          "disassembly_gate": "해당 구간만 수리한다."
+        },
+        "ecu_bad": {
+          "type": "result",
+          "title": "ECU 입력처리 이상 가능성",
+          "result": "ECU 핀까지 신호는 정상인데 진단값만 잘못됩니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "ECU 전원/GND/CAN과 해당 핀 접촉을 확인한다."
+          ],
+          "rule_out": [
+            "센서",
+            "하네스"
+          ],
+          "confirm_if": [
+            "외부회로 정상 + ECU 해석만 비정상"
+          ],
+          "disassembly_gate": "외부회로 배제 후 ECU를 판단한다."
+        },
+        "intermittent": {
+          "type": "result",
+          "title": "현재 온도입력 정상",
+          "result": "현재는 실제온도와 진단값이 정상 추종합니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "열간·진동·커넥터 흔들림에서 로그를 남긴다."
+          ],
+          "rule_out": [
+            "고정 고장"
+          ],
+          "confirm_if": [
+            "민원조건에서도 정상 유지"
+          ],
+          "disassembly_gate": "재현 전 교환하지 않는다."
+        }
+      },
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "sensor_ids": [
+        "WTS"
+      ]
+    },
+    "E_D24_MAF": {
+      "title": "D24 MAF/흡기온도 · 4핀 분리진단",
+      "circuit": "D24_MAF",
+      "start": "supply",
+      "nodes": {
+        "supply": {
+          "type": "question",
+          "title": "1. 12V/GND",
+          "question": "MAF pin4/ECU137 공급 12V와 pin3/ECU120 GND가 정상입니까?",
+          "field_method": [
+            "OEM 핀기능을 그대로 사용한다.",
+            "커넥터 연결 상태로 공급과 GND를 측정한다."
+          ],
+          "choices": [
+            {
+              "label": "정상",
+              "next": "signals"
+            },
+            {
+              "label": "공급/GND 이상",
+              "next": "powerbad"
+            }
+          ]
+        },
+        "signals": {
+          "type": "question",
+          "title": "2. 두 출력 분리",
+          "question": "pin1/ECU228 air-flow frequency와 pin2/ECU235 intake-temperature 중 어느 신호가 비정상입니까?",
+          "field_method": [
+            "두 출력이 동시에 죽으면 공급/GND/센서공통, 하나만 죽으면 해당 신호소자/선로를 우선한다.",
+            "진단기 live data와 센서핀을 비교한다."
+          ],
+          "choices": [
+            {
+              "label": "flow만 이상",
+              "next": "flowbad"
+            },
+            {
+              "label": "temperature만 이상",
+              "next": "tempbad"
+            },
+            {
+              "label": "둘 다 이상",
+              "next": "sensorbad"
+            }
+          ]
+        },
+        "powerbad": {
+          "type": "result",
+          "title": "MAF 공급/GND 회로 이상",
+          "result": "센서 자체 판단 전에 12V 또는 GND가 비정상입니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "ECU137→MAF4와 ECU120→MAF3 구간을 추적한다."
+          ],
+          "rule_out": [
+            "MAF 신호소자"
+          ],
+          "confirm_if": [
+            "공급/GND 복구 후 두 live data 정상화"
+          ],
+          "disassembly_gate": "공급/GND 구간만 수리한다."
+        },
+        "flowbad": {
+          "type": "result",
+          "title": "MAF airflow signal 회로 이상",
+          "result": "공급/GND와 온도신호는 정상이나 flow frequency만 비정상입니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "MAF1→ECU228 전단/후단 비교 및 센서대체로 분리한다."
+          ],
+          "rule_out": [
+            "공급/GND",
+            "온도신호회로"
+          ],
+          "confirm_if": [
+            "센서핀 또는 하네스 어느 지점에서 신호가 사라지는지 특정"
+          ],
+          "disassembly_gate": "해당 센서/신호선만 수리한다."
+        },
+        "tempbad": {
+          "type": "result",
+          "title": "MAF intake-temperature signal 회로 이상",
+          "result": "공급/GND와 airflow는 정상이나 intake temp 신호만 비정상입니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "MAF2→ECU235 신호를 실온/흡기온도 변화와 비교한다."
+          ],
+          "rule_out": [
+            "공급/GND",
+            "airflow signal"
+          ],
+          "confirm_if": [
+            "센서핀 또는 하네스의 이상 위치 특정"
+          ],
+          "disassembly_gate": "해당 센서/신호선만 수리한다."
+        },
+        "sensorbad": {
+          "type": "result",
+          "title": "MAF 공통 내부고장/커넥터 가능성",
+          "result": "정상 12V/GND인데 두 출력이 함께 비정상입니다.",
+          "field_tools": [
+            "디지털 멀티미터",
+            "백프로브",
+            "OEM 회로도"
+          ],
+          "field_test": [
+            "커넥터 핀장력/수분을 확인한 뒤 정상센서 A/B로 확인한다."
+          ],
+          "rule_out": [
+            "차량 공급/GND"
+          ],
+          "confirm_if": [
+            "정상센서에서 두 신호 모두 회복"
+          ],
+          "disassembly_gate": "공급/GND와 커넥터 확인 후 센서를 교환한다."
+        }
+      },
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "sensor_ids": [
+        "MAF"
+      ]
+    },
+    "EN_HARD_START": {
+      "title": "D24 냉간/열간 시동이 어려움",
+      "circuit": "D24_HARD_START",
+      "start": "condition",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "condition": {
+          "type": "question",
+          "title": "1. 조건 분리",
+          "question": "시동불량이 어느 조건에서 두드러집니까?",
+          "field_method": [
+            "냉각수온/흡기온도 live data와 실제 엔진 온도를 비교한다.",
+            "방치시간·외기온·재시동 시간을 기록한다."
+          ],
+          "choices": [
+            {
+              "label": "냉간 위주",
+              "next": "cold"
+            },
+            {
+              "label": "열간 위주",
+              "next": "hot"
+            },
+            {
+              "label": "냉·열간 모두",
+              "next": "alive"
+            }
+          ]
+        },
+        "cold": {
+          "type": "question",
+          "title": "2A. 냉간 예열",
+          "question": "냉간에서 예열 명령과 에어히터 실제 전류/전압강하가 있습니까?",
+          "field_method": [
+            "예열 표시만 보지 말고 히터 부하전류 또는 히터 양단 전압을 측정한다."
+          ],
+          "choices": [
+            {
+              "label": "예열 작동 이상",
+              "next": "pre_bad"
+            },
+            {
+              "label": "예열 정상",
+              "next": "alive"
+            }
+          ]
+        },
+        "pre_bad": {
+          "type": "result",
+          "title": "냉간 예열계통 우선",
+          "result": "냉간 시동불량과 예열 실제출력 이상이 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "퓨즈/릴레이/히터/제어명령을 부하상태에서 구간별 측정한다."
+          ],
+          "rule_out": [
+            "고압펌프 단독고장"
+          ],
+          "confirm_if": [
+            "예열 출력 복구 후 냉간 시동성이 반복 개선"
+          ],
+          "disassembly_gate": "예열 회로 원인 특정 후 해당 부품만 수리."
+        },
+        "hot": {
+          "type": "question",
+          "title": "2B. 열간 생존성",
+          "question": "열간 불발 순간 ECU 통신·RPM·5V VREF가 유지됩니까?",
+          "field_method": [
+            "열간 soak 상태에서 MIN/MAX/진단로그를 남긴다.",
+            "센서 냉각/하네스 흔들림은 원인 확정이 아니라 재현 도구로 사용한다."
+          ],
+          "choices": [
+            {
+              "label": "열간에서 통신/RPM/VREF 끊김",
+              "next": "hot_elec"
+            },
+            {
+              "label": "모두 유지",
+              "next": "rail"
+            }
+          ]
+        },
+        "hot_elec": {
+          "type": "result",
+          "title": "열간 전자계통 간헐",
+          "result": "열간에서 ECU/CRK-CAM/VREF 중 하나가 사라집니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "해당 신호를 열간 상태에서 백프로브/오실로스코프로 재현하고 전원/GND/CAN과 센서 신호를 분리한다."
+          ],
+          "rule_out": [
+            "연료기계 단독고장"
+          ],
+          "confirm_if": [
+            "열간 불발과 특정 신호 소실이 동시 재현"
+          ],
+          "disassembly_gate": "전자 원인 특정 전 연료계통 분해 금지."
+        },
+        "alive": {
+          "type": "question",
+          "title": "3. ECU/RPM 생존",
+          "question": "크랭킹 중 ECU 통신과 RPM/동기가 안정적입니까?",
+          "field_method": [
+            "진단기의 RPM만 보지 말고 필요 시 CRK/CAM 파형과 동기를 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "아니오",
+              "next": "sync_bad"
+            },
+            {
+              "label": "예",
+              "next": "rail"
+            }
+          ]
+        },
+        "sync_bad": {
+          "type": "result",
+          "title": "CRK/CAM/ECU 생존 우선",
+          "result": "크랭킹 중 ECU가 회전 정보를 안정적으로 받지 못합니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "EN_CRK_CAM_SYNC로 이동해 센서/배선/파형/기계타이밍을 분리한다."
+          ],
+          "rule_out": [
+            "인젝터/고압펌프 교환"
+          ],
+          "confirm_if": [
+            "동기 회복 후 시동성 정상화"
+          ],
+          "disassembly_gate": "동기 원인부터 해결."
+        },
+        "rail": {
+          "type": "question",
+          "title": "4. 레일압 형성",
+          "question": "크랭킹 중 rail actual이 command를 따라 형성됩니까?",
+          "field_method": [
+            "RPS 5V/GND/signal을 먼저 검증한다.",
+            "OEM 미확인 MPa를 임의 문턱값으로 쓰지 않는다."
+          ],
+          "choices": [
+            {
+              "label": "형성 실패/불안정",
+              "next": "fuel"
+            },
+            {
+              "label": "형성 정상",
+              "next": "inj"
+            }
+          ]
+        },
+        "fuel": {
+          "type": "result",
+          "title": "연료압 형성계통으로 이동",
+          "result": "동기 이후 rail actual 형성이 실패합니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "EN_FUEL_PRESSURE에서 저압공급→공기혼입→IMV→고압펌프→rail/injector return 순으로 분리한다."
+          ],
+          "rule_out": [
+            "예열 단독고장",
+            "압축 단독고장"
+          ],
+          "confirm_if": [
+            "연료압 형성 원인이 별도 시험에서 특정"
+          ],
+          "disassembly_gate": "원인 특정 후만 고압계통 분해."
+        },
+        "inj": {
+          "type": "question",
+          "title": "5. 분사/기계 분리",
+          "question": "인젝터 구동과 실린더별 기여/리턴이 정상입니까?",
+          "field_method": [
+            "전류파형/진단기 cut-out/리턴 비교 중 가능한 방법을 사용한다."
+          ],
+          "choices": [
+            {
+              "label": "한 실린더/인젝터 이상",
+              "next": "inj_bad"
+            },
+            {
+              "label": "분사계통 정상",
+              "next": "comp"
+            }
+          ]
+        },
+        "inj_bad": {
+          "type": "result",
+          "title": "인젝터 계통 우선",
+          "result": "시동불량과 인젝터 전기/리턴/기여 이상이 연결됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "EN_INJECTOR_SEPARATE로 전기구동·리턴·압축을 분리한다."
+          ],
+          "rule_out": [
+            "ECU 전체고장"
+          ],
+          "confirm_if": [
+            "특정 실린더 원인이 반복 확인"
+          ],
+          "disassembly_gate": "해당 실린더 원인 특정 후 정비."
+        },
+        "comp": {
+          "type": "result",
+          "title": "압축/기계조건 검사",
+          "result": "ECU·동기·레일압·분사 기본조건이 정상인데 시동성이 나쁩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "압축/밸브타이밍/EGR stuck-open/흡기폐색을 확인한다."
+          ],
+          "rule_out": [
+            "기본 ECU/연료압 고장"
+          ],
+          "confirm_if": [
+            "기계적 원인이 압축/누설/타이밍 시험에서 특정"
+          ],
+          "disassembly_gate": "기계원인 특정 후 분해.",
+          "oem_limit_note": "D24 OEM에 없는 압축 허용치를 임의 생성하지 말고 전 실린더 비교 및 해당 서비스 기준을 사용."
+        }
+      },
+      "sensor_ids": [
+        "WTS",
+        "CRK",
+        "CAM",
+        "RPS",
+        "IMV",
+        "INJ1",
+        "INJ2",
+        "INJ3",
+        "INJ4"
+      ]
+    },
+    "EN_STALL": {
+      "title": "D24 작업/주행 중 엔진이 꺼짐",
+      "circuit": "D24_STALL",
+      "start": "log",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "log": {
+          "type": "question",
+          "title": "1. 꺼지는 순간 로그",
+          "question": "엔진이 꺼지는 순간 ECU 통신/전원 또는 전체 계기전원이 함께 끊깁니까?",
+          "field_method": [
+            "가능하면 진단기 기록/플라이트레코드와 DMM MIN/MAX를 동시에 사용한다.",
+            "재시동 후 정상값만 보고 판정하지 않는다."
+          ],
+          "choices": [
+            {
+              "label": "통신/전원 함께 끊김",
+              "next": "power"
+            },
+            {
+              "label": "통신 유지",
+              "next": "rpm"
+            }
+          ]
+        },
+        "power": {
+          "type": "result",
+          "title": "ECU 전원/IGN/CAN 간헐 우선",
+          "result": "스톨과 ECU 생존신호 소실이 동시에 발생합니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "ECU B+/IGN/GND 전압강하와 main/ECU relay·퓨즈 출력, CAN을 스톨 순간 기록한다."
+          ],
+          "rule_out": [
+            "고압펌프 단독고장"
+          ],
+          "confirm_if": [
+            "스톨 순간 특정 공급/통신 회로가 먼저 소실"
+          ],
+          "disassembly_gate": "공급/커넥터 원인 특정 후 수리."
+        },
+        "rpm": {
+          "type": "question",
+          "title": "2. 회전신호",
+          "question": "스톨 순간 RPM/CRK-CAM sync가 rail pressure보다 먼저 사라집니까?",
+          "field_method": [
+            "CRK/CAM live-data와 가능하면 파형을 동시에 본다."
+          ],
+          "choices": [
+            {
+              "label": "회전신호 먼저 소실",
+              "next": "sync"
+            },
+            {
+              "label": "회전신호 유지",
+              "next": "rail"
+            }
+          ]
+        },
+        "sync": {
+          "type": "result",
+          "title": "CRK/CAM 간헐",
+          "result": "엔진 정지 이전에 회전/동기 신호가 먼저 소실됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "센서 전원/GND/파형, 커넥터, 열간/진동 재현을 EN_CRK_CAM_SYNC에서 확인한다."
+          ],
+          "rule_out": [
+            "연료압 원인"
+          ],
+          "confirm_if": [
+            "신호 소실과 스톨이 반복 동시발생"
+          ],
+          "disassembly_gate": "센서/하네스/기계동기 원인 특정 후 정비."
+        },
+        "rail": {
+          "type": "question",
+          "title": "3. 레일압/연료",
+          "question": "스톨 직전 rail actual이 command와 분리되어 붕괴합니까?",
+          "field_method": [
+            "RPS 회로가 정상인지 먼저 확인하고 command/actual을 비교한다."
+          ],
+          "choices": [
+            {
+              "label": "rail actual 붕괴",
+              "next": "fuel"
+            },
+            {
+              "label": "rail 유지",
+              "next": "air"
+            }
+          ]
+        },
+        "fuel": {
+          "type": "result",
+          "title": "연료공급/IMV/고압 누설",
+          "result": "스톨 직전 연료압 형성이 먼저 무너집니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "EN_FUEL_PRESSURE에서 저압측 공기혼입/필터/IMV/고압펌프/인젝터리턴을 분리한다."
+          ],
+          "rule_out": [
+            "CRK/CAM 우선고장"
+          ],
+          "confirm_if": [
+            "연료압 붕괴 원인이 재현시험에서 특정"
+          ],
+          "disassembly_gate": "연료고압 부품은 원인 특정 후 분해."
+        },
+        "air": {
+          "type": "question",
+          "title": "4. 공기/EGR/부하",
+          "question": "스톨이 유압/주행 부하를 걸 때만 재현되며 ECU·sync·rail이 유지됩니까?",
+          "field_method": [
+            "유압 중립과 작동상태를 비교한다.",
+            "EGR/흡기폐색 live-data/물리검사를 병행한다."
+          ],
+          "choices": [
+            {
+              "label": "부하에서만",
+              "next": "load"
+            },
+            {
+              "label": "부하와 무관",
+              "next": "inj"
+            }
+          ]
+        },
+        "load": {
+          "type": "result",
+          "title": "엔진출력 vs 외부과부하 분리",
+          "result": "엔진 제어신호가 유지되는데 특정 외부부하에서만 스톨합니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "엔진 무부하 가속성, 유압 relief/펌프 과부하, T/M drag를 분리한다."
+          ],
+          "rule_out": [
+            "ECU 생존고장"
+          ],
+          "confirm_if": [
+            "외부부하 제거 시 즉시 스톨 재현 사라짐"
+          ],
+          "disassembly_gate": "엔진분해보다 외부부하계통부터 수리."
+        },
+        "inj": {
+          "type": "result",
+          "title": "분사/흡기/기계 추가분리",
+          "result": "ECU·sync·rail은 유지되나 스톨합니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "인젝터 구동/기여, EGR stuck, 흡기폐색, 압축·밸브타이밍을 순서대로 확인한다."
+          ],
+          "rule_out": [
+            "전원/CAN",
+            "기본 rail 압력"
+          ],
+          "confirm_if": [
+            "특정 분사/흡기/기계원인이 재현"
+          ],
+          "disassembly_gate": "원인 특정 후 해당 계통만 분해."
+        }
+      },
+      "sensor_ids": [
+        "CRK",
+        "CAM",
+        "RPS",
+        "IMV"
+      ]
+    },
+    "EN_LOW_POWER": {
+      "title": "D24 부하에서 힘이 없음/출력저하",
+      "circuit": "D24_LOW_POWER",
+      "start": "air",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "air": {
+          "type": "question",
+          "title": "1. 흡기 기본",
+          "question": "에어필터/흡기덕트 막힘·붕괴·누설 및 MAF 값이 정상입니까?",
+          "field_method": [
+            "무부하가 아니라 실제 부하에서 흡기덕트 수축/누설도 확인한다.",
+            "MAF 전원/GND/flow 값을 정상차/엔진상태와 비교한다."
+          ],
+          "choices": [
+            {
+              "label": "이상 있음",
+              "next": "air_bad"
+            },
+            {
+              "label": "정상",
+              "next": "boost"
+            }
+          ]
+        },
+        "air_bad": {
+          "type": "result",
+          "title": "흡기/MAF 원인",
+          "result": "흡기 저항 또는 MAF 입력 이상이 확인됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "필터/덕트 누설·막힘을 복구하고 MAF 회로를 재검증한다."
+          ],
+          "rule_out": [
+            "터보 기계고장 확정",
+            "인젝터 교환"
+          ],
+          "confirm_if": [
+            "수리 후 부하 출력/MAF 반응 회복"
+          ],
+          "disassembly_gate": "흡기 원인부터 수리."
+        },
+        "boost": {
+          "type": "question",
+          "title": "2. 부스트 형성",
+          "question": "부하를 걸 때 BPS 실제값이 엔진부하/RPM 상승에 따라 정상적으로 증가하고 charge-air 누설이 없습니까?",
+          "field_method": [
+            "BPS 5V/GND/signal 검증 후 판단한다.",
+            "호스·인터쿨러·클램프를 압력/누설 흔적으로 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "부스트 부족/누설",
+              "next": "turbo"
+            },
+            {
+              "label": "부스트 형성 정상",
+              "next": "fuel"
+            }
+          ]
+        },
+        "turbo": {
+          "type": "question",
+          "title": "3. 터보/EGR 분리",
+          "question": "흡기누설은 없는데 터보/액추에이터 또는 EGR stuck-open 이상이 확인됩니까?",
+          "field_method": [
+            "축유격/휠 접촉/오일흔적/액추에이터 작동을 확인한다.",
+            "EGR 명령과 실제 위치/흡기 영향 비교."
+          ],
+          "choices": [
+            {
+              "label": "터보/액추에이터 이상",
+              "next": "turbo_bad"
+            },
+            {
+              "label": "EGR 이상",
+              "next": "egr_bad"
+            },
+            {
+              "label": "둘 다 뚜렷하지 않음",
+              "next": "fuel"
+            }
+          ]
+        },
+        "turbo_bad": {
+          "type": "result",
+          "title": "터보/액추에이터 원인",
+          "result": "부스트 부족과 터보 기계/제어 이상이 함께 확인됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "오일공급/리턴, 휠 손상, 축유격, actuator를 OEM §10 절차로 분리한다."
+          ],
+          "rule_out": [
+            "연료압 단독고장"
+          ],
+          "confirm_if": [
+            "터보 원인 수리 후 BPS/출력 회복"
+          ],
+          "disassembly_gate": "터보 분해 전 오일/흡배기 외부원인 배제."
+        },
+        "egr_bad": {
+          "type": "result",
+          "title": "EGR 과다개방/제어",
+          "result": "부하에서 EGR이 닫혀야 할 조건에 실제 공기량을 떨어뜨리는 이상이 확인됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "EGR 위치명령/실제, 밸브 고착, 전기회로를 확인한다."
+          ],
+          "rule_out": [
+            "터보 단독고장"
+          ],
+          "confirm_if": [
+            "EGR 격리/수리 후 MAF/BPS/출력 회복"
+          ],
+          "disassembly_gate": "EGR 원인 특정 후 분해."
+        },
+        "fuel": {
+          "type": "question",
+          "title": "4. 연료압/분사",
+          "question": "부하에서 rail actual이 command를 따라가고 실린더 기여가 균일합니까?",
+          "field_method": [
+            "부하 중 command/actual을 기록한다.",
+            "인젝터 correction/cut-out/리턴 비교를 사용한다."
+          ],
+          "choices": [
+            {
+              "label": "rail actual 부족",
+              "next": "fuel_bad"
+            },
+            {
+              "label": "한 실린더 기여 이상",
+              "next": "inj_bad"
+            },
+            {
+              "label": "정상",
+              "next": "exh"
+            }
+          ]
+        },
+        "fuel_bad": {
+          "type": "result",
+          "title": "부하 연료압 부족",
+          "result": "부하에서만 rail actual이 command를 따라가지 못합니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "EN_FUEL_PRESSURE에서 저압공급/IMV/HP pump/return leak 분리."
+          ],
+          "rule_out": [
+            "흡기/부스트 기본원인"
+          ],
+          "confirm_if": [
+            "연료압 원인 수리 후 부하 rail/출력 회복"
+          ],
+          "disassembly_gate": "고압펌프는 마지막."
+        },
+        "inj_bad": {
+          "type": "result",
+          "title": "실린더/인젝터 불균형",
+          "result": "부하 힘없음과 특정 실린더 기여 이상이 연결됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "EN_INJECTOR_SEPARATE에서 전기/리턴/압축 분리."
+          ],
+          "rule_out": [
+            "공통 연료압"
+          ],
+          "confirm_if": [
+            "특정 실린더 원인 확인"
+          ],
+          "disassembly_gate": "확정 후 해당 실린더만 정비."
+        },
+        "exh": {
+          "type": "result",
+          "title": "배기제한/기계출력 추가검사",
+          "result": "공기·부스트·연료가 정상인데 출력이 부족합니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "배기 막힘/DPF 장착사양이면 차압, 배기누설, 압축/밸브타이밍을 확인한다."
+          ],
+          "rule_out": [
+            "MAF/BPS/RPS 기본회로"
+          ],
+          "confirm_if": [
+            "배기 또는 기계 원인이 독립시험에서 특정"
+          ],
+          "disassembly_gate": "기계분해 전 배기저항을 배제."
+        }
+      },
+      "sensor_ids": [
+        "MAF",
+        "BPS",
+        "EGR",
+        "RPS",
+        "IMV",
+        "INJ1",
+        "INJ2",
+        "INJ3",
+        "INJ4"
+      ]
+    },
+    "EN_ROUGH_IDLE": {
+      "title": "D24 아이들 불안정/부조",
+      "circuit": "D24_ROUGH_IDLE",
+      "start": "rail",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "rail": {
+          "type": "question",
+          "title": "1. 공통 rail 안정",
+          "question": "아이들에서 rail actual이 command에 안정적으로 따라갑니까?",
+          "field_method": [
+            "RPS 회로를 검증하고 actual/command 변동을 비교한다."
+          ],
+          "choices": [
+            {
+              "label": "불안정",
+              "next": "rail_bad"
+            },
+            {
+              "label": "안정",
+              "next": "cyl"
+            }
+          ]
+        },
+        "rail_bad": {
+          "type": "result",
+          "title": "공통 연료압 제어 우선",
+          "result": "부조와 함께 rail actual 제어가 불안정합니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "저압연료/공기혼입/IMV/RPS/고압펌프를 EN_FUEL_PRESSURE로 분리한다."
+          ],
+          "rule_out": [
+            "단일 인젝터 확정"
+          ],
+          "confirm_if": [
+            "rail 안정화 후 부조가 같이 개선"
+          ],
+          "disassembly_gate": "공통 연료압부터 해결."
+        },
+        "cyl": {
+          "type": "question",
+          "title": "2. 실린더 기여",
+          "question": "cut-out/balance 또는 인젝터 correction에서 특정 실린더 차이가 큽니까?",
+          "field_method": [
+            "진단기가 지원하면 cylinder cut-out을 사용한다.",
+            "지원 안 하면 배기온도/진동/전류파형을 보조 비교한다."
+          ],
+          "choices": [
+            {
+              "label": "특정 실린더",
+              "next": "inj"
+            },
+            {
+              "label": "공통/뚜렷한 차이 없음",
+              "next": "air"
+            }
+          ]
+        },
+        "inj": {
+          "type": "result",
+          "title": "특정 실린더 분리",
+          "result": "특정 실린더 기여가 반복적으로 다릅니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "EN_INJECTOR_SEPARATE에서 구동전류→리턴→압축을 분리한다."
+          ],
+          "rule_out": [
+            "공통 rail pressure"
+          ],
+          "confirm_if": [
+            "동일 실린더에서 전기/리턴/압축 중 원인 특정"
+          ],
+          "disassembly_gate": "인젝터 교환 전 리턴/압축 배제."
+        },
+        "air": {
+          "type": "question",
+          "title": "3. 공기/EGR",
+          "question": "MAF와 EGR 명령/실제에서 아이들 공기량을 흔드는 이상이 있습니까?",
+          "field_method": [
+            "EGR을 명령변화시켜 실제 반응과 아이들 변화를 확인한다.",
+            "흡기누설을 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "있음",
+              "next": "air_bad"
+            },
+            {
+              "label": "없음",
+              "next": "mech"
+            }
+          ]
+        },
+        "air_bad": {
+          "type": "result",
+          "title": "흡기/EGR 제어 원인",
+          "result": "부조가 공기량/EGR 변화와 연결됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "흡기 누설 또는 EGR 고착/전기회로를 수리하고 재평가한다."
+          ],
+          "rule_out": [
+            "인젝터 기계고장"
+          ],
+          "confirm_if": [
+            "공기/EGR 복구 후 idle 안정"
+          ],
+          "disassembly_gate": "공기계통 먼저."
+        },
+        "mech": {
+          "type": "result",
+          "title": "압축/밸브/마운트 구분",
+          "result": "연료압·실린더 분사·공기제어에서 원인이 특정되지 않습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "압축/누설, 밸브타이밍, 엔진마운트/부하를 비교한다."
+          ],
+          "rule_out": [
+            "RPS/BPS 기본회로"
+          ],
+          "confirm_if": [
+            "기계원인 또는 단순 진동전달 원인 특정"
+          ],
+          "disassembly_gate": "기계원인 확인 후 분해."
+        }
+      },
+      "sensor_ids": [
+        "RPS",
+        "MAF",
+        "EGR",
+        "INJ1",
+        "INJ2",
+        "INJ3",
+        "INJ4"
+      ]
+    },
+    "EN_BLACK_SMOKE": {
+      "title": "검은연기",
+      "circuit": "D24_BLACK_SMOKE",
+      "start": "cond",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "cond": {
+          "type": "question",
+          "title": "1. 재현조건",
+          "question": "연기는 어느 조건에서 가장 뚜렷합니까?",
+          "field_method": [
+            "연기색·냄새·지속시간·부하·냉각수/오일 소모를 기록한다."
+          ],
+          "choices": [
+            {
+              "label": "냉간 시동 직후",
+              "next": "cold"
+            },
+            {
+              "label": "부하/가속",
+              "next": "load"
+            },
+            {
+              "label": "공회전/상시",
+              "next": "steady"
+            }
+          ]
+        },
+        "cold": {
+          "type": "question",
+          "title": "2A. 냉간 관련",
+          "question": "예열/수온 live-data와 시동 후 연소 안정이 정상입니까?",
+          "field_method": [
+            "WTS 실제온도 비교, 예열 실제출력, 실린더별 초기 기여를 본다."
+          ],
+          "choices": [
+            {
+              "label": "이상",
+              "next": "cold_bad"
+            },
+            {
+              "label": "정상",
+              "next": "common"
+            }
+          ]
+        },
+        "cold_bad": {
+          "type": "result",
+          "title": "냉간 연소조건 우선",
+          "result": "검은 연기가 냉간 예열/온도/초기 실린더 기여 이상과 연결됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "WTS/예열/인젝터 기여/압축을 분리한다."
+          ],
+          "rule_out": [
+            "터보 단독고장"
+          ],
+          "confirm_if": [
+            "냉간 원인 수리 후 연기 감소"
+          ],
+          "disassembly_gate": "원인 특정 후 정비."
+        },
+        "load": {
+          "type": "question",
+          "title": "2B. 부하 공기/연료",
+          "question": "부하에서 MAF/BPS/rail actual이 명령·엔진상태를 따라갑니까?",
+          "field_method": [
+            "부하에서만 기록한다.",
+            "센서 회로 정상 확인 후 데이터를 해석한다."
+          ],
+          "choices": [
+            {
+              "label": "공기/부스트 이상",
+              "next": "air_bad"
+            },
+            {
+              "label": "rail/분사 이상",
+              "next": "fuel_bad"
+            },
+            {
+              "label": "둘 다 정상",
+              "next": "common"
+            }
+          ]
+        },
+        "air_bad": {
+          "type": "result",
+          "title": "공기/부스트 계통",
+          "result": "검은 연기와 흡기/부스트 이상이 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "흡기막힘/charge leak/터보/EGR을 EN_LOW_BOOST로 분리한다."
+          ],
+          "rule_out": [
+            "인젝터 단독고장"
+          ],
+          "confirm_if": [
+            "공기계통 복구 후 연기/출력 회복"
+          ],
+          "disassembly_gate": "공기계통부터."
+        },
+        "fuel_bad": {
+          "type": "result",
+          "title": "연료/분사 계통",
+          "result": "검은 연기와 rail/실린더 분사 이상이 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "EN_FUEL_PRESSURE 및 EN_INJECTOR_SEPARATE로 분리한다."
+          ],
+          "rule_out": [
+            "터보 단독"
+          ],
+          "confirm_if": [
+            "연료원인 수리 후 연기 감소"
+          ],
+          "disassembly_gate": "연료원인 특정 후."
+        },
+        "steady": {
+          "type": "question",
+          "title": "2C. 오일/냉각수 소모",
+          "question": "연기와 함께 엔진오일 또는 냉각수 소모가 확인됩니까?",
+          "field_method": [
+            "레벨을 표시해 실제 변화량/누설을 먼저 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "오일 소모",
+              "next": "oil"
+            },
+            {
+              "label": "냉각수 소모",
+              "next": "coolant"
+            },
+            {
+              "label": "소모 없음",
+              "next": "common"
+            }
+          ]
+        },
+        "oil": {
+          "type": "result",
+          "title": "오일 유입 경로 검사",
+          "result": "검은 연기와 오일소모가 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "터보 compressor/turbine oil leak, breather, valve guide, ring/blow-by를 순서대로 확인한다."
+          ],
+          "rule_out": [
+            "연료센서 단독"
+          ],
+          "confirm_if": [
+            "오일 유입 위치가 물리적으로 확인"
+          ],
+          "disassembly_gate": "원인 위치 특정 후 분해."
+        },
+        "coolant": {
+          "type": "result",
+          "title": "냉각수 연소실 유입 검사",
+          "result": "검은 연기와 냉각수 소모가 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "외부누설 배제 후 압력유지/기포/헤드가스켓·EGR cooler 사양을 점검한다."
+          ],
+          "rule_out": [
+            "오일소모 원인"
+          ],
+          "confirm_if": [
+            "냉각수 내부누설 시험 양성"
+          ],
+          "disassembly_gate": "내부누설 확인 후 헤드/EGR 계통 분해."
+        },
+        "common": {
+          "type": "result",
+          "title": "분사품질/압축/타이밍 추가분리",
+          "result": "검은 연기의 기본 공기·연료·소모 단서가 뚜렷하지 않습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "인젝터 과다분사/기여, EGR 과다, 흡기/배기 제한, 기계타이밍을 확인한다."
+          ],
+          "rule_out": [
+            "단순 색상만으로 부품 확정"
+          ],
+          "confirm_if": [
+            "인젝터/압축/타이밍 중 원인이 독립시험에서 특정"
+          ],
+          "disassembly_gate": "특정된 계통만 분해."
+        }
+      },
+      "sensor_ids": [
+        "MAF",
+        "BPS",
+        "EGR",
+        "RPS",
+        "INJ1",
+        "INJ2",
+        "INJ3",
+        "INJ4"
+      ]
+    },
+    "EN_WHITE_SMOKE": {
+      "title": "흰연기",
+      "circuit": "D24_WHITE_SMOKE",
+      "start": "cond",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "cond": {
+          "type": "question",
+          "title": "1. 재현조건",
+          "question": "연기는 어느 조건에서 가장 뚜렷합니까?",
+          "field_method": [
+            "연기색·냄새·지속시간·부하·냉각수/오일 소모를 기록한다."
+          ],
+          "choices": [
+            {
+              "label": "냉간 시동 직후",
+              "next": "cold"
+            },
+            {
+              "label": "부하/가속",
+              "next": "load"
+            },
+            {
+              "label": "공회전/상시",
+              "next": "steady"
+            }
+          ]
+        },
+        "cold": {
+          "type": "question",
+          "title": "2A. 냉간 관련",
+          "question": "예열/수온 live-data와 시동 후 연소 안정이 정상입니까?",
+          "field_method": [
+            "WTS 실제온도 비교, 예열 실제출력, 실린더별 초기 기여를 본다."
+          ],
+          "choices": [
+            {
+              "label": "이상",
+              "next": "cold_bad"
+            },
+            {
+              "label": "정상",
+              "next": "common"
+            }
+          ]
+        },
+        "cold_bad": {
+          "type": "result",
+          "title": "냉간 연소조건 우선",
+          "result": "흰 연기가 냉간 예열/온도/초기 실린더 기여 이상과 연결됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "WTS/예열/인젝터 기여/압축을 분리한다."
+          ],
+          "rule_out": [
+            "터보 단독고장"
+          ],
+          "confirm_if": [
+            "냉간 원인 수리 후 연기 감소"
+          ],
+          "disassembly_gate": "원인 특정 후 정비."
+        },
+        "load": {
+          "type": "question",
+          "title": "2B. 부하 공기/연료",
+          "question": "부하에서 MAF/BPS/rail actual이 명령·엔진상태를 따라갑니까?",
+          "field_method": [
+            "부하에서만 기록한다.",
+            "센서 회로 정상 확인 후 데이터를 해석한다."
+          ],
+          "choices": [
+            {
+              "label": "공기/부스트 이상",
+              "next": "air_bad"
+            },
+            {
+              "label": "rail/분사 이상",
+              "next": "fuel_bad"
+            },
+            {
+              "label": "둘 다 정상",
+              "next": "common"
+            }
+          ]
+        },
+        "air_bad": {
+          "type": "result",
+          "title": "공기/부스트 계통",
+          "result": "흰 연기와 흡기/부스트 이상이 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "흡기막힘/charge leak/터보/EGR을 EN_LOW_BOOST로 분리한다."
+          ],
+          "rule_out": [
+            "인젝터 단독고장"
+          ],
+          "confirm_if": [
+            "공기계통 복구 후 연기/출력 회복"
+          ],
+          "disassembly_gate": "공기계통부터."
+        },
+        "fuel_bad": {
+          "type": "result",
+          "title": "연료/분사 계통",
+          "result": "흰 연기와 rail/실린더 분사 이상이 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "EN_FUEL_PRESSURE 및 EN_INJECTOR_SEPARATE로 분리한다."
+          ],
+          "rule_out": [
+            "터보 단독"
+          ],
+          "confirm_if": [
+            "연료원인 수리 후 연기 감소"
+          ],
+          "disassembly_gate": "연료원인 특정 후."
+        },
+        "steady": {
+          "type": "question",
+          "title": "2C. 오일/냉각수 소모",
+          "question": "연기와 함께 엔진오일 또는 냉각수 소모가 확인됩니까?",
+          "field_method": [
+            "레벨을 표시해 실제 변화량/누설을 먼저 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "오일 소모",
+              "next": "oil"
+            },
+            {
+              "label": "냉각수 소모",
+              "next": "coolant"
+            },
+            {
+              "label": "소모 없음",
+              "next": "common"
+            }
+          ]
+        },
+        "oil": {
+          "type": "result",
+          "title": "오일 유입 경로 검사",
+          "result": "흰 연기와 오일소모가 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "터보 compressor/turbine oil leak, breather, valve guide, ring/blow-by를 순서대로 확인한다."
+          ],
+          "rule_out": [
+            "연료센서 단독"
+          ],
+          "confirm_if": [
+            "오일 유입 위치가 물리적으로 확인"
+          ],
+          "disassembly_gate": "원인 위치 특정 후 분해."
+        },
+        "coolant": {
+          "type": "result",
+          "title": "냉각수 연소실 유입 검사",
+          "result": "흰 연기와 냉각수 소모가 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "외부누설 배제 후 압력유지/기포/헤드가스켓·EGR cooler 사양을 점검한다."
+          ],
+          "rule_out": [
+            "오일소모 원인"
+          ],
+          "confirm_if": [
+            "냉각수 내부누설 시험 양성"
+          ],
+          "disassembly_gate": "내부누설 확인 후 헤드/EGR 계통 분해."
+        },
+        "common": {
+          "type": "result",
+          "title": "분사품질/압축/타이밍 추가분리",
+          "result": "흰 연기의 기본 공기·연료·소모 단서가 뚜렷하지 않습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "냉간 미연소, 인젝터 분무/누설, 압축, 냉각수 유입을 구분한다."
+          ],
+          "rule_out": [
+            "단순 색상만으로 부품 확정"
+          ],
+          "confirm_if": [
+            "인젝터/압축/타이밍 중 원인이 독립시험에서 특정"
+          ],
+          "disassembly_gate": "특정된 계통만 분해."
+        }
+      },
+      "sensor_ids": [
+        "WTS",
+        "RPS",
+        "INJ1",
+        "INJ2",
+        "INJ3",
+        "INJ4"
+      ]
+    },
+    "EN_BLUE_SMOKE": {
+      "title": "청색연기/오일소모",
+      "circuit": "D24_BLUE_SMOKE",
+      "start": "cond",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "cond": {
+          "type": "question",
+          "title": "1. 재현조건",
+          "question": "연기는 어느 조건에서 가장 뚜렷합니까?",
+          "field_method": [
+            "연기색·냄새·지속시간·부하·냉각수/오일 소모를 기록한다."
+          ],
+          "choices": [
+            {
+              "label": "냉간 시동 직후",
+              "next": "cold"
+            },
+            {
+              "label": "부하/가속",
+              "next": "load"
+            },
+            {
+              "label": "공회전/상시",
+              "next": "steady"
+            }
+          ]
+        },
+        "cold": {
+          "type": "question",
+          "title": "2A. 냉간 관련",
+          "question": "예열/수온 live-data와 시동 후 연소 안정이 정상입니까?",
+          "field_method": [
+            "WTS 실제온도 비교, 예열 실제출력, 실린더별 초기 기여를 본다."
+          ],
+          "choices": [
+            {
+              "label": "이상",
+              "next": "cold_bad"
+            },
+            {
+              "label": "정상",
+              "next": "common"
+            }
+          ]
+        },
+        "cold_bad": {
+          "type": "result",
+          "title": "냉간 연소조건 우선",
+          "result": "청색 연기가 냉간 예열/온도/초기 실린더 기여 이상과 연결됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "WTS/예열/인젝터 기여/압축을 분리한다."
+          ],
+          "rule_out": [
+            "터보 단독고장"
+          ],
+          "confirm_if": [
+            "냉간 원인 수리 후 연기 감소"
+          ],
+          "disassembly_gate": "원인 특정 후 정비."
+        },
+        "load": {
+          "type": "question",
+          "title": "2B. 부하 공기/연료",
+          "question": "부하에서 MAF/BPS/rail actual이 명령·엔진상태를 따라갑니까?",
+          "field_method": [
+            "부하에서만 기록한다.",
+            "센서 회로 정상 확인 후 데이터를 해석한다."
+          ],
+          "choices": [
+            {
+              "label": "공기/부스트 이상",
+              "next": "air_bad"
+            },
+            {
+              "label": "rail/분사 이상",
+              "next": "fuel_bad"
+            },
+            {
+              "label": "둘 다 정상",
+              "next": "common"
+            }
+          ]
+        },
+        "air_bad": {
+          "type": "result",
+          "title": "공기/부스트 계통",
+          "result": "청색 연기와 흡기/부스트 이상이 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "흡기막힘/charge leak/터보/EGR을 EN_LOW_BOOST로 분리한다."
+          ],
+          "rule_out": [
+            "인젝터 단독고장"
+          ],
+          "confirm_if": [
+            "공기계통 복구 후 연기/출력 회복"
+          ],
+          "disassembly_gate": "공기계통부터."
+        },
+        "fuel_bad": {
+          "type": "result",
+          "title": "연료/분사 계통",
+          "result": "청색 연기와 rail/실린더 분사 이상이 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "EN_FUEL_PRESSURE 및 EN_INJECTOR_SEPARATE로 분리한다."
+          ],
+          "rule_out": [
+            "터보 단독"
+          ],
+          "confirm_if": [
+            "연료원인 수리 후 연기 감소"
+          ],
+          "disassembly_gate": "연료원인 특정 후."
+        },
+        "steady": {
+          "type": "question",
+          "title": "2C. 오일/냉각수 소모",
+          "question": "연기와 함께 엔진오일 또는 냉각수 소모가 확인됩니까?",
+          "field_method": [
+            "레벨을 표시해 실제 변화량/누설을 먼저 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "오일 소모",
+              "next": "oil"
+            },
+            {
+              "label": "냉각수 소모",
+              "next": "coolant"
+            },
+            {
+              "label": "소모 없음",
+              "next": "common"
+            }
+          ]
+        },
+        "oil": {
+          "type": "result",
+          "title": "오일 유입 경로 검사",
+          "result": "청색 연기와 오일소모가 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "터보 compressor/turbine oil leak, breather, valve guide, ring/blow-by를 순서대로 확인한다."
+          ],
+          "rule_out": [
+            "연료센서 단독"
+          ],
+          "confirm_if": [
+            "오일 유입 위치가 물리적으로 확인"
+          ],
+          "disassembly_gate": "원인 위치 특정 후 분해."
+        },
+        "coolant": {
+          "type": "result",
+          "title": "냉각수 연소실 유입 검사",
+          "result": "청색 연기와 냉각수 소모가 함께 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "외부누설 배제 후 압력유지/기포/헤드가스켓·EGR cooler 사양을 점검한다."
+          ],
+          "rule_out": [
+            "오일소모 원인"
+          ],
+          "confirm_if": [
+            "냉각수 내부누설 시험 양성"
+          ],
+          "disassembly_gate": "내부누설 확인 후 헤드/EGR 계통 분해."
+        },
+        "common": {
+          "type": "result",
+          "title": "분사품질/압축/타이밍 추가분리",
+          "result": "청색 연기의 기본 공기·연료·소모 단서가 뚜렷하지 않습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "터보 오일씰/리턴, 브리더, 밸브가이드, 링/블로바이를 구분한다."
+          ],
+          "rule_out": [
+            "단순 색상만으로 부품 확정"
+          ],
+          "confirm_if": [
+            "인젝터/압축/타이밍 중 원인이 독립시험에서 특정"
+          ],
+          "disassembly_gate": "특정된 계통만 분해."
+        }
+      },
+      "sensor_ids": [
+        "MAF",
+        "BPS"
+      ]
+    },
+    "EN_OVERHEAT": {
+      "title": "D24 엔진 과열",
+      "circuit": "D24_OVERHEAT",
+      "start": "real",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "real": {
+          "type": "question",
+          "title": "1. 실제 과열 확인",
+          "question": "WTS live 값과 비접촉/접촉 온도 측정이 같은 방향으로 실제 과열을 가리킵니까?",
+          "field_method": [
+            "WTS 저항/신호와 실제 하우징 온도를 교차한다."
+          ],
+          "choices": [
+            {
+              "label": "계기/센서만 높음",
+              "next": "sensor"
+            },
+            {
+              "label": "실제 과열",
+              "next": "level"
+            }
+          ]
+        },
+        "sensor": {
+          "type": "result",
+          "title": "WTS/표시계통 우선",
+          "result": "실제 엔진은 과열이 아닌데 표시/진단값만 높습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "E_D24_WATER_TEMP로 센서/배선/GND를 확인한다."
+          ],
+          "rule_out": [
+            "워터펌프",
+            "헤드가스켓"
+          ],
+          "confirm_if": [
+            "WTS/표시 수리 후 값 일치"
+          ],
+          "disassembly_gate": "냉각계 분해 금지."
+        },
+        "level": {
+          "type": "question",
+          "title": "2. 냉각수/압력유지",
+          "question": "냉각수 레벨, 외부누설, 라디에이터캡/압력유지가 정상입니까?",
+          "field_method": [
+            "냉간 레벨과 압력테스트로 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "이상",
+              "next": "level_bad"
+            },
+            {
+              "label": "정상",
+              "next": "air"
+            }
+          ]
+        },
+        "level_bad": {
+          "type": "result",
+          "title": "냉각수 부족/압력유지 불량",
+          "result": "냉각계 기본량 또는 압력유지가 무너집니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "누설위치를 특정하고 캡/호스/라디에이터를 확인한다."
+          ],
+          "rule_out": [
+            "서모스탯 확정"
+          ],
+          "confirm_if": [
+            "누설/캡 원인 수리 후 과열 재현 사라짐"
+          ],
+          "disassembly_gate": "누설원인부터."
+        },
+        "air": {
+          "type": "question",
+          "title": "3. 방열/팬/벨트",
+          "question": "라디에이터 외부 막힘, 팬 풍량, 벨트 상태가 정상입니까?",
+          "field_method": [
+            "부하상태에서 팬 풍량과 라디에이터 전후 온도패턴을 본다."
+          ],
+          "choices": [
+            {
+              "label": "이상",
+              "next": "air_bad"
+            },
+            {
+              "label": "정상",
+              "next": "flow"
+            }
+          ]
+        },
+        "air_bad": {
+          "type": "result",
+          "title": "방열/팬구동 원인",
+          "result": "냉각수는 있으나 열을 외기로 버리지 못합니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "핀 막힘/팬/벨트를 복구한다."
+          ],
+          "rule_out": [
+            "워터펌프 내부"
+          ],
+          "confirm_if": [
+            "방열 복구 후 온도 안정"
+          ],
+          "disassembly_gate": "방열계통 먼저."
+        },
+        "flow": {
+          "type": "question",
+          "title": "4. 순환/서모스탯",
+          "question": "워터펌프 순환과 서모스탯 개방이 정상입니까?",
+          "field_method": [
+            "상하 호스/라디에이터 온도패턴과 냉각수 순환을 비교한다.",
+            "서모스탯은 OEM 검사절차로 개방을 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "순환 부족",
+              "next": "pump_bad"
+            },
+            {
+              "label": "서모스탯 이상",
+              "next": "therm_bad"
+            },
+            {
+              "label": "둘 다 정상",
+              "next": "internal"
+            }
+          ]
+        },
+        "pump_bad": {
+          "type": "result",
+          "title": "워터펌프/순환 불량",
+          "result": "방열부는 정상인데 냉각수 순환이 부족합니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "펌프 구동/임펠러/통로 막힘을 확인한다."
+          ],
+          "rule_out": [
+            "WTS 센서"
+          ],
+          "confirm_if": [
+            "펌프/통로 원인이 확인"
+          ],
+          "disassembly_gate": "순환 원인 특정 후 분해."
+        },
+        "therm_bad": {
+          "type": "result",
+          "title": "서모스탯 불량",
+          "result": "순환경로 중 서모스탯 개방 이상이 확인됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "서모스탯 OEM 온도시험/물리검사로 확정한다."
+          ],
+          "rule_out": [
+            "라디에이터 외부막힘"
+          ],
+          "confirm_if": [
+            "시험에서 개방 이상 재현"
+          ],
+          "disassembly_gate": "서모스탯 교환."
+        },
+        "internal": {
+          "type": "result",
+          "title": "연소가스/내부열원 추가검사",
+          "result": "레벨·방열·순환·서모스탯이 정상인데 과열됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "헤드가스켓 연소가스, 분사/타이밍, 지속 과부하를 확인한다."
+          ],
+          "rule_out": [
+            "기본 냉각외부계통"
+          ],
+          "confirm_if": [
+            "내부누설/연소 또는 과부하 원인이 특정"
+          ],
+          "disassembly_gate": "헤드 분해는 내부누설 양성 후."
+        }
+      },
+      "sensor_ids": [
+        "WTS"
+      ]
+    },
+    "EN_LOW_OIL_PRESS": {
+      "title": "D24 엔진오일 압력 낮음/경고",
+      "circuit": "D24_LOW_OIL_PRESS",
+      "start": "verify",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "verify": {
+          "type": "question",
+          "title": "1. 센서 vs 실제압",
+          "question": "OPTS 회로를 검증하고 기계식 게이지로 실제 오일압 저하가 확인됩니까?",
+          "field_method": [
+            "OPTS pin3 ECU165 5V, pin1 ECU148 GND, pin4 ECU111 pressure를 확인한다.",
+            "가능한 OEM 압력포트에 기계게이지 연결."
+          ],
+          "choices": [
+            {
+              "label": "실압 정상·센서값만 이상",
+              "next": "sensor"
+            },
+            {
+              "label": "실압도 낮음",
+              "next": "oil"
+            }
+          ]
+        },
+        "sensor": {
+          "type": "result",
+          "title": "OPTS/배선 원인",
+          "result": "기계 오일압은 정상인데 ECU 표시만 낮습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "OPTS 전원/GND/signal과 커넥터를 수리한다."
+          ],
+          "rule_out": [
+            "오일펌프",
+            "베어링"
+          ],
+          "confirm_if": [
+            "센서/배선 복구 후 표시와 기계압 일치"
+          ],
+          "disassembly_gate": "윤활계 분해 금지."
+        },
+        "oil": {
+          "type": "question",
+          "title": "2. 오일 기본조건",
+          "question": "오일레벨·점도/규격·희석·필터가 정상입니까?",
+          "field_method": [
+            "연료희석/과열오일/필터 막힘 또는 잘못된 부품을 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "이상",
+              "next": "oil_bad"
+            },
+            {
+              "label": "정상",
+              "next": "leak"
+            }
+          ]
+        },
+        "oil_bad": {
+          "type": "result",
+          "title": "오일/필터 조건",
+          "result": "실압 저하를 만들 수 있는 오일 기본조건 이상이 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "OEM 규격으로 정상화 후 실제압 재측정."
+          ],
+          "rule_out": [
+            "펌프 확정"
+          ],
+          "confirm_if": [
+            "정상화 후 실제압 회복"
+          ],
+          "disassembly_gate": "펌프 분해 전 해결."
+        },
+        "leak": {
+          "type": "question",
+          "title": "3. 외부/대누설",
+          "question": "터보 오일공급·리턴, 필터하우징, 갤러리 외부누설 또는 내부 대누설 징후가 있습니까?",
+          "field_method": [
+            "누유량과 압력변화를 함께 본다."
+          ],
+          "choices": [
+            {
+              "label": "누설 있음",
+              "next": "leak_bad"
+            },
+            {
+              "label": "뚜렷한 누설 없음",
+              "next": "pump"
+            }
+          ]
+        },
+        "leak_bad": {
+          "type": "result",
+          "title": "윤활유 누설 경로",
+          "result": "펌프보다 먼저 압력손실 경로가 확인됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "확인된 누설을 복구 후 기계압 재측정."
+          ],
+          "rule_out": [
+            "펌프 마모"
+          ],
+          "confirm_if": [
+            "누설 수리 후 압력 회복"
+          ],
+          "disassembly_gate": "누설부만 정비."
+        },
+        "pump": {
+          "type": "question",
+          "title": "4. 펌프/릴리프",
+          "question": "오일펌프 구동과 relief valve에 열린고착/손상이 확인됩니까?",
+          "field_method": [
+            "OEM §8 펌프/필터 어셈블리 검사절차 사용."
+          ],
+          "choices": [
+            {
+              "label": "릴리프/펌프 이상",
+              "next": "pump_bad"
+            },
+            {
+              "label": "정상",
+              "next": "bearing"
+            }
+          ]
+        },
+        "pump_bad": {
+          "type": "result",
+          "title": "오일펌프/릴리프 원인",
+          "result": "기본 오일·누설을 배제한 뒤 펌프/릴리프 이상이 확인됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "확인된 펌프/릴리프 부품을 정비."
+          ],
+          "rule_out": [
+            "센서 표시오류"
+          ],
+          "confirm_if": [
+            "정비 후 기계압 회복"
+          ],
+          "disassembly_gate": "확정 후 펌프 분해."
+        },
+        "bearing": {
+          "type": "result",
+          "title": "내부 베어링/간극 손실 의심",
+          "result": "펌프/릴리프와 외부조건이 정상인데 실제압이 계속 낮습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "열간/냉간 압력패턴, 금속분, 크랭크/캠 베어링 간극을 OEM 기준으로 검사한다."
+          ],
+          "rule_out": [
+            "OPTS",
+            "외부누설"
+          ],
+          "confirm_if": [
+            "내부간극/손상 확인"
+          ],
+          "disassembly_gate": "엔진분해는 내부손실 증거 확보 후."
+        }
+      },
+      "sensor_ids": [
+        "OPTS"
+      ]
+    },
+    "EN_LOW_BOOST": {
+      "title": "D24 부스트 부족/터보 힘없음",
+      "circuit": "D24_LOW_BOOST",
+      "start": "sensor",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "sensor": {
+          "type": "question",
+          "title": "1. BPS 검증",
+          "question": "BPS 5V/GND/signal과 대기압/무부하 기준값이 물리적으로 타당합니까?",
+          "field_method": [
+            "BPS pin1 ECU161 5V, pin2 ECU167 GND, pin3 ECU112 signal을 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "센서회로 이상",
+              "next": "sensor_bad"
+            },
+            {
+              "label": "센서 정상·실제 부스트 낮음",
+              "next": "air"
+            }
+          ]
+        },
+        "sensor_bad": {
+          "type": "result",
+          "title": "BPS/배선 원인",
+          "result": "실제 터보를 분해하기 전에 부스트 측정회로가 잘못됐습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "E_D24_BOOST_PRESSURE로 회로를 수리한다."
+          ],
+          "rule_out": [
+            "터보 기계고장"
+          ],
+          "confirm_if": [
+            "BPS 수리 후 실제/진단값 일치"
+          ],
+          "disassembly_gate": "터보 분해 금지."
+        },
+        "air": {
+          "type": "question",
+          "title": "2. 흡기공급",
+          "question": "에어필터/MAF/흡기덕트에 막힘·붕괴가 있습니까?",
+          "field_method": [
+            "부하에서 덕트 수축까지 본다."
+          ],
+          "choices": [
+            {
+              "label": "이상",
+              "next": "air_bad"
+            },
+            {
+              "label": "정상",
+              "next": "leak"
+            }
+          ]
+        },
+        "air_bad": {
+          "type": "result",
+          "title": "흡기 제한",
+          "result": "터보 입구 공기공급이 제한됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "필터/덕트/MAF 문제를 복구."
+          ],
+          "rule_out": [
+            "터보 내부"
+          ],
+          "confirm_if": [
+            "복구 후 BPS/출력 회복"
+          ],
+          "disassembly_gate": "흡기부터."
+        },
+        "leak": {
+          "type": "question",
+          "title": "3. 차지에어 누설",
+          "question": "터보 출구→인터쿨러→흡기매니폴드에서 압력누설이 있습니까?",
+          "field_method": [
+            "오일자국/클램프/호스 균열과 압력누설 시험을 사용한다."
+          ],
+          "choices": [
+            {
+              "label": "누설 있음",
+              "next": "leak_bad"
+            },
+            {
+              "label": "없음",
+              "next": "turbo"
+            }
+          ]
+        },
+        "leak_bad": {
+          "type": "result",
+          "title": "차지에어 누설",
+          "result": "터보가 만든 압력이 흡기까지 전달되지 않습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "누설부 수리 후 부하 BPS 재시험."
+          ],
+          "rule_out": [
+            "터보 휠"
+          ],
+          "confirm_if": [
+            "수리 후 boost/출력 회복"
+          ],
+          "disassembly_gate": "누설부 수리."
+        },
+        "turbo": {
+          "type": "question",
+          "title": "4. 터보 기계/제어",
+          "question": "터보 휠 손상·하우징 접촉·비정상 유격·오일공급/리턴 또는 actuator 이상이 있습니까?",
+          "field_method": [
+            "D24 §10 turbo inspection을 사용한다."
+          ],
+          "choices": [
+            {
+              "label": "이상",
+              "next": "turbo_bad"
+            },
+            {
+              "label": "정상",
+              "next": "egr"
+            }
+          ]
+        },
+        "turbo_bad": {
+          "type": "result",
+          "title": "터보 자체/액추에이터",
+          "result": "외부흡기 정상 후 터보 기계/제어 이상이 확인됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "오일공급 원인을 함께 해결하고 터보 정비."
+          ],
+          "rule_out": [
+            "BPS 회로"
+          ],
+          "confirm_if": [
+            "터보 정비 후 boost 회복"
+          ],
+          "disassembly_gate": "확정 후 터보 분해."
+        },
+        "egr": {
+          "type": "question",
+          "title": "5. EGR/배기",
+          "question": "EGR 과다개방 또는 배기누설/막힘이 확인됩니까?",
+          "field_method": [
+            "EGR 명령/실제 위치, 터빈 전단 배기누설/후단 restriction을 본다."
+          ],
+          "choices": [
+            {
+              "label": "EGR 이상",
+              "next": "egr_bad"
+            },
+            {
+              "label": "배기 이상",
+              "next": "exh_bad"
+            },
+            {
+              "label": "없음",
+              "next": "other"
+            }
+          ]
+        },
+        "egr_bad": {
+          "type": "result",
+          "title": "EGR 과다/고착",
+          "result": "EGR 상태가 실제 흡기량/부스트를 낮춥니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "EGR 밸브/회로를 수리."
+          ],
+          "rule_out": [
+            "터보 교환"
+          ],
+          "confirm_if": [
+            "EGR 정상화 후 boost 회복"
+          ],
+          "disassembly_gate": "EGR만 정비."
+        },
+        "exh_bad": {
+          "type": "result",
+          "title": "배기 누설/제한",
+          "result": "터빈 구동에 필요한 배기 에너지 또는 후단 배출이 비정상입니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "누설/막힘 위치 수리."
+          ],
+          "rule_out": [
+            "터보 코어 단독"
+          ],
+          "confirm_if": [
+            "배기 수리 후 boost 회복"
+          ],
+          "disassembly_gate": "배기부터."
+        },
+        "other": {
+          "type": "result",
+          "title": "연료/엔진출력과 교차진단",
+          "result": "부스트계통 자체에서 원인이 특정되지 않습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "rail actual/command, injector contribution, 압축/타이밍을 EN_LOW_POWER에서 확인한다."
+          ],
+          "rule_out": [
+            "BPS/흡기누설/터보/EGR 기본"
+          ],
+          "confirm_if": [
+            "엔진출력 원인이 특정"
+          ],
+          "disassembly_gate": "터보 재교환 금지."
+        }
+      },
+      "sensor_ids": [
+        "MAF",
+        "BPS",
+        "EGR"
+      ]
+    },
+    "EN_PREHEAT": {
+      "title": "D24 예열/에어히터 작동 안 됨",
+      "circuit": "D24_PREHEAT",
+      "start": "request",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "request": {
+          "type": "question",
+          "title": "1. 예열 요구",
+          "question": "냉간 조건에서 ECU/표시상 예열 요구가 발생합니까?",
+          "field_method": [
+            "WTS/흡기온도 값이 실제와 맞는지 먼저 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "요구 없음",
+              "next": "input"
+            },
+            {
+              "label": "요구 있음",
+              "next": "relay"
+            }
+          ]
+        },
+        "input": {
+          "type": "result",
+          "title": "예열 요구 입력/ECU 조건",
+          "result": "히터보다 ECU가 예열을 요구하지 않는 상태입니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "WTS/MAF-IAT 값, ECU DTC/전원/조건을 확인한다."
+          ],
+          "rule_out": [
+            "히터 코일 단선 확정"
+          ],
+          "confirm_if": [
+            "잘못된 온도입력/제어조건 수정 후 요구 발생"
+          ],
+          "disassembly_gate": "히터 교환 전 제어조건 해결."
+        },
+        "relay": {
+          "type": "question",
+          "title": "2. 릴레이 부하측",
+          "question": "예열 요구 시 릴레이 입력은 유지되고 출력과 히터 전류가 발생합니까?",
+          "field_method": [
+            "릴레이 coil command와 load input/output을 동시에 측정한다."
+          ],
+          "choices": [
+            {
+              "label": "입력 있음·출력 없음",
+              "next": "relay_bad"
+            },
+            {
+              "label": "출력 있음·전류 없음/작음",
+              "next": "heater"
+            },
+            {
+              "label": "출력/전류 정상",
+              "next": "ok"
+            }
+          ]
+        },
+        "relay_bad": {
+          "type": "result",
+          "title": "예열 릴레이/소켓/제어",
+          "result": "공급은 있는데 릴레이 출력이 부하상태에서 전달되지 않습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "coil 명령 정상 여부로 릴레이 접점 vs 제어를 분리하고 소켓 장력/열화를 확인한다."
+          ],
+          "rule_out": [
+            "히터 자체"
+          ],
+          "confirm_if": [
+            "바이패스/교환 후 부하전류 회복"
+          ],
+          "disassembly_gate": "릴레이/소켓 원인 특정 후."
+        },
+        "heater": {
+          "type": "result",
+          "title": "에어히터/부하회로",
+          "result": "릴레이 출력은 정상인데 히터가 실제 전류를 소비하지 않습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "히터 양단전압/저항/접지와 연결부를 확인한다."
+          ],
+          "rule_out": [
+            "ECU 조건"
+          ],
+          "confirm_if": [
+            "히터 단선/접촉불량 확인"
+          ],
+          "disassembly_gate": "히터 원인 확인 후 교환."
+        },
+        "ok": {
+          "type": "result",
+          "title": "예열계통 기본 정상",
+          "result": "예열 요구·출력·부하전류가 모두 존재합니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "시동불량이면 EN_HARD_START로 이동한다."
+          ],
+          "rule_out": [
+            "예열 전기계통"
+          ],
+          "confirm_if": [
+            "동일 조건에서 예열 동작 재현"
+          ],
+          "disassembly_gate": "예열부품 교환 금지."
+        }
+      },
+      "sensor_ids": [
+        "WTS",
+        "MAF"
+      ]
+    },
+    "EN_FUEL_PRESSURE": {
+      "title": "D24 rail 압력 부족/형성 안 됨",
+      "circuit": "D24_FUEL_PRESS",
+      "start": "rps",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "rps": {
+          "type": "question",
+          "title": "1. RPS 신뢰성",
+          "question": "RPS 5V/GND/signal이 정상이고 진단값이 물리적으로 타당합니까?",
+          "field_method": [
+            "RPS pin3 ECU138 5V, pin2 ECU119 GND, pin1 ECU135 signal 확인."
+          ],
+          "choices": [
+            {
+              "label": "RPS 회로 이상",
+              "next": "rps_bad"
+            },
+            {
+              "label": "RPS 정상",
+              "next": "low"
+            }
+          ]
+        },
+        "rps_bad": {
+          "type": "result",
+          "title": "RPS 회로 먼저",
+          "result": "압력 자체보다 측정회로 이상이 있습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "E_D24_RAIL_PRESSURE에서 수리."
+          ],
+          "rule_out": [
+            "고압펌프"
+          ],
+          "confirm_if": [
+            "RPS 값 정상화"
+          ],
+          "disassembly_gate": "고압계 분해 금지."
+        },
+        "low": {
+          "type": "question",
+          "title": "2. 저압연료/공기혼입",
+          "question": "탱크→필터→펌프입구 연료공급에 공기혼입·막힘·누설이 있습니까?",
+          "field_method": [
+            "투명호스/프라이밍 반응/필터상태/흡입누설을 확인한다."
+          ],
+          "choices": [
+            {
+              "label": "이상",
+              "next": "low_bad"
+            },
+            {
+              "label": "정상",
+              "next": "imv"
+            }
+          ]
+        },
+        "low_bad": {
+          "type": "result",
+          "title": "저압공급 원인",
+          "result": "고압펌프 입력조건이 확보되지 않았습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "필터/호스/프라이밍/탱크 통기 원인을 수리."
+          ],
+          "rule_out": [
+            "HP pump 확정"
+          ],
+          "confirm_if": [
+            "수리 후 rail actual 회복"
+          ],
+          "disassembly_gate": "저압측부터."
+        },
+        "imv": {
+          "type": "question",
+          "title": "3. IMV 제어",
+          "question": "ECU177 IMV PWM 명령과 밸브/배선 반응이 정상입니까?",
+          "field_method": [
+            "가능하면 전류/듀티 파형과 rail 반응을 함께 본다."
+          ],
+          "choices": [
+            {
+              "label": "명령/배선 이상",
+              "next": "imv_bad"
+            },
+            {
+              "label": "정상",
+              "next": "return"
+            }
+          ]
+        },
+        "imv_bad": {
+          "type": "result",
+          "title": "IMV 제어 원인",
+          "result": "저압공급은 정상이나 펌프 유입량 제어가 비정상입니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "IMV 하네스/코일/밸브 고착을 분리한다."
+          ],
+          "rule_out": [
+            "HP pump 내부"
+          ],
+          "confirm_if": [
+            "IMV 복구 후 rail 반응 회복"
+          ],
+          "disassembly_gate": "IMV 확인 후."
+        },
+        "return": {
+          "type": "question",
+          "title": "4. rail 누설/인젝터 리턴",
+          "question": "인젝터 return/rail 누설 비교에서 과다 누설 경로가 확인됩니까?",
+          "field_method": [
+            "모델 OEM 리턴시험 수치가 없으면 실린더간 비교로 1차 분리하고 임의 mL 기준 금지."
+          ],
+          "choices": [
+            {
+              "label": "특정 인젝터/누설 확인",
+              "next": "return_bad"
+            },
+            {
+              "label": "뚜렷한 누설 없음",
+              "next": "pump"
+            }
+          ]
+        },
+        "return_bad": {
+          "type": "result",
+          "title": "고압 누설/인젝터 리턴",
+          "result": "펌프가 만든 연료가 rail에서 유지되지 못하는 경로가 확인됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "확인된 인젝터/rail leak를 정비."
+          ],
+          "rule_out": [
+            "HP pump 확정"
+          ],
+          "confirm_if": [
+            "누설 정비 후 rail actual 회복"
+          ],
+          "disassembly_gate": "누설경로 먼저."
+        },
+        "pump": {
+          "type": "result",
+          "title": "고압펌프 기계성능 의심",
+          "result": "RPS·저압공급·IMV·과다리턴을 배제했는데 rail pressure가 형성되지 않습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "고압펌프 기계검사/전문 bench test로 최종 확인한다."
+          ],
+          "rule_out": [
+            "RPS",
+            "저압공급",
+            "IMV",
+            "과다리턴"
+          ],
+          "confirm_if": [
+            "펌프 성능불량이 별도 시험에서 확인"
+          ],
+          "disassembly_gate": "이 조건에서만 고압펌프 분해/교환."
+        }
+      },
+      "sensor_ids": [
+        "RPS",
+        "IMV",
+        "INJ1",
+        "INJ2",
+        "INJ3",
+        "INJ4"
+      ]
+    },
+    "EN_CRK_CAM_SYNC": {
+      "title": "D24 CRK/CAM 동기/RPM 신호 이상",
+      "circuit": "D24_SYNC",
+      "start": "rpm",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "rpm": {
+          "type": "question",
+          "title": "1. 진단 RPM/동기",
+          "question": "크랭킹 중 RPM과 sync 상태가 안정적입니까?",
+          "field_method": [
+            "간헐은 MIN/MAX가 아니라 진단기 record와 scope가 유리하다."
+          ],
+          "choices": [
+            {
+              "label": "RPM 0/간헐 또는 sync 불량",
+              "next": "scope"
+            },
+            {
+              "label": "정상",
+              "next": "ok"
+            }
+          ]
+        },
+        "scope": {
+          "type": "question",
+          "title": "2. 센서측 파형",
+          "question": "CRK/CAM 센서 커넥터에서 파형이 안정적입니까?",
+          "field_method": [
+            "CRK pair와 CAM 신호를 오실로스코프로 확인한다.",
+            "열간/진동 조건을 재현한다."
+          ],
+          "choices": [
+            {
+              "label": "센서측부터 깨짐",
+              "next": "sensor"
+            },
+            {
+              "label": "센서측 정상·ECU측 깨짐",
+              "next": "harness"
+            },
+            {
+              "label": "둘 다 정상인데 sync 불량",
+              "next": "mech"
+            }
+          ]
+        },
+        "sensor": {
+          "type": "result",
+          "title": "CRK/CAM 센서/기계 타깃",
+          "result": "센서 바로 출력에서 파형이 불안정합니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "센서 설치/갭/오염/타깃 휠 손상과 센서 자체를 검사한다."
+          ],
+          "rule_out": [
+            "ECU 입력단"
+          ],
+          "confirm_if": [
+            "센서/타깃 수정 후 파형 회복"
+          ],
+          "disassembly_gate": "센서 원인 확인 후 교환."
+        },
+        "harness": {
+          "type": "result",
+          "title": "센서→ECU 하네스/실드",
+          "result": "센서측 파형은 정상인데 ECU 입력에서 손실됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "핀장력/도체/실드/단락을 양끝 파형 비교로 구간분리한다."
+          ],
+          "rule_out": [
+            "센서 자체"
+          ],
+          "confirm_if": [
+            "하네스 수리 후 ECU측 파형과 RPM 회복"
+          ],
+          "disassembly_gate": "하네스만 수리."
+        },
+        "mech": {
+          "type": "result",
+          "title": "기계 타이밍/위상 문제",
+          "result": "두 센서 파형은 존재하지만 ECU 동기가 맞지 않습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "타이밍기어/캠-크랭크 관계와 trigger wheel 위치를 OEM 기계타이밍 기준으로 확인한다."
+          ],
+          "rule_out": [
+            "단순 센서단선"
+          ],
+          "confirm_if": [
+            "기계위상 이상 확인"
+          ],
+          "disassembly_gate": "기계위상 증거 후 타이밍부 분해."
+        },
+        "ok": {
+          "type": "result",
+          "title": "CRK/CAM 기본 정상",
+          "result": "크랭킹 RPM/동기가 안정적입니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "무시동이면 E_D24_CRANK_NO_START의 rail 단계로 이동."
+          ],
+          "rule_out": [
+            "CRK/CAM"
+          ],
+          "confirm_if": [
+            "동일 조건 반복 정상"
+          ],
+          "disassembly_gate": "센서 교환 금지."
+        }
+      },
+      "sensor_ids": [
+        "CRK",
+        "CAM"
+      ]
+    },
+    "EN_INJECTOR_SEPARATE": {
+      "title": "D24 특정 인젝터/실린더 이상 분리",
+      "circuit": "D24_INJECTOR",
+      "start": "drive",
+      "engine_sensor_map": "engine_sensor_map_d24_v1.json",
+      "nodes": {
+        "drive": {
+          "type": "question",
+          "title": "1. 전기구동",
+          "question": "의심 실린더 인젝터의 ECU drive/current waveform이 다른 실린더와 비슷합니까?",
+          "field_method": [
+            "시험등을 직접 연결하지 말고 전류클램프/오실로스코프/진단기 기능을 사용한다.",
+            "INJ OEM ECU pair를 사용한다."
+          ],
+          "choices": [
+            {
+              "label": "구동 없음/파형 다름",
+              "next": "elec"
+            },
+            {
+              "label": "구동 정상",
+              "next": "return"
+            }
+          ]
+        },
+        "elec": {
+          "type": "question",
+          "title": "2. ECU vs 하네스",
+          "question": "ECU측 구동은 나오는데 인젝터 커넥터에서 사라집니까?",
+          "field_method": [
+            "양끝을 같은 조건에서 비교한다."
+          ],
+          "choices": [
+            {
+              "label": "ECU 출력 있음·인젝터쪽 없음",
+              "next": "harness"
+            },
+            {
+              "label": "ECU 출력 자체 없음",
+              "next": "ecu"
+            }
+          ]
+        },
+        "harness": {
+          "type": "result",
+          "title": "인젝터 하네스/커넥터",
+          "result": "ECU 출력은 있으나 인젝터까지 전달되지 않습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "커넥터 핀장력/단선/단락을 구간분리한다."
+          ],
+          "rule_out": [
+            "인젝터 기계불량"
+          ],
+          "confirm_if": [
+            "하네스수리 후 파형/기여 회복"
+          ],
+          "disassembly_gate": "인젝터 교환 금지."
+        },
+        "ecu": {
+          "type": "result",
+          "title": "ECU 구동허가/드라이버",
+          "result": "rail/sync 조건이 정상인데 특정/공통 인젝터 드라이브가 없습니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "DTC, 공급/허가, ECU driver를 동일 실린더/다른 실린더와 비교한다."
+          ],
+          "rule_out": [
+            "인젝터 리턴"
+          ],
+          "confirm_if": [
+            "ECU출력 문제로 특정"
+          ],
+          "disassembly_gate": "ECU는 전원/GND/CAN/외부회로 배제 후 판단."
+        },
+        "return": {
+          "type": "question",
+          "title": "3. 리턴/내부누설",
+          "question": "의심 실린더 return이 다른 실린더와 반복적으로 크게 다릅니까?",
+          "field_method": [
+            "OEM 수치 미확정이면 동조건 실린더 비교로 1차 판정한다."
+          ],
+          "choices": [
+            {
+              "label": "과다/비정상",
+              "next": "return_bad"
+            },
+            {
+              "label": "비슷함",
+              "next": "comp"
+            }
+          ]
+        },
+        "return_bad": {
+          "type": "result",
+          "title": "인젝터 내부누설/기계",
+          "result": "전기구동은 정상이나 해당 인젝터 내부누설이 비정상입니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "연료오염/rail 상태를 같이 확인하고 인젝터 전문검사/교환."
+          ],
+          "rule_out": [
+            "ECU driver"
+          ],
+          "confirm_if": [
+            "인젝터 교환/bench test에서 원인 확인"
+          ],
+          "disassembly_gate": "리턴 이상 확인 후 인젝터 정비."
+        },
+        "comp": {
+          "type": "question",
+          "title": "4. 실린더 기계",
+          "question": "전기구동과 리턴이 정상인데 해당 실린더 압축/기계상태가 정상입니까?",
+          "field_method": [
+            "압축/누설/밸브를 실린더 비교한다."
+          ],
+          "choices": [
+            {
+              "label": "압축/기계 이상",
+              "next": "mech"
+            },
+            {
+              "label": "정상",
+              "next": "quality"
+            }
+          ]
+        },
+        "mech": {
+          "type": "result",
+          "title": "실린더 기계원인",
+          "result": "인젝터를 탓하기 전에 해당 실린더 기계상태 이상이 확인됩니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "밸브/압축/헤드/피스톤 원인을 추가검사."
+          ],
+          "rule_out": [
+            "인젝터 전기/리턴"
+          ],
+          "confirm_if": [
+            "기계시험 양성"
+          ],
+          "disassembly_gate": "기계원인 특정 후 엔진분해."
+        },
+        "quality": {
+          "type": "result",
+          "title": "분사품질/노즐 정밀검사",
+          "result": "구동·리턴·압축이 정상인데 해당 실린더 기여가 계속 다릅니다.",
+          "field_tools": [
+            "진단기",
+            "디지털 멀티미터",
+            "OEM 서비스자료"
+          ],
+          "field_test": [
+            "인젝터 bench spray/보정 및 연료품질을 확인한다."
+          ],
+          "rule_out": [
+            "하네스",
+            "대량 압축불량"
+          ],
+          "confirm_if": [
+            "bench test에서 분사품질 이상 확인"
+          ],
+          "disassembly_gate": "bench 근거 후 인젝터 교환."
+        }
+      },
+      "sensor_ids": [
+        "INJ1",
+        "INJ2",
+        "INJ3",
+        "INJ4",
+        "RPS"
+      ]
+    }
+  },
+  "coverage": {
+    "benchmark_bundles": 21,
+    "graphs": 21,
+    "status": "21/21 benchmark symptom bundles represented; exact OEM limits/pins remain explicitly unverified where source does not establish them"
+  }
+}

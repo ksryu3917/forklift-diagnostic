@@ -1,0 +1,521 @@
+{
+  "version": "1.1-technician-location-testpoints",
+  "scope": "D20S-7/D25S-7/D30S-7/D33S-7 D24 Tier-4",
+  "rule": "정비사가 측정할 물리 위치를 빠르게 찾기 위한 앱 재작성 위치맵. 치수/배선도 대체물이 아니며 정확 옵션/장착은 OEM 정비도·부품도를 연다.",
+  "sources": [
+    "SM1018-01 service manual subsystem figures",
+    "SB5120C05 Parts Book exploded views",
+    "SB2401C12 O&M fuse/relay access information",
+    "600123-00120 electrical schematic"
+  ],
+  "zones": {
+    "MAST_FRONT": {
+      "label": "마스트 / 캐리지 전면",
+      "x": 0.12,
+      "y": 0.38,
+      "access": "차량 전면. 포크·캐리지·리프트 실린더·마스트 호스/체인 구역.",
+      "test_points": [
+        "리프트/틸트 실린더 및 호스",
+        "마스트 체인/롤러/캐리지",
+        "어태치먼트 라인"
+      ],
+      "evidence": [
+        "parts_views/parts_p1570.png"
+      ],
+      "certainty": "ZONE_EXACT_COMPONENT_VARIES_WITH_MAST"
+    },
+    "FRONT_DRIVE_AXLE": {
+      "label": "전륜 / 드라이브액슬 / 서비스브레이크",
+      "x": 0.31,
+      "y": 0.7,
+      "access": "전륜 드라이브 액슬. 서비스브레이크는 액슬 내부 습식 디스크 방식이므로 좌/우 액슬 구간에서 격리한다.",
+      "test_points": [
+        "좌/우 브레이크 라인 격리",
+        "좌측/우측 블리드 나사",
+        "드라이브액슬 하우징",
+        "휠/허브 회전 비교"
+      ],
+      "evidence": [
+        "parts_views/parts_p52.png",
+        "parts_views/parts_p54.png",
+        "parts_views/parts_p71.png",
+        "parts_views/parts_p72.png"
+      ],
+      "certainty": "OEM_SYSTEM_LOCATION"
+    },
+    "COCKPIT_FRONT": {
+      "label": "운전석 전방 / 페달 / 키·방향스위치",
+      "x": 0.47,
+      "y": 0.4,
+      "access": "운전석 전방 및 플로어/페달 구역. 하부 하네스 접근은 플로어 매트·플로어 플레이트 탈거 절차를 따른다.",
+      "test_points": [
+        "KEY B+/ST",
+        "방향스위치",
+        "브레이크/인칭 페달 스위치",
+        "계기판 입력"
+      ],
+      "evidence": [
+        "parts_views/parts_p1570.png",
+        "parts_views/parts_p31.png",
+        "parts_views/parts_p32.png"
+      ],
+      "certainty": "OEM_ACCESS_AND_ZONE"
+    },
+    "UNDER_SEAT_RELAY": {
+      "label": "시트/후드 아래 · 퓨즈/릴레이",
+      "x": 0.59,
+      "y": 0.47,
+      "access": "후드와 시트 어셈블리를 올려 접근. O&M의 퓨즈/릴레이 정비 절차에서 이 접근을 사용한다.",
+      "test_points": [
+        "퓨즈 입력/출력 부하전압",
+        "STARTER relay #8",
+        "MAIN relay #9",
+        "OSS/IGN 전원"
+      ],
+      "evidence": [
+        "parts_views/parts_p1570.png"
+      ],
+      "certainty": "OEM_ACCESS_CONFIRMED"
+    },
+    "SEAT_OSS": {
+      "label": "시트 하부 / OSS·인터록",
+      "x": 0.57,
+      "y": 0.34,
+      "access": "시트 스위치/시트벨트 인터록 및 OSS 옵션 하네스가 모이는 운전석/시트 하부 구역. 옵션에 따라 컨트롤러 위치가 달라질 수 있어 부품도를 병행한다.",
+      "test_points": [
+        "시트 스위치 입력",
+        "OSS B+/IGN/GND",
+        "5V 기준신호",
+        "CAN H/L"
+      ],
+      "evidence": [
+        "parts_views/parts_p372.png",
+        "parts_views/parts_p450.png"
+      ],
+      "certainty": "OPTION_DEPENDENT"
+    },
+    "ENGINE_BAY": {
+      "label": "후드 아래 엔진룸",
+      "x": 0.73,
+      "y": 0.43,
+      "access": "후드 아래 D24 엔진 구역. 스타터·알터네이터·엔진 하네스·ECU 관련 점검은 이 구역에서 시작한다.",
+      "test_points": [
+        "스타터 B+/ST/CASE",
+        "알터네이터 B+/CASE",
+        "ECU/엔진 하네스",
+        "엔진 센서"
+      ],
+      "evidence": [
+        "parts_views/parts_p210.png",
+        "parts_views/parts_p211.png",
+        "parts_views/parts_p212.png",
+        "parts_views/parts_p248.png"
+      ],
+      "certainty": "OEM_GROUP_LOCATION"
+    },
+    "BATTERY_GROUND": {
+      "label": "배터리 / 메인 B+·접지",
+      "x": 0.66,
+      "y": 0.61,
+      "access": "배터리 포스트에서 시작해 메인 B+ 및 엔진/차체 접지로 부하전압강하를 추적한다. 정확 배터리 트레이 위치는 장착사양에 따라 실차 확인.",
+      "test_points": [
+        "배터리 납 포스트",
+        "클램프/케이블 크림프",
+        "엔진블록/스타터 하우징 접지"
+      ],
+      "evidence": [
+        "parts_views/parts_p31.png",
+        "parts_views/parts_p32.png"
+      ],
+      "certainty": "FUNCTION_EXACT_PHYSICAL_VARIANT"
+    },
+    "TRANSMISSION_CENTER": {
+      "label": "차체 중앙 하부 / 트랜스미션",
+      "x": 0.51,
+      "y": 0.66,
+      "access": "엔진과 드라이브 액슬 사이 트랜스미션 구역. F/R 솔레노이드·압력스위치·시험포트는 해당 T/M 분해도/정비도에서 확인한다.",
+      "test_points": [
+        "Tap1 · 펌프/시스템 비교점",
+        "Tap2 · 컨버터 출구/쿨러입구",
+        "Tap3 · 컨버터 충전",
+        "Tap4 · 전진 클러치",
+        "Tap5 · 후진 클러치",
+        "Tap6 · 메인/펌프압",
+        "Tap7 · 윤활압",
+        "F/R 솔레노이드"
+      ],
+      "evidence": [
+        "parts_views/parts_p119.png",
+        "parts_views/parts_p121.png",
+        "parts_views/parts_p123.png",
+        "parts_views/parts_p133.png"
+      ],
+      "certainty": "OEM_SYSTEM_LOCATION"
+    },
+    "HYD_CONTROL": {
+      "label": "유압 컨트롤밸브 / 유량분배기 구역",
+      "x": 0.45,
+      "y": 0.55,
+      "access": "운전석/차체 중앙의 메인 컨트롤밸브 계통. 레버 수·핑거팁/옵션에 따라 밸브 구성이 달라지므로 현재 장착 밸브 부품도를 확인한다.",
+      "test_points": [
+        "메인 릴리프 / 메인압",
+        "틸트·AUX 릴리프",
+        "유량분배기 / Priority·LS",
+        "리프트/틸트 스풀",
+        "리프트락/언로드 솔레노이드"
+      ],
+      "evidence": [
+        "parts_views/parts_p294.png",
+        "parts_views/parts_p297.png",
+        "parts_views/parts_p534.png",
+        "parts_views/parts_p536.png"
+      ],
+      "certainty": "ASSEMBLY_VARIANT"
+    },
+    "REAR_STEER_AXLE": {
+      "label": "후륜 / 스티어 액슬·실린더",
+      "x": 0.84,
+      "y": 0.7,
+      "access": "후륜 스티어 액슬 중앙/실린더 구역. 좌우 조향포트와 로드/타이로드 움직임을 동시에 비교한다.",
+      "test_points": [
+        "스티어 실린더 좌/우 포트",
+        "실린더 로드",
+        "스티어 액슬/킹핀",
+        "Priority/LS 계통은 HYD_CONTROL과 연동 확인"
+      ],
+      "evidence": [
+        "parts_views/parts_p93.png"
+      ],
+      "certainty": "OEM_SYSTEM_LOCATION"
+    },
+    "FRONT_LIGHT": {
+      "label": "오버헤드가드 전방 램프",
+      "x": 0.42,
+      "y": 0.17,
+      "access": "오버헤드가드/프론트 램프 장착 구역. STD/LED/캐빈 옵션에 따라 램프군이 달라진다.",
+      "test_points": [
+        "램프 B+",
+        "램프 GND",
+        "하네스 중간커넥터"
+      ],
+      "evidence": [
+        "parts_views/parts_p355.png",
+        "parts_views/parts_p357.png"
+      ],
+      "certainty": "OPTION_DEPENDENT"
+    },
+    "REAR_LIGHT": {
+      "label": "후방 램프 / 경광등 / 백업부저",
+      "x": 0.88,
+      "y": 0.25,
+      "access": "오버헤드가드 후방/카운터웨이트 주변 램프·경광등·백업알람 장착 구역. 옵션 구성 확인.",
+      "test_points": [
+        "STOP/TAIL/BACK-UP B+",
+        "공통 GND",
+        "백업 알람 전원"
+      ],
+      "evidence": [
+        "parts_views/parts_p358.png",
+        "parts_views/parts_p409.png",
+        "parts_views/parts_p414.png",
+        "parts_views/parts_p436.png"
+      ],
+      "certainty": "OPTION_DEPENDENT"
+    },
+    "CLUSTER": {
+      "label": "계기판 / 모니터",
+      "x": 0.46,
+      "y": 0.28,
+      "access": "운전석 전방 계기판/모니터 구역. 전원·GND·센서 입력을 표시장치 커넥터에서 분리한다.",
+      "test_points": [
+        "IGN2/계기 전원",
+        "GND 전압강하",
+        "연료/수온/TM온도 입력"
+      ],
+      "evidence": [
+        "parts_views/parts_p1570.png"
+      ],
+      "certainty": "OEM_ZONE"
+    },
+    "AC_CAB": {
+      "label": "A/C 증발기·컨덴서/팬 옵션 구역",
+      "x": 0.62,
+      "y": 0.16,
+      "access": "캐빈/오버헤드 A/C 옵션 구역. 생산시점/캐빈 사양에 따라 A/C 어셈블리·팬 수가 달라지므로 실제 부품도 형상으로 확인한다.",
+      "test_points": [
+        "A/C 컨트롤 전원",
+        "블로워 4핀",
+        "컨덴서 팬 전원/GND",
+        "컴프레서 클러치"
+      ],
+      "evidence": [
+        "parts_views/parts_p268.png",
+        "parts_views/parts_p269.png",
+        "parts_views/parts_p270.png",
+        "parts_views/parts_p501.png"
+      ],
+      "certainty": "OPTION_AND_SERIAL_DEPENDENT"
+    },
+    "WIPER_FRONT": {
+      "label": "전방 와이퍼 / 와셔",
+      "x": 0.46,
+      "y": 0.12,
+      "access": "캐빈 전면 유리 상단/하단의 와이퍼 모터·링크 및 와셔탱크/호스 구역. 캐빈 옵션 확인.",
+      "test_points": [
+        "와이퍼 모터 B+/GND",
+        "스위치 출력",
+        "와셔펌프/호스/노즐"
+      ],
+      "evidence": [
+        "parts_views/parts_p488.png"
+      ],
+      "certainty": "CAB_OPTION_DEPENDENT"
+    },
+    "WIPER_REAR": {
+      "label": "후방 와이퍼",
+      "x": 0.73,
+      "y": 0.12,
+      "access": "캐빈 후면 유리 와이퍼 모터/하네스 구역. 모듈러 캐빈/풀캐빈 옵션 확인.",
+      "test_points": [
+        "리어 와이퍼 모터 B+/GND",
+        "후방 하네스"
+      ],
+      "evidence": [
+        "parts_views/parts_p422.png",
+        "parts_views/parts_p486.png"
+      ],
+      "certainty": "CAB_OPTION_DEPENDENT"
+    },
+    "FUEL_FILTER": {
+      "label": "연료필터 / 수분센서",
+      "x": 0.8,
+      "y": 0.52,
+      "access": "엔진룸 연료필터/수분분리기 구역. 저압연료 공급·수분센서·연료히터 점검.",
+      "test_points": [
+        "필터 전/후 공급",
+        "수분센서",
+        "연료히터 전원"
+      ],
+      "evidence": [
+        "parts_views/parts_p1570.png"
+      ],
+      "certainty": "ENGINE_OPTION_LOCATION"
+    }
+  },
+  "system_focus": {
+    "트랜스미션": [
+      "TRANSMISSION_CENTER",
+      "COCKPIT_FRONT",
+      "UNDER_SEAT_RELAY"
+    ],
+    "브레이크": [
+      "COCKPIT_FRONT",
+      "HYD_CONTROL",
+      "FRONT_DRIVE_AXLE"
+    ],
+    "스티어링": [
+      "REAR_STEER_AXLE",
+      "HYD_CONTROL"
+    ],
+    "유압": [
+      "HYD_CONTROL",
+      "ENGINE_BAY",
+      "MAST_FRONT"
+    ],
+    "작업장치": [
+      "MAST_FRONT",
+      "HYD_CONTROL"
+    ],
+    "드라이브 액슬": [
+      "FRONT_DRIVE_AXLE",
+      "TRANSMISSION_CENTER"
+    ],
+    "에어컨": [
+      "AC_CAB",
+      "ENGINE_BAY",
+      "COCKPIT_FRONT"
+    ],
+    "마스트": [
+      "MAST_FRONT",
+      "HYD_CONTROL"
+    ],
+    "주차 브레이크": [
+      "COCKPIT_FRONT",
+      "TRANSMISSION_CENTER"
+    ]
+  },
+  "graph_focus": {
+    "E_STOP_NO": [
+      "COCKPIT_FRONT",
+      "UNDER_SEAT_RELAY",
+      "REAR_LIGHT"
+    ],
+    "E_STOP_ON": [
+      "COCKPIT_FRONT",
+      "UNDER_SEAT_RELAY",
+      "REAR_LIGHT"
+    ],
+    "E_HEAD_NO": [
+      "UNDER_SEAT_RELAY",
+      "FRONT_LIGHT"
+    ],
+    "E_TURN_NO": [
+      "COCKPIT_FRONT",
+      "UNDER_SEAT_RELAY",
+      "FRONT_LIGHT",
+      "REAR_LIGHT"
+    ],
+    "E_HORN_NO": [
+      "COCKPIT_FRONT",
+      "UNDER_SEAT_RELAY",
+      "FRONT_LIGHT"
+    ],
+    "E_BACKUP_NO": [
+      "COCKPIT_FRONT",
+      "UNDER_SEAT_RELAY",
+      "REAR_LIGHT",
+      "TRANSMISSION_CENTER"
+    ],
+    "E_START_NO": [
+      "BATTERY_GROUND",
+      "ENGINE_BAY",
+      "UNDER_SEAT_RELAY",
+      "COCKPIT_FRONT"
+    ],
+    "E_CHARGE": [
+      "BATTERY_GROUND",
+      "ENGINE_BAY"
+    ],
+    "E_PARK_INPUT": [
+      "COCKPIT_FRONT",
+      "TRANSMISSION_CENTER",
+      "UNDER_SEAT_RELAY"
+    ],
+    "E_LIFT_LOCK": [
+      "SEAT_OSS",
+      "UNDER_SEAT_RELAY",
+      "HYD_CONTROL"
+    ],
+    "E_GAUGE": [
+      "CLUSTER",
+      "ENGINE_BAY",
+      "TRANSMISSION_CENTER"
+    ],
+    "E_WORK_LAMP": [
+      "UNDER_SEAT_RELAY",
+      "REAR_LIGHT"
+    ],
+    "E_FR_CONTROL": [
+      "COCKPIT_FRONT",
+      "UNDER_SEAT_RELAY",
+      "TRANSMISSION_CENTER"
+    ],
+    "E_OSS_SEAT_LOCK": [
+      "SEAT_OSS",
+      "UNDER_SEAT_RELAY",
+      "HYD_CONTROL",
+      "COCKPIT_FRONT"
+    ],
+    "E_AC_POWER_NO": [
+      "COCKPIT_FRONT",
+      "UNDER_SEAT_RELAY",
+      "AC_CAB"
+    ],
+    "E_AC_COND_FAN_NO": [
+      "AC_CAB",
+      "ENGINE_BAY",
+      "UNDER_SEAT_RELAY"
+    ],
+    "E_PREHEAT_NO": [
+      "ENGINE_BAY",
+      "UNDER_SEAT_RELAY"
+    ],
+    "E_FUEL_HEATER_NO": [
+      "FUEL_FILTER",
+      "ENGINE_BAY",
+      "UNDER_SEAT_RELAY"
+    ],
+    "E_BRAKE_OIL_WARN": [
+      "COCKPIT_FRONT",
+      "HYD_CONTROL",
+      "CLUSTER"
+    ],
+    "E_CLUSTER_POWER_NO": [
+      "CLUSTER",
+      "UNDER_SEAT_RELAY",
+      "COCKPIT_FRONT"
+    ],
+    "E_CAN_NETWORK": [
+      "COCKPIT_FRONT",
+      "SEAT_OSS",
+      "ENGINE_BAY",
+      "UNDER_SEAT_RELAY"
+    ],
+    "E_SEATBELT_INPUT": [
+      "SEAT_OSS",
+      "COCKPIT_FRONT"
+    ],
+    "E_LICENSE_NO": [
+      "REAR_LIGHT",
+      "UNDER_SEAT_RELAY"
+    ],
+    "E_HOURMETER_NO": [
+      "CLUSTER",
+      "UNDER_SEAT_RELAY"
+    ],
+    "E_REAR_LAMP_NO": [
+      "REAR_LIGHT",
+      "UNDER_SEAT_RELAY"
+    ],
+    "E_STROBE_NO": [
+      "REAR_LIGHT",
+      "UNDER_SEAT_RELAY"
+    ],
+    "E_WATER_GAUGE": [
+      "CLUSTER",
+      "ENGINE_BAY"
+    ],
+    "E_TM_TEMP_GAUGE": [
+      "CLUSTER",
+      "TRANSMISSION_CENTER"
+    ],
+    "E_FUEL_GAUGE_ONLY": [
+      "CLUSTER",
+      "FUEL_FILTER"
+    ],
+    "E_D24_RAIL_PRESSURE": [
+      "ENGINE_BAY"
+    ],
+    "E_D24_BOOST_PRESSURE": [
+      "ENGINE_BAY"
+    ],
+    "E_D24_WATER_TEMP": [
+      "ENGINE_BAY"
+    ],
+    "E_D24_MAF": [
+      "ENGINE_BAY"
+    ],
+    "E_D24_5V_REF": [
+      "ENGINE_BAY"
+    ],
+    "E_D24_ECU_NO_COMM": [
+      "ENGINE_BAY",
+      "UNDER_SEAT_RELAY",
+      "COCKPIT_FRONT"
+    ],
+    "E_D24_CRANK_NO_START": [
+      "ENGINE_BAY",
+      "FUEL_FILTER",
+      "BATTERY_GROUND"
+    ],
+    "E_WIPER_NO": [
+      "WIPER_FRONT",
+      "WIPER_REAR",
+      "COCKPIT_FRONT"
+    ],
+    "E_WASHER_NO": [
+      "WIPER_FRONT",
+      "COCKPIT_FRONT"
+    ]
+  }
+}
