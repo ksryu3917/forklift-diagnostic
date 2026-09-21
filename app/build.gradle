@@ -1,19 +1,32 @@
 plugins {
     id 'com.android.application'
 }
+def projectState = new groovy.json.JsonSlurper().parse(rootProject.file('PROJECT_STATE.json'))
 android {
     namespace 'com.ryu.forkliftdiagnostic'
     compileSdk 35
     defaultConfig {
-        applicationId "com.ryu.forkliftdiagnostic"
+        applicationId projectState.application_id
         minSdk 26
         targetSdk 35
-        versionCode 38
-        versionName "0.18-rc-expert-v8.9.4-manual-library"
+        versionCode projectState.version_code as Integer
+        versionName projectState.version_name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release { minifyEnabled false }
+    }
+    sourceSets {
+        main {
+            java {
+                include 'com/ryu/forkliftdiagnostic/MainActivity.java'
+                include 'com/ryu/forkliftdiagnostic/core/**'
+                include 'com/ryu/forkliftdiagnostic/engine/**'
+                include 'com/ryu/forkliftdiagnostic/ui/**'
+            }
+            assets { include 'v20/**'; exclude 'v20/legacy/**' }
+        }
+        androidTest { java { include 'com/ryu/forkliftdiagnostic/V20RuntimeGateTest.java' } }
     }
 }
 dependencies {
