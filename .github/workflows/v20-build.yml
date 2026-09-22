@@ -46,5 +46,9 @@ jobs:
             build/lamp-flow.txt
       - name: Full release readiness remains required
         run: |
-          python3 tools/validate_p0_regressions.py
-          python3 tools/validate_release_readiness.py
+          set +e
+          status=0
+          python3 tools/validate_scenarios_v20.py || status=1
+          python3 tools/validate_p0_regressions.py || status=1
+          python3 tools/validate_release_readiness.py || status=1
+          exit "$status"
