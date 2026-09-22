@@ -1,0 +1,419 @@
+{
+  "id": "EV_REACH_NO_TRAVEL_MECH_001",
+  "title": "리치 주행불가 · 모터 회전 + 차 안 감",
+  "vehicle_scope": {
+    "manufacturer": "ALL",
+    "models": [
+      "EXACT_REACH_MODEL_REQUIRED"
+    ]
+  },
+  "start": "scope",
+  "evidence_refs": [
+    "User field case 2026-09-20",
+    "OEM brake release and lift procedure required"
+  ],
+  "nodes": {
+    "scope": {
+      "type": "question",
+      "title": "모델·안전절차 확인",
+      "first_observation": "전원 정상·주행 불가",
+      "safety_preconditions": [
+        "정확한 제조사/모델 확인",
+        "OEM 안전 리프트·브레이크 해제 절차 확보"
+      ],
+      "test_location": "명판과 서비스 매뉴얼",
+      "tool": "명판·OEM 매뉴얼",
+      "operating_condition": "전원 OFF",
+      "measurement_or_action": "exact-model 절차 확보 여부 확인",
+      "expected_basis": "OEM procedure",
+      "choices": [
+        {
+          "id": "yes",
+          "label": "모델·절차 확인됨",
+          "next": "shaft"
+        },
+        {
+          "id": "no",
+          "label": "unknown model",
+          "next": "unknown_stop"
+        }
+      ]
+    },
+    "unknown_stop": {
+      "type": "result",
+      "title": "UNKNOWN MODEL STOP",
+      "result": "모델별 리프트·브레이크 해제 절차가 확인되지 않아 실행 절차를 차단합니다.",
+      "rule_out": [
+        "범용 절차 추정"
+      ],
+      "confirm_if": [
+        "명판과 OEM 절차 확보 후 재개"
+      ],
+      "next_action": "제조사·모델·제조번호를 확보",
+      "teardown_gate": "분해 금지",
+      "do_not": [
+        "브레이크 강제해제 추정 금지"
+      ],
+      "evidence_refs": [
+        "OEM_VERIFY"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "UNKNOWN_BLOCKED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "모델별 리프트·브레이크 해제 절차가 확인되지 않아 실행 절차를 차단합니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "제조사·모델·제조번호를 확보",
+      "expected_basis": "isolation"
+    },
+    "shaft": {
+      "type": "question",
+      "title": "1 · 모터 출력 확인",
+      "first_observation": "주행명령 때 모터 상단 브레이크 디스크/모터축 회전",
+      "safety_preconditions": [
+        "접근거리 확보"
+      ],
+      "test_location": "모터축·브레이크 디스크·커플링",
+      "tool": "회전 표시 페인트·관찰",
+      "operating_condition": "짧은 주행명령",
+      "measurement_or_action": "입력부 동시 회전과 커플링 미끄럼 확인",
+      "expected_basis": "isolation",
+      "choices": [
+        {
+          "id": "rotates",
+          "label": "모터축·커플링 회전",
+          "next": "lift"
+        },
+        {
+          "id": "not",
+          "label": "모터축 회전 안 함",
+          "next": "control_route"
+        }
+      ]
+    },
+    "lift": {
+      "type": "question",
+      "title": "2 · 안전 리프트 후 무부하 회전",
+      "first_observation": "모터 입력은 회전",
+      "safety_preconditions": [
+        "OEM 지정 리프트 포인트",
+        "정격 스탠드·휠초크",
+        "작업자 회전체 이격"
+      ],
+      "test_location": "구동휠과 모터/감속기",
+      "tool": "리프트·스탠드·표시도구",
+      "operating_condition": "구동휠 완전 부상·짧은 명령",
+      "measurement_or_action": "무부하 휠 회전과 주기성 쿵쿵 충격 동시 관찰",
+      "expected_basis": "isolation",
+      "choices": [
+        {
+          "id": "shock",
+          "label": "휠 회전하나 주기성 충격",
+          "next": "brake_release"
+        },
+        {
+          "id": "smooth",
+          "label": "무부하 부드럽게 회전",
+          "next": "loaded_only"
+        }
+      ]
+    },
+    "brake_release": {
+      "type": "question",
+      "title": "3 · 브레이크 해제 후 손회전",
+      "first_observation": "무부하 회전+주기성 충격",
+      "safety_preconditions": [
+        "전원 OFF·키 제거",
+        "OEM 절차로 전자브레이크 해제",
+        "차량 완전 지지"
+      ],
+      "test_location": "구동휠·브레이크·모터축",
+      "tool": "OEM 브레이크 해제공구·토크 감각 기록",
+      "operating_condition": "전원 OFF",
+      "measurement_or_action": "손회전하여 특정 각도 걸림·주기·백래시 확인",
+      "expected_basis": "isolation",
+      "choices": [
+        {
+          "id": "periodic",
+          "label": "특정 위치에서 떡떡 걸림",
+          "next": "sync"
+        },
+        {
+          "id": "brake",
+          "label": "브레이크 해제 시 걸림 사라짐",
+          "next": "brake_drag"
+        }
+      ]
+    },
+    "sync": {
+      "type": "question",
+      "title": "4 · 입력-출력 동시성 격리",
+      "first_observation": "손회전 주기성 걸림",
+      "safety_preconditions": [
+        "전원 OFF·완전 지지"
+      ],
+      "test_location": "모터축→커플링→감속기 입력→출력→허브",
+      "tool": "위치 마킹·다이얼게이지(필요 시)",
+      "operating_condition": "양방향 저속 손회전",
+      "measurement_or_action": "각 지점 회전 동시성·백래시·유격과 최초 단절 지점 비교",
+      "expected_basis": "isolation",
+      "choices": [
+        {
+          "id": "inside",
+          "label": "감속기 입력 이후 걸림/유격",
+          "next": "oil"
+        },
+        {
+          "id": "hub",
+          "label": "감속기 출력 이후 단절",
+          "next": "hub_result"
+        }
+      ]
+    },
+    "oil": {
+      "type": "question",
+      "title": "5 · 기어오일/금속편",
+      "first_observation": "감속기 어셈블리 내부로 격리",
+      "safety_preconditions": [
+        "오일 온도·화상 주의",
+        "받이 설치"
+      ],
+      "test_location": "감속기 레벨/드레인·자석 플러그",
+      "tool": "깨끗한 용기·자석·조명",
+      "operating_condition": "OEM 배유 조건",
+      "measurement_or_action": "오일량·색·금속편·치형 조각 확인",
+      "expected_basis": "OEM procedure / isolation",
+      "choices": [
+        {
+          "id": "metal",
+          "label": "금속편/치형 조각 있음",
+          "next": "reducer_result"
+        },
+        {
+          "id": "clean",
+          "label": "금속편 없음",
+          "next": "assembly_boundary"
+        }
+      ]
+    },
+    "reducer_result": {
+      "type": "result",
+      "title": "감속기 내부 기어/베어링/스플라인 범위",
+      "result": "주기성 걸림과 금속 증거가 감속기 입력 이후에서 재현됩니다.",
+      "rule_out": [
+        "컨트롤러 우선 교환",
+        "모터 전기 출력 단절",
+        "브레이크 끌림 단독",
+        "허브 이후 단절"
+      ],
+      "confirm_if": [
+        "분해 후 기어 치손·베어링 박리/유격·피니언/내부 스플라인 손상이 회전주기와 일치"
+      ],
+      "next_action": "OEM 분해절차로 감속기 내부 기어·베어링·스플라인 확인",
+      "teardown_gate": "리프트→브레이크 해제→손회전→동시성→오일/금속편까지 완료 후 감속기만 분해",
+      "do_not": [
+        "격리 전 모터/액슬 분해 금지"
+      ],
+      "evidence_refs": [
+        "User field case 2026-09-20",
+        "OEM_VERIFY"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_REACH_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "주기성 걸림과 금속 증거가 감속기 입력 이후에서 재현됩니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "OEM 분해절차로 감속기 내부 기어·베어링·스플라인 확인",
+      "expected_basis": "isolation"
+    },
+    "assembly_boundary": {
+      "type": "result",
+      "title": "감속기 어셈블리 경계까지 확정",
+      "result": "분해 전 검사로 감속기 입력 이후·출력 이전 범위까지 격리됐으나 내부 부품은 확정하지 않습니다.",
+      "rule_out": [
+        "컨트롤러",
+        "모터 무회전",
+        "브레이크 단독"
+      ],
+      "confirm_if": [
+        "OEM 분해검사에서 기어·베어링·스플라인 중 물리손상 확인"
+      ],
+      "next_action": "감속기 어셈블리만 분해검사",
+      "teardown_gate": "현재 단계에서 감속기 어셈블리 분해 허용",
+      "do_not": [
+        "내부 부품을 미리 단정 금지"
+      ],
+      "evidence_refs": [
+        "isolation chain"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_REACH_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "분해 전 검사로 감속기 입력 이후·출력 이전 범위까지 격리됐으나 내부 부품은 확정하지 않습니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "감속기 어셈블리만 분해검사",
+      "expected_basis": "isolation"
+    },
+    "hub_result": {
+      "type": "result",
+      "title": "허브/출력 결합 범위",
+      "result": "감속기 출력까지 동시 회전하나 허브/휠 전달이 끊깁니다.",
+      "rule_out": [
+        "모터",
+        "컨트롤러",
+        "감속기 입력"
+      ],
+      "confirm_if": [
+        "출력축과 허브 사이 스플라인/키/체결 손상 확인"
+      ],
+      "next_action": "허브·출력 결합부 검사",
+      "teardown_gate": "회전 단절 위치 확인 후 허브측만 분해",
+      "do_not": [
+        "감속기 전체 선분해 금지"
+      ],
+      "evidence_refs": [
+        "isolation chain"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_REACH_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "감속기 출력까지 동시 회전하나 허브/휠 전달이 끊깁니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "허브·출력 결합부 검사",
+      "expected_basis": "isolation"
+    },
+    "brake_drag": {
+      "type": "result",
+      "title": "전자브레이크 끌림/해제 불량",
+      "result": "OEM 절차로 브레이크 해제했을 때 걸림이 사라집니다.",
+      "rule_out": [
+        "감속기 주기성 걸림"
+      ],
+      "confirm_if": [
+        "브레이크 에어갭·코일/해제기구 이상이 OEM 기준에서 확인"
+      ],
+      "next_action": "브레이크 전원·에어갭·기계해제 검사",
+      "teardown_gate": "해제 전후 A/B 결과 후 브레이크만 분해",
+      "do_not": [
+        "모터 교환 금지"
+      ],
+      "evidence_refs": [
+        "OEM brake procedure"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_REACH_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "OEM 절차로 브레이크 해제했을 때 걸림이 사라집니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "브레이크 전원·에어갭·기계해제 검사",
+      "expected_basis": "isolation"
+    },
+    "loaded_only": {
+      "type": "result",
+      "title": "부하에서만 전달 실패",
+      "result": "무부하는 부드럽지만 접지 부하에서만 전달이 끊깁니다.",
+      "rule_out": [
+        "상시 베어링 고착"
+      ],
+      "confirm_if": [
+        "마킹한 결합부 중 부하에서만 미끄럼 발생"
+      ],
+      "next_action": "커플링·스플라인·허브를 부하 동시성으로 비교",
+      "teardown_gate": "부하에서 최초 미끄럼 지점 확인 후 분해",
+      "do_not": [
+        "무부하 회전만으로 정상 판정 금지"
+      ],
+      "evidence_refs": [
+        "isolation"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_REACH_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "무부하는 부드럽지만 접지 부하에서만 전달이 끊깁니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "커플링·스플라인·허브를 부하 동시성으로 비교",
+      "expected_basis": "isolation"
+    },
+    "control_route": {
+      "type": "result",
+      "title": "전기/제어 주행불가 경로로 이동",
+      "result": "주행명령에도 모터축이 회전하지 않습니다.",
+      "rule_out": [
+        "현재 기계전달 P0 경로"
+      ],
+      "confirm_if": [
+        "B+/B-·Drive Enable·F/R·accelerator·torque command·motor current/RPM 검사"
+      ],
+      "next_action": "EV_NO_TRAVEL_CONTROL_001 실행",
+      "teardown_gate": "기계부 분해 금지",
+      "do_not": [
+        "컨트롤러 즉시 교환 금지"
+      ],
+      "evidence_refs": [
+        "control isolation"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_REACH_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "주행명령에도 모터축이 회전하지 않습니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "EV_NO_TRAVEL_CONTROL_001 실행",
+      "expected_basis": "isolation"
+    }
+  }
+}
