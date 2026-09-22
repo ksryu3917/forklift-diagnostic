@@ -1,0 +1,344 @@
+{
+  "id": "EV_BATTERY_SHORT_RUNTIME_001",
+  "title": "완충 후 2~3시간 만에 배터리 소진",
+  "vehicle_scope": {
+    "manufacturer": "ALL",
+    "models": [
+      "EXACT_BATTERY_SPEC_REQUIRED"
+    ]
+  },
+  "start": "charged",
+  "evidence_refs": [
+    "Battery nameplate/OEM charger manual required"
+  ],
+  "nodes": {
+    "charged": {
+      "type": "question",
+      "title": "1 · 완충 확인",
+      "first_observation": "사용시간 급감",
+      "safety_preconditions": [
+        "절연 PPE·금속 장신구 제거"
+      ],
+      "test_location": "충전기 기록·배터리 명판",
+      "tool": "충전기 기록·DMM",
+      "operating_condition": "완충 종료 후 안정화",
+      "measurement_or_action": "충전종료 상태와 정지 팩 전압 기록",
+      "expected_basis": "OEM numeric",
+      "choices": [
+        {
+          "id": "yes",
+          "label": "완충 확인됨",
+          "next": "load"
+        },
+        {
+          "id": "no",
+          "label": "완충 불확실",
+          "next": "charge_fault"
+        }
+      ]
+    },
+    "load": {
+      "type": "question",
+      "title": "2 · 부하 중 팩 전압+동시 DC 전류",
+      "first_observation": "정지 전압 기록 완료",
+      "safety_preconditions": [
+        "CAT 정격 계측기·클램프 방향 확인"
+      ],
+      "test_location": "팩 메인단자와 메인 DC 케이블",
+      "tool": "DMM + DC 클램프미터",
+      "operating_condition": "동일 주행/유압 부하",
+      "measurement_or_action": "팩 voltage sag와 battery DC current를 동시에 기록",
+      "expected_basis": "OEM numeric / normal-side comparison",
+      "choices": [
+        {
+          "id": "sag",
+          "label": "전압 sag 큼·전류 정상",
+          "next": "cells"
+        },
+        {
+          "id": "amps",
+          "label": "전류 과다",
+          "next": "vehicle_load"
+        },
+        {
+          "id": "normal",
+          "label": "순간값 정상이나 사용시간 짧음",
+          "next": "capacity"
+        }
+      ]
+    },
+    "cells": {
+      "type": "question",
+      "title": "3 · 셀별 부하전압",
+      "first_observation": "팩 sag 확인",
+      "safety_preconditions": [
+        "노출 버스바 단락 방지"
+      ],
+      "test_location": "각 셀 단자",
+      "tool": "절연 프로브 DMM",
+      "operating_condition": "동일 부하·동일 시점",
+      "measurement_or_action": "셀별 부하 전압을 순차 기록해 약한 셀 편차 확인",
+      "expected_basis": "manufacturer numeric / comparison",
+      "choices": [
+        {
+          "id": "weak",
+          "label": "특정 셀만 크게 처짐",
+          "next": "gravity"
+        },
+        {
+          "id": "uniform",
+          "label": "전체가 비슷하게 처짐",
+          "next": "capacity"
+        }
+      ]
+    },
+    "gravity": {
+      "type": "question",
+      "title": "4 · 셀별 비중+온도",
+      "first_observation": "약한 셀 후보 존재",
+      "safety_preconditions": [
+        "보안경·산 장갑·환기"
+      ],
+      "test_location": "각 셀 전해액",
+      "tool": "온도보정 비중계·온도계",
+      "operating_condition": "제조사 지정 안정화 시점",
+      "measurement_or_action": "셀별 비중과 온도를 함께 기록·보정",
+      "expected_basis": "battery manufacturer numeric",
+      "choices": [
+        {
+          "id": "cell",
+          "label": "동일 셀 비중/전압 이상 일치",
+          "next": "connection"
+        },
+        {
+          "id": "not",
+          "label": "비중 편차 없음",
+          "next": "connection"
+        }
+      ]
+    },
+    "connection": {
+      "type": "question",
+      "title": "5 · 연결바/메인단자 전압강하",
+      "first_observation": "셀/팩 데이터 확보",
+      "safety_preconditions": [
+        "단락 방지 절연 프로브"
+      ],
+      "test_location": "각 연결바 양단·메인단자",
+      "tool": "mV 분해능 DMM",
+      "operating_condition": "동일 부하 중",
+      "measurement_or_action": "각 연결부 양단 전압강하를 비교",
+      "expected_basis": "normal-side comparison",
+      "choices": [
+        {
+          "id": "high",
+          "label": "특정 연결부만 높음",
+          "next": "connection_result"
+        },
+        {
+          "id": "normal",
+          "label": "연결부 균일",
+          "next": "capacity_result"
+        }
+      ]
+    },
+    "connection_result": {
+      "type": "result",
+      "title": "연결바/단자 고저항",
+      "result": "특정 연결부에서 부하 전압강하가 반복됩니다.",
+      "rule_out": [
+        "전체 팩 즉시 교환",
+        "차량 과전류 단독"
+      ],
+      "confirm_if": [
+        "접촉면 정비·규정 토크 후 해당 강하와 sag가 정상화"
+      ],
+      "next_action": "제조사 절차로 접촉면·체결상태 정비",
+      "teardown_gate": "고저항 연결부 특정 후 전원 격리·정비",
+      "do_not": [
+        "활선 상태 체결 금지"
+      ],
+      "evidence_refs": [
+        "manufacturer torque/spec required"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_BATTERY_SPEC_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "특정 연결부에서 부하 전압강하가 반복됩니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "제조사 절차로 접촉면·체결상태 정비",
+      "expected_basis": "isolation"
+    },
+    "capacity_result": {
+      "type": "result",
+      "title": "팩 용량저하/셀 열화 범위",
+      "result": "차량 전류와 연결부는 정상 범위이나 실제 Ah/사용시간이 부족합니다.",
+      "rule_out": [
+        "차량 과전류 소비",
+        "단일 연결바 고저항"
+      ],
+      "confirm_if": [
+        "제조사 조건의 용량시험에서 정격 대비 부족하고 셀 데이터가 반복"
+      ],
+      "next_action": "실제 사용 Ah와 제조사 용량시험으로 보증 판정",
+      "teardown_gate": "셀별 전압·비중·온도 결과 후 수리/교체 범위 결정",
+      "do_not": [
+        "48V 범용 종지전압 임의 적용 금지",
+        "특정 셀 확인 없이 전체 교체 판정 금지"
+      ],
+      "evidence_refs": [
+        "battery manufacturer capacity procedure"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_BATTERY_SPEC_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "차량 전류와 연결부는 정상 범위이나 실제 Ah/사용시간이 부족합니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "실제 사용 Ah와 제조사 용량시험으로 보증 판정",
+      "expected_basis": "isolation"
+    },
+    "vehicle_load": {
+      "type": "result",
+      "title": "차량 과전류 소비 경로",
+      "result": "팩 전압저하와 함께 battery DC current가 비정상적으로 큽니다.",
+      "rule_out": [
+        "팩 용량저하 단독"
+      ],
+      "confirm_if": [
+        "traction/pump/EPS 분리 운전에서 과전류 계통 특정"
+      ],
+      "next_action": "브레이크 끌림·감속기·펌프·모터 전류를 계통별 분리",
+      "teardown_gate": "과전류 계통 특정 후 해당 기계부만 검사",
+      "do_not": [
+        "배터리만 교체 금지"
+      ],
+      "evidence_refs": [
+        "vehicle OEM current spec or healthy comparison"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "팩 전압저하와 함께 battery DC current가 비정상적으로 큽니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "브레이크 끌림·감속기·펌프·모터 전류를 계통별 분리",
+      "expected_basis": "isolation"
+    },
+    "charge_fault": {
+      "type": "result",
+      "title": "충전 미완료/충전계통",
+      "result": "완충 자체가 확인되지 않았습니다.",
+      "rule_out": [
+        "용량 불량 확정"
+      ],
+      "confirm_if": [
+        "충전기 오류·입력·커넥터·충전곡선 이상 확인"
+      ],
+      "next_action": "충전기 기록과 배터리 제조사 충전절차 확인",
+      "teardown_gate": "충전 불량 원인 특정 후 정비",
+      "do_not": [
+        "정지 전압 하나로 배터리 폐기 금지"
+      ],
+      "evidence_refs": [
+        "charger OEM manual"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_CHARGER_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "완충 자체가 확인되지 않았습니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "충전기 기록과 배터리 제조사 충전절차 확인",
+      "expected_basis": "isolation"
+    },
+    "capacity": {
+      "type": "question",
+      "title": "실제 사용량/Ah",
+      "first_observation": "순간 전압·전류만으로 설명되지 않음",
+      "safety_preconditions": [
+        "계측 정격 준수"
+      ],
+      "test_location": "BDI/전류로거",
+      "tool": "DC 전류 로거",
+      "operating_condition": "완충부터 동일 작업 종료까지",
+      "measurement_or_action": "누적 Ah와 사용시간 기록",
+      "expected_basis": "rated Ah / isolation",
+      "choices": [
+        {
+          "id": "low",
+          "label": "사용 Ah 부족",
+          "next": "capacity_result"
+        },
+        {
+          "id": "normal",
+          "label": "Ah 정상·표시만 조기 종료",
+          "next": "bdi_result"
+        }
+      ]
+    },
+    "bdi_result": {
+      "type": "result",
+      "title": "BDI/표시 보정 경로",
+      "result": "실제 사용 Ah는 정상이나 BDI가 조기 소진을 표시합니다.",
+      "rule_out": [
+        "팩 용량저하"
+      ],
+      "confirm_if": [
+        "배터리 타입/전압곡선 설정 수정 후 표시 정상화"
+      ],
+      "next_action": "OEM BDI 설정 확인",
+      "teardown_gate": "부품 분해 불필요",
+      "do_not": [
+        "배터리 교체 금지"
+      ],
+      "evidence_refs": [
+        "OEM BDI setup"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "실제 사용 Ah는 정상이나 BDI가 조기 소진을 표시합니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "OEM BDI 설정 확인",
+      "expected_basis": "isolation"
+    }
+  }
+}
