@@ -33,6 +33,7 @@ public class DiagnosticRunnerActivity extends Activity {
 
     private void render() throws Exception {
         while(body.getChildCount()>1) body.removeViewAt(1);
+        body.post(()->((ScrollView)body.getParent()).smoothScrollTo(0,0));
         JSONObject node=engine.currentNode();
         TextView title=Ui.text(this,node.getString("title"),21,true);
         title.setContentDescription("node_title");body.addView(title);
@@ -40,6 +41,11 @@ public class DiagnosticRunnerActivity extends Activity {
             {"tool","공구"},{"safety_preconditions","안전조건"},{"operating_condition","작동조건"},
             {"measurement_or_action","측정/행동"},{"expected_basis","판정 근거"},{"evidence_refs","근거"}};
         for(String[] f:fields)add(f[1],node.opt(f[0]));
+        JSONArray evidenceIds=node.optJSONArray("evidence_refs");
+        if(evidenceIds!=null)for(int i=0;i<evidenceIds.length();i++){
+            String ref=evidenceIds.getString(i);Button evidence=Ui.button(this,"근거 보기 · "+ref);
+            evidence.setOnClickListener(v->{android.content.Intent intent=new android.content.Intent(this,EvidenceViewerActivity.class);intent.putExtra("evidence_id",ref);startActivity(intent);});body.addView(evidence);
+        }
         if(engine.isTerminal()) {
             for(String[] f:new String[][]{{"rule_out","배제된 것"},{"confirm_if","확정 조건"},
                 {"teardown_gate","분해 게이트"},{"next_action","다음 조치"},{"do_not","하지 말 것"}})
@@ -51,6 +57,19 @@ public class DiagnosticRunnerActivity extends Activity {
         safe.setOnCheckedChangeListener((button,checked)->{
             try {engine.acknowledgeSafety(checked);}catch(Exception e){safe.setChecked(false);}
         });body.addView(safe);
+        if("measure".equals(node.getString("type"))) {
+            String unit=node.getString("unit");
+            EditText input=new EditText(this);input.setSingleLine(true);input.setHint(node.optString("prompt","측정값")+" ("+unit+")");
+            input.setContentDescription("measurement_value");
+            input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER|android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL|android.text.InputType.TYPE_NUMBER_FLAG_SIGNED);
+            body.addView(input);Button submit=Ui.button(this,"측정값 판정");
+            submit.setOnClickListener(v->{try{
+                String value=input.getText().toString().trim();
+                if(value.isEmpty())throw new IllegalArgumentException("측정값을 입력하세요");
+                engine.submitMeasurement(Double.parseDouble(value),unit);render();
+            }catch(Exception error){new android.app.AlertDialog.Builder(this).setTitle("진행 차단").setMessage(error.getMessage()).setPositiveButton("확인",null).show();}});
+            body.addView(submit);return;
+        }
         JSONArray choices=node.getJSONArray("choices");
         for(int i=0;i<choices.length();i++) {
             JSONObject choice=choices.getJSONObject(i);String id=choice.getString("id");
