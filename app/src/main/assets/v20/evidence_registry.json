@@ -1,0 +1,27 @@
+{
+  "schema_version": 20,
+  "entries": {
+    "DOOSAN_600123_00120_S4": {
+      "status": "VERIFIED",
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20S-7",
+          "D25S-7",
+          "D30S-7",
+          "D33S-7",
+          "D20SE-7",
+          "D25SE-7",
+          "D30SE-7",
+          "D33SE-7"
+        ]
+      },
+      "locator": "SM1018-01 PDF p370, 600123-00120 (4/4), I8 LICENCE LAMP / I7-I8 COMB LAMP",
+      "asset": "evidence/oem_pages/p370.jpg",
+      "sha256": "336e17a2954365beb2d503c21e0046ca1d942d80cb1994a84fed5d2024e2af14",
+      "verified_content": "Sheet header model family and lamp topology visually inspected; no numeric limits or pin assignments inferred",
+      "procedure_basis": "Loaded electrical isolation and normal-side comparison; not an OEM numeric acceptance specification"
+    }
+  },
+  "review_state": "Lamp topology reviewed; other entries remain unverified"
+}
