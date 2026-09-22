@@ -56,12 +56,16 @@ jobs:
             bash -c 'mkdir -p build/runtime-ui; ready=0;
             for attempt in $(seq 1 45); do
             sdk=$(timeout 10 adb shell getprop ro.build.version.sdk | tr -d "\r");
-            if [ "$sdk" = "29" ] && timeout 10 adb shell pm path android > build/runtime-ui/package-manager.txt && grep -q "package:" build/runtime-ui/package-manager.txt; then ready=1; break; fi;
+            boot=$(timeout 10 adb shell getprop sys.boot_completed | tr -d "\r");
+            if [ "$sdk" = "29" ] && [ "$boot" = "1" ] && timeout 10 adb shell pm path android > build/runtime-ui/package-manager.txt && grep -q "package:" build/runtime-ui/package-manager.txt; then ready=1; break; fi;
             sleep 2; done;
             if [ "$ready" != "1" ]; then timeout 15 adb logcat -d > build/runtime-ui/logcat.txt; echo "EMULATOR_READINESS_FAILED"; exit 1; fi;
             set +e;
-            gradle :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.ryu.forkliftdiagnostic.V20RuntimeGateTest;
-            status=$?; adb pull /sdcard/Download/v20-runtime/. build/runtime-ui/ || true;
+            status=0;
+            adb install -r -t app/build/outputs/apk/debug/app-debug.apk || status=1;
+            adb install -r -t app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk || status=1;
+            if [ "$status" = "0" ]; then adb shell am instrument -w -r -e class com.ryu.forkliftdiagnostic.V20RuntimeGateTest com.ryu.forkliftdiagnostic.test/androidx.test.runner.AndroidJUnitRunner | tee build/runtime-ui/instrumentation.txt; instrument=${PIPESTATUS[0]}; if [ "$instrument" != "0" ] || ! grep -q "OK (" build/runtime-ui/instrumentation.txt; then status=1; fi; fi;
+            adb pull /sdcard/Download/v20-runtime/. build/runtime-ui/ || true;
             timeout 15 adb logcat -d > build/runtime-ui/logcat.txt || true; exit "$status"'
       - name: Preserve development artifacts regardless of test result
         if: always()
