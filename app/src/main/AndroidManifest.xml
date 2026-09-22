@@ -2,18 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <application
       android:allowBackup="true"
-      android:label="지게차 진단"
-      android:theme="@style/AppTheme">
-    <activity android:name=".ElectricalDiagnosticActivity" android:exported="false" />
-    <activity android:name=".EngineExpertDiagnosticActivity" android:exported="false" />
-    <activity android:name=".EngineSensorMapActivity" android:exported="false" />
-    <activity android:name=".ExpertDiagnosticActivity" android:exported="false" />
-    <activity android:name=".FieldLocationMapActivity" android:exported="false" />
-    <activity android:name=".PartsReferenceActivity" android:exported="false" />
-    <activity android:name=".TestPointLocatorActivity" android:exported="false" />
-    <activity
-        android:name=".MainActivity"
-        android:exported="true">
+      android:label="지게차 진단 V20"
+      android:theme="@android:style/Theme.Material.Light.NoActionBar">
+    <activity android:name=".ui.StudyActivity" android:exported="false" />
+    <activity android:name=".ui.DiagnosticRunnerActivity" android:exported="false" />
+    <activity android:name=".ui.DiagnosisHomeActivity" android:exported="false" />
+    <activity android:name=".ui.VehicleSelectActivity" android:exported="false" />
+    <activity android:name=".ui.InfoActivity" android:exported="false" />
+    <activity android:name=".ui.EvidenceViewerActivity" android:exported="false" />
+    <activity android:name=".MainActivity" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
