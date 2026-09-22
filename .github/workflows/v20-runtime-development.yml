@@ -5,6 +5,10 @@ on:
     paths:
       - '.github/workflows/v20-runtime-development.yml'
       - 'app/src/androidTest/**'
+      - 'app/src/main/java/**'
+      - 'app/src/main/assets/v20/**'
+      - 'app/src/main/AndroidManifest.xml'
+      - 'app/build.gradle'
   workflow_dispatch:
 jobs:
   runtime:
