@@ -1,0 +1,168 @@
+{
+  "id": "EV_NO_TRAVEL_CONTROL_001",
+  "title": "전원 ON·유압 정상·주행만 안 됨",
+  "vehicle_scope": {
+    "manufacturer": "ALL",
+    "models": [
+      "EXACT_MODEL_REQUIRED"
+    ]
+  },
+  "start": "inputs",
+  "evidence_refs": [
+    "OEM wiring/diagnostic tool required"
+  ],
+  "nodes": {
+    "inputs": {
+      "type": "question",
+      "title": "입력·허가 확인",
+      "first_observation": "유압 정상·주행만 불가",
+      "safety_preconditions": [
+        "구동휠 고정"
+      ],
+      "test_location": "주행 컨트롤러 B+/B-·Drive Enable·F/R·accelerator",
+      "tool": "진단기·DMM",
+      "operating_condition": "주행 명령",
+      "measurement_or_action": "입력과 torque command 동시 기록",
+      "expected_basis": "OEM procedure",
+      "choices": [
+        {
+          "id": "yes",
+          "label": "명령 정상",
+          "next": "output"
+        },
+        {
+          "id": "no",
+          "label": "입력/허가 누락",
+          "next": "input_result"
+        }
+      ]
+    },
+    "output": {
+      "type": "question",
+      "title": "출력 반응",
+      "first_observation": "torque command 있음",
+      "safety_preconditions": [
+        "안전 리프트"
+      ],
+      "test_location": "motor current·motor RPM·U/V/W·encoder/speed/temp sensor",
+      "tool": "OEM 진단기·DC 클램프",
+      "operating_condition": "짧은 주행명령",
+      "measurement_or_action": "전류 기준이 battery DC인지 motor phase인지 확인하고 RPM과 비교",
+      "expected_basis": "OEM numeric / isolation",
+      "choices": [
+        {
+          "id": "highlow",
+          "label": "전류 큼·RPM 낮음",
+          "next": "mechanical"
+        },
+        {
+          "id": "zero",
+          "label": "전류/RPM 없음",
+          "next": "controller"
+        }
+      ]
+    },
+    "input_result": {
+      "type": "result",
+      "title": "주행 허가/입력 경로",
+      "result": "Drive Enable·F/R·accelerator 중 명령 누락 구간이 확인됩니다.",
+      "rule_out": [
+        "모터 기계고착"
+      ],
+      "confirm_if": [
+        "센서측과 컨트롤러측 신호 비교로 단절 구간 반복"
+      ],
+      "next_action": "전원·접지·신호를 센서측/컨트롤러측으로 분리",
+      "teardown_gate": "분해 전 입력 회로 수리",
+      "do_not": [
+        "컨트롤러 즉시 교환 금지"
+      ],
+      "evidence_refs": [
+        "OEM schematic required"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "Drive Enable·F/R·accelerator 중 명령 누락 구간이 확인됩니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "전원·접지·신호를 센서측/컨트롤러측으로 분리",
+      "expected_basis": "isolation"
+    },
+    "mechanical": {
+      "type": "result",
+      "title": "고전류·저RPM 기계부하",
+      "result": "브레이크 끌림·감속기/베어링·모터 기계저항을 분리해야 합니다.",
+      "rule_out": [
+        "명령 누락"
+      ],
+      "confirm_if": [
+        "기계부하 분리 전후 전류/RPM 변화"
+      ],
+      "next_action": "EV_HIGH_CURRENT_LOW_RPM_001 실행",
+      "teardown_gate": "브레이크 해제·손회전 후 분해",
+      "do_not": [
+        "U/V/W 단일 멀티미터 전압으로 판정 금지"
+      ],
+      "evidence_refs": [
+        "isolation"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "브레이크 끌림·감속기/베어링·모터 기계저항을 분리해야 합니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "EV_HIGH_CURRENT_LOW_RPM_001 실행",
+      "expected_basis": "isolation"
+    },
+    "controller": {
+      "type": "result",
+      "title": "출력/피드백 경로",
+      "result": "명령은 있으나 전류와 RPM 반응이 없습니다.",
+      "rule_out": [
+        "주행 입력 누락"
+      ],
+      "confirm_if": [
+        "U/V/W 케이블/권선·encoder 신호 정상 후 컨트롤러 출력 부재"
+      ],
+      "next_action": "절연·권선·피드백을 OEM 절차로 확인",
+      "teardown_gate": "모터/배선 정상 증거 후 컨트롤러 범위",
+      "do_not": [
+        "컨트롤러 연결 상태 절연시험 금지"
+      ],
+      "evidence_refs": [
+        "OEM procedure"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "명령은 있으나 전류와 RPM 반응이 없습니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "절연·권선·피드백을 OEM 절차로 확인",
+      "expected_basis": "isolation"
+    }
+  }
+}

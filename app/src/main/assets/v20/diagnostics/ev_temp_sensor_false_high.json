@@ -1,0 +1,109 @@
+{
+  "id": "EV_TEMP_SENSOR_FALSE_HIGH_001",
+  "title": "진단기 모터온도 매우 높음·실제 케이스 미지근함",
+  "vehicle_scope": {
+    "manufacturer": "ALL",
+    "models": [
+      "EXACT_MODEL_REQUIRED"
+    ]
+  },
+  "start": "compare",
+  "evidence_refs": [
+    "OEM sensor curve/pinout required"
+  ],
+  "nodes": {
+    "compare": {
+      "type": "question",
+      "title": "실제 온도와 신호 비교",
+      "first_observation": "진단기 온도 높음·케이스 미지근함",
+      "safety_preconditions": [
+        "전원격리 절차 확인"
+      ],
+      "test_location": "모터 케이스·센서 전원/접지·센서측/컨트롤러측 신호",
+      "tool": "접촉온도계·DMM·진단기",
+      "operating_condition": "냉간/열간 비교",
+      "measurement_or_action": "실제 온도 측정 후 센서 저항 또는 신호를 양단에서 비교",
+      "expected_basis": "OEM numeric / normal-side comparison",
+      "choices": [
+        {
+          "id": "signal",
+          "label": "실제 온도와 신호 불일치",
+          "next": "sensor"
+        },
+        {
+          "id": "real",
+          "label": "실제 온도도 높음",
+          "next": "overheat"
+        }
+      ]
+    },
+    "sensor": {
+      "type": "result",
+      "title": "온도센서/배선 경로",
+      "result": "실제 온도와 진단기 온도가 불일치합니다.",
+      "rule_out": [
+        "실제 모터 과열"
+      ],
+      "confirm_if": [
+        "센서측 정상·컨트롤러측 이상 또는 OEM 곡선 대비 센서 이상"
+      ],
+      "next_action": "전원·접지·신호·커넥터를 구간 격리하고 derating 해제 확인",
+      "teardown_gate": "센서/배선 구간 특정 후 교환",
+      "do_not": [
+        "온도표시만으로 모터 분해 금지"
+      ],
+      "evidence_refs": [
+        "OEM sensor curve"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "실제 온도와 진단기 온도가 불일치합니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "전원·접지·신호·커넥터를 구간 격리하고 derating 해제 확인",
+      "expected_basis": "isolation"
+    },
+    "overheat": {
+      "type": "result",
+      "title": "실제 모터 과열",
+      "result": "실제 표면온도도 상승하며 derating이 동반됩니다.",
+      "rule_out": [
+        "센서 false-high 단독"
+      ],
+      "confirm_if": [
+        "부하·냉각·베어링·전류 원인 수리 후 온도 정상화"
+      ],
+      "next_action": "전류·기계부하·냉각 경로 확인",
+      "teardown_gate": "과열 원인 격리 후 분해",
+      "do_not": [
+        "센서 우선교환 금지"
+      ],
+      "evidence_refs": [
+        "OEM thermal limit"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "실제 표면온도도 상승하며 derating이 동반됩니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "전류·기계부하·냉각 경로 확인",
+      "expected_basis": "isolation"
+    }
+  }
+}

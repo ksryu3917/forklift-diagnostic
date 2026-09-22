@@ -1,0 +1,109 @@
+{
+  "id": "EV_HIGH_CURRENT_LOW_RPM_001",
+  "title": "토크명령 있음·전류 큼·RPM 낮음",
+  "vehicle_scope": {
+    "manufacturer": "ALL",
+    "models": [
+      "EXACT_MODEL_REQUIRED"
+    ]
+  },
+  "start": "basis",
+  "evidence_refs": [
+    "OEM current definition required"
+  ],
+  "nodes": {
+    "basis": {
+      "type": "question",
+      "title": "전류 정의와 기계저항 분리",
+      "first_observation": "토크명령 있음·전류 큼·RPM 낮음",
+      "safety_preconditions": [
+        "안전 리프트·휠초크"
+      ],
+      "test_location": "배터리 DC 케이블·진단기 motor phase 항목·구동휠",
+      "tool": "DC 클램프·진단기",
+      "operating_condition": "동일 명령",
+      "measurement_or_action": "battery DC인지 motor phase인지 구분 후 브레이크 해제 전후 손회전 비교",
+      "expected_basis": "OEM numeric / isolation",
+      "choices": [
+        {
+          "id": "drag",
+          "label": "브레이크 해제 시 정상",
+          "next": "brake"
+        },
+        {
+          "id": "bind",
+          "label": "해제 후에도 걸림",
+          "next": "drive"
+        }
+      ]
+    },
+    "brake": {
+      "type": "result",
+      "title": "브레이크 끌림",
+      "result": "브레이크 해제 전후에서 기계저항과 전류가 함께 변합니다.",
+      "rule_out": [
+        "감속기 상시 걸림"
+      ],
+      "confirm_if": [
+        "OEM 에어갭/코일/기계해제 불량 확인"
+      ],
+      "next_action": "브레이크 계통 정비",
+      "teardown_gate": "A/B 확인 후 브레이크만 분해",
+      "do_not": [
+        "모터 교환 금지"
+      ],
+      "evidence_refs": [
+        "OEM brake procedure"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "브레이크 해제 전후에서 기계저항과 전류가 함께 변합니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "브레이크 계통 정비",
+      "expected_basis": "isolation"
+    },
+    "drive": {
+      "type": "result",
+      "title": "감속기/베어링 또는 모터 기계저항",
+      "result": "브레이크 해제 후에도 주기성 또는 지속 저항이 남습니다.",
+      "rule_out": [
+        "브레이크 단독"
+      ],
+      "confirm_if": [
+        "모터-감속기 결합 경계 분리 후 어느 쪽 저항인지 재현"
+      ],
+      "next_action": "회전 동시성·오일/금속편·유격 검사",
+      "teardown_gate": "어셈블리 경계 격리 후 해당 쪽만 분해",
+      "do_not": [
+        "전류값 하나로 모터 확정 금지"
+      ],
+      "evidence_refs": [
+        "isolation"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "ALL",
+        "models": [
+          "EXACT_MODEL_REQUIRED"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "브레이크 해제 후에도 주기성 또는 지속 저항이 남습니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "회전 동시성·오일/금속편·유격 검사",
+      "expected_basis": "isolation"
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "id": "BRAKE_INTERNAL_LEAK_001",
+  "title": "브레이크 씰/내부누설 현장 격리",
+  "vehicle_scope": {
+    "manufacturer": "DOOSAN",
+    "models": [
+      "D20/25/30/33S(SE)-7"
+    ]
+  },
+  "start": "external",
+  "evidence_refs": [
+    "OEM brake hydraulic diagram required"
+  ],
+  "nodes": {
+    "external": {
+      "type": "question",
+      "title": "외부→에어→상류 확인",
+      "first_observation": "제동력 저하/페달 이상",
+      "safety_preconditions": [
+        "차량 고정"
+      ],
+      "test_location": "외부 누유·리저버·블리더·상류 공급·마스터/서보",
+      "tool": "조명·압력계·블리딩 장비",
+      "operating_condition": "OEM 블리딩/페달 조건",
+      "measurement_or_action": "외부 누유와 공기혼입을 배제하고 상류 공급·마스터/서보 반응 확인",
+      "expected_basis": "OEM procedure / isolation",
+      "choices": [
+        {
+          "id": "upperok",
+          "label": "상류 정상·하류 의심",
+          "next": "isolate"
+        },
+        {
+          "id": "upperbad",
+          "label": "상류 이상",
+          "next": "upper"
+        }
+      ]
+    },
+    "isolate": {
+      "type": "question",
+      "title": "좌우 액슬 격리",
+      "first_observation": "상류 공급 정상",
+      "safety_preconditions": [
+        "OEM 허용 격리 방식만 사용"
+      ],
+      "test_location": "좌/우 액슬 분기",
+      "tool": "규격 캡/플러그·압력계",
+      "operating_condition": "동일 페달 조건",
+      "measurement_or_action": "좌우 분기를 차례로 격리해 페달/압력 유지 변화를 비교",
+      "expected_basis": "isolation",
+      "choices": [
+        {
+          "id": "side",
+          "label": "한쪽 격리 시 정상화",
+          "next": "axle"
+        },
+        {
+          "id": "none",
+          "label": "변화 없음",
+          "next": "upper"
+        }
+      ]
+    },
+    "axle": {
+      "type": "result",
+      "title": "해당 액슬 어셈블리 경계",
+      "result": "한쪽 액슬 회로 격리 시 제동 반응이 정상화됩니다.",
+      "rule_out": [
+        "반대쪽 액슬",
+        "상류 공급·마스터/서보"
+      ],
+      "confirm_if": [
+        "분해 후 피스톤 씰/실린더 누설·마찰재 상태 확인"
+      ],
+      "next_action": "해당 액슬만 OEM 절차로 분해검사",
+      "teardown_gate": "좌우 격리로 어셈블리 경계 확인 후 분해",
+      "do_not": [
+        "40 bar를 axle piston seal 누설 합격/불합격 임계값으로 오용 금지"
+      ],
+      "evidence_refs": [
+        "OEM isolation procedure"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20/25/30/33S(SE)-7"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "한쪽 액슬 회로 격리 시 제동 반응이 정상화됩니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "해당 액슬만 OEM 절차로 분해검사",
+      "expected_basis": "isolation"
+    },
+    "upper": {
+      "type": "result",
+      "title": "상류 공급/마스터/서보 범위",
+      "result": "액슬 격리 전 단계에서 압력 생성/유지가 실패합니다.",
+      "rule_out": [
+        "액슬 씰 단독"
+      ],
+      "confirm_if": [
+        "상류 입력 정상이나 마스터/서보 출력 유지 실패"
+      ],
+      "next_action": "공급·마스터·서보를 전후 압력으로 분리",
+      "teardown_gate": "실패 구간 특정 후 해당 어셈블리만 분해",
+      "do_not": [
+        "액슬 선분해 금지"
+      ],
+      "evidence_refs": [
+        "OEM hydraulic diagram"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20/25/30/33S(SE)-7"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "액슬 격리 전 단계에서 압력 생성/유지가 실패합니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "공급·마스터·서보를 전후 압력으로 분리",
+      "expected_basis": "isolation"
+    }
+  }
+}

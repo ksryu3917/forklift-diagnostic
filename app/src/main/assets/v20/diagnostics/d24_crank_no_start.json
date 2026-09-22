@@ -1,0 +1,169 @@
+{
+  "id": "D24_CRANK_NO_START_001",
+  "title": "D24 크랭킹 시동불가",
+  "vehicle_scope": {
+    "manufacturer": "DOOSAN",
+    "models": [
+      "D20/25/30/33S(SE)-7 D24"
+    ]
+  },
+  "start": "scan",
+  "evidence_refs": [
+    "D24 OEM service manual"
+  ],
+  "nodes": {
+    "scan": {
+      "type": "question",
+      "title": "ECU 통신·RPM·동기",
+      "first_observation": "크랭킹 시동불가",
+      "safety_preconditions": [
+        "중립·주차브레이크"
+      ],
+      "test_location": "진단 커넥터",
+      "tool": "OEM 진단기",
+      "operating_condition": "크랭킹",
+      "measurement_or_action": "ECU communication·cranking RPM/sync 확인",
+      "expected_basis": "OEM procedure",
+      "choices": [
+        {
+          "id": "sync",
+          "label": "통신/RPM/sync 정상",
+          "next": "rail"
+        },
+        {
+          "id": "nosync",
+          "label": "통신 또는 sync 이상",
+          "next": "sync_result"
+        }
+      ]
+    },
+    "rail": {
+      "type": "question",
+      "title": "연료압력 분리",
+      "first_observation": "RPM/sync 정상",
+      "safety_preconditions": [
+        "고압연료 접촉 금지"
+      ],
+      "test_location": "진단기 rail actual/command·RPS·저압연료·IMV",
+      "tool": "진단기·저압 연료계·DMM",
+      "operating_condition": "크랭킹",
+      "measurement_or_action": "actual/command 관계와 RPS 회로·저압공급·IMV 명령 비교",
+      "expected_basis": "OEM numeric",
+      "choices": [
+        {
+          "id": "good",
+          "label": "rail 조건 충족",
+          "next": "inject"
+        },
+        {
+          "id": "bad",
+          "label": "rail 형성 불가",
+          "next": "fuel_result"
+        }
+      ]
+    },
+    "inject": {
+      "type": "result",
+      "title": "인젝터 구동/리턴·압축 경로",
+      "result": "크랭킹 동기와 rail 조건은 충족됩니다.",
+      "rule_out": [
+        "저압연료 단독",
+        "IMV 단독"
+      ],
+      "confirm_if": [
+        "인젝터 drive/return 독립시험 또는 필요 시 compression에서 원인 특정"
+      ],
+      "next_action": "인젝터 구동·리턴량 후 기계압축 확인",
+      "teardown_gate": "구동/리턴으로 실린더 특정 후 분해",
+      "do_not": [
+        "근거 없는 rail minimum MPa 생성 금지"
+      ],
+      "evidence_refs": [
+        "D24 OEM procedure"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20/25/30/33S(SE)-7 D24"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "크랭킹 동기와 rail 조건은 충족됩니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "인젝터 구동·리턴량 후 기계압축 확인",
+      "expected_basis": "isolation"
+    },
+    "fuel_result": {
+      "type": "result",
+      "title": "rail 형성 계통",
+      "result": "rail actual이 command를 따르지 못합니다.",
+      "rule_out": [
+        "압축 우선분해"
+      ],
+      "confirm_if": [
+        "저압 공급·RPS·IMV·인젝터 리턴 중 실패 구간 확인"
+      ],
+      "next_action": "저압→RPS→IMV→리턴 순으로 격리",
+      "teardown_gate": "연료 실패 구간 특정 후 부품 작업",
+      "do_not": [
+        "근거 없는 rail minimum MPa 생성 금지"
+      ],
+      "evidence_refs": [
+        "D24 OEM limits"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20/25/30/33S(SE)-7 D24"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "rail actual이 command를 따르지 못합니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "저압→RPS→IMV→리턴 순으로 격리",
+      "expected_basis": "isolation"
+    },
+    "sync_result": {
+      "type": "result",
+      "title": "ECU 통신/RPM/sync 경로",
+      "result": "ECU 통신 또는 크랭킹 RPM/sync가 성립하지 않습니다.",
+      "rule_out": [
+        "인젝터 선교환"
+      ],
+      "confirm_if": [
+        "전원/GND/CAN 또는 CKP/CMP 센서측-ECU측 신호 단절 확인"
+      ],
+      "next_action": "ECU 전원·접지·CAN·CKP/CMP 순서로 확인",
+      "teardown_gate": "신호 경로 특정 후 수리",
+      "do_not": [
+        "연료펌프부터 교환 금지"
+      ],
+      "evidence_refs": [
+        "D24 OEM wiring"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20/25/30/33S(SE)-7 D24"
+        ]
+      },
+      "safety_preconditions": [
+        "앞 단계의 안전조건 유지"
+      ],
+      "first_observation": "ECU 통신 또는 크랭킹 RPM/sync가 성립하지 않습니다.",
+      "test_location": "앞 단계에서 격리된 측정 위치",
+      "tool": "앞 단계에 지정된 공구",
+      "operating_condition": "앞 단계와 동일한 재현 조건",
+      "measurement_or_action": "ECU 전원·접지·CAN·CKP/CMP 순서로 확인",
+      "expected_basis": "isolation"
+    }
+  }
+}
