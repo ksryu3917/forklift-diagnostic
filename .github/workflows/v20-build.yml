@@ -45,4 +45,6 @@ jobs:
             build/measurement-contract.txt
             build/lamp-flow.txt
       - name: Full release readiness remains required
-        run: python3 tools/validate_release_readiness.py
+        run: |
+          python3 tools/validate_p0_regressions.py
+          python3 tools/validate_release_readiness.py
