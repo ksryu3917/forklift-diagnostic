@@ -1,0 +1,68 @@
+name: V20 Runtime Development
+on:
+  push:
+    branches: [v20-clean-rebuild]
+    paths:
+      - '.github/workflows/v20-runtime-development.yml'
+      - 'app/src/androidTest/**'
+  workflow_dispatch:
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with: { distribution: temurin, java-version: '17' }
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: '8.9' }
+      - name: Prepare candidate and build APKs
+        env:
+          BUILD_SHA: ${{ github.sha }}
+          BUILD_BRANCH: ${{ github.ref_name }}
+        run: |
+          python3 tools/migrate_v20.py
+          python3 tools/validate_migration_parity.py
+          python3 tools/migrate_evidence_v20.py
+          python3 tools/stamp_v20_identity.py .
+          gradle :app:assembleDebug :app:assembleDebugAndroidTest
+      - name: Verify packaged identity against actual candidate
+        env:
+          BUILD_SHA: ${{ github.sha }}
+        run: |
+          python3 - <<'PY'
+          import json, os, zipfile
+          expected=json.load(open('PROJECT_STATE.json'))
+          with zipfile.ZipFile('app/build/outputs/apk/debug/app-debug.apk') as apk:
+              actual=json.loads(apk.read('assets/v20/project_state.json'))
+          for key in ('release','state','version_code','version_name','application_id','source_branch'):
+              assert actual[key] == expected[key], key
+          assert actual['git_commit_sha'] == os.environ['BUILD_SHA']
+          print('PACKAGED IDENTITY MATCH:', actual)
+          PY
+      - name: Execute Android UI tests and preserve failure evidence
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          arch: x86_64
+          profile: pixel_2
+          disable-animations: true
+          emulator-boot-timeout: 600
+          script: >-
+            bash -c 'mkdir -p build/runtime-ui; set +e;
+            gradle :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.ryu.forkliftdiagnostic.V20RuntimeGateTest;
+            status=$?; adb pull /sdcard/Download/v20-runtime/. build/runtime-ui/;
+            adb logcat -d > build/runtime-ui/logcat.txt; exit "$status"'
+      - name: Preserve development artifacts regardless of test result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forklift-v20-UNVERIFIED-runtime-${{ github.sha }}
+          path: |
+            app/build/outputs/apk/**
+            app/build/outputs/androidTest-results/**
+            app/build/reports/androidTests/**
+            build/runtime-ui/**
+            validation/**
+      - name: Full release gates remain mandatory
+        run: python3 tools/validate_release_readiness.py
