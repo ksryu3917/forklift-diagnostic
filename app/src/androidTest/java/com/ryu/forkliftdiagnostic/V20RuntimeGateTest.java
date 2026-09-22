@@ -27,14 +27,25 @@ import com.ryu.forkliftdiagnostic.ui.*;import org.junit.*;import org.junit.runne
  }
  private void graph(String file){Intent i=new Intent(target,DiagnosticRunnerActivity.class);i.putExtra("graph",file);scenario=ActivityScenario.launch(i);}
  private void choose(String id){onView(isAssignableFrom(android.widget.CheckBox.class)).perform(scrollTo(),click());onView(withContentDescription("choice_"+id)).perform(scrollTo(),click());}
- @Test public void allSixteenScreensAndGestures()throws Exception{
-  target.getSharedPreferences("vehicle",0).edit().clear().putString("manufacturer","DOOSAN").putString("model","D25S-7").putString("engine","D24").commit();
-  try {
+ private void selectD25(){target.getSharedPreferences("vehicle",0).edit().clear().putString("manufacturer","DOOSAN").putString("model","D25S-7").putString("engine","D24").commit();}
+ private void failureShot(String name,Throwable failure){try{shot(name);}catch(Exception capture){failure.addSuppressed(capture);}}
+ @Test public void lampEvidenceGesturesAndMenus()throws Exception{
+  selectD25();try {
   graph("e_license_terminal_stop.json");onView(withText(org.hamcrest.Matchers.containsString("LP1"))).check(matches(isDisplayed()));shot("01-license-LP1");choose("normal");shot("02-license-LP2-power");choose("present");shot("03-license-LP3-ground-drop");choose("normal");onView(withContentDescription("terminal_stop")).perform(scrollTo()).check(matches(isDisplayed()));shot("04-license-bulb-socket-stop");scenario.close();graph("e_license_terminal_stop.json");choose("abnormal");shot("05-license-common-LAMP");scenario.close();
   scenario=ActivityScenario.launch(new Intent(target,EvidenceViewerActivity.class));UiObject zoom=device.findObject(new UiSelector().description("zoom_pan_canvas"));Assert.assertTrue(zoom.waitForExists(5000));android.graphics.Rect imageArea=zoom.getVisibleBounds();shot("06-zoom-before");Assert.assertTrue(zoom.pinchOut(75,24));device.waitForIdle();shot("07-zoom-after-pinch");Assert.assertTrue("Pinch did not change rendered OEM image",renderedDifference("06-zoom-before","07-zoom-after-pinch",imageArea)>0.005);android.graphics.Rect b=zoom.getBounds();device.swipe(b.centerX(),b.centerY(),b.centerX()+120,b.centerY()+60,18);device.waitForIdle();shot("08-zoom-after-drag");Assert.assertTrue("Pan did not change rendered OEM image",renderedDifference("07-zoom-after-pinch","08-zoom-after-drag",imageArea)>0.005);
   device.click(imageArea.centerX(),imageArea.centerY());device.click(imageArea.centerX(),imageArea.centerY());device.waitForIdle();shot("08b-zoom-double-tap-reset");Assert.assertTrue("Double tap did not restore original framing",renderedDifference("06-zoom-before","08b-zoom-double-tap-reset",imageArea)<0.005);scenario.close();
   scenario=ActivityScenario.launch(new Intent(target,VehicleSelectActivity.class));shot("09-manufacturer-model-select");scenario.close();scenario=ActivityScenario.launch(new Intent(target,StudyActivity.class));shot("10-study-home");onView(withContentDescription("study_scope_stop")).perform(scrollTo()).check(matches(isDisplayed()));shot("11-study-exact-model-stop");scenario.close();
-  graph("ev_reach_no_travel_mech.json");choose("yes");shot("12-reach-motor-turns-first-check");choose("rotates");choose("shock");shot("13-lift-brake-release-hand-turn");choose("periodic");choose("inside");choose("metal");shot("14-reducer-axle-isolation-result");scenario.close();graph("ev_battery_short_runtime.json");choose("yes");shot("15-battery-pack-va-cell-gravity");scenario.close();scenario=ActivityScenario.launch(new Intent(target,MainActivity.class));onView(withText(org.hamcrest.Matchers.containsString("v20"))).check(matches(isDisplayed()));shot("16-release-identity");
-  } catch(Throwable failure) { try {shot("failure-current-screen");}catch(Exception capture){failure.addSuppressed(capture);}if(failure instanceof Exception)throw (Exception)failure;throw (Error)failure;}
+  } catch(Throwable failure) {failureShot("failure-lamp-evidence-menu",failure);if(failure instanceof Exception)throw (Exception)failure;throw (Error)failure;}
+ }
+ @Test public void reachMechanicalP0Flow()throws Exception{
+  selectD25();try{graph("ev_reach_no_travel_mech.json");choose("yes");shot("12-reach-motor-turns-first-check");choose("rotates");choose("shock");shot("13-lift-brake-release-hand-turn");choose("periodic");choose("inside");choose("metal");shot("14-reducer-axle-isolation-result");}
+  catch(Throwable failure){failureShot("failure-reach-p0",failure);if(failure instanceof Exception)throw (Exception)failure;throw (Error)failure;}
+ }
+ @Test public void batteryP0Flow()throws Exception{
+  selectD25();try{graph("ev_battery_short_runtime.json");choose("yes");shot("15-battery-pack-va-cell-gravity");}
+  catch(Throwable failure){failureShot("failure-battery-p0",failure);if(failure instanceof Exception)throw (Exception)failure;throw (Error)failure;}
+ }
+ @Test public void releaseIdentityScreen()throws Exception{
+  scenario=ActivityScenario.launch(new Intent(target,MainActivity.class));onView(withText(org.hamcrest.Matchers.containsString("v20"))).check(matches(isDisplayed()));shot("16-release-identity");
  }
 }
