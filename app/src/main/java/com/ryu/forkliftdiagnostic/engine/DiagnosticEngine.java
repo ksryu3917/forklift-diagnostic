@@ -47,6 +47,7 @@ public final class DiagnosticEngine {
         JSONObject n = currentNode();
         if (isTerminal()) throw new IllegalStateException("TERMINAL_STOP");
         if (!currentId.equals(safetyNode)) throw new IllegalStateException("SAFETY_NOT_ACKNOWLEDGED");
+        if (!"question".equals(n.getString("type"))) throw new IllegalStateException("MEASUREMENT_REQUIRED");
         JSONArray choices = n.optJSONArray("choices");
         if (choices == null) throw new IllegalStateException("현재 node는 선택형이 아닙니다.");
         for (int i=0;i<choices.length();i++) {
@@ -62,6 +63,39 @@ public final class DiagnosticEngine {
             }
         }
         throw new IllegalArgumentException("unknown choice: "+choiceId);
+    }
+
+    /** Numeric boundaries are supplied by a reviewed node; never inferred by the engine. */
+    public void submitMeasurement(double value, String unit) throws Exception {
+        JSONObject node=currentNode();
+        if(isTerminal()) throw new IllegalStateException("TERMINAL_STOP");
+        if(!"measure".equals(node.getString("type"))) throw new IllegalStateException("NOT_MEASUREMENT_NODE");
+        if(!currentId.equals(safetyNode)) throw new IllegalStateException("SAFETY_NOT_ACKNOWLEDGED");
+        if(Double.isNaN(value)||Double.isInfinite(value)) throw new IllegalArgumentException("NONFINITE_MEASUREMENT");
+        if(!node.getString("unit").equals(unit)) throw new IllegalArgumentException("UNIT_MISMATCH");
+        String branch=value<node.getDouble("min")?"next_low":value>node.getDouble("max")?"next_high":"next_normal";
+        JSONArray branches=node.getJSONArray("result_branches");
+        for(int i=0;i<branches.length();i++) {
+            JSONObject candidate=branches.getJSONObject(i);
+            if(branch.equals(candidate.getString("id"))) {
+                String next=candidate.getString("next");
+                requireNode(next);currentId=next;safetyNode="";return;
+            }
+        }
+        throw new IllegalStateException("MEASUREMENT_BRANCH_MISSING");
+    }
+
+    private JSONArray numericBranches(JSONObject node) throws Exception {
+        double low=node.getDouble("min"),high=node.getDouble("max");
+        if(Double.isNaN(low)||Double.isNaN(high)||Double.isInfinite(low)||Double.isInfinite(high)||low>high)
+            throw new IllegalStateException("INVALID_MEASUREMENT_RANGE");
+        requireValue(node,"unit");
+        JSONArray branches=node.getJSONArray("result_branches");
+        Set<String> ids=new HashSet<>();
+        for(int i=0;i<branches.length();i++)ids.add(branches.getJSONObject(i).getString("id"));
+        if(branches.length()!=3||ids.size()!=3||!ids.contains("next_low")||!ids.contains("next_normal")||!ids.contains("next_high"))
+            throw new IllegalStateException("MEASUREMENT_BRANCH_MISSING");
+        return branches;
     }
 
     private void validateReachability() throws Exception {
@@ -85,7 +119,8 @@ public final class DiagnosticEngine {
             active.remove(id);
             return;
         }
-        if (!"question".equals(n.getString("type")) || choices == null || choices.length() == 0)
+        if ("measure".equals(n.getString("type"))) choices=numericBranches(n);
+        else if (!"question".equals(n.getString("type")) || choices == null || choices.length() == 0)
             throw new IllegalStateException("DEAD_END: "+id);
         Set<String> choiceIds = new HashSet<>();
         for (int i=0;i<choices.length();i++) {
