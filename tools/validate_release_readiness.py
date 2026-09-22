@@ -7,10 +7,10 @@ This checkpoint must not publish a VERIFIED artifact.
 import sys
 
 BLOCKERS = (
-    "Legacy graphs/causes are archived, not migrated into executable V20 flows",
+    "83 graphs and 268 causes are structurally migrated; field contracts and numeric-node execution remain incomplete",
     "Scenario validator checks row uniqueness, not engine outcomes or distinct paths",
-    "Exact vehicle scope and evidence are not enforced by DiagnosticEngine",
-    "OEM evidence images and supporting registries are absent from the new runtime",
+    "Scope and evidence guards pass synthetic tests; full model/P0/terminal coverage remains unverified",
+    "OEM images are preserved locally; evidence linkage and runtime viewer verification remain incomplete",
     "STUDY lessons, manual search, history and parts workflows are incomplete",
     "P0 validator checks tokens rather than all eight executable case contracts",
     "Runtime tests lack double-tap assertions and rendered pinch/pan verification",
