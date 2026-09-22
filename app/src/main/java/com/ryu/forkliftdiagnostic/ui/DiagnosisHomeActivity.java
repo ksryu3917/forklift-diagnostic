@@ -15,6 +15,8 @@ public class DiagnosisHomeActivity extends Activity {
         String maker=getSharedPreferences("vehicle",0).getString("manufacturer","");
         String model=getSharedPreferences("vehicle",0).getString("model","");
         body.addView(Ui.text(this,"현재 차량: "+maker+" · "+model,18,true));
+        if("DOOSAN".equals(maker) && model.matches("D(20|25|30|33)S(E)?-7"))
+            add(body,"번호판등 순차 진단","e_license_terminal_stop.json");
         EditText search=new EditText(this); search.setHint("증상 또는 계통 검색"); body.addView(search);
         LinearLayout results=new LinearLayout(this);results.setOrientation(LinearLayout.VERTICAL);body.addView(results);
         try {
