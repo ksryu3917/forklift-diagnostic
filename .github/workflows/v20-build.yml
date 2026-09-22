@@ -18,12 +18,14 @@ jobs:
           python3 tools/migrate_v20.py
           python3 tools/validate_migration_parity.py
           python3 tools/migrate_evidence_v20.py
-      - name: Test engine guards (not terminal scenario coverage)
+      - name: Test engine guards and executed measurement paths
         run: |
           mkdir -p build/engine-test
           curl -fsSL https://repo.maven.apache.org/maven2/org/json/json/20240303/json-20240303.jar -o build/json.jar
-          javac -cp build/json.jar -d build/engine-test app/src/main/java/com/ryu/forkliftdiagnostic/engine/DiagnosticEngine.java tools/EngineContractTest.java
+          javac -cp build/json.jar -d build/engine-test app/src/main/java/com/ryu/forkliftdiagnostic/engine/DiagnosticEngine.java tools/EngineContractTest.java tools/MeasurementContractTest.java tools/LampFlowTest.java
           java -cp build/json.jar:build/engine-test EngineContractTest | tee build/engine-contract.txt
+          java -cp build/json.jar:build/engine-test MeasurementContractTest | tee build/measurement-contract.txt
+          java -cp build/json.jar:build/engine-test LampFlowTest | tee build/lamp-flow.txt
       - name: Stamp build identity
         env:
           BUILD_SHA: ${{ github.sha }}
@@ -40,5 +42,7 @@ jobs:
             app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
             validation/**
             build/engine-contract.txt
+            build/measurement-contract.txt
+            build/lamp-flow.txt
       - name: Full release readiness remains required
         run: python3 tools/validate_release_readiness.py
