@@ -1,0 +1,402 @@
+{
+  "id": "E_LICENSE_TERMINAL_STOP_001",
+  "title": "번호판등 순차 진단",
+  "vehicle_scope": {
+    "manufacturer": "DOOSAN",
+    "models": [
+      "D20S-7",
+      "D25S-7",
+      "D30S-7",
+      "D33S-7",
+      "D20SE-7",
+      "D25SE-7",
+      "D30SE-7",
+      "D33SE-7"
+    ]
+  },
+  "start": "lp1",
+  "evidence_refs": [
+    "DOOSAN_600123_00120_S4"
+  ],
+  "nodes": {
+    "lp1": {
+      "type": "question",
+      "title": "LP1 · 공통 회로 확인",
+      "first_observation": "다른 미등/후미등 정상 여부",
+      "safety_preconditions": [
+        "평탄지 주차·중립·주차브레이크 체결·포크 하강·엔진 정지",
+        "백프로브 절연부 확인; 단자 간 단락 금지; 탈거·연속성 시험은 미등 OFF 후 실시"
+      ],
+      "test_location": "좌우 후미등과 미등",
+      "tool": "육안",
+      "operating_condition": "미등 스위치 ON",
+      "measurement_or_action": "다른 미등/후미등 점등 확인",
+      "expected_basis": "isolation",
+      "choices": [
+        {
+          "id": "normal",
+          "label": "다른 미등 정상",
+          "next": "lp2"
+        },
+        {
+          "id": "abnormal",
+          "label": "다른 미등도 이상",
+          "next": "lamp_common"
+        }
+      ],
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20S-7",
+          "D25S-7",
+          "D30S-7",
+          "D33S-7",
+          "D20SE-7",
+          "D25SE-7",
+          "D30SE-7",
+          "D33SE-7"
+        ]
+      },
+      "evidence_refs": [
+        "DOOSAN_600123_00120_S4"
+      ],
+      "result_branches": [
+        {
+          "id": "normal",
+          "label": "다른 미등 정상",
+          "next": "lp2"
+        },
+        {
+          "id": "abnormal",
+          "label": "다른 미등도 이상",
+          "next": "lamp_common"
+        }
+      ],
+      "do_not": [
+        "도면에서 판독되지 않는 퓨즈 번호·핀 번호·전압강하 한계값을 추정하지 않는다",
+        "부하가 실제로 흐르지 않는 상태의 전압만으로 전원·접지를 정상 판정하지 않는다"
+      ],
+      "rule_out": [
+        "이 단계만으로 부품 고장을 확정하지 않는다"
+      ],
+      "confirm_if": [
+        "같은 점등 조건에서 측정 결과가 반복되고 다음 격리검사와 일치한다"
+      ],
+      "next_action": "현재 점검 결과에 맞는 분기를 선택한다; 불명확하면 진행하지 않는다",
+      "teardown_gate": "전원·접지·부하 격리 전 어셈블리 교환 금지"
+    },
+    "lp2": {
+      "type": "question",
+      "title": "LP2 · 번호판등 +전원",
+      "first_observation": "번호판등만 꺼짐",
+      "safety_preconditions": [
+        "평탄지 주차·중립·주차브레이크 체결·포크 하강·엔진 정지",
+        "백프로브 절연부 확인; 단자 간 단락 금지; 탈거·연속성 시험은 미등 OFF 후 실시"
+      ],
+      "test_location": "번호판등 소켓 B+ 단자",
+      "tool": "DMM·백프로브",
+      "operating_condition": "커넥터 연결·미등 ON·부하 상태",
+      "measurement_or_action": "미등 ON에서 번호판등 공급 단자와 배터리 음극 사이 전압을 측정하고 배터리 단자 전압·정상 미등 공급과 같은 부하 조건으로 비교한다. 단선 전구로 전류가 없으면 차량 적용 형식의 정상 전구를 연결해 재측정한다. 핀 번호는 원문·실차로 확인하며 추정하지 않는다.",
+      "expected_basis": "normal-side comparison",
+      "choices": [
+        {
+          "id": "present",
+          "label": "+전원 정상",
+          "next": "lp3"
+        },
+        {
+          "id": "absent",
+          "label": "+전원 없음/부하 시 붕괴",
+          "next": "feed_fault"
+        }
+      ],
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20S-7",
+          "D25S-7",
+          "D30S-7",
+          "D33S-7",
+          "D20SE-7",
+          "D25SE-7",
+          "D30SE-7",
+          "D33SE-7"
+        ]
+      },
+      "evidence_refs": [
+        "DOOSAN_600123_00120_S4"
+      ],
+      "result_branches": [
+        {
+          "id": "present",
+          "label": "+전원 정상",
+          "next": "lp3"
+        },
+        {
+          "id": "absent",
+          "label": "+전원 없음/부하 시 붕괴",
+          "next": "feed_fault"
+        }
+      ],
+      "do_not": [
+        "도면에서 판독되지 않는 퓨즈 번호·핀 번호·전압강하 한계값을 추정하지 않는다",
+        "부하가 실제로 흐르지 않는 상태의 전압만으로 전원·접지를 정상 판정하지 않는다"
+      ],
+      "rule_out": [
+        "이 단계만으로 부품 고장을 확정하지 않는다"
+      ],
+      "confirm_if": [
+        "같은 점등 조건에서 측정 결과가 반복되고 다음 격리검사와 일치한다"
+      ],
+      "next_action": "현재 점검 결과에 맞는 분기를 선택한다; 불명확하면 진행하지 않는다",
+      "teardown_gate": "전원·접지·부하 격리 전 어셈블리 교환 금지"
+    },
+    "lp3": {
+      "type": "question",
+      "title": "LP3 · 번호판등 접지 전압강하",
+      "first_observation": "+전원은 정상",
+      "safety_preconditions": [
+        "평탄지 주차·중립·주차브레이크 체결·포크 하강·엔진 정지",
+        "백프로브 절연부 확인; 단자 간 단락 금지; 탈거·연속성 시험은 미등 OFF 후 실시"
+      ],
+      "test_location": "소켓 GND와 배터리(-)",
+      "tool": "DMM·백프로브",
+      "operating_condition": "전구 연결·미등 ON·부하 상태",
+      "measurement_or_action": "정상 부하가 연결된 미등 ON 상태에서 번호판등 접지 단자와 배터리 음극 사이 전압강하를 측정하고 정상 후미등 접지 경로와 비교한다. 부하 전류가 확인되지 않으면 접지 정상으로 선택하지 않는다.",
+      "expected_basis": "normal-side comparison",
+      "choices": [
+        {
+          "id": "normal",
+          "label": "접지 정상",
+          "next": "bulb_socket"
+        },
+        {
+          "id": "high",
+          "label": "접지 전압강하 큼",
+          "next": "ground_fault"
+        }
+      ],
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20S-7",
+          "D25S-7",
+          "D30S-7",
+          "D33S-7",
+          "D20SE-7",
+          "D25SE-7",
+          "D30SE-7",
+          "D33SE-7"
+        ]
+      },
+      "evidence_refs": [
+        "DOOSAN_600123_00120_S4"
+      ],
+      "result_branches": [
+        {
+          "id": "normal",
+          "label": "접지 정상",
+          "next": "bulb_socket"
+        },
+        {
+          "id": "high",
+          "label": "접지 전압강하 큼",
+          "next": "ground_fault"
+        }
+      ],
+      "do_not": [
+        "도면에서 판독되지 않는 퓨즈 번호·핀 번호·전압강하 한계값을 추정하지 않는다",
+        "부하가 실제로 흐르지 않는 상태의 전압만으로 전원·접지를 정상 판정하지 않는다"
+      ],
+      "rule_out": [
+        "이 단계만으로 부품 고장을 확정하지 않는다"
+      ],
+      "confirm_if": [
+        "같은 점등 조건에서 측정 결과가 반복되고 다음 격리검사와 일치한다"
+      ],
+      "next_action": "현재 점검 결과에 맞는 분기를 선택한다; 불명확하면 진행하지 않는다",
+      "teardown_gate": "전원·접지·부하 격리 전 어셈블리 교환 금지"
+    },
+    "bulb_socket": {
+      "type": "result",
+      "title": "전구/소켓 접촉 terminal stop",
+      "result": "전원과 접지가 부하 상태에서 정상입니다. 전구·소켓 접촉 영역으로 격리됐습니다.",
+      "rule_out": [
+        "LAMP 공통전원",
+        "번호판등 공급배선",
+        "접지 경로"
+      ],
+      "confirm_if": [
+        "정상품 전구 A/B 또는 소켓 장력·부식 수리 후 점등"
+      ],
+      "next_action": "전구 필라멘트·정격·소켓 장력·부식 확인",
+      "teardown_gate": "전원·접지가 부하 상태에서 정상일 때만 소켓/전구를 탈거",
+      "do_not": [
+        "도면에서 판독되지 않는 퓨즈 번호·핀 번호·전압강하 한계값을 추정하지 않는다",
+        "부하가 실제로 흐르지 않는 상태의 전압만으로 전원·접지를 정상 판정하지 않는다",
+        "전구·소켓 영역에서 멈추며 추가 컨트롤러·하네스 어셈블리 교환으로 진행하지 않는다"
+      ],
+      "evidence_refs": [
+        "DOOSAN_600123_00120_S4"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20S-7",
+          "D25S-7",
+          "D30S-7",
+          "D33S-7",
+          "D20SE-7",
+          "D25SE-7",
+          "D30SE-7",
+          "D33SE-7"
+        ]
+      },
+      "safety_preconditions": [
+        "평탄지 주차·중립·주차브레이크 체결·포크 하강·엔진 정지",
+        "백프로브 절연부 확인; 단자 간 단락 금지; 탈거·연속성 시험은 미등 OFF 후 실시"
+      ],
+      "first_observation": "전원과 접지가 부하 상태에서 정상입니다. 전구·소켓 접촉 영역으로 격리됐습니다.",
+      "test_location": "600123-00120 (4/4) I8 LICENCE LAMP, 후단 커넥터와 접지 경로",
+      "tool": "디지털 멀티미터·절연 백프로브·차량 적용 형식의 정상 전구",
+      "operating_condition": "커넥터 연결·미등 ON·정상 부하가 흐르는 조건; 탈거 시 미등 OFF",
+      "measurement_or_action": "전구 필라멘트·정격·소켓 장력·부식 확인",
+      "expected_basis": "isolation",
+      "result_branches": []
+    },
+    "lamp_common": {
+      "type": "result",
+      "title": "공통 LAMP 경로",
+      "result": "여러 미등이 함께 꺼져 공통 LAMP 경로를 먼저 격리해야 합니다. 공통 공급 고장으로 아직 확정하지 않습니다.",
+      "rule_out": [
+        "번호판등 전구 단독고장만으로는 다른 미등 불량을 설명할 수 없음; 복합고장은 배제하지 않음"
+      ],
+      "confirm_if": [
+        "공통 퓨즈/스위치/릴레이 출력 전후에서 전압 단절 재현"
+      ],
+      "next_action": "LAMP 공통 퓨즈→스위치/릴레이→분기 순서로 부하 전압 추적",
+      "teardown_gate": "공통 회로에서 단절 구간을 확인한 뒤 해당 커넥터만 분해",
+      "do_not": [
+        "도면에서 판독되지 않는 퓨즈 번호·핀 번호·전압강하 한계값을 추정하지 않는다",
+        "부하가 실제로 흐르지 않는 상태의 전압만으로 전원·접지를 정상 판정하지 않는다"
+      ],
+      "evidence_refs": [
+        "DOOSAN_600123_00120_S4"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20S-7",
+          "D25S-7",
+          "D30S-7",
+          "D33S-7",
+          "D20SE-7",
+          "D25SE-7",
+          "D30SE-7",
+          "D33SE-7"
+        ]
+      },
+      "safety_preconditions": [
+        "평탄지 주차·중립·주차브레이크 체결·포크 하강·엔진 정지",
+        "백프로브 절연부 확인; 단자 간 단락 금지; 탈거·연속성 시험은 미등 OFF 후 실시"
+      ],
+      "first_observation": "여러 미등이 함께 꺼져 공통 LAMP 경로를 먼저 격리해야 합니다. 공통 공급 고장으로 아직 확정하지 않습니다.",
+      "test_location": "해당 차량의 미등 공통 공급·스위치·접지 분기; 도면과 실차로 식별",
+      "tool": "디지털 멀티미터·절연 백프로브·차량 적용 형식의 정상 전구",
+      "operating_condition": "커넥터 연결·미등 ON·정상 부하가 흐르는 조건; 탈거 시 미등 OFF",
+      "measurement_or_action": "LAMP 공통 퓨즈→스위치/릴레이→분기 순서로 부하 전압 추적",
+      "expected_basis": "isolation",
+      "result_branches": []
+    },
+    "feed_fault": {
+      "type": "result",
+      "title": "번호판등 +공급 경로 불량",
+      "result": "공통 미등은 정상이나 번호판등 B+가 부하에서 도달하지 않습니다.",
+      "rule_out": [
+        "다른 미등이 켜져 공통 공급 전체 상실 가능성은 낮음; 접지·복합고장은 아직 배제하지 않음"
+      ],
+      "confirm_if": [
+        "분기 전 정상·분기 후 무전압이 동일 조건에서 반복"
+      ],
+      "next_action": "정상 미등 분기점부터 번호판등 소켓까지 구간별 부하 전압 추적",
+      "teardown_gate": "전단/후단으로 불량 구간 특정 후 수리",
+      "do_not": [
+        "도면에서 판독되지 않는 퓨즈 번호·핀 번호·전압강하 한계값을 추정하지 않는다",
+        "부하가 실제로 흐르지 않는 상태의 전압만으로 전원·접지를 정상 판정하지 않는다"
+      ],
+      "evidence_refs": [
+        "DOOSAN_600123_00120_S4"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20S-7",
+          "D25S-7",
+          "D30S-7",
+          "D33S-7",
+          "D20SE-7",
+          "D25SE-7",
+          "D30SE-7",
+          "D33SE-7"
+        ]
+      },
+      "safety_preconditions": [
+        "평탄지 주차·중립·주차브레이크 체결·포크 하강·엔진 정지",
+        "백프로브 절연부 확인; 단자 간 단락 금지; 탈거·연속성 시험은 미등 OFF 후 실시"
+      ],
+      "first_observation": "공통 미등은 정상이나 번호판등 B+가 부하에서 도달하지 않습니다.",
+      "test_location": "600123-00120 (4/4) I8 LICENCE LAMP, 후단 커넥터와 접지 경로",
+      "tool": "디지털 멀티미터·절연 백프로브·차량 적용 형식의 정상 전구",
+      "operating_condition": "커넥터 연결·미등 ON·정상 부하가 흐르는 조건; 탈거 시 미등 OFF",
+      "measurement_or_action": "정상 미등 분기점부터 번호판등 소켓까지 구간별 부하 전압 추적",
+      "expected_basis": "isolation",
+      "result_branches": []
+    },
+    "ground_fault": {
+      "type": "result",
+      "title": "번호판등 접지 경로 불량",
+      "result": "번호판등 접지 전압강하가 정상측보다 큽니다.",
+      "rule_out": [
+        "+전원 공급",
+        "전구 단독고장"
+      ],
+      "confirm_if": [
+        "같은 정상 부하에서 접지 구간의 과도한 전압강하가 반복되고 해당 접지 수리 후 정상화"
+      ],
+      "next_action": "소켓→접지점 구간을 부하 전압강하로 분할",
+      "teardown_gate": "고저항 구간 특정 후 단자/접지점 수리",
+      "do_not": [
+        "도면에서 판독되지 않는 퓨즈 번호·핀 번호·전압강하 한계값을 추정하지 않는다",
+        "부하가 실제로 흐르지 않는 상태의 전압만으로 전원·접지를 정상 판정하지 않는다"
+      ],
+      "evidence_refs": [
+        "DOOSAN_600123_00120_S4"
+      ],
+      "vehicle_scope": {
+        "manufacturer": "DOOSAN",
+        "models": [
+          "D20S-7",
+          "D25S-7",
+          "D30S-7",
+          "D33S-7",
+          "D20SE-7",
+          "D25SE-7",
+          "D30SE-7",
+          "D33SE-7"
+        ]
+      },
+      "safety_preconditions": [
+        "평탄지 주차·중립·주차브레이크 체결·포크 하강·엔진 정지",
+        "백프로브 절연부 확인; 단자 간 단락 금지; 탈거·연속성 시험은 미등 OFF 후 실시"
+      ],
+      "first_observation": "번호판등 접지 전압강하가 정상측보다 큽니다.",
+      "test_location": "600123-00120 (4/4) I8 LICENCE LAMP, 후단 커넥터와 접지 경로",
+      "tool": "디지털 멀티미터·절연 백프로브·차량 적용 형식의 정상 전구",
+      "operating_condition": "커넥터 연결·미등 ON·정상 부하가 흐르는 조건; 탈거 시 미등 OFF",
+      "measurement_or_action": "소켓→접지점 구간을 부하 전압강하로 분할",
+      "expected_basis": "isolation",
+      "result_branches": []
+    }
+  },
+  "schema_version": 20
+}
