@@ -1,19 +1,18 @@
-# Forklift Diagnostic Android v0.18 RC Auto
+# forklift_v20_clean_rebuild_master
 
-Native Android field test build.
+이 ZIP은 과거 V8.x overlay를 또 적용하는 패치가 아니다.
+프로젝트를 하나의 기준으로 다시 시작하기 위한 **authoritative reset package**다.
 
-v0.18 release-candidate validation:
-- Every reachable individual diagnosis/result is exercised with at least 30 distinct operating-condition scenarios.
-- CI rejects broken links, unreachable results, dead ends, placeholders, missing OEM page assets, scenario collisions, and wrong terminal outcomes.
-- GitHub Actions builds the `v18-rc-auto` branch and publishes both the debug APK and validation reports.
+먼저 `WORK_START_HERE.md`를 읽는다.
 
-Changes in v0.2:
-- Brand + model display (두산 · D25S-7 style)
-- Persistent Home button in top bar
-- Removed '정규화 대기' UI: all 64 symptoms / 268 causes are normalized as exact graph, OEM procedure chain, or OEM source/action
-- OEM remedies added where explicitly present in troubleshooting tables
-- F/R electrical diagnosis gets an app-rendered service schematic based on OEM procedure, with current target highlighting
-- D34 engine provisional reference entry and verified sample DTC flows (P0605/P0641/P0651)
-- Version code/name updated to 2 / 0.2-field
-
-Important: D34 engine information is provisional and is not shown as confirmed D24 vehicle-specific data.
+핵심:
+- 새 branch `v20-clean-rebuild`
+- old runtime code 재사용 금지
+- validated data/behavior만 migration
+- single state file
+- single diagnostic engine
+- model scope hard gate
+- field-first diagnostic contract
+- P0 real-world regressions
+- 30 distinct scenarios per terminal
+- runtime evidence + exact SHA VERIFIED APK
