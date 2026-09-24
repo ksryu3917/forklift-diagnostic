@@ -1,4 +1,4 @@
-package com.ryu.forkliftdiagnostic;
+ackage com.ryu.forkliftdiagnostic;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
@@ -46,6 +46,6 @@ import com.ryu.forkliftdiagnostic.ui.*;import org.junit.*;import org.junit.runne
   catch(Throwable failure){failureShot("failure-battery-p0",failure);if(failure instanceof Exception)throw (Exception)failure;throw (Error)failure;}
  }
  @Test public void releaseIdentityScreen()throws Exception{
-  scenario=ActivityScenario.launch(new Intent(target,MainActivity.class));onView(withText(org.hamcrest.Matchers.containsString("v20"))).check(matches(isDisplayed()));shot("16-release-identity");
+    scenario=ActivityScenario.launch(new Intent(target,MainActivity.class));onView(withText("v20 · CLEAN REBUILD ALPHA")).check(matches(isDisplayed()));shot("16-release-identity");
  }
 }
