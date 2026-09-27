@@ -66,7 +66,7 @@ public class EvidenceViewerActivity extends Activity {
             });
             gestureDetector=new GestureDetector(getContext(),new GestureDetector.SimpleOnGestureListener(){
                 @Override public boolean onDown(MotionEvent event){return true;}
-                @Override public boolean onDoubleTap(MotionEvent event){setZoom(zoom>1?1:3,event.getX(),event.getY());return true;}
+                @Override public boolean onDoubleTap(MotionEvent event){if(zoom>1){zoom=1;tx=0;ty=0;invalidate();}else setZoom(3,event.getX(),event.getY());return true;}
             });
         }
         private float fit(){return Math.min((float)getWidth()/page.getWidth(),(float)getHeight()/page.getHeight());}
