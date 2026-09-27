@@ -4,7 +4,14 @@
   "vehicle_scope": {
     "manufacturer": "DOOSAN",
     "models": [
-      "D20/25/30/33S(SE)-7 D24"
+      "D20S-7",
+      "D25S-7",
+      "D30S-7",
+      "D33S-7",
+      "D20SE-7",
+      "D25SE-7",
+      "D30SE-7",
+      "D33SE-7"
     ]
   },
   "start": "scan",
@@ -84,7 +91,14 @@
       "vehicle_scope": {
         "manufacturer": "DOOSAN",
         "models": [
-          "D20/25/30/33S(SE)-7 D24"
+          "D20S-7",
+          "D25S-7",
+          "D30S-7",
+          "D33S-7",
+          "D20SE-7",
+          "D25SE-7",
+          "D30SE-7",
+          "D33SE-7"
         ]
       },
       "safety_preconditions": [
@@ -118,7 +132,14 @@
       "vehicle_scope": {
         "manufacturer": "DOOSAN",
         "models": [
-          "D20/25/30/33S(SE)-7 D24"
+          "D20S-7",
+          "D25S-7",
+          "D30S-7",
+          "D33S-7",
+          "D20SE-7",
+          "D25SE-7",
+          "D30SE-7",
+          "D33SE-7"
         ]
       },
       "safety_preconditions": [
@@ -152,7 +173,14 @@
       "vehicle_scope": {
         "manufacturer": "DOOSAN",
         "models": [
-          "D20/25/30/33S(SE)-7 D24"
+          "D20S-7",
+          "D25S-7",
+          "D30S-7",
+          "D33S-7",
+          "D20SE-7",
+          "D25SE-7",
+          "D30SE-7",
+          "D33SE-7"
         ]
       },
       "safety_preconditions": [
