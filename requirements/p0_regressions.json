@@ -1,0 +1,147 @@
+{
+  "schema_version": 20,
+  "cases": [
+    {
+      "id": "EV_REACH_NO_TRAVEL_MECH_001",
+      "priority": "P0",
+      "title": "리치 주행불가 · 모터는 회전 · 무부하 휠 회전 · 주기성 걸림",
+      "observations": [
+        "전원 정상",
+        "주행 불가",
+        "주행 명령 시 모터 상단 브레이크 디스크/모터축 회전",
+        "커플링 정상 확인",
+        "차량을 띄우면 구동휠 회전",
+        "구동 시 모터까지 쿵쿵 충격",
+        "브레이크 해제 후 손회전 시 특정 위치에서 떡떡 걸림"
+      ],
+      "must_route_through": [
+        "안전 리프트/고정",
+        "무부하 휠 구동 확인",
+        "OEM 절차의 브레이크 해제",
+        "전원 OFF 손회전/주기성 걸림",
+        "백래시/입출력 동시성 비교",
+        "모터축/커플링/감속기입력/감속기출력/허브 구간 격리",
+        "기어오일/드레인 금속편 확인"
+      ],
+      "allowed_terminal_scope": [
+        "감속기 내부 기어 치손",
+        "베어링/축 유격",
+        "내부 스플라인/피니언 결합",
+        "허브/출력 결합",
+        "분해 전 어셈블리 경계"
+      ],
+      "must_not": [
+        "모터가 돈다는 이유만으로 구동계 정상 판정",
+        "손회전/무부하 격리 전 모터 또는 액슬 분해 지시",
+        "컨트롤러 교환부터 지시"
+      ]
+    },
+    {
+      "id": "EV_BATTERY_SHORT_RUNTIME_001",
+      "priority": "P0",
+      "title": "완충 후 2~3시간 만에 배터리 소진",
+      "must_route_through": [
+        "완충 확인",
+        "정지 전압",
+        "부하 중 팩 전압",
+        "동시 DC 전류",
+        "셀별 부하 전압",
+        "셀별 비중/온도",
+        "연결바/메인단자 전압강하",
+        "차량 과전류 소비와 팩 용량저하 분리"
+      ],
+      "must_not": [
+        "팩 전압 한 숫자로 불량 확정",
+        "48V 범용 종지전압 임의 적용",
+        "특정 셀 편차 확인 없이 전체 교체 판정"
+      ]
+    },
+    {
+      "id": "EV_NO_TRAVEL_CONTROL_001",
+      "priority": "P0",
+      "title": "전원 ON · 유압 정상 · 주행만 안 됨",
+      "must_route_through": [
+        "주행 컨트롤러 B+/B-",
+        "Drive Enable",
+        "F/R",
+        "accelerator",
+        "torque command",
+        "motor current",
+        "motor RPM",
+        "U/V/W 케이블/권선",
+        "encoder/speed/temp sensor",
+        "기계부하 분리"
+      ]
+    },
+    {
+      "id": "EV_HIGH_CURRENT_LOW_RPM_001",
+      "priority": "P0",
+      "title": "토크명령 있음 · 전류 큼 · RPM 낮음",
+      "must_route_through": [
+        "브레이크 끌림",
+        "감속기/베어링",
+        "모터 기계저항",
+        "전류 기준이 battery DC인지 motor phase인지 확인"
+      ]
+    },
+    {
+      "id": "EV_TEMP_SENSOR_FALSE_HIGH_001",
+      "priority": "P0",
+      "title": "진단기 모터온도 매우 높음 · 실제 케이스 미지근함",
+      "must_route_through": [
+        "실제 온도 측정",
+        "센서 전원/접지",
+        "센서 저항 또는 신호",
+        "센서측과 컨트롤러측 비교",
+        "derating 확인"
+      ]
+    },
+    {
+      "id": "E_LICENSE_TERMINAL_STOP_001",
+      "priority": "P0",
+      "title": "번호판등 순차 진단",
+      "must_route_through": [
+        "다른 미등/후미등 정상 여부",
+        "번호판등 +전원",
+        "번호판등 접지 전압강하",
+        "전구/소켓 접촉 영역에서 terminal stop",
+        "공통 이상이면 LAMP 공통경로"
+      ]
+    },
+    {
+      "id": "BRAKE_INTERNAL_LEAK_001",
+      "priority": "P0",
+      "title": "브레이크 씰/내부누설 현장 격리",
+      "must_route_through": [
+        "외부 누유",
+        "에어/블리딩",
+        "상류 공급",
+        "마스터/서보",
+        "좌우 액슬 격리",
+        "분해 전 어셈블리 경계"
+      ],
+      "must_not": [
+        "40 bar를 axle piston seal 누설 합격/불합격 임계값으로 오용"
+      ]
+    },
+    {
+      "id": "D24_CRANK_NO_START_001",
+      "priority": "P0",
+      "title": "D24 크랭킹 시동불가",
+      "must_route_through": [
+        "ECU communication",
+        "cranking RPM/sync",
+        "rail actual/command",
+        "RPS",
+        "low pressure fuel",
+        "IMV",
+        "injector drive/return",
+        "compression when required"
+      ],
+      "must_not": [
+        "근거 없는 rail minimum MPa 생성"
+      ]
+    }
+  ]
+}
+
