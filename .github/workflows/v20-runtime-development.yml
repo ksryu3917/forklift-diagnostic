@@ -9,6 +9,11 @@ on:
       - 'app/src/main/assets/v20/**'
       - 'app/src/main/AndroidManifest.xml'
       - 'app/build.gradle'
+      - 'tools/validate_release_readiness.py'
+      - 'tools/validate_p0_regressions.py'
+      - 'tools/validate_scenarios_v20.py'
+      - 'validation/**'
+      - 'requirements/**'
   workflow_dispatch:
 jobs:
   runtime:
